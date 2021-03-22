@@ -7,4 +7,13 @@ export const NavWrapper = styled.div`
     color:white;
     display:inline-block;
     position:absolute;
+    @media only screen and (max-width: 900px) {
+        width:25vw;
+        p{
+            font-size:0.8rem;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        width:40vw;
+    }
 `;

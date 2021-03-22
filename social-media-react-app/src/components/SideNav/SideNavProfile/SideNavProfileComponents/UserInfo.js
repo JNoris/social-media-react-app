@@ -1,5 +1,5 @@
 import React from 'react'
-import { Center } from './UserInfo.styles';
+import { Center } from './SideNavProfileComponents.styles';
 
 const UserInfo = (props) => {
     return(
