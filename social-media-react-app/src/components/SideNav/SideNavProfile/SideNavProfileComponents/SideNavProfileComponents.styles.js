@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const InfoWrapper = styled.div`
     width:80%;
-    background-color:blue;
     margin:auto;
-    padding-bottom:50%;
-
+    p{
+        text-align:center;
+    }
 `;
 
 export const Center = styled.div`
@@ -15,4 +15,10 @@ export const FlexCenter = styled.div`
     display: flex;
     justify-content:center;
     align-items:center;
+    
+    .avatar {
+        height:4rem;
+        width:4rem;
+        border: 0.15rem solid black;
+    }
 `;

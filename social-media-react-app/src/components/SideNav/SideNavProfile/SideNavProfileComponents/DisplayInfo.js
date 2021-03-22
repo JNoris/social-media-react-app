@@ -3,15 +3,14 @@ import { FlexCenter, InfoWrapper } from './SideNavProfileComponents.styles';
 import Avatar from '@material-ui/core/Avatar';
 import test from '../../../temp/test.png';
 
-const DisplayInfo = () => {
-    return(
+const DisplayInfo = (props) => {
+    return (
         <InfoWrapper>
             <FlexCenter>
-                <Avatar alt="test" src={test}/>
+                <Avatar className="avatar" alt="test" src={test} />
             </FlexCenter>
-            <p>
-                sdsaf
-            </p>
+            <p>{props.fullname}</p>
+            <p>@{props.userName}</p>
         </InfoWrapper>
     );
 }

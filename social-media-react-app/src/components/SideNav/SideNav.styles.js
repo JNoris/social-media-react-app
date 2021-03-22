@@ -6,7 +6,9 @@ export const NavWrapper = styled.div`
     height:100vh;
     color:white;
     display:inline-block;
-    position:absolute;
+    h1{
+        text-align:center;
+    }
     @media only screen and (max-width: 900px) {
         width:25vw;
         p{
