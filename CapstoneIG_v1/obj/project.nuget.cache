@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mUbb0LFzo9nbsA4fEL4s4BIaJz8Suoo3CHQi/IwtzeJELzfNmCX+JT1iihx7+kq+Qb2km1a8+mCzVtP2mqxMPA==",
+  "dgSpecHash": "0u+/ulfuIWOrBrAkhf3hsfhC1Dhp9z4HWJe9KC2PZ+TLDPrjp/XPcYmn1TX7D4GwQ2CYwcn8CYLaDHstgKlS6Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\kryas\\source\\repos\\CapstoneIG_v1\\CapstoneIG_v1\\CapstoneIG_v1.csproj",
   "expectedPackageFiles": [
@@ -17,8 +17,10 @@
     "C:\\Users\\kryas\\.nuget\\packages\\microsoft.entityframeworkcore\\3.1.13\\microsoft.entityframeworkcore.3.1.13.nupkg.sha512",
     "C:\\Users\\kryas\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\3.1.13\\microsoft.entityframeworkcore.abstractions.3.1.13.nupkg.sha512",
     "C:\\Users\\kryas\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\3.1.13\\microsoft.entityframeworkcore.analyzers.3.1.13.nupkg.sha512",
+    "C:\\Users\\kryas\\.nuget\\packages\\microsoft.entityframeworkcore.design\\3.1.13\\microsoft.entityframeworkcore.design.3.1.13.nupkg.sha512",
     "C:\\Users\\kryas\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\3.1.13\\microsoft.entityframeworkcore.relational.3.1.13.nupkg.sha512",
     "C:\\Users\\kryas\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\3.1.13\\microsoft.entityframeworkcore.sqlserver.3.1.13.nupkg.sha512",
+    "C:\\Users\\kryas\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\3.1.13\\microsoft.entityframeworkcore.tools.3.1.13.nupkg.sha512",
     "C:\\Users\\kryas\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\3.1.13\\microsoft.extensions.caching.abstractions.3.1.13.nupkg.sha512",
     "C:\\Users\\kryas\\.nuget\\packages\\microsoft.extensions.caching.memory\\3.1.13\\microsoft.extensions.caching.memory.3.1.13.nupkg.sha512",
     "C:\\Users\\kryas\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.13\\microsoft.extensions.configuration.3.1.13.nupkg.sha512",

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CapstoneIG_v1.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CapstoneIG_v1.Auth
@@ -13,5 +14,10 @@ namespace CapstoneIG_v1.Auth
             base.OnModelCreating(builder);
             builder.Entity<ApplicationUser>().ToTable("ApplicationUser");
         }
+
+        public DbSet<CommentModel> Comments { get; set; }
+        public DbSet<FollowersModel> Followers { get; set; }
+        public DbSet<LikeModel> Likes { get; set; }
+        public DbSet<PostModel> Posts { get; set; }
     }
 }

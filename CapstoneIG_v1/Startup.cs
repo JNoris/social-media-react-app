@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CapstoneIG_v1.DAL;
+//using CapstoneIG_v1.DAL;
 using Microsoft.EntityFrameworkCore;
 using CapstoneIG_v1.Auth;
 using Microsoft.AspNetCore.Identity;
@@ -24,7 +24,7 @@ namespace CapstoneIG_v1
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<IgDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            //services.AddDbContext<IgDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Default")));
 
             services.AddCors();
