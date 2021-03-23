@@ -1,34 +1,68 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Followers from './Followers/Followers';
 import Following from './Following/Following';
 import { FollowWrapper } from './Follow.styles';
 
-const Follow = (props) => {
-    const [index, setIndex] = useState(0);
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
 
-    const handleChange = (event, value) => {
-        setIndex(value);
-    }
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <div>
+                    {children}
+                </div>
+            )}
+        </div>
+    );
+}
 
-    const handleChangeIndex = ind => {
-        setIndex(ind)
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
+const Follow = () => {
+
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
     };
 
     return (
         <FollowWrapper>
-            <Tabs className="tabs" variant="fullWidth" value={index} onChange={handleChange}>
-                <Tab label="Followers" />
-                <Tab label="Following" />
-            </Tabs>
-            {/* <SwipeableViews index={index} onChangeIndex={handleChangeIndex}> */}
-                <Followers></Followers>
-                <Following></Following>
-            {/* </SwipeableViews> */}
+            <AppBar position="static" className="tabs">
+                <Tabs value={value} variant="fullWidth" onChange={handleChange} aria-label="follows">
+                    <Tab label="Followers" {...a11yProps(0)} />
+                    <Tab label="Following" {...a11yProps(1)} />
+                </Tabs>
+            </AppBar>
+            <TabPanel value={value} index={0}>
+                <Followers />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <Following />
+            </TabPanel>
         </FollowWrapper>
     );
 }
-
-
-export default Follow;
+export default Follow

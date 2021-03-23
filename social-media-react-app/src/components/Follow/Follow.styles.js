@@ -8,7 +8,4 @@ export const FollowWrapper = styled.div`
     span{
         color:white;
     }
-    .bar-color{
-        background-color:black;
-    }
 `;
