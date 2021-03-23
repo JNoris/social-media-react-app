@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import SwipeableViews from 'react-swipeable-views';
-import Followers from '../Followers/Followers';
-import Following from '../Following/Following';
+import Followers from './Followers/Followers';
+import Following from './Following/Following';
 import { FollowWrapper } from './Follow.styles';
 
-const Follow = () => {
+const Follow = (props) => {
     const [index, setIndex] = useState(0);
 
     const handleChange = (event, value) => {

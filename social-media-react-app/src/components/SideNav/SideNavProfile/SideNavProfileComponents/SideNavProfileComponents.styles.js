@@ -19,6 +19,10 @@ export const Center = styled.div`
         font-size: clamp(0.6rem,1vw,0.8rem);
         margin:0;
     }
+    a{
+        text-decoration:none;
+        color:white;
+    }
 
 `;
 export const FlexCenter = styled.div`

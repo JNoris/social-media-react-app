@@ -4,7 +4,7 @@ export const FollowWrapper = styled.div`
     .tabs{
         background-color:black;
     }
-    width:100%;
+    width:80%;
     span{
         color:white;
     }

@@ -7,8 +7,13 @@ import UserInfo from '../SideNav/SideNavProfile/SideNavProfileComponents/UserInf
 import ProfileGridItem from './ProfileGridItem';
 import {dummyData, dummyImg} from '../temp/dummyData';
 const Profile = (props) => {
-    if (props.location.state.userId) {
-        console.log(props.location.state.userId);
+   
+    if('userId' in props)
+    {
+        console.log(true);
+    }
+    else{
+        console.log(false);
     }
     
     //const getUser = async() => await((await fetch('https://localhost')).json());
