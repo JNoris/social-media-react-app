@@ -3,7 +3,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import {ContentComponent, PostActions} from './PostCardContentStyles'
 
-const PostStats = () => {
+const PostStats = (props) => {
     const [like, setLike] = useState(false);
     const [heartColor, setHeartColor] = useState({color: "#fff"})
 
@@ -28,7 +28,7 @@ const PostStats = () => {
                     style={heartColor}
                 />
                     {/* onClick open list view of likes */}
-                    <p id="likes">311</p> 
+                    <p id="likes">{props.likes}</p> 
                     {/* TO DO on click */}
             </ContentComponent>
             <ContentComponent>
@@ -36,7 +36,7 @@ const PostStats = () => {
                     // onClick open individual post view - shows input field to comment + view comments
                 />
                     {/* onClick open list view of commments */}
-                    <p id="comments">24</p>
+                    <p id="comments">{props.comments}</p>
                 </ContentComponent>
         </PostActions>
     )

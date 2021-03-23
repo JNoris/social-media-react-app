@@ -5,13 +5,16 @@ import {ContentWrapper} from './PostCardContentStyles'
 import PostStats from './PostStats'
 import UserInfo from './UserInfo'
 
-const PostCardContent = () => {
+const PostCardContent = (props) => {
     return (
         <ContentWrapper>
             <CardContent>
                 <CardActions disableSpacing>
                     <UserInfo />
-                   <PostStats />
+                   <PostStats 
+                        likes={props.likes}
+                        comments={props.comments}
+                   />
                 </CardActions>
             </CardContent>
         </ContentWrapper>

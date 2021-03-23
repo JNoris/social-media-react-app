@@ -5,12 +5,20 @@ import PostCardContent from './PostCardContent/PostCardContent'
 import PostImage from './PostCardContent/PostImage'
 
 
-const PostCard = () => {
+const PostCard = (props) => {
+    
+    const post = props.post;
+
     return (
         <CardWrapper>
             <Card>
-               <PostImage />
-               <PostCardContent />
+               <PostImage 
+                    img = {post.img}
+               />
+               <PostCardContent
+                    likes = {post.likes}
+                    comments = {post.comments}
+               />
             </Card>
         </CardWrapper>
     );
