@@ -3,7 +3,9 @@ import React from 'react'
 
 const Following = (props) => {
     return (
-        <></>
+        <>
+            <p>Following</p>
+        </>
     );
 }
 export default Following
