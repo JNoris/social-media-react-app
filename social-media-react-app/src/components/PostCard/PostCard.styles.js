@@ -13,6 +13,6 @@ export const CardWrapper = styled.div`
     }
 
     //for testing on home page
-    // margin-left: 20rem;
+    margin-left: 20rem;
 `;
 

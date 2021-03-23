@@ -4,12 +4,18 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import {ContentComponent, PostActions} from './PostCardContentStyles'
 
 const PostStats = () => {
-    const [like, setLike] = useState(false)
+    const [like, setLike] = useState(false);
+    const [heartColor, setHeartColor] = useState({color: "#fff"})
 
     function handleLike() {
         setLike(!like);
-        if(like) {
 
+        // TO DO add API Call functionality
+
+        if(like) {
+            setHeartColor({color: "#e2336b"});
+        } else {
+            setHeartColor({color: "#fff"});
         }
     }
 
@@ -18,13 +24,15 @@ const PostStats = () => {
             <ContentComponent>
                 <FavoriteBorderIcon
                     id="likeIcon"
-                    //onClick="handleLike"
-                    //className={heartIcon}
+                    onClick={handleLike}
+                    style={heartColor}
                 />
                     <p id="likes">311</p>
             </ContentComponent>
             <ContentComponent>
-                <ChatBubbleOutlineIcon />
+                <ChatBubbleOutlineIcon
+                    // onClick open individual post view - shows input field to comment + view comments
+                />
                     <p id="comments">24</p>
                 </ContentComponent>
         </PostActions>
