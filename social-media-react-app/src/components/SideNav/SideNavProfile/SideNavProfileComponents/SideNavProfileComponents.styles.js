@@ -16,19 +16,10 @@ export const InfoWrapper = styled.div`
 export const Center = styled.div`
     text-align: center;
     p{
-        font-size:0.8rem;
+        font-size: clamp(0.6rem,1vw,0.8rem);
         margin:0;
     }
-    @media only screen and (max-width: 900px) {
-        p{
-            font-size:0.6rem;
-        }
-    }
-    @media only screen and (max-width: 768px) {
-        p{
-            font-size:0.5rem;
-        }
-    }
+
 `;
 export const FlexCenter = styled.div`
     display: flex;
