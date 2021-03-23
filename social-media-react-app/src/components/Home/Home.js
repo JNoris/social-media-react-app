@@ -1,5 +1,6 @@
 import React from 'react'
 import {HomeWrapper} from './Home.styles';
+import PostCard from '../PostCard/PostCard';
 
 const Home = () => {
     return(
@@ -8,6 +9,7 @@ const Home = () => {
                 asdsa
             </p>
         </HomeWrapper>
+       // <PostCard />
     );
 }
 export default Home;
