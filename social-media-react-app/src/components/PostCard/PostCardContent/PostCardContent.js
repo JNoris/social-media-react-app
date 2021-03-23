@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import {CardContent, CardActions, Avatar } from '@material-ui/core';
-import {ContentWrapper, ContentComponent } from './PostCardContentStyles'
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import {ContentWrapper} from './PostCardContentStyles'
 import PostStats from './PostStats'
 import UserInfo from './UserInfo'
 

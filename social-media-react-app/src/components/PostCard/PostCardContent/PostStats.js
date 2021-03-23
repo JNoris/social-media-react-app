@@ -27,12 +27,15 @@ const PostStats = () => {
                     onClick={handleLike}
                     style={heartColor}
                 />
-                    <p id="likes">311</p>
+                    {/* onClick open list view of likes */}
+                    <p id="likes">311</p> 
+                    {/* TO DO on click */}
             </ContentComponent>
             <ContentComponent>
                 <ChatBubbleOutlineIcon
                     // onClick open individual post view - shows input field to comment + view comments
                 />
+                    {/* onClick open list view of commments */}
                     <p id="comments">24</p>
                 </ContentComponent>
         </PostActions>

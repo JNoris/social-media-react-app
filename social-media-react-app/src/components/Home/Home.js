@@ -7,7 +7,6 @@ const Home = () => {
         <HomeWrapper>
             <PostCard />
         </HomeWrapper>
-       
     );
 }
 export default Home;
