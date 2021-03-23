@@ -1,4 +1,4 @@
-import { Route, Router, Switch } from 'react-router';
+import { Route, Switch } from 'react-router';
 import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
 import SignUp from './components/Login/SignUp';
