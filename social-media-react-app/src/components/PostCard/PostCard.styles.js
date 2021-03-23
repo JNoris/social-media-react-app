@@ -11,8 +11,5 @@ export const CardWrapper = styled.div`
     .MuiPaper-elevation1 {
         box-shadow: none;
     }
-
-    //for testing on home page
-    margin-left: 20rem;
 `;
 
