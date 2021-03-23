@@ -30,12 +30,24 @@ export const InfoCol = styled.div`
         font-weight:700;
         color:white;
     }
+    .edit{
+        width:100%;
+    }
+`;
+export const FlexEven = styled.div`
+    display:flex;
+    justify-content:space-evenly;
     button{
         width:100%;
     }
 `;
 export const Bio = styled.div`
+    padding-top:2rem;
     display:inline-block;
+    color:white;
+    .bio-text{
+        color:white;
+    }
 `;
 export const BioML = styled(TextField)`
     width:30vw;

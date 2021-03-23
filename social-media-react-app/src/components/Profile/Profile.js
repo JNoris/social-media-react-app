@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
-import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML, GridWrapper } from './Profile.styles';
+import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML, GridWrapper, FlexEven } from './Profile.styles';
 import Grid from '@material-ui/core/Grid';
 import UserInfo from '../SideNav/SideNavProfile/SideNavProfileComponents/UserInfo';
 //import {useQuery} from 'react-query';
@@ -15,6 +15,7 @@ const Profile = (props) => {
     if (props.location.state.userId) {
         console.log(props.location.state.userId);
     }
+    
     //const getUser = async() => await((await fetch('https://localhost')).json());
     // const {data, isLoading, error} = useQuery(
     //     'userdata',
@@ -30,6 +31,7 @@ const Profile = (props) => {
         followers: 2800,
         following: 5
     }
+
     var dummyImg = [
         {
             id: 1,
@@ -60,6 +62,7 @@ const Profile = (props) => {
     const [bio, setBio] = useState(dummyData.bio)
     const [bioReadOnly, setReadOnly] = useState(true);
     const [saveBtn, showSaveBtn] = useState(false);
+    const [isSelf, setIsSelf] = useState(false); //usually false
 
     const handleBioChange = event => {
         setBio(event.target.value);
@@ -73,8 +76,10 @@ const Profile = (props) => {
         showSaveBtn(false);
         setReadOnly(true);
     }
-
-
+    const testSelfBtn = () => {
+        setIsSelf(v=>!v);
+    }
+    
 
     return (
         <ProfileWrapper>
@@ -101,18 +106,24 @@ const Profile = (props) => {
                     </Grid>
                 </Grid>
                 <Bio>
-                    <h3>Bio</h3>
                     <BioML
                         multiline
                         value={bio}
                         InputProps={{
                             readOnly: bioReadOnly,
+                            className: "bio-text"
                         }}
                         onChange={handleBioChange}
                     />
                 </Bio>
-                {bioReadOnly ? <Button variant="contained" onClick={() => handleBioEdit()}>Edit Bio</Button> : null}
-                {saveBtn ? <Button variant="contained" onClick={() => handleBioSave()}>SAVE</Button> : null}
+                {bioReadOnly && isSelf ? <Button className="edit" variant="contained" onClick={() => handleBioEdit()}>Edit Bio</Button> : null}
+                {saveBtn ? <Button className="edit" variant="contained" onClick={() => handleBioSave()}>SAVE</Button> : null}
+                {!isSelf ? <FlexEven>
+                    <Button variant="contained">Follow</Button>
+                    <Button variant="contained">Message</Button>
+                    <Button variant="contained">Email</Button>
+                </FlexEven> : null}
+                <Button onClick={() => testSelfBtn()}>TEST BUTTON</Button>
             </InfoCol>
             <PostDummy>
                 <GridWrapper>
@@ -124,7 +135,7 @@ const Profile = (props) => {
                     >
                         {dummyImg?.map(item => (
                             <Grid item key={item.id} xs={4}>
-                                <ProfileGridItem src={item.photo} alt={item.id} />
+                                <ProfileGridItem link={item.id} src={item.photo} alt={item.id} />
                             </Grid>
                         ))}
                     </Grid>

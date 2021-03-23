@@ -1,10 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { ProfileGridWrapper } from './Profile.styles'
 
 const ProfileGridItem = (props) => {
-    return(
+    var link = "/"+props.link;
+    return (
         <ProfileGridWrapper>
-            <img src={props.src} alt={props.alt}/>
+            <Link to={link}>
+                <img src={props.src} alt={props.alt} />
+            </Link>
         </ProfileGridWrapper>
     );
 }
