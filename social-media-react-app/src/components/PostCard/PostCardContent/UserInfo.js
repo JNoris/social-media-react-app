@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Avatar } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
 import {ContentComponent} from './PostCardContentStyles'
 
 const UserInfo = () => {

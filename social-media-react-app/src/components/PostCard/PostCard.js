@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card} from '@material-ui/core';
+import Card from '@material-ui/core/Card';
 import {CardWrapper} from './PostCard.styles'
 import PostCardContent from './PostCardContent/PostCardContent'
 import PostImage from './PostCardContent/PostImage'
