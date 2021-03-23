@@ -43,8 +43,8 @@ namespace CapstoneIG_v1.Controllers
         }
 
         [HttpPost]
-        [Route("createpost")]
-        public async Task<IActionResult> CreatePost([FromForm] PostModel post)
+        [Route("addpost")]
+        public async Task<IActionResult> AddPost([FromForm] PostModel post)
         {
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
@@ -64,13 +64,64 @@ namespace CapstoneIG_v1.Controllers
             return Ok(new Response { Status = "Success", Message = "Post Created" });
         }
 
+        [HttpPost]
+        [Route("deletepost/{postId}")]
+        public async Task<IActionResult> DeletePost(int postId)
+        {
+            ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+
+            PostModel pst = _db.Posts.Where(p => p.User == user).Where(q => q.Id == postId).FirstOrDefault();
+
+            if(pst != null)
+            {
+                _db.Posts.Remove(pst);
+                _db.SaveChanges();
+            }
+            else
+            {
+                return Ok(new Response { Status = "Failed", Message = "You can't delete a post you don't own" });
+            }
+            
+            return Ok(new Response { Status = "Success", Message = "Post Deleted" });
+        }
+
+        [HttpPut]
+        [Route("editpost/{postId}")]
+        public async Task<IActionResult> EditPost([FromForm] PostModel post, int postId)
+        {
+            ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+
+            PostModel pst = _db.Posts.Where(p => p.User == user).Where(q => q.Id == postId).FirstOrDefault();
+
+            if (pst != null)
+            {
+                pst.Caption = post.Caption;
+                _db.SaveChanges();
+            }
+            else
+            {
+                return Ok(new Response { Status = "Failed", Message = "You can't edit a post you don't own" });
+            }
+
+            return Ok(new Response { Status = "Success", Message = "Post Updated" });
+        }
+
         [HttpGet]
-        [Route("getuserposts")]
-        public async Task<JsonResult> GetUserPosts()
+        [Route("getcurrentuserposts")]
+        public async Task<JsonResult> GetCurrentUserPosts()
         {
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
             List<PostModel> posts = _db.Posts.Where(x => x.User.Id == user.Id).ToList();
+
+            return Json(posts);
+        }
+
+        [HttpGet]
+        [Route("getuserposts/{userId}")]
+        public JsonResult GetUserPosts(string userId)
+        {
+            List<PostModel> posts = _db.Posts.Where(x => x.User.Id == userId).ToList();
 
             return Json(posts);
         }

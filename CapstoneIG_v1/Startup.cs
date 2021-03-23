@@ -26,7 +26,6 @@ namespace CapstoneIG_v1
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<IgDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Default")));
 
             services.AddCors();

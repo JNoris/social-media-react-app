@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kryas\\source\\repos\\CapstoneIG_v1\\CapstoneIG_v1\\CapstoneIG_v1.csproj": {}
+    "C:\\Users\\kryas\\GitRepo\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kryas\\source\\repos\\CapstoneIG_v1\\CapstoneIG_v1\\CapstoneIG_v1.csproj": {
+    "C:\\Users\\kryas\\GitRepo\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kryas\\source\\repos\\CapstoneIG_v1\\CapstoneIG_v1\\CapstoneIG_v1.csproj",
+        "projectUniqueName": "C:\\Users\\kryas\\GitRepo\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj",
         "projectName": "CapstoneIG_v1",
-        "projectPath": "C:\\Users\\kryas\\source\\repos\\CapstoneIG_v1\\CapstoneIG_v1\\CapstoneIG_v1.csproj",
+        "projectPath": "C:\\Users\\kryas\\GitRepo\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj",
         "packagesPath": "C:\\Users\\kryas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kryas\\source\\repos\\CapstoneIG_v1\\CapstoneIG_v1\\obj\\",
+        "outputPath": "C:\\Users\\kryas\\GitRepo\\social-media-react-app\\CapstoneIG_v1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kryas\\AppData\\Roaming\\NuGet\\NuGet.Config",

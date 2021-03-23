@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0u+/ulfuIWOrBrAkhf3hsfhC1Dhp9z4HWJe9KC2PZ+TLDPrjp/XPcYmn1TX7D4GwQ2CYwcn8CYLaDHstgKlS6Q==",
+  "dgSpecHash": "AG0GfjYJSsfHlBfhCBgCq2jpdycv3Zf0uAaK4Iq3UCTDj21kkCiGh72nJ+kzrr64xq+Oux0bk03TUA5IjgFDCQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kryas\\source\\repos\\CapstoneIG_v1\\CapstoneIG_v1\\CapstoneIG_v1.csproj",
+  "projectFilePath": "C:\\Users\\kryas\\GitRepo\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kryas\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.13\\microsoft.aspnetcore.authentication.jwtbearer.3.1.13.nupkg.sha512",
     "C:\\Users\\kryas\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.13\\microsoft.aspnetcore.cryptography.internal.3.1.13.nupkg.sha512",
