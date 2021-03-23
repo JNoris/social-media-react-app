@@ -5,11 +5,9 @@ import PostCard from '../PostCard/PostCard';
 const Home = () => {
     return(
         <HomeWrapper>
-            <p>
-                asdsa
-            </p>
+            <PostCard />
         </HomeWrapper>
-       // <PostCard />
+       
     );
 }
 export default Home;
