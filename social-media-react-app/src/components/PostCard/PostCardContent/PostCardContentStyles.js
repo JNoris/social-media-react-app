@@ -1,14 +1,21 @@
 import styled from 'styled-components'
 
+export const Media = styled.div`
+    img {
+        border-radius: 20px;
+    }
+`;
+
 export const ContentWrapper = styled.div`
     display: flex;
     justify-content:space-between;
     width: 100%;
     margin: 0 auto;
-    background-color: transparent;
+    background: transparent;
 
     .MuiCardContent-root {
         width: 100%;
+        padding: 7px 0;
     }
 
     .MuiCardActions-root {
@@ -28,10 +35,14 @@ export const ContentComponent = styled.div `
         padding-left: 0.5rem;
         margin-right: 1rem;
     }
+
+    #comments {
+        margin-right: 0;
+    }
 `;
 
 export const PostActions = styled.div `
     display: flex;
     align-items: center;
-    margin: 0 1rem;
+    margin: 0 0.4rem;
 `;

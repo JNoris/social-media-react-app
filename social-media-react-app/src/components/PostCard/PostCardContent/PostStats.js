@@ -8,11 +8,11 @@ const PostStats = () => {
         <PostActions>
             <ContentComponent>
                 <FavoriteBorderIcon />
-                    <p>311</p>
+                    <p id="likes">311</p>
             </ContentComponent>
             <ContentComponent>
                 <ChatBubbleOutlineIcon />
-                    <p>24</p>
+                    <p id="comments">24</p>
                 </ContentComponent>
         </PostActions>
     )
