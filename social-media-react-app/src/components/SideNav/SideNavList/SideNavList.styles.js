@@ -1,12 +1,20 @@
 import styled from 'styled-components';
 
 export const ListWrapper = styled.div`
+    .selected {
+        color:red;
+        font-weight:bold;
+    }
     ul{
         list-style-type:none;
         padding:0;
     }
     ul li:last-child {
         border-top:1px solid white;
+    }
+    a{
+        color:white;
+        text-decoration:none;
     }
 `;
 

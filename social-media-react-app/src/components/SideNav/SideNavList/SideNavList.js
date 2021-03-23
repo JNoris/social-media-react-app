@@ -15,35 +15,43 @@ const SideNavList = () => {
         <ListWrapper>
             <ul>
                 <SideNavListItem 
+                    route="/"
                     icon={<FireplaceIcon />}
                     description="Feed"
                 />
                 <SideNavListItem 
+                    route="/g"
                     icon={<SearchIcon/>}
                     description="Explore"
                 />
                 <SideNavListItem 
+                    route="/f"
                     icon={<NotificationsIcon/>}
                     description="Notifications"
                     
                 />
                 <SideNavListItem 
+                    route="/e"
                     icon={<ChatIcon/>}
                     description="Direct"
                 />
                 <SideNavListItem 
+                    route="/d"
                     icon={<LiveTvIcon/>}
                     description="FGTV"
                 />
                 <SideNavListItem 
+                    route="/c"
                     icon={<ShowChartIcon/>}
                     description="Stats"
                 />
                 <SideNavListItem 
+                    route="/b"
                     icon={<SettingsIcon/>}
                     description="Settings"
                 />
                 <SideNavListItem 
+                    route="/a"
                     icon={<ExitToAppIcon/>}
                     description="Logout"
                 />
