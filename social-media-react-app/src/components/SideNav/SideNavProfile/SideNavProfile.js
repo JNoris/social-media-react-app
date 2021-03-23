@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import UserInfo from './SideNavProfileComponents/UserInfo';
 import DisplayInfo from './SideNavProfileComponents/DisplayInfo';
 
 const SideNavProfile = () => {
-    const [userId, setUserId] = useState("");
+    //const [userId, setUserId] = useState("");
     return (
         <div>
-            <DisplayInfo />
+            <DisplayInfo 
+                fullname="Jane Doe"
+                userName="testing"
+            />
             <Grid container justify="center" spacing={1}>
                 <Grid item xs={4}>
                     <UserInfo
