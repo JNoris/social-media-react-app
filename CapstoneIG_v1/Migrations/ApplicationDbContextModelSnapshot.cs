@@ -171,18 +171,18 @@ namespace CapstoneIG_v1.Migrations
                         .HasColumnType("nvarchar(26)")
                         .HasMaxLength(26);
 
-                    b.Property<string>("ImgPath")
+                    b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UploadDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserIdId")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserIdId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
                 });
@@ -357,9 +357,9 @@ namespace CapstoneIG_v1.Migrations
 
             modelBuilder.Entity("CapstoneIG_v1.Models.PostModel", b =>
                 {
-                    b.HasOne("CapstoneIG_v1.Auth.ApplicationUser", "UserId")
+                    b.HasOne("CapstoneIG_v1.Auth.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserIdId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

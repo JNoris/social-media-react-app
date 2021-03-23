@@ -26,46 +26,36 @@ namespace CapstoneIG_v1.Controllers
             _environment = environment;
         }
 
-        public class FileUpload
-        {
-            public IFormFile Files { get; set; }
-        }
-
         [NonAction]
-        public async Task<string> SaveImage(FileUpload imgfile)
+        public async Task<string> SaveImage(IFormFile imageFile)
         {
-            if (!Directory.Exists(_environment.WebRootPath + "\\PostImages\\"))
+            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
+            imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
+            var imagePath = Path.Combine(_environment.ContentRootPath, "Images", imageName);
+            using (var fileStream = new FileStream(imagePath, FileMode.Create))
             {
-                Directory.CreateDirectory(_environment.WebRootPath + "\\PostImages\\");
+                await imageFile.CopyToAsync(fileStream);
             }
 
-            string imgPath = _environment.WebRootPath + "\\PostImages\\" + imgfile.Files.FileName;
+            string src = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, imageName);
 
-            using (FileStream fileStream = System.IO.File.Create(imgPath))
-            {
-                await imgfile.Files.CopyToAsync(fileStream);
-                fileStream.Flush();
-            }
-
-            return imgPath;
+            return src;
         }
 
         [HttpPost]
         [Route("createpost")]
-        public async Task<IActionResult> CreatePost([FromBody] PostModel post, [FromForm] FileUpload model)
+        public async Task<IActionResult> CreatePost([FromForm] PostModel post)
         {
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
-            var userId = user.Id;
-
-            var getImg = await SaveImage(model);
+            var imgStoreName = await SaveImage(post.ImgFile);
 
             PostModel newPost = new PostModel()
             {
-                ImgPath = getImg,
+                ImageName = imgStoreName,
                 UploadDate = DateTime.Now,
                 Caption = post.Caption,
-                UserId = userId
+                User = user
             };
 
             _db.Posts.Add(newPost);
@@ -73,5 +63,17 @@ namespace CapstoneIG_v1.Controllers
 
             return Ok(new Response { Status = "Success", Message = "Post Created" });
         }
+
+        [HttpGet]
+        [Route("getuserposts")]
+        public async Task<JsonResult> GetUserPosts()
+        {
+            ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+
+            List<PostModel> posts = _db.Posts.Where(x => x.User.Id == user.Id).ToList();
+
+            return Json(posts);
+        }
+
     }
 }

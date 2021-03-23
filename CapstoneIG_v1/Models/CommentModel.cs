@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace CapstoneIG_v1.Models
 {
@@ -23,6 +24,7 @@ namespace CapstoneIG_v1.Models
 
         [StringLength(450)]
         [DataType(DataType.Text)]
+        [JsonIgnore]
         public virtual ApplicationUser CommentBy { get; set; }
     }
 }

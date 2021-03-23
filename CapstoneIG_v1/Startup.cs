@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace CapstoneIG_v1
 {
@@ -60,6 +62,12 @@ namespace CapstoneIG_v1
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Images")),
+                RequestPath = "/Images"
+            });
 
             app.UseCors(builder => builder
             .AllowAnyOrigin()

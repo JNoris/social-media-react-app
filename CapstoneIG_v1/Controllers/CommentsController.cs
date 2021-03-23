@@ -29,18 +29,18 @@ namespace CapstoneIG_v1.Controllers
         {
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
-            var userId = user.Id;
+            //var userId = user.Id;
 
-            CommentModel newComment = new CommentModel()
-            {
-                CommentText = comment.CommentText,
-                CommentDate = DateTime.Now,
-                PostId = postId,
-                CommentBy = userId
-            };
+            //CommentModel newComment = new CommentModel()
+            //{
+            //    CommentText = comment.CommentText,
+            //    CommentDate = DateTime.Now,
+            //    PostId = postId,
+            //    CommentBy = userId
+            //};
 
-            _db.Comments.Add(newComment);
-            _db.SaveChanges();
+            //_db.Comments.Add(newComment);
+            //_db.SaveChanges();
 
             return Ok(new Response { Status = "Success", Message = "Comment Added" });
         }
