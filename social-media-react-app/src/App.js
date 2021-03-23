@@ -5,6 +5,8 @@ import SignUp from './components/Login/SignUp';
 import SignInSide from './components/Login/SignInSide';
 import SideNav from './components/SideNav/SideNav';
 import { Flex } from './App.styles';
+import Followers from './components/Follow/Followers/Followers';
+import Following from './components/Following/Following';
 function App() {
   return (
     <>
@@ -15,6 +17,8 @@ function App() {
           <SideNav />
           <Route exact path='/' component={Home} />
           <Route exact path='/profile' component={Profile} />
+          <Route exact path='/followers' component={Followers} />
+          <Route exact path='/following' component={Following} />
         </Flex>
       </Switch>
     </>
