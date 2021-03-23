@@ -4,7 +4,7 @@ export const Media = styled.div`
     img {
         border-radius: 20px;
         height: auto;
-        max-width: 350px; // update with max width of card container
+        max-width: 300px; // update with max width of card container
     }
 `;
 

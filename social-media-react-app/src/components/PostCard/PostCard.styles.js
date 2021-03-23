@@ -4,7 +4,7 @@ export const CardWrapper = styled.div`
     .MuiCard-root {
         background: transparent;
         color: #fff;
-        max-width: 350px;
+        max-width: 300px;
         height: auto;
     }
 

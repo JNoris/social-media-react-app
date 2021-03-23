@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PostCard from '../PostCard/PostCard'
 import Grid from '@material-ui/core/Grid';
+import {GridWrapper} from "./PostGridViewStyles";
 
 //temp
 import img1 from "../temp/postImgs/img5.jpg"
@@ -50,14 +51,16 @@ const PostGridView = () => {
     ]
 
     return (
-        <Grid container justify="center" spacing={spacing}>
-           {tempPostContent.map((post) => (
-               <Grid key={post.img} item>
-                   <PostCard post={post} />
-               </Grid>
+        <GridWrapper>
+            <Grid container justify="center" spacing={spacing} className="postGrid">
+                {tempPostContent.map((post) => (
+                    <Grid key={post.img} item>
+                        <PostCard post={post} />
+                    </Grid>
                    
            ))}
         </Grid>
+        </GridWrapper>
     );
 }
 export default PostGridView;
