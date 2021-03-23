@@ -1,10 +1,16 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
-import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML } from './Profile.styles';
+import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML, GridWrapper } from './Profile.styles';
 import Grid from '@material-ui/core/Grid';
 import UserInfo from '../SideNav/SideNavProfile/SideNavProfileComponents/UserInfo';
 //import {useQuery} from 'react-query';
-
+import img1 from '../temp/postImgs/img1.jpg';
+import img2 from '../temp/postImgs/img2.jpg';
+import img3 from '../temp/postImgs/img3.jpg';
+import img4 from '../temp/postImgs/img4.jpg';
+import img5 from '../temp/postImgs/img5.jpg';
+import img6 from '../temp/postImgs/img6.jpg';
+import ProfileGridItem from './ProfileGridItem';
 const Profile = (props) => {
     if (props.location.state.userId) {
         console.log(props.location.state.userId);
@@ -22,25 +28,52 @@ const Profile = (props) => {
         userId: props.location.state.userId,
         posts: 46,
         followers: 2800,
-        following:5
+        following: 5
     }
+    var dummyImg = [
+        {
+            id: 1,
+            photo: img1
+        },
+        {
+            id: 2,
+            photo: img2
+        },
+        {
+            id: 3,
+            photo: img3
+        },
+        {
+            id: 4,
+            photo: img4
+        },
+        {
+            id: 5,
+            photo: img5
+        },
+        {
+            id: 6,
+            photo: img6
+        }
+    ];
+
     const [bio, setBio] = useState(dummyData.bio)
     const [bioReadOnly, setReadOnly] = useState(true);
     const [saveBtn, showSaveBtn] = useState(false);
-    
+
     const handleBioChange = event => {
         setBio(event.target.value);
     }
     const handleBioEdit = () => {
         setReadOnly(false);
-        showSaveBtn(true);   
+        showSaveBtn(true);
     }
     const handleBioSave = () => {
         //Api call to put/patch new bio
         showSaveBtn(false);
         setReadOnly(true);
     }
-    
+
 
 
     return (
@@ -74,15 +107,28 @@ const Profile = (props) => {
                         value={bio}
                         InputProps={{
                             readOnly: bioReadOnly,
-                          }}
+                        }}
                         onChange={handleBioChange}
                     />
                 </Bio>
-                {bioReadOnly ? <Button variant="contained" onClick={()=> handleBioEdit()}>Edit Bio</Button> : null }
-                {saveBtn ? <Button variant="contained" onClick={()=>handleBioSave()}>SAVE</Button> : null}         
+                {bioReadOnly ? <Button variant="contained" onClick={() => handleBioEdit()}>Edit Bio</Button> : null}
+                {saveBtn ? <Button variant="contained" onClick={() => handleBioSave()}>SAVE</Button> : null}
             </InfoCol>
             <PostDummy>
-                <p>asdasd</p>
+                <GridWrapper>
+                    <Grid 
+                        container 
+                        spacing={1}
+                        justify="space-evenly"
+                        alignItems="center"
+                    >
+                        {dummyImg?.map(item => (
+                            <Grid item key={item.id} xs={4}>
+                                <ProfileGridItem src={item.photo} alt={item.id} />
+                            </Grid>
+                        ))}
+                    </Grid>
+                </GridWrapper>
             </PostDummy>
         </ProfileWrapper>
     );
