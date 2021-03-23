@@ -10,7 +10,7 @@ function App() {
       <Route exact path='/' component = {Home}/>
       <Route path='/profile' component = {Profile}/>
       <Route path='/registration' component = {SignUp}/>
-      <Route path='/signinside' component = {SignInSide}/>
+      <Route path='/signin' component = {SignInSide}/>
     </Layout>
   );
 }
