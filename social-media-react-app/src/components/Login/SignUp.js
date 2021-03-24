@@ -1,5 +1,7 @@
 import React from "react";
+// eslint-disable-next-line
 import ReactDOM from "react-dom";
+// eslint-disable-next-line
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 //import { useForm } from "react-hook-form";
 import Avatar from "@material-ui/core/Avatar";
@@ -21,8 +23,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   avatar: {
+    // lock icon
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.info, // can change rudimentary color here
   },
   form: {
     width: "100%", // Fix IE 11 issue.

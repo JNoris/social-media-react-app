@@ -1,9 +1,11 @@
 import React from "react";
+// eslint-disable-next-line
 import ReactDOM from "react-dom";
+// eslint-disable-next-line
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
-//import { Link } from "react-router";
-//import SignUp from "./components/Login/SignUp";
+// import { Link } from "react-router";
+// import SignUp from "./components/Login/SignUp";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: "url(https://source.unsplash.com/random)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
-      theme.palette.type === "light"
+      theme.palette.type === "dark" // was light, now doesn't do anything apparently
         ? theme.palette.grey[50]
         : theme.palette.grey[900],
     backgroundSize: "cover",
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.info,
   },
   form: {
     width: "100%", // Fix IE 11 issue.

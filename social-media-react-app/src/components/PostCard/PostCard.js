@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import {CardWrapper} from './PostCard.styles'

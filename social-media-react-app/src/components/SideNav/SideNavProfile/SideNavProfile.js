@@ -17,18 +17,21 @@ const SideNavProfile = () => {
                     <UserInfo
                         name="Posts"
                         number="46"
+                        link="profile"
                     />
                 </Grid>
                 <Grid item xs={4}>
                     <UserInfo
                         name="Followers"
                         number="2800"
+                        link="follow"
                     />
                 </Grid>
                 <Grid item xs={4}>
                     <UserInfo
                         name="Following"
                         number="5"
+                        link="follow"
                     />
                 </Grid>
             </Grid>
