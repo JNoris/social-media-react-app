@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import {ContentWrapper} from './PostCardContentStyles'
+import {ContentWrapper} from './PostCardContent.styles'
 import PostStats from './PostStats'
 import UserInfo from './UserInfo'
 
 const PostCardContent = (props) => {
+    console.log(props)
     return (
         <ContentWrapper>
             <CardContent>
                 <CardActions disableSpacing>
-                    <UserInfo />
+                    <UserInfo 
+                        username={props.user}
+                    />
                    <PostStats 
                         likes={props.likes}
                         comments={props.comments}
+                        post={props.post}
                    />
                 </CardActions>
             </CardContent>

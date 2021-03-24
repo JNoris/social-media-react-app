@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import {ContentComponent, PostActions} from './PostCardContentStyles'
+import {ContentComponent, PostActions} from './PostCardContent.styles'
+import PostViewModal from '../../PostViewModal/PostViewModal'
 
 const PostStats = (props) => {
     const [like, setLike] = useState(false);
     const [heartColor, setHeartColor] = useState({color: "#fff"})
+    const [isOpen, setIsOpen] = useState(false)
 
     function handleLike() {
         setLike(!like);
@@ -19,7 +21,13 @@ const PostStats = (props) => {
         }
     }
 
+    function toggleModal() {
+        console.log("toggleModal")
+        setIsOpen(!isOpen);
+    }
+
     return (
+        <div>
         <PostActions>
             <ContentComponent>
                 <FavoriteBorderIcon
@@ -33,12 +41,18 @@ const PostStats = (props) => {
             </ContentComponent>
             <ContentComponent>
                 <ChatBubbleOutlineIcon
-                    // onClick open individual post view - shows input field to comment + view comments
+                    onClick={toggleModal}
                 />
                     {/* onClick open list view of commments */}
                     <p id="comments">{props.comments}</p>
                 </ContentComponent>
         </PostActions>
+        <PostViewModal 
+            show={isOpen}
+            onClose={toggleModal}
+            post = {props.post}
+        />
+        </div>
     )
 }
 

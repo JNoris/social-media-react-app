@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PostCard from '../PostCard/PostCard'
 import Grid from '@material-ui/core/Grid';
-import {GridWrapper} from "./PostGridViewStyles";
+import {GridWrapper} from "./PostGridView.styles";
 
 //temp
 import img1 from "../temp/postImgs/img5.jpg"
@@ -19,31 +19,37 @@ const PostGridView = () => {
     // temp dummy data
     var tempPostContent = [
         {
+            username: "random.user",
             img: img1,
             likes: "311",
             comments: "114"
         },
         {
+            username: "user_twooooo",
             img: img3,
             likes: "105",
             comments: "25"
         },
         {
+            username: "janedoedoe",
             img: img2,
             likes: "2.1k",
             comments: "362"
         },
         {
+            username: "john_smith",
             img: img5,
             likes: "30",
             comments: "2"
         },
         {
+            username: "hugh.boss",
             img: img4,
             likes: "574",
             comments: "183"
         },
         {
+            username: "niceee_postz",
             img: img6,
             likes: "410",
             comments: "16"

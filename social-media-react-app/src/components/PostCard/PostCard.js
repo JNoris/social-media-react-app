@@ -16,8 +16,10 @@ const PostCard = (props) => {
                     img = {post.img}
                />
                <PostCardContent
+                    user = {post.username}
                     likes = {post.likes}
                     comments = {post.comments}
+                    post = {post}
                />
             </Card>
         </CardWrapper>
