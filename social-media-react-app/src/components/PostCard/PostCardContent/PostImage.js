@@ -1,15 +1,14 @@
 // eslint-disable-next-line
 import React, { useState } from 'react';
 import CardMedia  from '@material-ui/core/CardMedia';
-import {Media} from './PostCardContentStyles';
-//temp
-import img from '../../temp/postImgs/img5.jpg'
+import {Media} from './PostCardContent.styles';
+import img from "../../temp/postImgs/img1.jpg"
 
-const PostImage = () => {
+const PostImage = (props) => {
     return (
         <Media>
             <CardMedia>
-                <img src={img} alt=""/>
+                <img src={props.img} />
             </CardMedia>
         </Media>
     );
