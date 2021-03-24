@@ -10,13 +10,13 @@ function App() {
   return (
     <>
       <Switch>
-        <Route exact path='/registration' component={SignUp} />
-        <Route exact path='/signin' component={SignInSide} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/signin" component={SignInSide} />
+        <Route exact path="/settings" component={Settings} />
         <Flex>
           <SideNav />
-          <Route exact path='/' component={Home} />
-          <Route exact path='/profile' component={Profile} />    
-          <Route exact path='/follow' component={Follow} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/profile" component={Profile} />
         </Flex>
       </Switch>
     </>
