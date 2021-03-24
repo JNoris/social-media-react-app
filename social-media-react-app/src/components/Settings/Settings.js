@@ -1,7 +1,6 @@
 import "./Settings.css";
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 
 function Settings() {
   const options = [
