@@ -14,4 +14,9 @@ export const FormWrapper = styled.div`
     background-color: rgba(255,255,255,.1);
     border-radius: 5px;
 }
+
+.MuiFilledInput-input::placeholder {
+    color: #e4e4e4;
+}
+
 `;
