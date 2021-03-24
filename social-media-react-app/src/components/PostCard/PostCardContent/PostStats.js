@@ -22,7 +22,6 @@ const PostStats = (props) => {
     }
 
     function toggleModal() {
-        console.log("toggleModal")
         setIsOpen(!isOpen);
     }
 

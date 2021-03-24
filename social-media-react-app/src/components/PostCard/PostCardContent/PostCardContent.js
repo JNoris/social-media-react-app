@@ -6,7 +6,6 @@ import PostStats from './PostStats'
 import UserInfo from './UserInfo'
 
 const PostCardContent = (props) => {
-    console.log(props)
     return (
         <ContentWrapper>
             <CardContent>

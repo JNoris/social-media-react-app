@@ -1,36 +1,38 @@
-import React, {forwardRef, useState} from 'react';
+import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import PostCard from '../PostCard/PostCard'
+import PostCardModalView from '../PostCard/PostCardModalView/PostCardModalView'
+import {ModalWrapper} from './PostViewModal.styles'
 
 const PostViewModal = (props) => {
 
-    console.log("modal",props);
-
+    const post = props.post;
+    const show = props.show;
 
     return (
-  !props.show ? null : (                
-    <Modal
-        aria-labelledby=""
-        aria-describedby=""
-        open={true}
-        onClose={props.onClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-        timeout: 500,
-    }}
-  >
-    <Fade in={true}>
-      {/* <PostCard 
-        post = {props.post}
-      /> */}
-      <p>hello</p>
-    </Fade>
-  </Modal>
-)
-  );
-
+        !show ? null : (   
+     
+             <Modal
+                aria-labelledby=""
+                aria-describedby=""
+                open={show}
+                onClose={props.onClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}>
+                <ModalWrapper>   
+                    <Fade in={show}>
+                        <PostCardModalView
+                            post = {post}
+                        />
+                    </Fade>
+                </ModalWrapper>   
+            </Modal>
+  
+            )
+    );
   }
   export default PostViewModal;

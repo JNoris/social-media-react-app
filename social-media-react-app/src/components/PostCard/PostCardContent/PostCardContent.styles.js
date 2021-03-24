@@ -35,7 +35,7 @@ export const ContentComponent = styled.div `
 
     p {
         padding-left: 0.5rem;
-        margin-right: 1rem;
+        margin-right: .5rem;
     }
 
     #comments {
