@@ -1,11 +1,11 @@
 import React from 'react'
 import {HomeWrapper} from './Home.styles';
-import PostCard from '../PostCard/PostCard';
+import PostGridView from '../PostGridView/PostGridView'
 
 const Home = () => {
     return(
         <HomeWrapper>
-            <PostCard />
+            <PostGridView />
         </HomeWrapper>
     );
 }

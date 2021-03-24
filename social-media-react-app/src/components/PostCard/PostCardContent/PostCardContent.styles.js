@@ -4,7 +4,7 @@ export const Media = styled.div`
     img {
         border-radius: 20px;
         height: auto;
-        max-width: 350px; // update with max width of card container
+        max-width: 300px; // update with max width of card container
     }
 `;
 
@@ -35,11 +35,15 @@ export const ContentComponent = styled.div `
 
     p {
         padding-left: 0.5rem;
-        margin-right: 1rem;
+        margin-right: .5rem;
     }
 
     #comments {
         margin-right: 0;
+    }
+
+    .icon:hover{
+        color: #d3d3d3;
     }
 `;
 

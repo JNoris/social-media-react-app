@@ -1,12 +1,11 @@
-// eslint-disable-next-line
 import React, { useState } from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import {ContentWrapper} from './PostCardContent.styles'
-import PostStats from './PostStats'
-import UserInfo from './UserInfo'
+import {ContentWrapper} from '../../PostCardContent/PostCardContent.styles'
+import PostStats from '../../PostCardContent/PostStats'
+import UserInfo from '../../PostCardContent/UserInfo'
 
-const PostCardContent = (props) => {
+const PostCardModalContent = (props) => {
     return (
         <ContentWrapper>
             <CardContent>
@@ -16,7 +15,6 @@ const PostCardContent = (props) => {
                     />
                    <PostStats 
                         likes={props.likes}
-                        comments={props.comments}
                         post={props.post}
                    />
                 </CardActions>
@@ -25,4 +23,4 @@ const PostCardContent = (props) => {
     )
 }
 
-export default PostCardContent;
+export default PostCardModalContent;

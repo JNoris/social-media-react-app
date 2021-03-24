@@ -1,5 +1,7 @@
 import React from "react";
+// eslint-disable-next-line
 import ReactDOM from "react-dom";
+// eslint-disable-next-line
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 //import { useForm } from "react-hook-form";
 import Avatar from "@material-ui/core/Avatar";
