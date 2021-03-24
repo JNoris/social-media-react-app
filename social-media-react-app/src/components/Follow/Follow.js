@@ -33,7 +33,7 @@ TabPanel.propTypes = {
     value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
+function tabProps(index) {
     return {
         id: `simple-tab-${index}`,
         'aria-controls': `simple-tabpanel-${index}`,
@@ -52,8 +52,8 @@ const Follow = () => {
         <FollowWrapper>
             <AppBar position="static" className="tabs">
                 <Tabs value={value} variant="fullWidth" onChange={handleChange} aria-label="follows">
-                    <Tab label="Followers" {...a11yProps(0)} />
-                    <Tab label="Following" {...a11yProps(1)} />
+                    <Tab label="Followers" {...tabProps(0)} />
+                    <Tab label="Following" {...tabProps(1)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
