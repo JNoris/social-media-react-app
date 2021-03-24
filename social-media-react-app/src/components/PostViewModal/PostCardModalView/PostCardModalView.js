@@ -20,6 +20,7 @@ const PostCardModalView = (props) => {
             <Card>
                <PostImage 
                     img = {post.img}
+                    modalView = {props.modalView}
                />
                <PostCardModalContent 
                     user = {user}

@@ -1,15 +1,32 @@
 import React, { useState } from 'react';
 import CardMedia  from '@material-ui/core/CardMedia';
 import {Media} from './PostCardContent.styles';
+import PostViewModal from "../../PostViewModal/PostViewModal"
 
 const PostImage = (props) => {
+    const [isOpen, setIsOpen] = useState(false)
+    const isModelView = props.modalView? props.modalView : false;
 
+    function toggleModal() {
+        if(!isModelView) {
+            setIsOpen(!isOpen);
+        }
+    }
+    
+    console.log("img",props)
     return (
+        <div>
         <Media>
             <CardMedia>
-                <img src={props.img} />
+                <img src={props.img} onClick={toggleModal} />
             </CardMedia>
         </Media>
+        <PostViewModal 
+            show={isOpen}
+            onClose={toggleModal}
+            post = {props.post}
+        />
+        </div>
     );
 }
 

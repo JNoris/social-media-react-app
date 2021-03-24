@@ -29,6 +29,7 @@ const PostViewModal = (props) => {
                     <Fade in={show}>
                         <PostCardModalView
                             post = {post}
+                            modalView={true}
                         />
                     </Fade>
                 </ModalWrapper>   
