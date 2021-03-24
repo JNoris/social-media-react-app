@@ -21,8 +21,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   avatar: {
+    // lock icon
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.info,
+    backgroundColor: theme.palette.primary.info, // can change rudimentary color here
   },
   form: {
     width: "100%", // Fix IE 11 issue.

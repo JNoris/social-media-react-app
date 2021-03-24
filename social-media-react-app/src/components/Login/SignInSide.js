@@ -25,11 +25,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: "url(https://source.unsplash.com/random)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
-<<<<<<< Updated upstream
-      theme.palette.type === "dark" // switched from "light"
-=======
       theme.palette.type === "dark" // was light, now doesn't do anything apparently
->>>>>>> Stashed changes
         ? theme.palette.grey[50]
         : theme.palette.grey[900],
     backgroundSize: "cover",
