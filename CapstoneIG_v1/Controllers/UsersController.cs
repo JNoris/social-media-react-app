@@ -92,7 +92,7 @@ namespace CapstoneIG_v1.Controllers
 
         [HttpGet]
         [Route("getuserdetails/{userId}")]
-        public JsonResult GetCurrentUserDetails(string userId)
+        public JsonResult GetUserDetails(string userId)
         {
             ApplicationUser usr = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
 
@@ -114,8 +114,7 @@ namespace CapstoneIG_v1.Controllers
         {
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
-            _db.Users.Remove(user);
-            _db.SaveChanges();
+            await _userManager.DeleteAsync(user);
 
             return Ok(new Response { Status = "Success", Message = "User Deleted" });
         }
