@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapstoneIG_v1", "CapstoneIG_v1\CapstoneIG_v1.csproj", "{15813101-71B4-47EF-8327-0FC86FE70524}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CapstoneIG_v1", "CapstoneIG_v1\CapstoneIG_v1.csproj", "{15813101-71B4-47EF-8327-0FC86FE70524}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapstoneIG_v1.Tests", "CapstoneIG_v1.Tests\CapstoneIG_v1.Tests.csproj", "{78469C92-450E-4BDC-AF1B-2E4B4742ACB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{15813101-71B4-47EF-8327-0FC86FE70524}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15813101-71B4-47EF-8327-0FC86FE70524}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15813101-71B4-47EF-8327-0FC86FE70524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78469C92-450E-4BDC-AF1B-2E4B4742ACB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78469C92-450E-4BDC-AF1B-2E4B4742ACB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78469C92-450E-4BDC-AF1B-2E4B4742ACB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78469C92-450E-4BDC-AF1B-2E4B4742ACB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

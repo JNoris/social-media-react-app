@@ -96,7 +96,16 @@ namespace CapstoneIG_v1.Controllers
         {
             ApplicationUser usr = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
 
-            return Json(usr);
+            UserResponse newUResponse = new UserResponse()
+            {
+                ProfilePhotoPath = usr.ProfileImageName,
+                UserName = usr.UserName,
+                NumberOfPosts = _db.Posts.Where(p => p.User == usr).Count(),
+                NumberOfFollowers = _db.Followers.Where(f => f.FollowingId.Id == userId).Count(),
+                NumberOfFollowing = _db.Followers.Where(f => f.UserId.Id == userId).Count()
+            };
+
+            return Json(newUResponse);
         }
 
         [HttpPost]
