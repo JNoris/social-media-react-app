@@ -16,6 +16,8 @@ const PostViewModal = (props) => {
              <Modal
                 aria-labelledby=""
                 aria-describedby=""
+                style={{overflow: 'scroll'}}
+                //disableScrollLock
                 open={show}
                 onClose={props.onClose}
                 closeAfterTransition

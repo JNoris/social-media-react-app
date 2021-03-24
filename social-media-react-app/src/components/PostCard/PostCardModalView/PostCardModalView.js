@@ -4,8 +4,8 @@ import {CardWrapper} from '../PostCard.styles'
 import PostImage from '../PostCardContent/PostImage'
 import PostCardModalContent from './PostCardModalContent/PostCardModalContent';
 import {CaptionWrapper} from './PostCardModalView.styles'
-import PostCardComment from './PostCardModalContent/PostCardComment';
-
+import PostCardAddComment from '../../PostComment/PostCardAddComment';
+import PostCommentListView from '../../PostComment/PostCommentListView'
 
 const PostCardModalView = (props) => {
     
@@ -27,7 +27,8 @@ const PostCardModalView = (props) => {
                <CaptionWrapper>
                 <p>This will be where the caption goes...</p>
                </CaptionWrapper>
-               <PostCardComment user = {user}/>
+               <PostCardAddComment user = {user}/>
+               <PostCommentListView />
             </Card>
         </CardWrapper>
     );

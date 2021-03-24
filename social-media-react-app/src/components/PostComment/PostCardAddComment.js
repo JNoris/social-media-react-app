@@ -1,8 +1,8 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import {FormWrapper} from '../PostCardModalView.styles'
+import {FormWrapper} from '../PostCard/PostCardModalView/PostCardModalView.styles'
 
-const PostCardComment = (props) => {
+const PostCardAddComment = (props) => {
     
     const user = props.user;
 
@@ -11,14 +11,10 @@ const PostCardComment = (props) => {
         <form noValidate autoComplete="off">
             <TextField 
                 id="filled-full-width"
-                //label="Label"
                 style={{ margin: 0 }}
                 placeholder="Add a comment"
                 fullWidth
                 margin="normal"
-                // InputLabelProps={{
-                //     shrink: true,
-                // }}
                 variant="filled" 
             />
         </form>
@@ -26,4 +22,4 @@ const PostCardComment = (props) => {
     );
 }
 
-export default PostCardComment;
+export default PostCardAddComment;
