@@ -41,6 +41,10 @@ export const ContentComponent = styled.div `
     #comments {
         margin-right: 0;
     }
+
+    .icon:hover{
+        color: #d3d3d3;
+    }
 `;
 
 export const PostActions = styled.div `

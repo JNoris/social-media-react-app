@@ -9,7 +9,7 @@ export const ModalWrapper = styled.div`
     border-radius: 20px;
     margin-top: 3rem;
     outline: none;
-    padding: 1rem;
+    padding: 2rem 1rem;
     width: 350px;   // will need to adjust
-    height: 350px;  // will need to adjust
+    //height: 350px;  // will need to adjust
 `;

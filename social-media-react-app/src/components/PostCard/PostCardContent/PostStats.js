@@ -9,11 +9,19 @@ const PostStats = (props) => {
     const [heartColor, setHeartColor] = useState({color: "#fff"})
     const [isOpen, setIsOpen] = useState(false)
 
+    var showCommentCount = !props.comments ? null : <ContentComponent>
+    <ChatBubbleOutlineIcon
+        className="icon"
+        id="CommentIcon"
+        onClick={toggleModal}
+    />
+        {/* onClick open list view of commments */}
+        <p id="comments">{props.comments}</p>
+    </ContentComponent>
+
     function handleLike() {
-        setLike(!like);
-
         // TO DO add API Call functionality
-
+        setLike(!like);
         if(like) {
             setHeartColor({color: "#e2336b"});
         } else {
@@ -30,6 +38,7 @@ const PostStats = (props) => {
         <PostActions>
             <ContentComponent>
                 <FavoriteBorderIcon
+                    className="icon"
                     id="likeIcon"
                     onClick={handleLike}
                     style={heartColor}
@@ -38,13 +47,7 @@ const PostStats = (props) => {
                     <p id="likes">{props.likes}</p> 
                     {/* TO DO on click */}
             </ContentComponent>
-            <ContentComponent>
-                <ChatBubbleOutlineIcon
-                    onClick={toggleModal}
-                />
-                    {/* onClick open list view of commments */}
-                    <p id="comments">{props.comments}</p>
-                </ContentComponent>
+            {showCommentCount}
         </PostActions>
         <PostViewModal 
             show={isOpen}
