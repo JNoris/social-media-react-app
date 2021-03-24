@@ -8,10 +8,14 @@ import SideNav from './components/SideNav/SideNav';
 import { Flex, MainWrapper } from './App.styles';
 import Settings from './components/Settings/Settings';
 import Follow from './components/Follow/Follow';
+import TopNav from "./components/TopNav/TopNav";
+
+
 function App() {
   //const [token, setToken]=useState("");
   return (
     <>
+      <TopNav />
       <Switch>
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignInSide} />  
