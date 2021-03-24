@@ -17,3 +17,10 @@ export const NavWrapper = styled.div`
         width:40vw;
     }
 `;
+
+export const SideNavProfileWrapper = styled.div`
+    a{
+        text-decoration:none;
+        color:white;
+    }
+`;
