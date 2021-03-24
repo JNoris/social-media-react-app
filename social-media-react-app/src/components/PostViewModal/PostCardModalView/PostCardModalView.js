@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
-import {CardWrapper} from '../PostCard.styles'
-import PostImage from '../PostCardContent/PostImage'
+import {CardWrapper} from '../../PostCard/PostCard.styles'
+import PostImage from '../../PostCard/PostCardContent/PostImage'
 import PostCardModalContent from './PostCardModalContent/PostCardModalContent';
 import {CaptionWrapper} from './PostCardModalView.styles'
-import PostCardAddComment from '../../PostComment/PostCardAddComment';
-import PostCommentListView from '../../PostComment/PostCommentListView'
+import PostCardAddComment from '../PostComment/PostCardAddComment';
+import PostCommentListView from '../PostComment/PostCommentListView'
 
 const PostCardModalView = (props) => {
     
+    console.log(props )
     const post = props.post;
     const user = post.username
 

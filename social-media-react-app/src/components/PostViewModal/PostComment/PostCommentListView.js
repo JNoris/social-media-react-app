@@ -45,7 +45,7 @@ const PostCommentListView = (props) => {
         <List>
             {tempComments.map((comment) => (
                 <CommentWrapper>
-                  <ListItem key = {comment.username} alignItems="flex-start">
+                  <ListItem key={comment.username} alignItems="flex-start">
                   <ListItemAvatar>
                       <Avatar aria-label="user">RU</Avatar>
                   </ListItemAvatar>

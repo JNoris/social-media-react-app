@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import {ContentWrapper} from '../../PostCardContent/PostCardContent.styles'
-import PostStats from '../../PostCardContent/PostStats'
-import UserInfo from '../../PostCardContent/UserInfo'
+import {ContentWrapper} from '../../../PostCard/PostCardContent/PostCardContent.styles'
+import PostStats from '../../../PostCard/PostCardContent/PostStats'
+import UserInfo from '../../../PostCard/PostCardContent/UserInfo'
 
 const PostCardModalContent = (props) => {
     return (

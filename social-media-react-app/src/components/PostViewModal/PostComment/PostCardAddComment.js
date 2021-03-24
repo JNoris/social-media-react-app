@@ -1,6 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import {FormWrapper} from '../PostCard/PostCardModalView/PostCardModalView.styles'
+import {FormWrapper} from '../PostCardModalView/PostCardModalView.styles'
 
 const PostCardAddComment = (props) => {
     

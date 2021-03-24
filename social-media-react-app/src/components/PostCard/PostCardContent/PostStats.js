@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import {ContentComponent, PostActions} from './PostCardContent.styles'
-import PostViewModal from '../../PostViewModal/PostViewModal'
+import PostViewModal from "../../PostViewModal/PostViewModal"
+
 
 const PostStats = (props) => {
     const [like, setLike] = useState(false);
@@ -16,7 +17,7 @@ const PostStats = (props) => {
         onClick={toggleModal}
     />
         {/* onClick open list view of commments */}
-        <p id="comments">{props.comments}</p>
+        <p id="comments" onClick={toggleModal}>{props.comments}</p>
     </ContentComponent>
 
     function handleLike() {

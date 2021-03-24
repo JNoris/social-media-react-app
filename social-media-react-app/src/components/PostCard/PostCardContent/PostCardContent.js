@@ -13,6 +13,7 @@ const PostCardContent = (props) => {
                 <CardActions disableSpacing>
                     <UserInfo 
                         username={props.user}
+                        post={props.post}
                     />
                    <PostStats 
                         likes={props.likes}
