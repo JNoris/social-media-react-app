@@ -95,11 +95,11 @@ const Profile = (props) => {
                     <Grid 
                         container 
                         spacing={1}
-                        justify="space-evenly"
+                        justify="flex-start"
                         alignItems="center"
                     >
                         {dummyImg?.map(item => (
-                            <Grid item key={item.id} xs={4}>
+                            <Grid item key={item.id} xs={12} md={4} lg={3} >
                                 <ProfileGridItem link={item.id} src={item.photo} alt={item.id} />
                             </Grid>
                         ))}
