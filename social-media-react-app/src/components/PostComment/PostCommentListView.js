@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import {CommentWrapper} from './PostComment.styles'
 
 const PostCommentListView = (props) => {
     // TODO API call to get all post comments
@@ -44,15 +44,18 @@ const PostCommentListView = (props) => {
     return (
         <List>
             {tempComments.map((comment) => (
+                <CommentWrapper>
                   <ListItem key = {comment.username} alignItems="flex-start">
                   <ListItemAvatar>
                       <Avatar aria-label="user">RU</Avatar>
                   </ListItemAvatar>
                   <ListItemText
+                      id="listItem"
                       primary={comment.username}
                       secondary={comment.comment}
                   />      
               </ListItem>
+              </CommentWrapper>
             ))}
         </List>
     )
