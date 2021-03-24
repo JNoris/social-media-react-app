@@ -13,6 +13,10 @@ namespace CapstoneIG_v1.Auth
         {
             base.OnModelCreating(builder);
             builder.Entity<ApplicationUser>().ToTable("ApplicationUser");
+
+            builder.Entity<ApplicationUser>()
+            .Property(p => p.ProfileImageName)
+            .HasDefaultValue("https://localhost:5001/profileimages/defaultprofile.png");
         }
 
         public DbSet<CommentModel> Comments { get; set; }

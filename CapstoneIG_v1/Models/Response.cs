@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CapstoneIG_v1.Models
 {
@@ -9,5 +6,25 @@ namespace CapstoneIG_v1.Models
     {
         public string Status { get; set; }
         public string Message { get; set; }
+    }
+
+    public class PostResponse
+    {
+        public int Id { get; set; }
+        public string PhotoPath { get; set; }
+        public DateTime UploadDate { get; set; }
+        public string ProfilePhotoPath { get; set; }
+        public string UserName { get; set; }
+        public int NumberOfLikes { get; set; }
+        public int NumberOfComments { get; set; }
+    }
+
+    public class UserResponse
+    {
+        public string ProfilePhotoPath { get; set; }
+        public string UserName { get; set; }
+        public int NumberOfPosts { get; set; }
+        public int NumberOfFollowers { get; set; }
+        public int NumberOfFollowing { get; set; }
     }
 }

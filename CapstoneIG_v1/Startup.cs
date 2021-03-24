@@ -68,6 +68,12 @@ namespace CapstoneIG_v1
                 RequestPath = "/Images"
             });
 
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "ProfileImages")),
+                RequestPath = "/ProfileImages"
+            });
+
             app.UseCors(builder => builder
             .AllowAnyOrigin()
             .AllowAnyMethod()

@@ -87,7 +87,7 @@ namespace CapstoneIG_v1.Controllers
 
         [HttpPut]
         [Route("editpost/{postId}")]
-        public async Task<IActionResult> EditPost([FromForm] PostModel post, int postId)
+        public async Task<IActionResult> EditPost([FromBody] PostModel post, int postId)
         {
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
@@ -111,20 +111,99 @@ namespace CapstoneIG_v1.Controllers
         public async Task<JsonResult> GetCurrentUserPosts()
         {
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            List<PostModel> usrPosts = _db.Posts.Where(p => p.User == user).ToList();
+            List<PostResponse> pResponse = new List<PostResponse>();
 
-            List<PostModel> posts = _db.Posts.Where(x => x.User.Id == user.Id).ToList();
+            foreach(var p in usrPosts)
+            {
+                int totalLikes = _db.Likes.Where(l => l.PostId == p.Id).Count();
+                int totalComments = _db.Comments.Where(l => l.PostId == p.Id).Count();
 
-            return Json(posts);
+                PostResponse newPResponse = new PostResponse()
+                {
+                    Id = p.Id,
+                    PhotoPath = p.ImageName,
+                    UploadDate = p.UploadDate,
+                    ProfilePhotoPath = user.ProfileImageName,
+                    UserName = user.UserName,
+                    NumberOfLikes = totalLikes,
+                    NumberOfComments = totalComments
+                };
+
+                pResponse.Add(newPResponse);
+            }
+
+            var orderByDate = pResponse.OrderByDescending(p => p.UploadDate);
+
+            return Json(orderByDate);
         }
 
         [HttpGet]
         [Route("getuserposts/{userId}")]
         public JsonResult GetUserPosts(string userId)
         {
-            List<PostModel> posts = _db.Posts.Where(x => x.User.Id == userId).ToList();
+            ApplicationUser user = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            List<PostModel> usrPosts = _db.Posts.Where(p => p.User == user).ToList();
+            List<PostResponse> pResponse = new List<PostResponse>();
 
-            return Json(posts);
+            foreach (var p in usrPosts)
+            {
+                int totalLikes = _db.Likes.Where(l => l.PostId == p.Id).Count();
+                int totalComments = _db.Comments.Where(l => l.PostId == p.Id).Count();
+
+                PostResponse newPResponse = new PostResponse()
+                {
+                    Id = p.Id,
+                    PhotoPath = p.ImageName,
+                    UploadDate = p.UploadDate,
+                    ProfilePhotoPath = user.ProfileImageName,
+                    UserName = user.UserName,
+                    NumberOfLikes = totalLikes,
+                    NumberOfComments = totalComments
+                };
+
+                pResponse.Add(newPResponse);
+            }
+
+            var orderByDate = pResponse.OrderByDescending(p => p.UploadDate);
+
+            return Json(orderByDate);
         }
 
+        [HttpGet]
+        [Route("gethomepageposts")]
+        public async Task<JsonResult> GetHomePagePosts()
+        {
+            ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+
+            List<string> followedUsers = _db.Followers.Where(f => f.UserId == user).Select(x => x.FollowingId.Id).ToList();
+
+            List<PostResponse> pResponse = new List<PostResponse>();
+
+            foreach (string key in followedUsers)
+            {
+                ApplicationUser usr = _db.Users.Where(u => u.Id == key).FirstOrDefault();
+                PostModel usrPost = _db.Posts.Where(p => p.User.Id == key).FirstOrDefault();
+                int totalLikes = _db.Likes.Where(l => l.PostId == usrPost.Id).Count();
+                int totalComments = _db.Comments.Where(l => l.PostId == usrPost.Id).Count();
+
+                PostResponse newPResponse = new PostResponse()
+                {
+                    Id = usrPost.Id,
+                    PhotoPath = usrPost.ImageName,
+                    UploadDate = usrPost.UploadDate,
+                    ProfilePhotoPath = usr.ProfileImageName,
+                    UserName = usr.UserName,
+                    NumberOfLikes = totalLikes,
+                    NumberOfComments = totalComments
+                };
+
+                pResponse.Add(newPResponse);
+            }
+
+            var orderByDate = pResponse.OrderByDescending(p => p.UploadDate);
+
+            return Json(orderByDate);
+        }
     }
 }
