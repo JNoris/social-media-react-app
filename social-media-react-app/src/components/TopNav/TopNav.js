@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { TopNavItems } from "./TopNavItems";
-import "./TopNav.css";
 
 // Utilizing state
 class TopNav extends Component {
