@@ -126,6 +126,8 @@ namespace CapstoneIG_v1.Controllers
                     UploadDate = p.UploadDate,
                     ProfilePhotoPath = user.ProfileImageName,
                     UserName = user.UserName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     NumberOfLikes = totalLikes,
                     NumberOfComments = totalComments
                 };
@@ -158,6 +160,8 @@ namespace CapstoneIG_v1.Controllers
                     UploadDate = p.UploadDate,
                     ProfilePhotoPath = user.ProfileImageName,
                     UserName = user.UserName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     NumberOfLikes = totalLikes,
                     NumberOfComments = totalComments
                 };
@@ -194,6 +198,8 @@ namespace CapstoneIG_v1.Controllers
                     UploadDate = usrPost.UploadDate,
                     ProfilePhotoPath = usr.ProfileImageName,
                     UserName = usr.UserName,
+                    FirstName = usr.FirstName,
+                    LastName = usr.LastName,
                     NumberOfLikes = totalLikes,
                     NumberOfComments = totalComments
                 };

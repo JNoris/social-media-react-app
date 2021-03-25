@@ -64,6 +64,8 @@ namespace CapstoneIG_v1.Controllers
 
             user.Bio = curUser.Bio;
             user.UserName = curUser.UserName;
+            user.FirstName = curUser.FirstName;
+            user.LastName = curUser.LastName;
 
             _db.SaveChanges();
 
@@ -82,6 +84,8 @@ namespace CapstoneIG_v1.Controllers
             {
                 ProfilePhotoPath = usr.ProfileImageName,
                 UserName = usr.UserName,
+                FirstName = usr.FirstName,
+                LastName = usr.LastName,
                 NumberOfPosts = _db.Posts.Where(p => p.User == usr).Count(),
                 NumberOfFollowers = _db.Followers.Where(f => f.FollowingId == user).Count(),
                 NumberOfFollowing = _db.Followers.Where(f => f.UserId == user).Count()
@@ -100,6 +104,8 @@ namespace CapstoneIG_v1.Controllers
             {
                 ProfilePhotoPath = usr.ProfileImageName,
                 UserName = usr.UserName,
+                FirstName = usr.FirstName,
+                LastName = usr.LastName,
                 NumberOfPosts = _db.Posts.Where(p => p.User == usr).Count(),
                 NumberOfFollowers = _db.Followers.Where(f => f.FollowingId.Id == userId).Count(),
                 NumberOfFollowing = _db.Followers.Where(f => f.UserId.Id == userId).Count()
