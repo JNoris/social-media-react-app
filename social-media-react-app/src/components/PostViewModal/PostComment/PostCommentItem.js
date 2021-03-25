@@ -24,12 +24,11 @@ const PostCommentItem= (props) => {
 
     return(
         <CommentWrapper>
-            <ListItem key={comment.username} alignItems="flex-start">
+            <ListItem key={comment.username} className="listItem">
                 <ListItemAvatar>
                     <Avatar aria-label="user">RU</Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                    id="listItem"
                     primary={comment.username}
                     secondary={comment.comment}
                 />      
