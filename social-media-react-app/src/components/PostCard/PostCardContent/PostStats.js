@@ -9,16 +9,28 @@ const PostStats = (props) => {
     const [like, setLike] = useState(false);
     const [heartColor, setHeartColor] = useState({color: "#fff"})
     const [isOpen, setIsOpen] = useState(false)
+    const [isOpenLikes, setIsOpenLikes] = useState(false)
 
-    var showCommentCount = !props.comments ? null : <ContentComponent>
-    <ChatBubbleOutlineIcon
-        className="icon"
-        id="CommentIcon"
-        onClick={toggleModal}
-    />
-        {/* onClick open list view of commments */}
-        <p id="comments" onClick={toggleModal}>{props.comments}</p>
-    </ContentComponent>
+    var showCommentCount = !props.comments ? null : 
+        <ContentComponent>
+            <ChatBubbleOutlineIcon
+                className="icon"
+                id="CommentIcon"
+                onClick={toggleModal}
+            />
+            <p id="comments" onClick={toggleModal}>{props.comments}</p>
+        </ContentComponent>
+
+    var showLikeCount = !props.likes ? null :             
+        <ContentComponent>
+            <FavoriteBorderIcon
+                className="icon"
+                id="likeIcon"
+                onClick={handleLike}
+                style={heartColor}
+            />
+             <p id="likes" onClick={toggleModalLikes}>{props.likes}</p> 
+        </ContentComponent>
 
     function handleLike() {
         // TO DO add API Call functionality
@@ -34,26 +46,27 @@ const PostStats = (props) => {
         setIsOpen(!isOpen);
     }
 
+    function toggleModalLikes() {
+        setIsOpenLikes(!isOpenLikes);
+    }
+
     return (
         <div>
         <PostActions>
-            <ContentComponent>
-                <FavoriteBorderIcon
-                    className="icon"
-                    id="likeIcon"
-                    onClick={handleLike}
-                    style={heartColor}
-                />
-                    {/* onClick open list view of likes */}
-                    <p id="likes">{props.likes}</p> 
-                    {/* TO DO on click */}
-            </ContentComponent>
+            {showLikeCount}
             {showCommentCount}
         </PostActions>
         <PostViewModal 
             show={isOpen}
             onClose={toggleModal}
             post = {props.post}
+            viewComments = {true}
+        />
+        <PostViewModal 
+            show={isOpenLikes}
+            onClose={toggleModalLikes}
+            post = {props.post}
+            viewComments = {false}
         />
         </div>
     )

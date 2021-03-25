@@ -9,9 +9,9 @@ export const CaptionWrapper = styled.div`
 
 export const FormWrapper = styled.div`
 .MuiFilledInput-input {
-    padding: 5px 10px;
+    padding: 10px;
     color: #fff;
-    background-color: rgba(255,255,255,.1);
+    background-color: rgba(255,255,255,.2);
     border-radius: 5px;
 }
 

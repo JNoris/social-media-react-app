@@ -6,6 +6,8 @@ import PostStats from '../../../PostCard/PostCardContent/PostStats'
 import UserInfo from '../../../PostCard/PostCardContent/UserInfo'
 
 const PostCardModalContent = (props) => {
+    console.log("pcmc", props)
+
     return (
         <ContentWrapper>
             <CardContent>
@@ -15,6 +17,7 @@ const PostCardModalContent = (props) => {
                     />
                    <PostStats 
                         likes={props.likes}
+                        comments={props.comments}
                         post={props.post}
                    />
                 </CardActions>

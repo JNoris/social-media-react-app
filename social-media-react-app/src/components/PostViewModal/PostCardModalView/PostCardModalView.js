@@ -5,15 +5,38 @@ import PostImage from '../../PostCard/PostCardContent/PostImage'
 import PostCardModalContent from './PostCardModalContent/PostCardModalContent';
 import {CaptionWrapper} from './PostCardModalView.styles'
 import PostCardAddComment from '../PostComment/PostCardAddComment';
-import PostCommentListView from '../PostComment/PostCommentListView'
+import PostCommentListView from '../PostComment/PostCommentList';
+import PostLikeList from '../PostLikes/PostLikeList'
 
 const PostCardModalView = (props) => {
-    
-    console.log(props )
+
     const post = props.post;
     const user = post.username
+    const viewComments = props.viewComments
 
     // API to get post description + comments
+    var postDataToShow = viewComments ? (
+        <PostCardModalContent 
+                    user = {user}
+                    likes = {post.likes}
+                    post={post}
+               />
+    ) : (
+        <PostCardModalContent 
+                    user = {user}
+                    comments = {post.comments}
+                    post={post}
+               />
+    ) ;
+
+    var content = viewComments ? (
+        <div>
+           <PostCardAddComment user = {user}/>
+            <PostCommentListView />
+        </div>
+    ) : (
+        <PostLikeList/>
+    )
 
     return (
         <CardWrapper>
@@ -22,15 +45,11 @@ const PostCardModalView = (props) => {
                     img = {post.img}
                     modalView = {props.modalView}
                />
-               <PostCardModalContent 
-                    user = {user}
-                    likes = {post.likes}
-               />
+                {postDataToShow}
                <CaptionWrapper>
                 <p>This will be where the caption goes...</p>
                </CaptionWrapper>
-               <PostCardAddComment user = {user}/>
-               <PostCommentListView />
+                {content}
             </Card>
         </CardWrapper>
     );

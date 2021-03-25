@@ -9,6 +9,7 @@ const PostViewModal = (props) => {
 
     const post = props.post;
     const show = props.show;
+    const viewComments = props.viewComments;
 
     return (
         !show ? null : (   
@@ -30,6 +31,7 @@ const PostViewModal = (props) => {
                         <PostCardModalView
                             post = {post}
                             modalView={true}
+                            viewComments={viewComments}
                         />
                     </Fade>
                 </ModalWrapper>   

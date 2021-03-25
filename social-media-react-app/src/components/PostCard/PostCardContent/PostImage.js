@@ -13,7 +13,6 @@ const PostImage = (props) => {
         }
     }
     
-    console.log("img",props)
     return (
         <div>
         <Media>
@@ -25,6 +24,7 @@ const PostImage = (props) => {
             show={isOpen}
             onClose={toggleModal}
             post = {props.post}
+            viewComments = {true}
         />
         </div>
     );
