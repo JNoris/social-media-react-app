@@ -45,7 +45,9 @@ namespace CapstoneIG_v1.Controllers
                 {
                     Id = person.Id,
                     UserId = person.LikeBy.Id,
-                    UserName = person.LikeBy.UserName
+                    UserName = person.LikeBy.UserName,
+                    FirstName = person.LikeBy.FirstName,
+                    LastName = person.LikeBy.LastName
                 };
                 likeReponses.Add(singleLike);
             }

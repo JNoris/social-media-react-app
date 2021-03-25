@@ -67,11 +67,12 @@ namespace CapstoneIG_v1.Controllers
             //List<CommentModel> comments = await _db.Comments.Where(x => x.PostId == postId).ToListAsync();
             var comments = await _db.Comments.Where(x => x.PostId == postId).Select(x => new
             {
-                x.Id,
-                x.CommentText,
-                x.CommentDate,
-                x.PostId,
-                userId = x.CommentBy.Id
+                Id = x.Id,
+                UserId = x.CommentBy.Id,
+                UserName = x.CommentBy.UserName,
+                FirstName= x.CommentBy.FirstName,
+                LastName= x.CommentBy.LastName,
+                Text = x.CommentText
             }).ToListAsync();
 
             List<CommentResponse> commentResponses = new List<CommentResponse>();

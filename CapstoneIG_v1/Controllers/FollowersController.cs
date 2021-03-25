@@ -33,9 +33,11 @@ namespace CapstoneIG_v1.Controllers
             //List<FollowersModel> followers = await _db.Followers.Where(x => x.UserId == user).ToListAsync();
             var followers = await _db.Followers.Where(x => x.UserId.Id == userId).Select(x => new
             {
-                x.Id,
-                User = x.UserId.Id,
-                Follower = x.FollowingId.Id
+                Id= x.Id,
+                UserId = x.FollowingId.Id,
+                UserName= x.FollowingId.UserName,
+                FollowerFirstName= x.FollowingId.FirstName,
+                FollowerLastName= x.FollowingId.LastName
             }).ToListAsync();
 
             return Json(followers);
@@ -50,9 +52,11 @@ namespace CapstoneIG_v1.Controllers
             //List<FollowersModel> followers = await _db.Followers.Where(x => x.UserId == user).ToListAsync();
             var followers = await _db.Followers.Where(x => x.FollowingId.Id == userId).Select(x => new
             {
-                x.Id,
-                user = x.UserId.Id,
-                following = x.FollowingId.Id
+                Id = x.Id,
+                UserId = x.FollowingId.Id,
+                UserName = x.FollowingId.UserName,
+                FollowerFirstName= x.FollowingId.FirstName,
+                FollowerLastName= x.FollowingId.LastName
             }).ToListAsync();
 
             return Json(followers);
