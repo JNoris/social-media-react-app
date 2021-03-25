@@ -28,22 +28,32 @@ namespace CapstoneIG_v1.Controllers
         [Route("GetFollowers/{userId}")]
         public async Task<JsonResult> GetFollowers(string userId)
         {
-            ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            //ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
             
             //List<FollowersModel> followers = await _db.Followers.Where(x => x.UserId == user).ToListAsync();
-            List<FollowersModel> followers = await _db.Followers.Where(x => x.UserId.Id == userId).ToListAsync();
+            var followers = await _db.Followers.Where(x => x.UserId.Id == userId).Select(x => new
+            {
+                x.Id,
+                User = x.UserId.Id,
+                Follower = x.FollowingId.Id
+            }).ToListAsync();
 
             return Json(followers);
         }
         //People who are following you
         [HttpGet]
-        [Route("GetFollowedBy")]
-        public async Task<JsonResult> GetFollowedBy()
+        [Route("GetFollowedBy/{userId}")]
+        public async Task<JsonResult> GetFollowedBy(string userId)
         {
-            ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            //ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
             //List<FollowersModel> followers = await _db.Followers.Where(x => x.UserId == user).ToListAsync();
-            List<FollowersModel> followers = await _db.Followers.Where(x => x.FollowingId == user).ToListAsync();
+            var followers = await _db.Followers.Where(x => x.FollowingId.Id == userId).Select(x => new
+            {
+                x.Id,
+                user = x.UserId.Id,
+                following = x.FollowingId.Id
+            }).ToListAsync();
 
             return Json(followers);
         }

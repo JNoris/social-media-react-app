@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace CapstoneIG_v1.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class LikesController : Controller
     {
@@ -28,11 +27,17 @@ namespace CapstoneIG_v1.Controllers
         [Route("GetLikes/{postId}")]
         public async Task<JsonResult> GetLikes(int postId)
         {
-            List<LikeModel> likers = await _db.Likes.Where(x => x.PostId == postId).ToListAsync();
+            var likers = await _db.Likes.Where(x => x.PostId == postId).Select(x => new
+            {
+                x.Id,
+                x.LikeDate,
+                x.PostId,
+                x.LikeBy
+            }).ToListAsync();
 
             List<LikeReponse> likeReponses = new List<LikeReponse>();
 
-            foreach (LikeModel person in likers)
+            foreach (var person in likers)
             {
                 ApplicationUser usr = _db.Users.Where(u => u.Id == person.LikeBy.Id).FirstOrDefault();
 
@@ -40,7 +45,7 @@ namespace CapstoneIG_v1.Controllers
                 {
                     Id = person.Id,
                     UserId = person.LikeBy.Id,
-                    UserName = usr.UserName
+                    UserName = person.LikeBy.UserName
                 };
                 likeReponses.Add(singleLike);
             }
@@ -58,8 +63,8 @@ namespace CapstoneIG_v1.Controllers
             //Check if post exists
             PostModel targetExists = _db.Posts.Where(p => p.Id == postId).FirstOrDefault();
 
-            //Check if targetID is already a follower
-            LikeModel likeExists = _db.Likes.Where(p => p.Id == postId).Where(q => q.LikeBy == user).FirstOrDefault();
+            //Check if already liked
+            LikeModel likeExists = _db.Likes.Where(p => p.PostId == postId).Where(q => q.LikeBy == user).FirstOrDefault();
 
             if (targetExists != null && likeExists == null)
             {
@@ -95,7 +100,7 @@ namespace CapstoneIG_v1.Controllers
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
             //Check if target exists
-            LikeModel like = _db.Likes.Where(p => p.LikeBy == user).Where(q => q.Id == postId).FirstOrDefault();
+            LikeModel like = _db.Likes.Where(p => p.LikeBy == user).Where(q => q.PostId == postId).FirstOrDefault();
 
             if (like != null)
             {
