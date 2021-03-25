@@ -12,6 +12,7 @@ import img5 from "../temp/postImgs/img3.jpg"
 import img6 from "../temp/postImgs/img4.jpg"
 
 const PostGridView = () => {
+    // eslint-disable-next-line
     const [spacing, setSpacing] = useState(2);
 
     // TODO API call to get post content using props (home or profile content)

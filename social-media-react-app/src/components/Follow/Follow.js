@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Followers from './Followers/Followers';
 import Following from './Following/Following';
-import { FollowWrapper } from './Follow.styles';
+import { FollowWrapper, Sticky } from './Follow.styles';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -40,14 +40,20 @@ function tabProps(index) {
     };
 }
 
-const Follow = () => {
+const Follow = (props) => {
 
-    const [value, setValue] = React.useState(0);
-
+    const { followIndex } = props.location.state;
+    const { userName } = props.location.state;
+    const [value, setValue] = useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+    useEffect(() => {
+        setValue(followIndex);
+    }, [followIndex]);
 
+    console.log(followIndex);
+    console.log(userName);
     return (
         <FollowWrapper>
             <AppBar position="static" className="tabs">

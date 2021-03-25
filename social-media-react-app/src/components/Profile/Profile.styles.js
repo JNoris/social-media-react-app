@@ -10,7 +10,7 @@ export const ProfileWrapper = styled.div`
 export const PostDummy = styled.div`
     height:100vh;
     width:44vw;
-    background-color:grey;
+    background-color:rgba(40,42,52,0.5);
     overflow-x:auto;
     overflow-y:scroll;
     ::-webkit-scrollbar {
