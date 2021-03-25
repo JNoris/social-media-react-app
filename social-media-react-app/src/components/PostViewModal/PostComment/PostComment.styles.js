@@ -6,6 +6,14 @@ export const CommentWrapper = styled.div`
         font-size: 1rem;
     }
 
+    #delete {
+        color: #b4b4b4;
+    }
+
+    #delete:hover {
+        color: #a1a1a1;
+    }
+
 .MuiListItem-root {
     color: #c3c3c3;
 }
