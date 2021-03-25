@@ -45,11 +45,53 @@ namespace CapstoneIG_v1.Controllers
         }
 
         [HttpGet]
-        [Route("GetPostComments/{postId}")]
-        public JsonResult GetPostComments([FromForm] CommentModel comment, int postId)
+        [Route("GetPostCommentsFull/{postId}")]
+        public async Task<JsonResult> GetPostCommentsFull(int postId)
         {
-            List<CommentModel> comments = _db.Comments.Where(x => x.PostId == postId).ToList();
+            //List<CommentModel> comments = _db.Comments.Where(x => x.PostId == postId).ToList();
+            var comments = await _db.Comments.Where(x => x.PostId == postId).Select(x => new
+            {
+                x.Id,
+                x.CommentText,
+                x.CommentDate,
+                x.PostId,
+                userId = x.CommentBy.Id
+            }).ToListAsync();
             return Json(comments);
+        }
+
+        [HttpGet]
+        [Route("GetPostComments/{postId}")]
+        public async Task<JsonResult> GetPostComments(int postId)
+        {
+            //List<CommentModel> comments = await _db.Comments.Where(x => x.PostId == postId).ToListAsync();
+            var comments = await _db.Comments.Where(x => x.PostId == postId).Select(x => new
+            {
+                Id = x.Id,
+                UserId = x.CommentBy.Id,
+                UserName = x.CommentBy.UserName,
+                FirstName= x.CommentBy.FirstName,
+                LastName= x.CommentBy.LastName,
+                Text = x.CommentText
+            }).ToListAsync();
+
+            List<CommentResponse> commentResponses = new List<CommentResponse>();
+
+            foreach (var comment in comments)
+            {
+                ApplicationUser usr = _db.Users.Where(u => u.Id == comment.userId).FirstOrDefault();
+
+                CommentResponse singleComment = new CommentResponse()
+                {
+                    Id = comment.Id,
+                    UserId = comment.userId,
+                    UserName = usr.UserName,
+                    Text = comment.CommentText
+                };
+                commentResponses.Add(singleComment);
+            }
+            var orderByDate = commentResponses.OrderBy(p => p.Id);
+            return Json(orderByDate);
         }
 
 
