@@ -6,11 +6,19 @@ import PostViewModal from "../../PostViewModal/PostViewModal"
 
 
 const PostStats = (props) => {
+    // update with connection
     const [like, setLike] = useState(false);
     const [heartColor, setHeartColor] = useState({color: "#fff"})
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenLikes, setIsOpenLikes] = useState(false)
     const isModalView = props.modalView? props.modalView : false;
+
+    useEffect(() => {
+            if(like) {
+                setHeartColor({color: "#e2336b"})
+            }
+        }, 
+    [like])
 
     var showCommentCount = !props.comments || isModalView ? null : 
         <ContentComponent>
