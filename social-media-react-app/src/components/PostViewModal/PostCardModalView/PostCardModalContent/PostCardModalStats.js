@@ -12,7 +12,7 @@ const PostStats = (props) => {
     const [isOpenLikes, setIsOpenLikes] = useState(false)
     const isModalView = props.modalView? props.modalView : false;
 
-    var showCommentCount = !props.comments || isModalView ? null : 
+    var showCommentCount = !props.comments ? null : 
         <ContentComponent>
             <ChatBubbleOutlineIcon
                 className="icon"
@@ -22,7 +22,7 @@ const PostStats = (props) => {
             <p id="comments" onClick={toggleModal}>{props.comments}</p>
         </ContentComponent>
 
-    var showLikeCount = !props.likes || isModalView ? null :             
+    var showLikeCount = !props.likes ? null :             
         <ContentComponent>
             <FavoriteBorderIcon
                 className="icon"

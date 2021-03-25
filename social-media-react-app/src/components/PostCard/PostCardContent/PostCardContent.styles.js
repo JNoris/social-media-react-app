@@ -6,6 +6,10 @@ export const Media = styled.div`
         height: auto;
         max-width: 300px; // update with max width of card container
     }
+
+    img:hover {
+        opacity: .7;
+    }
 `;
 
 export const ContentWrapper = styled.div`
@@ -38,12 +42,16 @@ export const ContentComponent = styled.div `
         margin-right: .5rem;
     }
 
+    p:hover {
+        color: #d3d3d3;
+    }
+
     #comments {
         margin-right: 0;
     }
 
     .icon:hover{
-        color: #d3d3d3;
+        color: #fcac56;
     }
 `;
 

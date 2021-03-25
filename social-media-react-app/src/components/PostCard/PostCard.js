@@ -15,6 +15,7 @@ const PostCard = (props) => {
             <Card>
                <PostImage 
                     img = {post.img}
+                    post={post}
                />
                <PostCardContent
                     user = {post.username}
