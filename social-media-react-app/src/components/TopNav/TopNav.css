@@ -1,7 +1,4 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -25,6 +22,7 @@
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
+  width:80%;
 }
 
 .navbar-logo {
@@ -48,7 +46,7 @@
   grid-gap: 10px;
   list-style: none;
   text-align: center;
-  width: 70vw;
+  width: auto;
   justify-content: end;
   margin-right: 2rem;
 }

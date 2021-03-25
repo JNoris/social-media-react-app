@@ -7,6 +7,7 @@ import UserInfo from '../SideNav/SideNavProfile/SideNavProfileComponents/UserInf
 //import {useQuery} from 'react-query';
 import ProfileGridItem from './ProfileGridItem';
 import { dummyData, dummyImg } from '../temp/dummyData';
+import SearchBar from '../TopNav/TopNavComponents/SearchBar';
 const Profile = (props) => {
 
     if ('userId' in props) {
@@ -49,6 +50,7 @@ const Profile = (props) => {
     return (
         <ProfileWrapper>
             <InfoCol>
+                <SearchBar/>
                 <h1>{dummyData.userId}</h1>
                 <Grid container justify="center" spacing={1}>
                     <Grid item xs={4}>

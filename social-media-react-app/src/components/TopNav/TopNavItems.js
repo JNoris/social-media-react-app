@@ -1,19 +1,18 @@
 export const TopNavItems = [
   {
     title: "Search",
-    url: "#", // Goes nowhere right now
+    url: "/", // Goes nowhere right now
     cName: "nav-links",
   },
   {
     /**
      * Use any of these three:
-     * <i class="fas fa-paper-plane"></i>
-     * <i class="fas fa-location-arrow"></i
+     * <i class="fas fa-paper-plane"></i>w
      * <i class="far fa-paper-plane"></i>
      *
      */
     title: "Messages",
-    url: "#",
+    url: "/",
     cName: "nav-links",
   },
   {
@@ -25,7 +24,7 @@ export const TopNavItems = [
      *
      */
     title: "Notifications",
-    url: "#",
+    url: "/",
     cName: "nav-links",
   },
   {
@@ -35,7 +34,7 @@ export const TopNavItems = [
      * <i class="fas fa-book-open"></i>
      */
     title: "Stories", // Maybe
-    url: "#",
+    url: "/",
     cName: "nav-links",
   },
   {
@@ -47,7 +46,7 @@ export const TopNavItems = [
      *
      */
     title: "Add Post", // Maybe
-    url: "#",
+    url: "/",
     cName: "nav-links",
   },
 ];
