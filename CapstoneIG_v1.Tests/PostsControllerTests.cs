@@ -21,7 +21,6 @@ namespace CapstoneIG_v1.Tests
 {
     public class PostsControllerTests
     {
-        // NEED TO LEARN HOW TO MOCK FILEUPLOAD AND ENVIRONMENT
         //[Fact]
         //public async Task AddPostAsync()
         //{
@@ -346,5 +345,4 @@ namespace CapstoneIG_v1.Tests
 
     }
 }
-
 

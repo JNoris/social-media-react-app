@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-//using CapstoneIG_v1.DAL;
 using Microsoft.EntityFrameworkCore;
 using CapstoneIG_v1.Auth;
 using Microsoft.AspNetCore.Identity;

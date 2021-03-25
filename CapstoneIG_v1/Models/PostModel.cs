@@ -22,7 +22,6 @@ namespace CapstoneIG_v1.Models
         [DataType(DataType.DateTime)]
         public DateTime UploadDate { get; set; }
 
-        [StringLength(26)]
         [DataType(DataType.Text)]
         public string Caption { get; set; }
 

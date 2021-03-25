@@ -41,6 +41,12 @@ namespace CapstoneIG_v1.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -106,8 +112,7 @@ namespace CapstoneIG_v1.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CommentText")
-                        .HasColumnType("nvarchar(26)")
-                        .HasMaxLength(26);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PostId")
                         .HasColumnType("int");
@@ -176,8 +181,7 @@ namespace CapstoneIG_v1.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Caption")
-                        .HasColumnType("nvarchar(26)")
-                        .HasMaxLength(26);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");

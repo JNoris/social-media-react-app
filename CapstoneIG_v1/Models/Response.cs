@@ -15,6 +15,8 @@ namespace CapstoneIG_v1.Models
         public DateTime UploadDate { get; set; }
         public string ProfilePhotoPath { get; set; }
         public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public int NumberOfLikes { get; set; }
         public int NumberOfComments { get; set; }
     }
@@ -23,6 +25,8 @@ namespace CapstoneIG_v1.Models
     {
         public string ProfilePhotoPath { get; set; }
         public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public int NumberOfPosts { get; set; }
         public int NumberOfFollowers { get; set; }
         public int NumberOfFollowing { get; set; }

@@ -14,6 +14,12 @@ namespace CapstoneIG_v1.Auth
         [DataType(DataType.Text)]
         public string ProfileImageName { get; set; }
 
+        [DataType(DataType.Text)]
+        public string FirstName { get; set; }
+
+        [DataType(DataType.Text)]
+        public string LastName { get; set; }
+
         [JsonIgnore]
         [NotMapped]
         public IFormFile ImgFile { get; set; }

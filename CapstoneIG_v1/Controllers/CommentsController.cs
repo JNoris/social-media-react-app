@@ -26,7 +26,7 @@ namespace CapstoneIG_v1.Controllers
 
         [HttpPost]
         [Route("AddComment/{postId}")]
-        public async Task<IActionResult> AddComment([FromForm] CommentModel comment, int postId)
+        public async Task<IActionResult> AddComment([FromBody] CommentModel comment, int postId)
         {
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
@@ -48,7 +48,6 @@ namespace CapstoneIG_v1.Controllers
         [Route("GetPostCommentsFull/{postId}")]
         public async Task<JsonResult> GetPostCommentsFull(int postId)
         {
-            //List<CommentModel> comments = _db.Comments.Where(x => x.PostId == postId).ToList();
             var comments = await _db.Comments.Where(x => x.PostId == postId).Select(x => new
             {
                 x.Id,
@@ -64,14 +63,13 @@ namespace CapstoneIG_v1.Controllers
         [Route("GetPostComments/{postId}")]
         public async Task<JsonResult> GetPostComments(int postId)
         {
-            //List<CommentModel> comments = await _db.Comments.Where(x => x.PostId == postId).ToListAsync();
             var comments = await _db.Comments.Where(x => x.PostId == postId).Select(x => new
             {
                 Id = x.Id,
                 UserId = x.CommentBy.Id,
                 UserName = x.CommentBy.UserName,
-                FirstName= x.CommentBy.FirstName,
-                LastName= x.CommentBy.LastName,
+                FirstName = x.CommentBy.FirstName,
+                LastName = x.CommentBy.LastName,
                 Text = x.CommentText
             }).ToListAsync();
 
@@ -79,14 +77,16 @@ namespace CapstoneIG_v1.Controllers
 
             foreach (var comment in comments)
             {
-                ApplicationUser usr = _db.Users.Where(u => u.Id == comment.userId).FirstOrDefault();
+                ApplicationUser usr = _db.Users.Where(u => u.Id == comment.UserId).FirstOrDefault();
 
                 CommentResponse singleComment = new CommentResponse()
                 {
                     Id = comment.Id,
-                    UserId = comment.userId,
-                    UserName = usr.UserName,
-                    Text = comment.CommentText
+                    UserId = comment.UserId,
+                    UserName = comment.UserName,
+                    FirstName = comment.FirstName,
+                    LastName = comment.LastName,
+                    Text = comment.Text
                 };
                 commentResponses.Add(singleComment);
             }

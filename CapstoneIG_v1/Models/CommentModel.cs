@@ -11,7 +11,6 @@ namespace CapstoneIG_v1.Models
         [Key]
         public int Id { get; set; }
 
-        [StringLength(26, MinimumLength = 2)]
         [DataType(DataType.Text)]
         public string CommentText { get; set; }
 
@@ -19,8 +18,8 @@ namespace CapstoneIG_v1.Models
         public DateTime CommentDate { get; set; }
 
         [ForeignKey("PostId")]
-        [JsonIgnore]
         public int PostId { get; set; }
+        [JsonIgnore]
         public virtual PostModel Post { get; set; }
 
         [StringLength(450)]

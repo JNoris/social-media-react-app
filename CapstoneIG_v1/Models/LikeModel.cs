@@ -15,8 +15,8 @@ namespace CapstoneIG_v1.Models
         public DateTime LikeDate { get; set; }
 
         [ForeignKey("PostId")]
-        [JsonIgnore]
         public int PostId { get; set; }
+        [JsonIgnore]
         public virtual PostModel Post { get; set; }
 
         [StringLength(450)]

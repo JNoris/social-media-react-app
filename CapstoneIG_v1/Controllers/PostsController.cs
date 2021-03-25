@@ -72,7 +72,7 @@ namespace CapstoneIG_v1.Controllers
 
             PostModel pst = _db.Posts.Where(p => p.User == user).Where(q => q.Id == postId).FirstOrDefault();
 
-            if(pst != null)
+            if (pst != null)
             {
                 _db.Posts.Remove(pst);
                 _db.SaveChanges();
@@ -81,7 +81,7 @@ namespace CapstoneIG_v1.Controllers
             {
                 return Ok(new Response { Status = "Failed", Message = "You can't delete a post you don't own" });
             }
-            
+
             return Ok(new Response { Status = "Success", Message = "Post Deleted" });
         }
 
@@ -114,7 +114,7 @@ namespace CapstoneIG_v1.Controllers
             List<PostModel> usrPosts = _db.Posts.Where(p => p.User == user).ToList();
             List<PostResponse> pResponse = new List<PostResponse>();
 
-            foreach(var p in usrPosts)
+            foreach (var p in usrPosts)
             {
                 int totalLikes = _db.Likes.Where(l => l.PostId == p.Id).Count();
                 int totalComments = _db.Comments.Where(l => l.PostId == p.Id).Count();
@@ -126,6 +126,8 @@ namespace CapstoneIG_v1.Controllers
                     UploadDate = p.UploadDate,
                     ProfilePhotoPath = user.ProfileImageName,
                     UserName = user.UserName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     NumberOfLikes = totalLikes,
                     NumberOfComments = totalComments
                 };
@@ -158,6 +160,8 @@ namespace CapstoneIG_v1.Controllers
                     UploadDate = p.UploadDate,
                     ProfilePhotoPath = user.ProfileImageName,
                     UserName = user.UserName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     NumberOfLikes = totalLikes,
                     NumberOfComments = totalComments
                 };
@@ -194,6 +198,8 @@ namespace CapstoneIG_v1.Controllers
                     UploadDate = usrPost.UploadDate,
                     ProfilePhotoPath = usr.ProfileImageName,
                     UserName = usr.UserName,
+                    FirstName = usr.FirstName,
+                    LastName = usr.LastName,
                     NumberOfLikes = totalLikes,
                     NumberOfComments = totalComments
                 };

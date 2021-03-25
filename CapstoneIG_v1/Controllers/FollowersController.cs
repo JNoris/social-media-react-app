@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CapstoneIG_v1.Controllers
 {
-    //[Route("api/[controller]")]
     [ApiController]
     public class FollowersController : Controller
     {
@@ -28,16 +25,14 @@ namespace CapstoneIG_v1.Controllers
         [Route("GetFollowers/{userId}")]
         public async Task<JsonResult> GetFollowers(string userId)
         {
-            //ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-            
-            //List<FollowersModel> followers = await _db.Followers.Where(x => x.UserId == user).ToListAsync();
             var followers = await _db.Followers.Where(x => x.UserId.Id == userId).Select(x => new
             {
-                Id= x.Id,
+                Id = x.Id,
                 UserId = x.FollowingId.Id,
-                UserName= x.FollowingId.UserName,
-                FollowerFirstName= x.FollowingId.FirstName,
-                FollowerLastName= x.FollowingId.LastName
+                UserName = x.FollowingId.UserName,
+                FirstName = x.FollowingId.FirstName,
+                LastName = x.FollowingId.LastName,
+                ProfilePhotoPath = x.FollowingId.ProfileImageName
             }).ToListAsync();
 
             return Json(followers);
@@ -47,16 +42,14 @@ namespace CapstoneIG_v1.Controllers
         [Route("GetFollowedBy/{userId}")]
         public async Task<JsonResult> GetFollowedBy(string userId)
         {
-            //ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-
-            //List<FollowersModel> followers = await _db.Followers.Where(x => x.UserId == user).ToListAsync();
             var followers = await _db.Followers.Where(x => x.FollowingId.Id == userId).Select(x => new
             {
                 Id = x.Id,
                 UserId = x.FollowingId.Id,
                 UserName = x.FollowingId.UserName,
-                FollowerFirstName= x.FollowingId.FirstName,
-                FollowerLastName= x.FollowingId.LastName
+                FirstName = x.FollowingId.FirstName,
+                LastName = x.FollowingId.LastName,
+                ProfilePhotoPath = x.FollowingId.ProfileImageName
             }).ToListAsync();
 
             return Json(followers);
