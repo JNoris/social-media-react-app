@@ -26,7 +26,6 @@ function App() {
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/follow" component={Follow} />
             <Route exact path="/settings" component={Settings2} />
-
             <Route exact path="/chat" component={Chat} />
           </MainWrapper>
         </Flex>

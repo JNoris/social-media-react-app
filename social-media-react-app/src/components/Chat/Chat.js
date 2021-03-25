@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import AttachmentIcon from "@material-ui/icons/Attachment";
-import "./Chat.css";
+import {Wrapper} from './Chat.styles';
 
 function Chat() {
   return (
+    <Wrapper>
     <div className="main">
       <div className="body">
         <div className="chat-container">
@@ -36,6 +37,7 @@ function Chat() {
         </div>
       </div>
     </div>
+    </Wrapper>
   );
 }
 
