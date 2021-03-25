@@ -14,17 +14,19 @@ function App() {
   //const [token, setToken]=useState("");
   return (
     <>
-      <Route exact path="/signup" component={SignUp} />
-      <Route exact path="/signin" component={SignInSide} />
-      <Flex>
-        <SideNav />
-        <MainWrapper>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/follow" component={Follow} />
-          <Route exact path="/settings" component={Settings2} />
-        </MainWrapper>
-      </Flex>
+      <Switch>
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/signin" component={SignInSide} />
+        <Flex>
+          <SideNav />
+          <MainWrapper>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/follow" component={Follow} />
+            <Route exact path="/settings" component={Settings2} />
+          </MainWrapper>
+        </Flex>
+      </Switch>
     </>
   );
 }
