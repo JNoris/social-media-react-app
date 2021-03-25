@@ -27,4 +27,18 @@ namespace CapstoneIG_v1.Models
         public int NumberOfFollowers { get; set; }
         public int NumberOfFollowing { get; set; }
     }
+    public class CommentResponse
+    {
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+        public string Text { get; set; }
+    }
+
+    public class LikeReponse
+    {
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+    }
 }

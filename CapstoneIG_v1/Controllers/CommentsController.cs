@@ -45,11 +45,37 @@ namespace CapstoneIG_v1.Controllers
         }
 
         [HttpGet]
-        [Route("GetPostComments/{postId}")]
-        public JsonResult GetPostComments([FromForm] CommentModel comment, int postId)
+        [Route("GetPostCommentsFull/{postId}")]
+        public JsonResult GetPostCommentsFull(int postId)
         {
             List<CommentModel> comments = _db.Comments.Where(x => x.PostId == postId).ToList();
             return Json(comments);
+        }
+
+        [HttpGet]
+        [Route("GetPostComments/{postId}")]
+        public async Task<JsonResult> GetPostComments(int postId)
+        {
+            List<CommentModel> comments = await _db.Comments.Where(x => x.PostId == postId).ToListAsync();
+            //List<CommentModel> comments = await _db.Comments.Include("_db.").Where(x => x.PostId == postId).ToListAsync();
+
+            List<CommentResponse> commentResponses = new List<CommentResponse>();
+
+            foreach (CommentModel comment in comments)
+            {
+                ApplicationUser usr = _db.Users.Where(u => u.Id == comment.CommentBy.Id).FirstOrDefault();
+
+                CommentResponse singleComment = new CommentResponse()
+                {
+                    Id = comment.Id,
+                    UserId = usr.Id,
+                    UserName = usr.UserName,
+                    Text = comment.CommentText
+                };
+                commentResponses.Add(singleComment);
+            }
+            var orderByDate = commentResponses.OrderBy(p => p.Id);
+            return Json(orderByDate);
         }
 
 
