@@ -18,8 +18,7 @@ class TopNav extends Component {
           <i className="fab fa-react"></i> FakeGram
         </h1>
         <div className="menu-icon" onClick={this.handleClick}>
-          {/* Ternary operator dictates state of menu bar: fa-times = 3 lines. 
-          Probably going to remove this later, taking too much time */}
+          {/* Ternary operator dictates state of menu bar: fa-times = 3 lines */}
           <i
             className={this.state.clicked ? "fas fa-times" : "fas fa-bars"}
           ></i>

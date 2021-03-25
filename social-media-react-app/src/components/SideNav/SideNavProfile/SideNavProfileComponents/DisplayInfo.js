@@ -11,7 +11,10 @@ const DisplayInfo = (props) => {
     return (
         <InfoWrapper>
             <FlexCenter>
-                <Link to={userLink}>
+                <Link to={{
+                    pathname: "/profile",
+                    state:{ userId: props.userName }
+                }}>
                     <Avatar className="avatar" alt="test" src={test} />
                 </Link>
             </FlexCenter>

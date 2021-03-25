@@ -11,12 +11,16 @@ export const NavWrapper = styled.div`
         text-align:center;
     }
     @media only screen and (max-width: 900px) {
-        width:25vw;
-        p{
-            font-size:0.8rem;
-        }
+        width:30vw;
     }
     @media only screen and (max-width: 768px) {
         width:40vw;
+    }
+`;
+
+export const SideNavProfileWrapper = styled.div`
+    a{
+        text-decoration:none;
+        color:white;
     }
 `;

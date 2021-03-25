@@ -5,24 +5,28 @@ import SignUp from "./components/Login/SignUp";
 import Settings from "./components/Settings/Settings";
 import SignInSide from "./components/Login/SignInSide";
 import SideNav from "./components/SideNav/SideNav";
-import TopNav from "./components/TopNav/TopNav";
+// import TopNav from "./components/TopNav/TopNav";
 import Chat from "./components/Chat/Chat";
-import { Flex } from "./App.styles";
+import { Flex, MainWrapper } from "./App.styles";
+import Follow from "./components/Follow/Follow";
 
 function App() {
+  // const [token, setToken] = useState("");
   return (
     <>
-      <TopNav />
       <Switch>
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignInSide} />
-        <Route exact path="/settings" component={Settings} />
-        <Route exact path="/chat" component={Chat} />
 
         <Flex>
           <SideNav />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/profile" component={Profile} />
+          <MainWrapper>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/follow" component={Follow} />
+            <Route exact path="/settings" component={Settings} />
+            <Route exact path="/chat" component={Chat} />
+          </MainWrapper>
         </Flex>
       </Switch>
     </>

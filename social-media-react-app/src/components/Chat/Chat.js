@@ -14,17 +14,18 @@ function Chat() {
           <div className="conversation-list">
             <div className="conversation">
               {/* Add profile photo here */}
-              {/* <img src="images/profiles/.." alt="Edvin Lin" /> */}
-              <div className="title-text">Edvin Lin</div>
+              {/* <img src="images/profiles/.." alt="Noris Buriac" /> */}
+              <div className="title-text">Noris Buriac</div>
               <div className="created-date">Mar 24</div>
               <div className="conversation-message">This is a message.</div>
             </div>
           </div>
           <div className="new-message-container">
+            {/* CSS Error on the + sign for some reason. */}
             <a href="#">+</a>
           </div>
           <div className="chat-title">
-            <span>Edvin Lin</span>
+            <span>Noris Buriac</span>
             <DeleteOutlineIcon />
           </div>
           <div className="chat-message-list"></div>

@@ -1,7 +1,4 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -25,6 +22,7 @@
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
+  width:80%;
 }
 
 .navbar-logo {
@@ -48,7 +46,7 @@
   grid-gap: 10px;
   list-style: none;
   text-align: center;
-  width: 70vw;
+  width: auto;
   justify-content: end;
   margin-right: 2rem;
 }
@@ -65,24 +63,6 @@
   border-radius: 5px;
   transition: all 0.2s ease-out;
 }
-
-.fa-bars {
-  color: #fff;
-}
-
-/* 
-    Mobile, not necessary right now, but good for future reference.
-*/
-.nav-links-mobile {
-  display: none;
-}
-
-.menu-icon {
-  display: none;
-}
-/* 
-    End of mobile stuff.
-*/
 
 .content {
   padding: 5% 25% 5%;
