@@ -67,3 +67,18 @@ export const PostActions = styled.div `
     align-items: center;
     margin: 0 0.4rem;
 `;
+
+
+export const LinkWrapper = styled.div `
+    a {
+        text-decoration:none;
+        color:white;
+        display: flex;
+        align-items: center;
+    }
+    
+    a:hover {
+        color:#d3d3d3;
+    }
+
+`;

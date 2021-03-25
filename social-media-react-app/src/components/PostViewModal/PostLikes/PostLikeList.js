@@ -42,7 +42,7 @@ const PostLikeList = (props) => {
         <List>
             {tempLikes.map((like) => (
                 <LikeWrapper>
-                  <ListItem key={like.username} alignItems="flex-start">
+                  <ListItem key={like.username}>
                   <ListItemAvatar>
                       <Avatar aria-label="user">RU</Avatar>
                   </ListItemAvatar>
