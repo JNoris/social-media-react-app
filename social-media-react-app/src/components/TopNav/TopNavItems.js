@@ -1,5 +1,6 @@
 export const TopNavItems = [
   {
+    // TODO: Get rid of this later on.
     title: "Search",
     url: "#", // Goes nowhere right now
     cName: "nav-links",
@@ -18,7 +19,7 @@ export const TopNavItems = [
   },
   {
     /**
-     * Use any of these three, whichever is better:
+     * TODO: Use any of these three, whichever is better:
      * <i class="far fa-bell"></i>
      * <i class="fas fa-bell"></i>
      *<i class="fab fa-canadian-maple-leaf"></i>

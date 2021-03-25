@@ -6,6 +6,7 @@ import Settings from "./components/Settings/Settings";
 import SignInSide from "./components/Login/SignInSide";
 import SideNav from "./components/SideNav/SideNav";
 import TopNav from "./components/TopNav/TopNav";
+import Chat from "./components/Chat/Chat";
 import { Flex } from "./App.styles";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignInSide} />
         <Route exact path="/settings" component={Settings} />
+        <Route exact path="/chat" component={Chat} />
 
         <Flex>
           <SideNav />

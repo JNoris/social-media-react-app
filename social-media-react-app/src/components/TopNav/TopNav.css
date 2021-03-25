@@ -66,6 +66,24 @@
   transition: all 0.2s ease-out;
 }
 
+.fa-bars {
+  color: #fff;
+}
+
+/* 
+    Mobile, not necessary right now, but good for future reference.
+*/
+.nav-links-mobile {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+}
+/* 
+    End of mobile stuff.
+*/
+
 .content {
   padding: 5% 25% 5%;
 }
