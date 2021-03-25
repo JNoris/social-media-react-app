@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML, GridWrapper, FlexEven } from './Profile.styles';
 import Grid from '@material-ui/core/Grid';
 import UserInfo from '../SideNav/SideNavProfile/SideNavProfileComponents/UserInfo';
 //import {useQuery} from 'react-query';
 import ProfileGridItem from './ProfileGridItem';
-import {dummyData, dummyImg} from '../temp/dummyData';
+import { dummyData, dummyImg } from '../temp/dummyData';
+import SearchBar from '../TopNav/TopNavComponents/SearchBar';
 const Profile = (props) => {
-   
-    if('userId' in props)
-    {
+
+    if ('userId' in props) {
         console.log(true);
     }
-    else{
+    else {
         console.log(false);
     }
-    
+
     //const getUser = async() => await((await fetch('https://localhost')).json());
     // const {data, isLoading, error} = useQuery(
     //     'userdata',
@@ -23,7 +24,7 @@ const Profile = (props) => {
     // );
     //if(Authenticated userId != props.location.state.userId)
     //return version with no edit bio and <p> for bio
-
+    const {userName} = props.location.state;
     const [bio, setBio] = useState(dummyData.bio)
     const [bioReadOnly, setReadOnly] = useState(true);
     const [saveBtn, showSaveBtn] = useState(false);
@@ -42,13 +43,14 @@ const Profile = (props) => {
         setReadOnly(true);
     }
     const testSelfBtn = () => {
-        setIsSelf(v=>!v);
+        setIsSelf(v => !v);
     }
-    
+
 
     return (
         <ProfileWrapper>
             <InfoCol>
+                <SearchBar/>
                 <h1>{dummyData.userId}</h1>
                 <Grid container justify="center" spacing={1}>
                     <Grid item xs={4}>
@@ -57,17 +59,35 @@ const Profile = (props) => {
                             number={dummyData.posts}
                         />
                     </Grid>
+
                     <Grid item xs={4}>
-                        <UserInfo
-                            name="Followers"
-                            number={dummyData.followers}
-                        />
+                        <Link to={{
+                            pathname:"follow",
+                            state:{
+                                followIndex:0,
+                                userName:userName
+                            }
+                            }}>
+                            <UserInfo
+                                name="Followers"
+                                number={dummyData.followers}
+                            />
+                        </Link>
                     </Grid>
+
                     <Grid item xs={4}>
-                        <UserInfo
-                            name="Following"
-                            number={dummyData.following}
-                        />
+                    <Link to={{
+                            pathname:"follow",
+                            state:{
+                                followIndex:1,
+                                userName:userName
+                            }
+                            }}>
+                            <UserInfo
+                                name="Following"
+                                number={dummyData.following}
+                            />
+                        </Link>
                     </Grid>
                 </Grid>
                 <Bio>
@@ -92,14 +112,14 @@ const Profile = (props) => {
             </InfoCol>
             <PostDummy>
                 <GridWrapper>
-                    <Grid 
-                        container 
+                    <Grid
+                        container
                         spacing={1}
-                        justify="space-evenly"
+                        justify="flex-start"
                         alignItems="center"
                     >
                         {dummyImg?.map(item => (
-                            <Grid item key={item.id} xs={4}>
+                            <Grid item key={item.id} xs={12} md={4} lg={3} >
                                 <ProfileGridItem link={item.id} src={item.photo} alt={item.id} />
                             </Grid>
                         ))}

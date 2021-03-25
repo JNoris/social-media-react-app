@@ -1,7 +1,9 @@
-import "./Settings.css";
 import React, { useState } from "react";
-
-
+import Container from '@material-ui/core/Container';
+import Button from "@material-ui/core/Button";
+import Input from "@material-ui/core/Input";
+import { Wrapper } from "./Settings.styles";
+import {useHistory} from 'react-router-dom';
 function Settings() {
   const options = [
     {
@@ -133,7 +135,7 @@ function Settings() {
         // .trim to remove whitespace & search for name or description
         return (
           item.name.toLocaleLowerCase().search(value.trim().toLowerCase()) !==
-            -1 ||
+          -1 ||
           item.description
             .toLocaleLowerCase()
             .search(value.trim().toLowerCase()) !== -1
@@ -163,37 +165,39 @@ function Settings() {
 
     setVisibleOptions(returnedItems);
   };
-
+  let history = useHistory();
   return (
-    <div className="Settings">
-      <div className="container my-5">
+    <Wrapper>
+      <Container maxWidth="lg">
         <h1>
-          <span>
-            <button className="btn btn-secondary">
-              {" "}
-              <span>&lt;</span> Back{" "}
-            </button>{" "}
+          <Button 
+          variant="contained" 
+          color="primary"
+          onClick={()=>history.goBack()}
+          >
+            <span>&lt;</span> Back
+          </Button>{" "}
             Settings
-          </span>
         </h1>
 
-        <input
+        <Input
           type="text"
-          className="form-control mt-5"
+          disableUnderline
+          inputProps={{
+            className:"Search"
+          }}
           onChange={onChange}
           placeholder="Search..."
         />
-
         <div>
           {visibleOptions.map((option) => (
-            <div key={option.header.name} className="mt-5 mt-2">
+            <div key={option.header.name} className="settingheader">
               <h3>{option.header.name}</h3>
-
               <div>
                 {option.values.map((value) => (
                   <div key={value.name}>
-                    <ul className="list-group">
-                      <li className="list-group-item mb-2">
+                    <ul className="group">
+                      <li>
                         <h6>{value.name}</h6>
                         <p>{value.description}</p>
                       </li>
@@ -204,8 +208,8 @@ function Settings() {
             </div>
           ))}
         </div>
-      </div>
-    </div>
+      </Container>
+    </Wrapper>
   );
 }
 

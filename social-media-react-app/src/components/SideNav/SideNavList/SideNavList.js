@@ -46,7 +46,7 @@ const SideNavList = () => {
                     description="Stats"
                 />
                 <SideNavListItem 
-                    route="/b"
+                    route="/settings"
                     icon={<SettingsIcon/>}
                     description="Settings"
                 />
