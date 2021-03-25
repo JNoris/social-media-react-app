@@ -4,7 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import {CommentWrapper} from './PostComment.styles'
+import {CommentWrapper, TitleWrapper} from './PostComment.styles'
 
 const PostCommentListView = (props) => {
     // TODO API call to get all post comments
@@ -42,6 +42,10 @@ const PostCommentListView = (props) => {
     ];
 
     return (
+        <div>
+        <TitleWrapper>
+        <h6>Comments</h6>
+        </TitleWrapper>
         <List>
             {tempComments.map((comment) => (
                 <CommentWrapper>
@@ -58,6 +62,7 @@ const PostCommentListView = (props) => {
               </CommentWrapper>
             ))}
         </List>
+        </div>
     )
 }
 
