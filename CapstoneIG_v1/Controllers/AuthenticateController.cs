@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace CapstoneIG_v1.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
@@ -27,7 +28,6 @@ namespace CapstoneIG_v1.Controllers
             _configuration = configuration;
         }
 
-        [AllowAnonymous]
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
