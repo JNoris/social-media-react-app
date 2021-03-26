@@ -19,6 +19,7 @@ const PostCardAddComment = (props) => {
                 style={{ margin: 0 }}
                 placeholder="Add a comment"
                 fullWidth
+                multiline
                 margin="normal"
                 variant="filled" 
             />
