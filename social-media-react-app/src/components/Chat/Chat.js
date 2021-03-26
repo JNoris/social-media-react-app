@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import AttachmentIcon from "@material-ui/icons/Attachment";
 import {Wrapper} from './Chat.styles';
