@@ -1,12 +1,12 @@
 import React from 'react'
 import {HomeWrapper} from './Home.styles';
 import PostGridView from '../PostGridView/PostGridView'
-import TopNav2 from "../TopNav/TopNav2";
+import TopNav3 from "../TopNav/TopNav3";
 
 const Home = () => {
     return(
         <HomeWrapper>
-            <TopNav2 />
+            <TopNav3 />
             <PostGridView />
         </HomeWrapper>
     );

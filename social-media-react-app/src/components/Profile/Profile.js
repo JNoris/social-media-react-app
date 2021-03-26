@@ -24,8 +24,9 @@ const Profile = (props) => {
     // );
     //if(Authenticated userId != props.location.state.userId)
     //return version with no edit bio and <p> for bio
-    const {userName} = props.location.state;
-    const [bio, setBio] = useState(dummyData.bio)
+   // const {userName} = props.location.state;
+    const userName = "testdata";
+    const [bio, setBio] = useState(dummyData.bio);
     const [bioReadOnly, setReadOnly] = useState(true);
     const [saveBtn, showSaveBtn] = useState(false);
     const [isSelf, setIsSelf] = useState(false); //usually false

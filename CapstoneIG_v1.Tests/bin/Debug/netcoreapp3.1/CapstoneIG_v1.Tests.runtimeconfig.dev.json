@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\kryas\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\kryas\\.nuget\\packages"
+    ]
+  }
+}

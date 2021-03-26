@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
   const classes = useStyles();
-  const { register, control } = useForm(); // Hook to handle form
+  const { register, control, handleSubmit } = useForm(); // Hook to handle form
 
   return (
     <Grid container component="main" className={classes.root}>

@@ -31,7 +31,7 @@ const SideNavList = () => {
                     
                 />
                 <SideNavListItem 
-                    route="/e"
+                    route="/chat"
                     icon={<ChatIcon/>}
                     description="Direct"
                 />
