@@ -23,6 +23,7 @@ function App() {
         <Flex>
           <SideNav />
           <MainWrapper>
+            {/* <TopNav3 /> */}
             <Route exact path="/" component={Home} />
             <Route exact path="/add" component={AddPost}/>
             <Route exact path="/profile" component={Profile} />
