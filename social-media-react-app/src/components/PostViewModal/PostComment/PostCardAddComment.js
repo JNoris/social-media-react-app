@@ -1,10 +1,15 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import {FormWrapper} from '../PostCardModalView/PostCardModalView.styles'
+import Button from '@material-ui/core/Button';
+import {FormWrapper, ButtonWrapper} from '../PostCardModalView/PostCardModalView.styles'
 
 const PostCardAddComment = (props) => {
     
     const user = props.user;
+
+    const handlePostComment = () => {
+        // TODO API call to post comment + refresh view
+    }
 
     return (
         <FormWrapper>
@@ -17,6 +22,9 @@ const PostCardAddComment = (props) => {
                 margin="normal"
                 variant="filled" 
             />
+            <ButtonWrapper>
+                <Button id="submitButton" onClick={handlePostComment}>Post</Button>
+            </ButtonWrapper>
         </form>
         </FormWrapper>
     );

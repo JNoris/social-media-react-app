@@ -11,8 +11,6 @@ import Follow from './components/Follow/Follow';
 import Chat from "./components/Chat/Chat";
 import AddPost from './components/AddPost/AddPost';
 
-
-
 function App() {
   //const [token, setToken]=useState("");
   return (

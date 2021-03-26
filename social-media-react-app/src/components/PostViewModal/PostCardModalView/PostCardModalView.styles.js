@@ -20,3 +20,29 @@ export const FormWrapper = styled.div`
 }
 
 `;
+
+export const ButtonWrapper = styled.div`
+.MuiButton-root {
+    background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);    
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: #fff;
+    border-radius: 10px;
+    display: block;
+    border: none;
+    margin-top: .5rem;
+}
+
+.MuiButton-label {
+    color: #fff;
+}
+
+.MuiButton-root:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+}
+`;
