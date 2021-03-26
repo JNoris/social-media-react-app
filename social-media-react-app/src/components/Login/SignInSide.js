@@ -1,8 +1,6 @@
 import React from "react";
 // eslint-disable-next-line
-import ReactDOM from "react-dom";
-// eslint-disable-next-line
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+//import React, { Component } from "react";
 import { useForm, Controller } from "react-hook-form";
 // import { Link } from "react-router";
 // import SignUp from "./components/Login/SignUp";
@@ -19,6 +17,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
+
+
+// Styling code
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -51,7 +52,28 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
+// End styling code
 
+// Begin Form Validation
+// Begin reference code
+const required = (value) => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This field is required!
+      </div>
+    );
+  }
+};
+
+
+//this.form.validateAll();
+
+// if (this.checkBtn.context._errors.length === 0) {
+//   // do something when no error
+// }
+// End Form Validation
+// end reference code
 export default function SignInSide() {
   const classes = useStyles();
   const { register, control, handleSubmit } = useForm(); // Hook to handle form

@@ -1,8 +1,4 @@
-import React from "react";
-// eslint-disable-next-line
-import ReactDOM from "react-dom";
-// eslint-disable-next-line
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React from 'react'
 //import { useForm } from "react-hook-form";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -14,6 +10,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
