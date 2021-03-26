@@ -67,11 +67,11 @@ const required = (value) => {
 };
 
 
-this.form.validateAll();
+//this.form.validateAll();
 
-if (this.checkBtn.context._errors.length === 0) {
-  // do something when no error
-}
+// if (this.checkBtn.context._errors.length === 0) {
+//   // do something when no error
+// }
 // End Form Validation
 // end reference code
 export default function SignInSide() {

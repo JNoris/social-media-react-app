@@ -14,20 +14,14 @@ import { CSSTransition } from "react-transition-group";
 function TopNav3() {
   return (
     <TopNavWrapper>
-      <body>
-        <code>
-          {/* Top Nav Icons */}
           <Navbar>
             <NavItem icon={<PlusIcon />} />
             <NavItem icon={<BellIcon />} />
-            <NavItem icon={<MessengerIcon />} />
-
+            <NavItem icon={<MessengerIcon />} />  
             <NavItem icon={<CaretIcon />}>
               <DropdownMenu></DropdownMenu>
             </NavItem>
           </Navbar>
-        </code>
-      </body>
     </TopNavWrapper>
   );
 }
@@ -35,13 +29,9 @@ function TopNav3() {
 function Navbar(props) {
   return (
     <TopNavWrapper>
-      <body>
-        <code>
           <nav className="navbar">
             <ul className="navbar-nav">{props.children}</ul>
           </nav>
-        </code>
-      </body>
     </TopNavWrapper>
   );
 }
@@ -51,8 +41,6 @@ function NavItem(props) {
 
   return (
     <TopNavWrapper>
-      <body>
-        <code>
           <li className="nav-item">
             <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
               {props.icon}
@@ -60,8 +48,6 @@ function NavItem(props) {
 
             {open && props.children}
           </li>
-        </code>
-      </body>
     </TopNavWrapper>
   );
 }
@@ -83,8 +69,6 @@ function DropdownMenu() {
   function DropdownItem(props) {
     return (
       <TopNavWrapper>
-        <body>
-          <code>
             <a
               href="#"
               className="menu-item"
@@ -94,16 +78,12 @@ function DropdownMenu() {
               {props.children}
               <span className="icon-right">{props.rightIcon}</span>
             </a>
-          </code>
-        </body>
       </TopNavWrapper>
     );
   }
 
   return (
     <TopNavWrapper>
-      <body>
-        <code>
           <div
             className="dropdown"
             style={{ height: menuHeight }}
@@ -147,8 +127,6 @@ function DropdownMenu() {
               </div>
             </CSSTransition>
           </div>
-        </code>
-      </body>
     </TopNavWrapper>
   );
 }
