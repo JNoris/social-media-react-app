@@ -29,7 +29,6 @@ export const ButtonWrapper = styled.div`
     transition: 0.5s;
     background-size: 200% auto;
     color: #fff;
-    border-radius: 10px;
     display: block;
     border: none;
     margin-top: .5rem;
