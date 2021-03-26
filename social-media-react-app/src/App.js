@@ -9,6 +9,8 @@ import SideNav from "./components/SideNav/SideNav";
 import Chat from "./components/Chat/Chat";
 import { Flex, MainWrapper } from "./App.styles";
 import Follow from "./components/Follow/Follow";
+import AddPost from "./components/AddPost/AddPost";
+// import TopNav3 from "./components/Topnav/TopNav3";
 
 function App() {
   // const [token, setToken] = useState("");
@@ -21,7 +23,9 @@ function App() {
         <Flex>
           <SideNav />
           <MainWrapper>
+            {/* <TopNav3 /> */}
             <Route exact path="/" component={Home} />
+            <Route exact path="/add" component={AddPost} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/follow" component={Follow} />
             <Route exact path="/settings" component={Settings} />

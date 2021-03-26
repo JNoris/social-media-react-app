@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import AttachmentIcon from "@material-ui/icons/Attachment";
-import "./Chat.css";
 
 function Chat() {
   return (
