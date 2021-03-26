@@ -15,3 +15,4 @@ export const FormWrapper = styled.div`
     border-radius: 5px;
 }
 `;
+
