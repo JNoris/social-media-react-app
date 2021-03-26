@@ -8,6 +8,10 @@ export const FollowWrapper = styled.div`
     span{
         color:white;
     }
+
+    .PrivateTabIndicator-colorSecondary-3 {
+        background-color: #fcac56
+    }
 `;
 
 export const Flex = styled.div`
