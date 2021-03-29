@@ -60,6 +60,7 @@ namespace CapstoneIG_v1.Controllers
         [Route("edituser")]
         public async Task<IActionResult> EditCurrentUser([FromBody] ApplicationUser curUser)
         {
+
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
             user.Bio = curUser.Bio;
@@ -95,20 +96,21 @@ namespace CapstoneIG_v1.Controllers
         }
 
         [HttpGet]
-        [Route("getuserdetails/{userId}")]
-        public JsonResult GetUserDetails(string userId)
+        [Route("getuserdetails/{username}")]
+        public JsonResult GetUserDetails(string username)
         {
-            ApplicationUser usr = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
+
+            ApplicationUser user = _db.Users.Where(u => u.UserName == username).FirstOrDefault();
 
             UserResponse newUResponse = new UserResponse()
             {
-                ProfilePhotoPath = usr.ProfileImageName,
-                UserName = usr.UserName,
-                FirstName = usr.FirstName,
-                LastName = usr.LastName,
-                NumberOfPosts = _db.Posts.Where(p => p.User == usr).Count(),
-                NumberOfFollowers = _db.Followers.Where(f => f.FollowingId.Id == userId).Count(),
-                NumberOfFollowing = _db.Followers.Where(f => f.UserId.Id == userId).Count()
+                ProfilePhotoPath = user.ProfileImageName,
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                NumberOfPosts = _db.Posts.Where(p => p.User == user).Count(),
+                NumberOfFollowers = _db.Followers.Where(f => f.FollowingId.UserName == username).Count(),
+                NumberOfFollowing = _db.Followers.Where(f => f.UserId.UserName == username).Count()
             };
 
             return Json(newUResponse);

@@ -141,10 +141,10 @@ namespace CapstoneIG_v1.Controllers
         }
 
         [HttpGet]
-        [Route("getuserposts/{userId}")]
-        public JsonResult GetUserPosts(string userId)
+        [Route("getuserposts/{username}")]
+        public JsonResult GetUserPosts(string username)
         {
-            ApplicationUser user = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            ApplicationUser user = _db.Users.Where(u => u.UserName == username).FirstOrDefault();
             List<PostModel> usrPosts = _db.Posts.Where(p => p.User == user).ToList();
             List<PostResponse> pResponse = new List<PostResponse>();
 
