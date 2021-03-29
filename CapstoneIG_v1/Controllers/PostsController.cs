@@ -29,15 +29,20 @@ namespace CapstoneIG_v1.Controllers
         [NonAction]
         public async Task<string> SaveImage(IFormFile imageFile)
         {
-            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
-            imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
-            var imagePath = Path.Combine(_environment.ContentRootPath, "Images", imageName);
-            using (var fileStream = new FileStream(imagePath, FileMode.Create))
-            {
-                await imageFile.CopyToAsync(fileStream);
-            }
+            string src = "https://localhost:5001/images/posterror.png";
 
-            string src = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, imageName);
+            if (imageFile != null)
+            {
+                string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
+                imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
+                var imagePath = Path.Combine(_environment.ContentRootPath, "Images", imageName);
+                using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(fileStream);
+                }
+
+                src = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, imageName);
+            }
 
             return src;
         }
@@ -46,170 +51,244 @@ namespace CapstoneIG_v1.Controllers
         [Route("addpost")]
         public async Task<IActionResult> AddPost([FromForm] PostModel post)
         {
+            dynamic res;
+
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
-            var imgStoreName = await SaveImage(post.ImgFile);
-
-            PostModel newPost = new PostModel()
+            if (user != null)
             {
-                ImageName = imgStoreName,
-                UploadDate = DateTime.Now,
-                Caption = post.Caption,
-                User = user
-            };
+                var imgStoreName = await SaveImage(post.ImgFile);
 
-            _db.Posts.Add(newPost);
-            _db.SaveChanges();
+                PostModel newPost = new PostModel()
+                {
+                    ImageName = imgStoreName,
+                    UploadDate = DateTime.Now,
+                    Caption = post.Caption,
+                    User = user
+                };
 
-            return Ok(new Response { Status = "Success", Message = "Post Created" });
+                _db.Posts.Add(newPost);
+                _db.SaveChanges();
+
+                res = Ok(new Response { Status = "Success", Message = "Post Created" });
+            }
+            else
+            {
+                Response.StatusCode = StatusCodes.Status400BadRequest;
+                res = Json(new { Status = "Failed", Message = "No user found" });
+            }
+
+            return res;
         }
 
         [HttpPost]
         [Route("deletepost/{postId}")]
         public async Task<IActionResult> DeletePost(int postId)
         {
+            dynamic res;
+
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
-            PostModel pst = _db.Posts.Where(p => p.User == user).Where(q => q.Id == postId).FirstOrDefault();
-
-            if (pst != null)
+            if (user != null)
             {
-                _db.Posts.Remove(pst);
-                _db.SaveChanges();
+                PostModel pst = _db.Posts.Where(p => p.User == user).Where(q => q.Id == postId).FirstOrDefault();
+
+                if (pst != null)
+                {
+                    _db.Posts.Remove(pst);
+                    _db.SaveChanges();
+                    res = Ok(new Response { Status = "Success", Message = "Post Deleted" });
+                }
+                else
+                {
+                    Response.StatusCode = StatusCodes.Status400BadRequest;
+                    res = Json(new { Status = "Failed", Message = "Can't delete a post you don't own" });
+                }
             }
             else
             {
-                return Ok(new Response { Status = "Failed", Message = "You can't delete a post you don't own" });
+                Response.StatusCode = StatusCodes.Status400BadRequest;
+                res = Json(new { Status = "Failed", Message = "No user found" });
             }
 
-            return Ok(new Response { Status = "Success", Message = "Post Deleted" });
+            return res;
         }
 
         [HttpPut]
         [Route("editpost/{postId}")]
         public async Task<IActionResult> EditPost([FromBody] PostModel post, int postId)
         {
+            dynamic res;
+
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
-            PostModel pst = _db.Posts.Where(p => p.User == user).Where(q => q.Id == postId).FirstOrDefault();
-
-            if (pst != null)
+            if (user != null)
             {
-                pst.Caption = post.Caption;
-                _db.SaveChanges();
+                PostModel pst = _db.Posts.Where(p => p.User == user).Where(q => q.Id == postId).FirstOrDefault();
+
+                if (pst != null)
+                {
+                    pst.Caption = post.Caption;
+                    _db.SaveChanges();
+                    res = Ok(new Response { Status = "Success", Message = "Post Updated" });
+                }
+                else
+                {
+                    Response.StatusCode = StatusCodes.Status400BadRequest;
+                    res = Json(new { Status = "Failed", Message = "Can't edit a post you don't own" });
+                }
             }
             else
             {
-                return Ok(new Response { Status = "Failed", Message = "You can't edit a post you don't own" });
+                Response.StatusCode = StatusCodes.Status400BadRequest;
+                res = Json(new { Status = "Failed", Message = "No user found" });
             }
 
-            return Ok(new Response { Status = "Success", Message = "Post Updated" });
+            return res;
         }
 
         [HttpGet]
         [Route("getcurrentuserposts")]
         public async Task<JsonResult> GetCurrentUserPosts()
         {
+            dynamic res;
+
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-            List<PostModel> usrPosts = _db.Posts.Where(p => p.User == user).ToList();
-            List<PostResponse> pResponse = new List<PostResponse>();
 
-            foreach (var p in usrPosts)
+            if (user != null)
             {
-                int totalLikes = _db.Likes.Where(l => l.PostId == p.Id).Count();
-                int totalComments = _db.Comments.Where(l => l.PostId == p.Id).Count();
+                List<PostModel> usrPosts = _db.Posts.Where(p => p.User == user).ToList();
+                List<PostResponse> pResponse = new List<PostResponse>();
 
-                PostResponse newPResponse = new PostResponse()
+                foreach (var p in usrPosts)
                 {
-                    Id = p.Id,
-                    PhotoPath = p.ImageName,
-                    UploadDate = p.UploadDate,
-                    ProfilePhotoPath = user.ProfileImageName,
-                    UserName = user.UserName,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    NumberOfLikes = totalLikes,
-                    NumberOfComments = totalComments
-                };
+                    int totalLikes = _db.Likes.Where(l => l.PostId == p.Id).Count();
+                    int totalComments = _db.Comments.Where(l => l.PostId == p.Id).Count();
 
-                pResponse.Add(newPResponse);
+                    PostResponse newPResponse = new PostResponse()
+                    {
+                        Id = p.Id,
+                        PhotoPath = p.ImageName,
+                        UploadDate = p.UploadDate,
+                        ProfilePhotoPath = user.ProfileImageName,
+                        UserName = user.UserName,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        NumberOfLikes = totalLikes,
+                        NumberOfComments = totalComments
+                    };
+
+                    pResponse.Add(newPResponse);
+                }
+
+                var orderByDate = pResponse.OrderByDescending(p => p.UploadDate);
+
+                res = Json(orderByDate);
+            }
+            else
+            {
+                Response.StatusCode = StatusCodes.Status400BadRequest;
+                res = Json(new { Status = "Failed", Message = "No user found" });
             }
 
-            var orderByDate = pResponse.OrderByDescending(p => p.UploadDate);
-
-            return Json(orderByDate);
+            return res;
         }
 
         [HttpGet]
         [Route("getuserposts/{username}")]
         public JsonResult GetUserPosts(string username)
         {
+            dynamic res;
+
             ApplicationUser user = _db.Users.Where(u => u.UserName == username).FirstOrDefault();
-            List<PostModel> usrPosts = _db.Posts.Where(p => p.User == user).ToList();
-            List<PostResponse> pResponse = new List<PostResponse>();
 
-            foreach (var p in usrPosts)
+            if (user != null)
             {
-                int totalLikes = _db.Likes.Where(l => l.PostId == p.Id).Count();
-                int totalComments = _db.Comments.Where(l => l.PostId == p.Id).Count();
+                List<PostModel> usrPosts = _db.Posts.Where(p => p.User == user).ToList();
+                List<PostResponse> pResponse = new List<PostResponse>();
 
-                PostResponse newPResponse = new PostResponse()
+                foreach (var p in usrPosts)
                 {
-                    Id = p.Id,
-                    PhotoPath = p.ImageName,
-                    UploadDate = p.UploadDate,
-                    ProfilePhotoPath = user.ProfileImageName,
-                    UserName = user.UserName,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    NumberOfLikes = totalLikes,
-                    NumberOfComments = totalComments
-                };
+                    int totalLikes = _db.Likes.Where(l => l.PostId == p.Id).Count();
+                    int totalComments = _db.Comments.Where(l => l.PostId == p.Id).Count();
 
-                pResponse.Add(newPResponse);
+                    PostResponse newPResponse = new PostResponse()
+                    {
+                        Id = p.Id,
+                        PhotoPath = p.ImageName,
+                        UploadDate = p.UploadDate,
+                        ProfilePhotoPath = user.ProfileImageName,
+                        UserName = user.UserName,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        NumberOfLikes = totalLikes,
+                        NumberOfComments = totalComments
+                    };
+
+                    pResponse.Add(newPResponse);
+                }
+
+                var orderByDate = pResponse.OrderByDescending(p => p.UploadDate);
+
+                res = Json(orderByDate);
+            }
+            else
+            {
+                Response.StatusCode = StatusCodes.Status400BadRequest;
+                res = Json(new { Status = "Failed", Message = "No user found" });
             }
 
-            var orderByDate = pResponse.OrderByDescending(p => p.UploadDate);
-
-            return Json(orderByDate);
+            return res;
         }
 
         [HttpGet]
         [Route("gethomepageposts")]
         public async Task<JsonResult> GetHomePagePosts()
         {
+            dynamic res;
+
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
-            List<string> followedUsers = _db.Followers.Where(f => f.UserId == user).Select(x => x.FollowingId.Id).ToList();
-
-            List<PostResponse> pResponse = new List<PostResponse>();
-
-            foreach (string key in followedUsers)
+            if (user != null)
             {
-                ApplicationUser usr = _db.Users.Where(u => u.Id == key).FirstOrDefault();
-                PostModel usrPost = _db.Posts.Where(p => p.User.Id == key).FirstOrDefault();
-                int totalLikes = _db.Likes.Where(l => l.PostId == usrPost.Id).Count();
-                int totalComments = _db.Comments.Where(l => l.PostId == usrPost.Id).Count();
+                List<string> followedUsers = _db.Followers.Where(f => f.UserId == user).Select(x => x.FollowingId.Id).ToList();
 
-                PostResponse newPResponse = new PostResponse()
+                List<PostResponse> pResponse = new List<PostResponse>();
+
+                foreach (string key in followedUsers)
                 {
-                    Id = usrPost.Id,
-                    PhotoPath = usrPost.ImageName,
-                    UploadDate = usrPost.UploadDate,
-                    ProfilePhotoPath = usr.ProfileImageName,
-                    UserName = usr.UserName,
-                    FirstName = usr.FirstName,
-                    LastName = usr.LastName,
-                    NumberOfLikes = totalLikes,
-                    NumberOfComments = totalComments
-                };
+                    ApplicationUser usr = _db.Users.Where(u => u.Id == key).FirstOrDefault();
+                    PostModel usrPost = _db.Posts.Where(p => p.User.Id == key).FirstOrDefault();
+                    int totalLikes = _db.Likes.Where(l => l.PostId == usrPost.Id).Count();
+                    int totalComments = _db.Comments.Where(l => l.PostId == usrPost.Id).Count();
 
-                pResponse.Add(newPResponse);
+                    PostResponse newPResponse = new PostResponse()
+                    {
+                        Id = usrPost.Id,
+                        PhotoPath = usrPost.ImageName,
+                        UploadDate = usrPost.UploadDate,
+                        ProfilePhotoPath = usr.ProfileImageName,
+                        UserName = usr.UserName,
+                        FirstName = usr.FirstName,
+                        LastName = usr.LastName,
+                        NumberOfLikes = totalLikes,
+                        NumberOfComments = totalComments
+                    };
+
+                    pResponse.Add(newPResponse);
+                }
+
+                var orderByDate = pResponse.OrderByDescending(p => p.UploadDate);
+
+                res = Json(orderByDate);
+            }
+            else
+            {
+                Response.StatusCode = StatusCodes.Status400BadRequest;
+                res = Json(new { Status = "Failed", Message = "No user found" });
             }
 
-            var orderByDate = pResponse.OrderByDescending(p => p.UploadDate);
-
-            return Json(orderByDate);
+            return res;
         }
     }
 }
