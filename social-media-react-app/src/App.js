@@ -42,7 +42,6 @@ function App() {
         <Route exact path="/signin" component={SignInSide} />
         <Route exact path="/register" component={Register} />
         <Route path="/login" component={Login} />
-        <Route exact path="*" component={Register} />
         <Flex>
           <SideNav />
           <MainWrapper>
@@ -55,6 +54,7 @@ function App() {
             {/* <Route exact path='/TEST' component={TEST}/> */}
           </MainWrapper>
         </Flex>
+        <Route exact path="*" component={Register} />
       </Switch>
     </>
   );
