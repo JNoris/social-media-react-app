@@ -19,21 +19,23 @@ function App() {
   //const [token, setToken] = useState("");
   if (isAuth) {
     return (
-      <Flex>
-        <SideNav />
-        <MainWrapper>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/add" component={AddPost} />
-          <Route path="/profile/:id?" component={Profile} />
-          <Route exact path="/follow" component={Follow} />
-          <Route exact path="/settings" component={Settings2} />
-          <Route exact path="/chat" component={Chat} />
-          {/* <Route exact path='/TEST' component={TEST}/> */}
-        </MainWrapper>
-      </Flex>
+      <Switch>
+        <Flex>
+          <SideNav />
+          <MainWrapper>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/add" component={AddPost} />
+            <Route path="/profile/:id?" component={Profile} />
+            <Route exact path="/follow" component={Follow} />
+            <Route exact path="/settings" component={Settings2} />
+            <Route exact path="/chat" component={Chat} />
+            {/* <Route exact path='/TEST' component={TEST}/> */}
+          </MainWrapper>
+        </Flex>
+      </Switch>
     );
   }
-  else{
+  else {
     return (
       <>
         <Switch>
