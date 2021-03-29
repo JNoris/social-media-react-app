@@ -1,5 +1,5 @@
-import { Route,Switch } from "react-router";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Route, Switch } from "react-router";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import Settings2 from "./components/Settings/Settings2";
@@ -14,51 +14,36 @@ import Register from "./components/Login/Register";
 import Login from "./components/Login/Login";
 // import TopNav3 from "./components/Topnav/TopNav3";
 
-/**
- * 
- 
-// Class for utilizing state
-class App extends Component {
-  render(){
+function App() {
+  const isAuth = !!localStorage.getItem("token");
+  //const [token, setToken] = useState("");
+  if (isAuth) {
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/register" component={Register}/>
-          <Route path="/login" component={Login}/>
-          <Route exact path="*" component={Register}/>
-        </Switch>
-      </BrowserRouter>
+      <Flex>
+        <SideNav />
+        <MainWrapper>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/add" component={AddPost} />
+          <Route path="/profile/:id?" component={Profile} />
+          <Route exact path="/follow" component={Follow} />
+          <Route exact path="/settings" component={Settings2} />
+          <Route exact path="/chat" component={Chat} />
+          {/* <Route exact path='/TEST' component={TEST}/> */}
+        </MainWrapper>
+      </Flex>
     );
   }
-}
-// End remove
-*/
-
-function App() {
-  //const [token, setToken]=useState("");
-  return (
-    <>
-      <Switch>
-        <Route exact path="/signin" component={SignInSide} />
-        <Route exact path="/register" component={Register} />
-        <Route path="/login" component={Login} />
-        
-        <Flex>
-          <SideNav />
-          <MainWrapper>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/add" component={AddPost}/>
-            <Route path="/profile/:id?" component={Profile} />
-            <Route exact path="/follow" component={Follow} />
-            <Route exact path="/settings" component={Settings2} />
-            <Route exact path="/chat" component={Chat} />
-            {/* <Route exact path='/TEST' component={TEST}/> */}
-          </MainWrapper>
-        </Flex>
-        <Route exact path="*" component={Register} />
-      </Switch>
-    </>
-  );
+  else{
+    return (
+      <>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="*" component={Login} />
+        </Switch>
+      </>
+    );
+  }
 }
 
 export default App;

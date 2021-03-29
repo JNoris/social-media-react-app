@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { SideNavProfileWrapper } from '../SideNav.styles';
 
 const SideNavProfile = () => {
+   
     const [userId, setUserId] = useState("");
 
     axios.defaults.headers={
@@ -17,10 +18,11 @@ const SideNavProfile = () => {
     useEffect(()=>{
         axios.get("https://localhost:5001/getcurrentuserdetails")
         .then(res => setUserId(res.data))
-        .catch(err=>console.log(err));
+        .catch(err=>console.log(err))
     },[])
 
     const fullname = userId.firstName + " " + userId.lastName;
+
     return (
         <SideNavProfileWrapper>
             <DisplayInfo
