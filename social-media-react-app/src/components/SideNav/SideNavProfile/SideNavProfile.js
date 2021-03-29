@@ -6,9 +6,9 @@ import DisplayInfo from './SideNavProfileComponents/DisplayInfo';
 import { Link } from 'react-router-dom';
 import { SideNavProfileWrapper } from '../SideNav.styles';
 
-const SideNavProfile = (props) => {
+const SideNavProfile = () => {
     const [userId, setUserId] = useState("");
-    
+
     axios.defaults.headers={
         "Content-Type":"application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`

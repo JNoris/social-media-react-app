@@ -48,7 +48,7 @@ function App() {
           <MainWrapper>
             <Route exact path="/" component={Home} />
             <Route exact path="/add" component={AddPost}/>
-            <Route exact path="/profile" component={Profile} />
+            <Route path="/profile/:id?" component={Profile} />
             <Route exact path="/follow" component={Follow} />
             <Route exact path="/settings" component={Settings2} />
             <Route exact path="/chat" component={Chat} />
