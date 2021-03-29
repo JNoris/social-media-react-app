@@ -42,23 +42,16 @@ export const ContentComponent = styled.div `
         margin-right: .5rem;
     }
 
-<<<<<<< HEAD
     p:hover {
         color: #d3d3d3;
     }
 
-=======
->>>>>>> 3c8b657ca53800756c11f43bc467d200dfcc97b2
     #comments {
         margin-right: 0;
     }
 
     .icon:hover{
-<<<<<<< HEAD
         color: #fcac56;
-=======
-        color: #d3d3d3;
->>>>>>> 3c8b657ca53800756c11f43bc467d200dfcc97b2
     }
 `;
 
