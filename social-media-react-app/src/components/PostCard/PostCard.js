@@ -18,7 +18,7 @@ const PostCard = (props) => {
                     post={post}
                />
                <PostCardContent
-                    userName = {post.UserName}
+                    username = {post.UserName}
                     userProfilePhoto = {post.ProfilePhotoPath}
                     likes = {post.NumberOfLikes}
                     comments = {post.NumberOfComments}
