@@ -17,6 +17,10 @@ export const PostDummy = styled.div`
         width: 0;  /* Remove scrollbar space */
         background: transparent;  /* Optional: just make scrollbar invisible */
     }  
+    img {
+        border-radius: 15px;
+        border: none;
+    }
 `;
 export const GridWrapper = styled.div`
     padding:0.5vw;

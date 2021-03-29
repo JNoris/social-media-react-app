@@ -17,8 +17,6 @@ import ProfileGridItem from "./ProfileGridItem";
 import { dummyData, dummyImg } from "../temp/dummyData";
 import SearchBar from "../TopNav/TopNavComponents/SearchBar";
 
-
-
 /**
  * This page gets current User from Local Storage by calling AuthService.getCurrentUser() method
  * and show user information (with token).
@@ -156,7 +154,7 @@ const Profile = (props) => {
         <GridWrapper>
           <Grid container spacing={1} justify="flex-start" alignItems="center">
             {dummyImg?.map((item) => (
-              <Grid item key={item.id} xs={12} md={4} lg={3}>
+              <Grid item key={item.id} xs={12} md={4} lg={4}>
                 <ProfileGridItem
                   link={item.id}
                   src={item.photo}
