@@ -27,6 +27,7 @@ namespace CapstoneIG_v1.Models
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Bio { get; set; }
         public int NumberOfPosts { get; set; }
         public int NumberOfFollowers { get; set; }
         public int NumberOfFollowing { get; set; }
