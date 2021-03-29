@@ -18,6 +18,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
 
+// import AuthService from "../services/auth.service";
+import { isEmail } from "validator";
 
 // Styling code
 const useStyles = makeStyles((theme) => ({
@@ -54,26 +56,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 // End styling code
 
-// Begin Form Validation
-// Begin reference code
-const required = (value) => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
-
-
-//this.form.validateAll();
-
-// if (this.checkBtn.context._errors.length === 0) {
-//   // do something when no error
-// }
-// End Form Validation
-// end reference code
 export default function SignInSide() {
   const classes = useStyles();
   const { register, control, handleSubmit } = useForm(); // Hook to handle form

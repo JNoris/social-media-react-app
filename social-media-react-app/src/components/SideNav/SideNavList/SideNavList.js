@@ -25,7 +25,7 @@ const SideNavList = () => {
                     description="Explore"
                 />
                 <SideNavListItem 
-                    route="/f"
+                    route="/notifications"
                     icon={<NotificationsIcon/>}
                     description="Notifications"
                     
@@ -36,7 +36,7 @@ const SideNavList = () => {
                     description="Direct"
                 />
                 <SideNavListItem 
-                    route="/d"
+                    route="/TEST"
                     icon={<LiveTvIcon/>}
                     description="FGTV"
                 />

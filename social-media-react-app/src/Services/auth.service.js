@@ -1,24 +1,29 @@
 // Authentication Service
-
+/**
+ * 
+ 
 import axios from "axios";
 
-const API_URL = "http://localhost:5001/api/auth/";
+const API_URL = "http://localhost:5001/auth/";
 
 class AuthService {
   // POST {username, password} & save JWT to Local Storage
   login(username, password) {
-    return axios
-      .post(API_URL + "signin", {
-        username,
-        password,
-      })
-      .then((response) => {
-        if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
+    return (
+      axios
+        // Changed from signin
+        .post(API_URL + "signinside", {
+          username,
+          password,
+        })
+        .then((response) => {
+          if (response.data.accessToken) {
+            localStorage.setItem("user", JSON.stringify(response.data));
+          }
 
-        return response.data;
-      });
+          return response.data;
+        })
+    );
   }
 
   // remove JWT from Local Storage
@@ -42,3 +47,4 @@ class AuthService {
 }
 
 export default new AuthService();
+*/
