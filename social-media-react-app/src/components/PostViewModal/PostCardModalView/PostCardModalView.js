@@ -11,21 +11,23 @@ import PostLikeList from '../PostLikes/PostLikeList'
 const PostCardModalView = (props) => {
 
     const post = props.post;
-    const user = post.username
     const viewComments = props.viewComments
 
     // API to get post description + comments
     var postDataToShow = viewComments ? (
         <PostCardModalContent 
-                    user = {user}
-                    likes = {post.likes}
-                    post={post}
+            username={props.userName} 
+            userProfilePhoto={props.userProfilePhoto}
+            likes = {post.NumberOfLikes}
+            post={post}
                />
     ) : (
         <PostCardModalContent 
-                    user = {user}
-                    comments = {post.comments}
-                    post={post}
+            username={props.userName} 
+            userProfilePhoto={props.userProfilePhoto}
+            //TODO call for posts
+            comments = {post.comments}
+            post={post}
                />
     ) ;
 
@@ -42,7 +44,7 @@ const PostCardModalView = (props) => {
         <CardWrapper>
             <Card>
                <PostImage 
-                    img = {post.img}
+                    img = {post.PhotoPath}
                     modalView = {props.modalView}
                />
                 {postDataToShow}

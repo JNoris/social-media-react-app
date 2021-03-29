@@ -8,7 +8,7 @@ import UserInfo from './UserInfo'
 
 const PostCardContent = (props) => {
     var userHtml = props.user ? (<UserInfo 
-    username={props.user} /> ) : null
+    username={props.userName} userProfilePhoto={props.userProfilePhoto} /> ) : null
 
     var statsHtml = props.likes || props.comments ? ( <PostStats 
         likes={props.likes}
