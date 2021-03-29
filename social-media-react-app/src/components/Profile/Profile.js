@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
+import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
-import {
-  ProfileWrapper,
-  PostDummy,
-  InfoCol,
-  Bio,
-  BioML,
-  GridWrapper,
-  FlexEven,
-  LinkWrapper
-} from "./Profile.styles";
+import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML, GridWrapper, FlexEven, LinkWrapper } from "./Profile.styles";
 import Grid from "@material-ui/core/Grid";
 import UserInfo from "../SideNav/SideNavProfile/SideNavProfileComponents/UserInfo";
 import ProfileGridItem from "./ProfileGridItem";
@@ -19,24 +11,15 @@ import SearchBar from "../TopNav/TopNavComponents/SearchBar";
 
 const Profile = () => {
 
-  const [urlParam, setParam] = useState("");
-  let url = useParams();
-  function checkParams() {
-    if(url)
-    {
-      setParam(url.id);
-      console.log(urlParam);
-    }
-  }
-  useEffect(() => {
-    checkParams();
-  });
-
   const userName = "testdata";
   const [bio, setBio] = useState(dummyData.bio);
   const [bioReadOnly, setReadOnly] = useState(true);
   const [saveBtn, showSaveBtn] = useState(false);
   const [isSelf, setIsSelf] = useState(false); //usually false
+  const [urlParam, setParam] = useState("");
+  const [userDetails, setUserDetails] = useState("");
+  const [error, setError] = useState(false);
+  const [noUser, setNoUser] = useState(false);
 
   const handleBioChange = (event) => {
     setBio(event.target.value);
@@ -54,45 +37,80 @@ const Profile = () => {
     setIsSelf((v) => !v);
   };
 
+  axios.defaults.headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`
+  }
+  function getCurrentUserDetails() {
+    axios.get("https://localhost:5001/getcurrentuserdetails")
+      .then(res => setUserDetails(res.data))
+      .catch(err => setError(true) && console.log(err));
+  }
+  function getUserDetails(username) {
+    axios.get("https://localhost:5001/getuserdetails/"+username)
+      .then(res => setUserDetails(res.data))
+      .catch(err => setNoUser(true) && console.log(err));
+  }
+  let url = useParams();
+  function checkParams() {
+    if (url) {
+      setParam(url.id);
+      console.log(urlParam);
+      getUserDetails(url.id);
+    }
+    else
+    {
+      getCurrentUserDetails();
+    }
+  }
+  useEffect(() => {
+    checkParams();
+  });
+  if(error)
+  {
+    return(
+      <div>An Error has occured</div>
+    );
+  }
   return (
     <ProfileWrapper>
       <InfoCol>
         <SearchBar />
-        <h1>{dummyData.userId}</h1>
+        <h1>{userDetails.userName}</h1>
         <LinkWrapper>
-        <Grid container justify="center" spacing={1}>
-          <Grid item xs={4}>
-            <UserInfo name="Posts" number={dummyData.posts} />
-          </Grid>
+          <Grid container justify="center" spacing={1}>
+            <Grid item xs={4}>
+              <UserInfo name="Posts" number={dummyData.posts} />
+            </Grid>
 
-          <Grid item xs={4}>
-            <Link
-              to={{
-                pathname: "follow",
-                state: {
-                  followIndex: 0,
-                  userName: userName,
-                },
-              }}
-            >
-              <UserInfo name="Followers" number={dummyData.followers} />
-            </Link>
-          </Grid>
+            <Grid item xs={4}>
+              <Link
+                to={{
+                  pathname: "follow",
+                  state: {
+                    followIndex: 0,
+                    userName: userDetails.userName,
+                  },
+                }}
+              >
+                <UserInfo name="Followers" number={userDetails.numberOfFollowers} />
+              </Link>
+            </Grid>
 
-          <Grid item xs={4}>
-            <Link
-              to={{
-                pathname: "follow",
-                state: {
-                  followIndex: 1,
-                  userName: userName,
-                },
-              }}
-            >
-              <UserInfo name="Following" number={dummyData.following} />
-            </Link>
+            <Grid item xs={4}>
+              <Link
+                to={{
+                  pathname: "follow",
+                  state: {
+                    followIndex: 1,
+                    userName: userName,
+                  },
+                }}
+              >
+                <UserInfo name="Following" number={dummyData.following} />
+              </Link>
+            </Grid>
           </Grid>
-        </Grid>
         </LinkWrapper>
         <Bio>
           <BioML
