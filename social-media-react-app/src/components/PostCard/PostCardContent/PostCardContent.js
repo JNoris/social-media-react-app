@@ -7,18 +7,22 @@ import PostStats from './PostStats'
 import UserInfo from './UserInfo'
 
 const PostCardContent = (props) => {
+    var userHtml = props.user ? (<UserInfo 
+    username={props.user} /> ) : null
+
+    var statsHtml = props.likes || props.comments ? ( <PostStats 
+        likes={props.likes}
+        comments={props.comments}
+        post={props.post}
+   />
+   ) : null
+
     return (
         <ContentWrapper>
             <CardContent>
                 <CardActions disableSpacing>
-                    <UserInfo 
-                        username={props.user}
-                    />
-                   <PostStats 
-                        likes={props.likes}
-                        comments={props.comments}
-                        post={props.post}
-                   />
+                    {userHtml}
+                    {statsHtml}
                 </CardActions>
             </CardContent>
         </ContentWrapper>
