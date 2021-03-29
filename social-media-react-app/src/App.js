@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
+<<<<<<< HEAD
 import Settings2 from "./components/Settings/Settings2";
 import SignInSide from "./components/Login/SignInSide";
+=======
+import Settings from "./components/Settings/Settings";
+>>>>>>> 5a94387fde7ab53c06fe75cecabd8bec36c303f7
 import SideNav from "./components/SideNav/SideNav";
 // import TopNav from "./components/TopNav/TopNav";
 import Chat from "./components/Chat/Chat";
