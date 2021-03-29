@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   ProfileWrapper,
   PostDummy,
@@ -13,49 +13,25 @@ import {
 } from "./Profile.styles";
 import Grid from "@material-ui/core/Grid";
 import UserInfo from "../SideNav/SideNavProfile/SideNavProfileComponents/UserInfo";
-//import {useQuery} from 'react-query';
 import ProfileGridItem from "./ProfileGridItem";
 import { dummyData, dummyImg } from "../temp/dummyData";
 import SearchBar from "../TopNav/TopNavComponents/SearchBar";
 
-// Next line is for JWT validation
-// import AuthService from "../services/auth.service";
+const Profile = () => {
 
-/**
- * This page gets current User from Local Storage by calling AuthService.getCurrentUser() method
- * and show user information (with token).
- */
-
-    //const getUser = async() => await((await fetch('https://localhost')).json());
-    // const {data, isLoading, error} = useQuery(
-    //     'userdata',
-    //     getUser
-    // );
-    //if(Authenticated userId != props.location.state.userId)
-    //return version with no edit bio and <p> for bio
-   // const {userName} = props.location.state;
-    // const userName = "testdata";
-    // const [bio, setBio] = useState(dummyData.bio);
-    // const [bioReadOnly, setReadOnly] = useState(true);
-    // const [saveBtn, showSaveBtn] = useState(false);
-    // const [isSelf, setIsSelf] = useState(false); //usually false
-
-
-const Profile = (props) => {
-  if ("userId" in props) {
-    console.log(true);
-  } else {
-    console.log(false);
+  const [urlParam, setParam] = useState("");
+  let url = useParams();
+  function checkParams() {
+    if(url)
+    {
+      setParam(url.id);
+      console.log(urlParam);
+    }
   }
+  useEffect(() => {
+    checkParams();
+  });
 
-  //const getUser = async() => await((await fetch('https://localhost')).json());
-  // const {data, isLoading, error} = useQuery(
-  //     'userdata',
-  //     getUser
-  // );
-  //if(Authenticated userId != props.location.state.userId)
-  //return version with no edit bio and <p> for bio
-  // const { userName } = props.location.state;
   const userName = "testdata";
   const [bio, setBio] = useState(dummyData.bio);
   const [bioReadOnly, setReadOnly] = useState(true);

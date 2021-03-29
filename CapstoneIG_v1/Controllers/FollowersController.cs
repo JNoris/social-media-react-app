@@ -20,13 +20,29 @@ namespace CapstoneIG_v1.Controllers
             _db = db;
             _userManager = userManager;
         }
-
         //People you are following
         [HttpGet]
-        [Route("GetFollowing/{userId}")]
-        public async Task<JsonResult> GetFollowing(string userId)
+        [Route("GetFollowers/{username}")]
+        public async Task<JsonResult> GetFollowers(string username)
         {
-            var followers = await _db.Followers.Where(x => x.UserId.Id == userId).Select(x => new
+            var followers = await _db.Followers.Where(x => x.UserId.UserName == username).Select(x => new
+            {
+                Id = x.Id,
+                UserId = x.FollowingId.Id,
+                UserName = x.FollowingId.UserName,
+                FirstName = x.FollowingId.FirstName,
+                LastName = x.FollowingId.LastName,
+                ProfilePhotoPath = x.FollowingId.ProfileImageName
+            }).ToListAsync();
+
+            return Json(followers);
+        }
+        //People who are following you
+        [HttpGet]
+        [Route("GetFollowedBy/{username}")]
+        public async Task<JsonResult> GetFollowedBy(string username)
+        {
+            var followers = await _db.Followers.Where(x => x.FollowingId.UserName == username).Select(x => new
             {
                 Id = x.Id,
                 UserId = x.FollowingId.Id,
@@ -39,32 +55,14 @@ namespace CapstoneIG_v1.Controllers
             return Json(followers);
         }
 
-        //People who are following you
-        [HttpGet]
-        [Route("GetFollowers/{userId}")]
-        public async Task<JsonResult> GetFollowers(string userId)
-        {
-            var followers = await _db.Followers.Where(x => x.FollowingId.Id == userId).Select(x => new
-            {
-                Id = x.Id,
-                UserId = x.UserId.Id,
-                UserName = x.UserId.UserName,
-                FirstName = x.UserId.FirstName,
-                LastName = x.UserId.LastName,
-                ProfilePhotoPath = x.UserId.ProfileImageName
-            }).ToListAsync();
-
-            return Json(followers);
-        }
-
         [HttpPost]
-        [Route("AddNewFollow/{targetId}")]
-        public async Task<IActionResult> AddNewFollow(string targetId)
+        [Route("AddNewFollow/{username}")]
+        public async Task<IActionResult> AddNewFollow(string username)
         {
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
             //Check if targetId exists
-            ApplicationUser targetExists = _db.Users.Where(p => p.Id == targetId).FirstOrDefault();
+            ApplicationUser targetExists = _db.Users.Where(p => p.UserName == username).FirstOrDefault();
 
             //Check if targetID is already a follower
             FollowersModel followExists = _db.Followers.Where(p => p.UserId == user).Where(q => q.FollowingId == targetExists).FirstOrDefault();
@@ -96,12 +94,12 @@ namespace CapstoneIG_v1.Controllers
         }
 
         [HttpPost]
-        [Route("RemoveFollow/{targetId}")]
-        public async Task<IActionResult> RemoveFollow(string targetId)
+        [Route("RemoveFollow/{username}")]
+        public async Task<IActionResult> RemoveFollow(string username)
         {
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
-            ApplicationUser target = _db.Users.Where(p => p.Id == targetId).FirstOrDefault();
+            ApplicationUser target = _db.Users.Where(p => p.UserName == username).FirstOrDefault();
 
             //Check if target exists
             FollowersModel follow = _db.Followers.Where(p => p.UserId == user).Where(q => q.FollowingId == target).FirstOrDefault();

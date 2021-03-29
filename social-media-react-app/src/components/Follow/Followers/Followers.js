@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios';
 import Container from '@material-ui/core/Container';
 //import {useQuery} from 'react-query';
 import {dummyFollow} from '../../temp/dummyData';
@@ -6,6 +7,8 @@ import FollowersListItem from './FollowersListItem';
 import {Wrapper} from '../Follow.styles';
 
 const Followers = (props) => {
+
+    
     //API call using props.id or something
     // const getFollowers = async() => await(fetch('',{
     //     method:"GET",
