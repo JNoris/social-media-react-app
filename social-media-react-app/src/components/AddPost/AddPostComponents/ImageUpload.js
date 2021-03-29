@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Wrapper, ImageFrame, PostFrame, CaptionFrame, Flex } from './ImageUpload.styles';
+import { Wrapper, ImageFrame, PostFrame, CaptionFrame, Flex, UploadButton } from './ImageUpload.styles';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 
@@ -32,6 +32,7 @@ const ImageUpload = () => {
                     <ImageFrame>
                         <img src={imgData} alt="" className="center" />
                     </ImageFrame>
+                    <UploadButton>
                     <Button variant="contained" onClick={handleClick}>
                         Upload
                     <input
@@ -41,6 +42,7 @@ const ImageUpload = () => {
                             style={{ display: 'none' }}
                         />
                     </Button>
+                    </UploadButton>
                 </PostFrame>
                 <CaptionFrame>
                     <Input

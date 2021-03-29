@@ -57,7 +57,11 @@ const Follow = (props) => {
     return (
         <FollowWrapper>
             <AppBar position="static" className="tabs">
-                <Tabs value={value} variant="fullWidth" onChange={handleChange} aria-label="follows">
+                <Tabs value={value} variant="fullWidth" onChange={handleChange} aria-label="follows"
+                TabIndicatorProps={{
+                    style: {
+                      backgroundColor: "#fcac56" }}}
+                >
                     <Tab label="Followers" {...tabProps(0)} />
                     <Tab label="Following" {...tabProps(1)} />
                 </Tabs>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ListWrapper = styled.div`
     .selected {
-        color:red;
+        color:#fcac56;
         font-weight:bold;
     }
     ul{
