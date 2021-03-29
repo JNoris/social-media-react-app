@@ -9,6 +9,7 @@ import {
   BioML,
   GridWrapper,
   FlexEven,
+  LinkWrapper
 } from "./Profile.styles";
 import Grid from "@material-ui/core/Grid";
 import UserInfo from "../SideNav/SideNavProfile/SideNavProfileComponents/UserInfo";
@@ -82,6 +83,7 @@ const Profile = (props) => {
       <InfoCol>
         <SearchBar />
         <h1>{dummyData.userId}</h1>
+        <LinkWrapper>
         <Grid container justify="center" spacing={1}>
           <Grid item xs={4}>
             <UserInfo name="Posts" number={dummyData.posts} />
@@ -115,6 +117,7 @@ const Profile = (props) => {
             </Link>
           </Grid>
         </Grid>
+        </LinkWrapper>
         <Bio>
           <BioML
             multiline
@@ -157,7 +160,7 @@ const Profile = (props) => {
         <GridWrapper>
           <Grid container spacing={1} justify="flex-start" alignItems="center">
             {dummyImg?.map((item) => (
-              <Grid item key={item.id} xs={12} md={4} lg={3}>
+              <Grid item key={item.id} xs={12} md={6} lg={4}>
                 <ProfileGridItem
                   link={item.id}
                   src={item.photo}

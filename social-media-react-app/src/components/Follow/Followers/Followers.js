@@ -3,6 +3,8 @@ import Container from '@material-ui/core/Container';
 //import {useQuery} from 'react-query';
 import {dummyFollow} from '../../temp/dummyData';
 import FollowersListItem from './FollowersListItem';
+import {Wrapper} from '../Follow.styles';
+
 const Followers = (props) => {
     //API call using props.id or something
     // const getFollowers = async() => await(fetch('',{
@@ -15,14 +17,16 @@ const Followers = (props) => {
     // );
     return (
         <Container>
-            <p>{dummyFollow.length} Followers</p>
-            {dummyFollow?.map(item => (
-                <FollowersListItem
-                key={item.id}
-                src={item.src}
-                username={item.username}
-                />
-            ))}
+            <Wrapper>
+                <p class="subheader">{dummyFollow.length} Followers</p>
+                {dummyFollow?.map(item => (
+                    <FollowersListItem
+                        key={item.id}
+                        src={item.src}
+                        username={item.username}
+                    />
+                ))}
+            </Wrapper>
         </Container>
     );
 }
