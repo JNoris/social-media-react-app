@@ -42,6 +42,7 @@ function App() {
         <Route exact path="/signin" component={SignInSide} />
         <Route exact path="/register" component={Register} />
         <Route path="/login" component={Login} />
+        
         <Flex>
           <SideNav />
           <MainWrapper>
