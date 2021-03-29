@@ -17,7 +17,8 @@ import ProfileGridItem from "./ProfileGridItem";
 import { dummyData, dummyImg } from "../temp/dummyData";
 import SearchBar from "../TopNav/TopNavComponents/SearchBar";
 
-
+// Next line is for JWT validation
+// import AuthService from "../services/auth.service";
 
 /**
  * This page gets current User from Local Storage by calling AuthService.getCurrentUser() method
