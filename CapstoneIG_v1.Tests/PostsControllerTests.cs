@@ -21,12 +21,6 @@ namespace CapstoneIG_v1.Tests
 {
     public class PostsControllerTests
     {
-        //[Fact]
-        //public async Task AddPostAsync()
-        //{
-
-        //}
-
         [Fact]
         public async Task DeletePost()
         {
@@ -252,7 +246,7 @@ namespace CapstoneIG_v1.Tests
 
                 context.SaveChanges();
 
-                var res = controller.GetUserPosts("321");
+                var res = controller.GetUserPosts("rainman");
 
                 List<PostResponse> records = JsonConvert.DeserializeObject<List<PostResponse>>(JsonConvert.SerializeObject(res.Value));
 

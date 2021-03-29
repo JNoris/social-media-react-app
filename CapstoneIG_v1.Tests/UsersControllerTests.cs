@@ -17,12 +17,6 @@ namespace CapstoneIG_v1.Tests
 {
     public class UsersControllerTests
     {
-        //[Fact]
-        //public async Task EditUserProfilePhoto()
-        //{
-
-        //}
-
         [Fact]
         public async Task EditCurrentUser()
         {
@@ -215,64 +209,13 @@ namespace CapstoneIG_v1.Tests
 
                 context.SaveChanges();
 
-                var res = controller.GetUserDetails("012");
+                var res = controller.GetUserDetails("fireman");
 
                 UserResponse records = JsonConvert.DeserializeObject<UserResponse>(JsonConvert.SerializeObject(res.Value));
 
                 Assert.Equal(1, records.NumberOfFollowing);
             }
         }
-
-        //[Fact]
-        //public async Task DeleteUser()
-        //{
-        //    var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
-
-        //    var context = new ApplicationDbContext(options);
-
-        //    var mockStore = Mock.Of<IUserStore<ApplicationUser>>();
-        //    var mockUserManager = new Mock<UserManager<ApplicationUser>>(mockStore, null, null, null, null, null, null, null, null);
-        //    var appUser = new ApplicationUser
-        //    {
-        //        Id = "123",
-        //        UserName = "snowman",
-        //        NormalizedUserName = "snowman",
-        //        ProfileImageName = "fakeprofileurl"
-        //    };
-
-        //    mockUserManager
-        //        .Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
-        //        .ReturnsAsync(IdentityResult.Success);
-
-        //    await mockUserManager.Object.CreateAsync(appUser);
-
-        //    mockUserManager
-        //        .Setup(x => x.FindByNameAsync(appUser.UserName))
-        //        .Returns(Task.FromResult(appUser));
-
-        //    mockUserManager
-        //        .Setup(x => x.DeleteAsync(It.IsAny<ApplicationUser>()))
-        //        .ReturnsAsync(IdentityResult.Success);
-
-        //    var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] {
-        //                                new Claim(ClaimTypes.NameIdentifier, "snowman"),
-        //                                new Claim(ClaimTypes.Name, "snowman")
-        //                           }, "TestAuthentication"));
-
-        //    var mockEnv = Mock.Of<IWebHostEnvironment>();
-
-        //    var controller = new UsersController(context, mockUserManager.Object, mockEnv)
-        //    {
-        //        ControllerContext = new ControllerContext()
-        //    };
-
-        //    controller.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
-
-        //    await controller.DeleteCurrentUser();
-
-        //    Assert.Null(mockUserManager.Object);
-
-        //}
     }
 }
 
