@@ -23,6 +23,10 @@ export const FormWrapper = styled.div`
     padding: 0;
 }
 
+.MuiFilledInput-underline:after {
+    border-bottom: 2px solid #fcac56;
+}
+
 `;
 
 export const ButtonWrapper = styled.div`
