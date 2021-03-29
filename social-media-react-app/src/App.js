@@ -2,7 +2,6 @@ import { Route,Switch } from "react-router";
 import React from "react";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
-import SignUp from "./components/Login/SignUp";
 import Settings2 from "./components/Settings/Settings2";
 import SignInSide from "./components/Login/SignInSide";
 import SideNav from "./components/SideNav/SideNav";
@@ -11,8 +10,8 @@ import Chat from "./components/Chat/Chat";
 import { Flex, MainWrapper } from "./App.styles";
 import Follow from "./components/Follow/Follow";
 import AddPost from "./components/AddPost/AddPost";
-import Register from "./Pages/Register";
-import Login from "./Pages/Login";
+import Register from "./components/Login/Register";
+import Login from "./components/Login/Login";
 // import TopNav3 from "./components/Topnav/TopNav3";
 
 /**
@@ -40,7 +39,6 @@ function App() {
   return (
     <>
       <Switch>
-        <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignInSide} />
         <Route exact path="/register" component={Register} />
         <Route path="/login" component={Login} />
