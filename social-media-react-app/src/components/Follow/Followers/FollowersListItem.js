@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import { Flex } from '../Follow.styles';
@@ -6,7 +7,15 @@ import { Link } from 'react-router-dom';
 
 const FollowersListItem = (props) => {
     var link = '/profile/' + props.username;
-    return (
+    const [deleted, setDeleted] = useState(false);
+    function deleteFollow(user) {
+        if (user !== "") {
+            axios.post("https://localhost:5001/SelfRemoveFollow/" + user)
+                .then(res => setDeleted(true))
+                .catch(err => console.log(err));
+        }
+    }
+    return !deleted ? (
         <Flex>
             <Avatar src={props.src} />
             <div className="center">
@@ -16,9 +25,9 @@ const FollowersListItem = (props) => {
                 </Link>
             </div>
             {props.isSelf ?
-                <Button variant="outlined">Remove</Button>
+                <Button variant="outlined" onClick={() => deleteFollow(props.username)}>Remove</Button>
                 : <div />}
         </Flex>
-    );
+    ) : null;
 }
 export default FollowersListItem
