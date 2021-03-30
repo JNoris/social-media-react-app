@@ -44,6 +44,7 @@ namespace CapstoneIG_v1.Controllers
                 LikeReponse singleLike = new LikeReponse()
                 {
                     Id = person.Id,
+                    ProfilePhotoPath = person.LikeBy.ProfileImageName,
                     UserId = person.LikeBy.Id,
                     UserName = person.LikeBy.UserName,
                     FirstName = person.LikeBy.FirstName,
