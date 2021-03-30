@@ -19,6 +19,7 @@ const Profile = () => {
   const [noUser, setNoUser] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [posts, setPosts] = useState("");
+  const [isFollowing, setIsFollowing] = useState(false);
 
   function checkIfPosts(data) {
     if (Array.isArray(data)) {
@@ -88,6 +89,21 @@ const Profile = () => {
     setReadOnly(false);
     showSaveBtn(true);
   };
+  function addFollow(user) {
+    if (user !== "") {
+      axios.post("https://localhost:5001/AddNewFollow/" + user)
+        .then(res => setIsFollowing(true))
+        .catch(err => setError(true) && console.log(err));
+    }
+  }
+
+  function removeFollow(user) {
+    if (user !== "") {
+      axios.post("https://localhost:5001/RemoveFollow/" + user)
+        .then(res => setIsFollowing(false))
+        .catch(err => setError(true) && console.log(err));
+    }
+  }
   const handleBioSave = () => {
     //Api call to put/patch new bio
     axios.put("https://localhost:5001/edituser",
@@ -145,7 +161,7 @@ const Profile = () => {
             </Grid>
 
             <Grid item xs={4}>
-              {isSelf? (<Link
+              {isSelf ? (<Link
                 to={{
                   pathname: "follow",
                   state: {
@@ -156,19 +172,19 @@ const Profile = () => {
               >
                 <UserInfo name="Following" number={userDetails.numberOfFollowing} />
               </Link>)
-              :
-              (<Link
-                to={{
-                  pathname: "/follow/"+userDetails.userName,
-                  state: {
-                    followIndex: 1,
-                    userName: userDetails.userName,
-                  },
-                }}
-              >
-                <UserInfo name="Following" number={userDetails.numberOfFollowing} />
-              </Link>
-              )}
+                :
+                (<Link
+                  to={{
+                    pathname: "/follow/" + userDetails.userName,
+                    state: {
+                      followIndex: 1,
+                      userName: userDetails.userName,
+                    },
+                  }}
+                >
+                  <UserInfo name="Following" number={userDetails.numberOfFollowing} />
+                </Link>
+                )}
 
             </Grid>
           </Grid>
@@ -202,9 +218,16 @@ const Profile = () => {
             SAVE
           </Button>
         ) : null}
-        {!isSelf ? (
+        {!isSelf && !isFollowing ? (
           <FlexEven>
-            <Button variant="contained">Follow</Button>
+            <Button variant="contained" onClick={() => addFollow(userDetails.userName)}>Follow</Button>
+            <Button variant="contained">Message</Button>
+            <Button variant="contained">Email</Button>
+          </FlexEven>
+        ) : null}
+        {!isSelf && isFollowing ? (
+          <FlexEven>
+            <Button variant="contained"onClick={() => removeFollow(userDetails.userName)}>Unfollow</Button>
             <Button variant="contained">Message</Button>
             <Button variant="contained">Email</Button>
           </FlexEven>

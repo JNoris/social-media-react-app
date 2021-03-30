@@ -16,7 +16,7 @@ const FollowingListItem = (props) => {
 
     function addFollow(user) {
         if (user !== "") {
-            axios.get("https://localhost:5001/AddNewFollow/" + user)
+            axios.post("https://localhost:5001/AddNewFollow/" + user)
                 .then(res => setIsFollowing(true))
                 .catch(err => setError(true) && console.log(err));
         }
@@ -24,7 +24,7 @@ const FollowingListItem = (props) => {
 
     function removeFollow(user) {
         if (user !== "") {
-            axios.get("https://localhost:5001/RemoveFollow/" + user)
+            axios.post("https://localhost:5001/RemoveFollow/" + user)
                 .then(res => setIsFollowing(false))
                 .catch(err => setError(true) && console.log(err));
         }
@@ -47,10 +47,10 @@ const FollowingListItem = (props) => {
             {props.isSelf ?
                 isFollowing ?
                     <Button variant="outlined"
-                        onClick={() => addFollow()}
+                        onClick={() => removeFollow(props.username)}
                     >Unfollow</Button>
                     : <Button variant="outlined"
-                        onClick={() => removeFollow()}
+                        onClick={() => addFollow(props.username)}
                     >Follow</Button> : <div />
             }
         </Flex>
