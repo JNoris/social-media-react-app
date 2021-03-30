@@ -106,7 +106,7 @@ const Profile = () => {
   return (
     <ProfileWrapper>
       <InfoCol>
-        <SearchBar />
+        {/* <SearchBar /> */}
         <h1>@{userDetails.userName}</h1>
         <ImgFrame>
           <img src={userDetails.profilePhotoPath} alt={userDetails.userName} />

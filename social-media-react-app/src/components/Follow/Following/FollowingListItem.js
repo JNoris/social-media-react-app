@@ -14,31 +14,25 @@ const FollowingListItem = (props) => {
     const [isFollowing, setIsFollowing] = useState(true);
     const [error, setError] = useState(false);
 
-    const handleFollow = () => {
-        //Api Call
-        function addFollow(user) {
-            if (user !== "") {
-                axios.get("https://localhost:5001/AddNewFollow/" + user)
-                    .then(res => setIsFollowing(true))
-                    .catch(err => setError(true) && console.log(err));
-            }
+    function addFollow(user) {
+        if (user !== "") {
+            axios.get("https://localhost:5001/AddNewFollow/" + user)
+                .then(res => setIsFollowing(true))
+                .catch(err => setError(true) && console.log(err));
         }
     }
-    const handleUnFollow = () => {
-        //api call
-        function removeFollow(user) {
-            if (user !== "") {
-                axios.get("https://localhost:5001/RemoveFollow/" + user)
-                    .then(res => setIsFollowing(false))
-                    .catch(err => setError(true) && console.log(err));
-            }
-        }
 
+    function removeFollow(user) {
+        if (user !== "") {
+            axios.get("https://localhost:5001/RemoveFollow/" + user)
+                .then(res => setIsFollowing(false))
+                .catch(err => setError(true) && console.log(err));
+        }
     }
-    var link = '/profile/'+ props.username;
-    if(error)
-    {
-        
+
+    var link = '/profile/' + props.username;
+    if (error) {
+
     }
     return (
         <Flex>
@@ -53,10 +47,10 @@ const FollowingListItem = (props) => {
             {props.isSelf ?
                 isFollowing ?
                     <Button variant="outlined"
-                        onClick={() => handleUnFollow()}
+                        onClick={() => addFollow()}
                     >Unfollow</Button>
                     : <Button variant="outlined"
-                        onClick={() => handleFollow()}
+                        onClick={() => removeFollow()}
                     >Follow</Button> : <div />
             }
         </Flex>
