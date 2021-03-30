@@ -22,8 +22,8 @@ namespace CapstoneIG_v1.Controllers
         }
         //People you are following
         [HttpGet]
-        [Route("GetFollowers/{username}")]
-        public async Task<JsonResult> GetFollowers(string username)
+        [Route("GetFollowing/{username}")]
+        public async Task<JsonResult> GetFollowing(string username)
         {
             var followers = await _db.Followers.Where(x => x.UserId.UserName == username).Select(x => new
             {
@@ -39,17 +39,17 @@ namespace CapstoneIG_v1.Controllers
         }
         //People who are following you
         [HttpGet]
-        [Route("GetFollowedBy/{username}")]
-        public async Task<JsonResult> GetFollowedBy(string username)
+        [Route("GetFollowers/{username}")]
+        public async Task<JsonResult> GetFollowers(string username)
         {
             var followers = await _db.Followers.Where(x => x.FollowingId.UserName == username).Select(x => new
             {
                 Id = x.Id,
-                UserId = x.FollowingId.Id,
-                UserName = x.FollowingId.UserName,
-                FirstName = x.FollowingId.FirstName,
-                LastName = x.FollowingId.LastName,
-                ProfilePhotoPath = x.FollowingId.ProfileImageName
+                UserId = x.UserId.Id,
+                UserName = x.UserId.UserName,
+                FirstName = x.UserId.FirstName,
+                LastName = x.UserId.LastName,
+                ProfilePhotoPath = x.UserId.ProfileImageName
             }).ToListAsync();
 
             return Json(followers);
