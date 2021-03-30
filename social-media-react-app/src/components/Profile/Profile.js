@@ -77,7 +77,7 @@ const Profile = () => {
     setBio(userDetails.bio)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url.id]);
+  }, [url.id,userDetails.bio]);
   useEffect(() => {
     setIsFollowing(userDetails.isFollowed)
   },[userDetails])
