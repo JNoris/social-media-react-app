@@ -26,10 +26,9 @@ const PostCommentItem= (props) => {
     return(
         <CommentWrapper>
             <ListItem key={comment.Id} className="listItem">
-                {/* TODO readd once API call is updated */}
-                  {/* <ListItemAvatar>
+                  <ListItemAvatar>
                       <Avatar aria-label="user" src={comment.ProfilePhotoPath}/>
-                  </ListItemAvatar> */}
+                  </ListItemAvatar>
                 <ListItemText
                     primary={comment.UserName}
                     secondary={comment.Text}

@@ -9,6 +9,7 @@ import PostImage from './PostCardContent/PostImage'
 const PostCard = (props) => {
     
     const post = props.post;
+    console.log(post);
 
     return (
         <CardWrapper>

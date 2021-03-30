@@ -33,7 +33,7 @@ const PostCardModalView = (props) => {
 
     var content = viewComments ? (
         <div>
-           <PostCardAddComment user = {props.UserName}/>
+           <PostCardAddComment postId={post.Id}/>
             <PostCommentListView />
         </div>
     ) : (
