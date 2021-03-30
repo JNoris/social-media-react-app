@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Login from "./Login";
+import { useForm, FieldErrors } from "react-hook-form";
+import Notification from "./Notification";
 import {
   Button,
   TextField,
@@ -15,6 +17,10 @@ import {
   Typography,
   Container,
   makeStyles,
+  Snackbar,
+  IconButton,
+  CloseIcon,
+  MuiAlert,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
@@ -60,6 +66,13 @@ const Register = () => {
     setLastname(event.target.value);
   };
 
+  // Error handling messages
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
   // Valah-day-shiun
   function inputValidation() {
     let res = false;
@@ -97,12 +110,20 @@ const Register = () => {
         .then((response) => {
           if (response.status === 200) {
             this.props.history.push("/login");
+            setNotify({
+              isOpen: true,
+              message: "Logged in successfully",
+              type: "success",
+            });
           }
         })
         .catch((e) => window.alert(e));
     } else {
-      // TODO: potentially remove
-      window.alert("Error");
+      setNotify({
+        isOpen: true,
+        message: "Login unsuccessful",
+        type: "error",
+      });
     }
   };
 
@@ -205,6 +226,7 @@ const Register = () => {
               </Link>
             </Grid>
           </Grid>
+          <Notification notify={notify} setNotify={setNotify} />
         </form>
       </div>
     </Container>

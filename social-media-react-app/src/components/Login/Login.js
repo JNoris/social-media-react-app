@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"; // useState for Hooks
 import axios from "axios";
 import styled from "styled-components";
 import Register from "./Register";
+import Notification from "./Notification";
 import {
   Button,
   TextField,
@@ -16,6 +17,10 @@ import {
   Container,
   makeStyles,
   Paper,
+  Snackbar,
+  IconButton,
+  CloseIcon,
+  MuiAlert,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
@@ -53,11 +58,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
+  // Styling
   const classes = useStyles();
 
+  // Error handling messages
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
+  // State for username & password
   const [userName, setUserName] = useState("");
   const [passWord, setPassWord] = useState("");
 
+  // Handle username & password
   const handleUsername = (event) => {
     setUserName(event.target.value);
   };
@@ -91,12 +106,20 @@ const Login = () => {
         .then((response) => {
           if (response.status === 200) {
             window.localStorage.setItem("token", response.data.token);
+            setNotify({
+              isOpen: true,
+              message: "Logged in successfully",
+              type: "success",
+            });
           }
         })
         .catch((e) => window.alert(e));
     } else {
-      // TODO: potentially remove
-      window.alert("Error");
+      setNotify({
+        isOpen: true,
+        message: "Login unsuccessful",
+        type: "error",
+      });
     }
   };
 
@@ -180,6 +203,7 @@ const Login = () => {
                 </Link>
               </Grid>
             </Grid>
+            <Notification notify={notify} setNotify={setNotify} />
           </form>
         </div>
       </Grid>
