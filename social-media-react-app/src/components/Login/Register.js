@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import Login from "./Login";
 import {
   Button,
   TextField,
@@ -199,8 +200,8 @@ const Register = () => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
+              <Link href="#" to="/login" variant="body2">
+                {"Already have an account? Sign in"}
               </Link>
             </Grid>
           </Grid>

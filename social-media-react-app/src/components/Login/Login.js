@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"; // useState for Hooks
 import axios from "axios";
 import styled from "styled-components";
+import Register from "./Register";
 import {
   Button,
   TextField,
@@ -174,7 +175,7 @@ const Login = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="#" to="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
