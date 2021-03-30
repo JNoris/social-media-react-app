@@ -10,9 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using CapstoneIG_v1.Controllers;
 using Microsoft.AspNetCore.Hosting;
@@ -225,11 +223,16 @@ namespace CapstoneIG_v1.Tests
                 .Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
                 .ReturnsAsync(IdentityResult.Success);
 
-            await mockUserManager.Object.CreateAsync(appUser);
+            await mockUserManager.Object.CreateAsync(appUser2);
 
             mockUserManager
-                .Setup(x => x.FindByNameAsync(appUser.UserName))
-                .Returns(Task.FromResult(appUser));
+                .Setup(x => x.FindByNameAsync(appUser2.UserName))
+                .Returns(Task.FromResult(appUser2));
+
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] {
+                                        new Claim(ClaimTypes.NameIdentifier, "rainman"),
+                                        new Claim(ClaimTypes.Name, "rainman")
+                                   }, "TestAuthentication"));
 
             var mockEnv = Mock.Of<IWebHostEnvironment>();
 
@@ -237,6 +240,8 @@ namespace CapstoneIG_v1.Tests
             {
                 ControllerContext = new ControllerContext()
             };
+
+            controller.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
 
             using (context)
             {
@@ -246,7 +251,7 @@ namespace CapstoneIG_v1.Tests
 
                 context.SaveChanges();
 
-                var res = controller.GetUserPosts("rainman");
+                var res = await controller.GetUserPostsAsync("rainman");
 
                 List<PostResponse> records = JsonConvert.DeserializeObject<List<PostResponse>>(JsonConvert.SerializeObject(res.Value));
 

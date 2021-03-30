@@ -138,11 +138,15 @@ namespace CapstoneIG_v1.Controllers
 
         [HttpGet]
         [Route("getuserdetails/{username}")]
-        public JsonResult GetUserDetails(string username)
+        public async Task<JsonResult> GetUserDetailsAsync(string username)
         {
             dynamic res;
 
+            ApplicationUser curUser = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+
             ApplicationUser user = _db.Users.Where(u => u.UserName == username).FirstOrDefault();
+
+            bool checkFollow = _db.Followers.Any(c => c.FollowingId == user && c.UserId == curUser);
 
             if (user != null)
             {
@@ -155,7 +159,8 @@ namespace CapstoneIG_v1.Controllers
                     Bio = user.Bio,
                     NumberOfPosts = _db.Posts.Where(p => p.User == user).Count(),
                     NumberOfFollowers = _db.Followers.Where(f => f.FollowingId.UserName == username).Count(),
-                    NumberOfFollowing = _db.Followers.Where(f => f.UserId.UserName == username).Count()
+                    NumberOfFollowing = _db.Followers.Where(f => f.UserId.UserName == username).Count(),
+                    IsFollowed = checkFollow
                 };
 
                 res = Json(newUResponse);
