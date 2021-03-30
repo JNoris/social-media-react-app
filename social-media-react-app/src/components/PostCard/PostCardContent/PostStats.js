@@ -7,6 +7,8 @@ import PostViewModal from "../../PostViewModal/PostViewModal"
 
 
 const PostStats = (props) => {
+
+    console.log("stats", props)
     // update with connection
     const [like, setLike] = useState(props.isLiked);
     const [heartColor, setHeartColor] = useState(like ? {color: "#e2336b"} : {color: "#fff"});
@@ -17,23 +19,23 @@ const PostStats = (props) => {
 
     // update with get state of like + get updated like count
     useEffect(() => {
-            if(like) {
-                setHeartColor({color: "#e2336b"})
+            if(like == undefined) {
+                setLike(false)
             }
         }, 
     [like])
 
-    var showCommentCount = !props.comments || isModalView ? null : 
+    var showCommentCount = !props.numberOfComments || isModalView ? null : 
         <ContentComponent>
             <ChatBubbleOutlineIcon
                 className="icon"
                 id="CommentIcon"
                 onClick={toggleModal}
             />
-            <p id="comments" onClick={toggleModal}>{props.comments}</p>
+            <p id="comments" onClick={toggleModal}>{props.numberOfComments}</p>
         </ContentComponent>
 
-    var showLikeCount = !props.likes || isModalView ? null :             
+    var showLikeCount = !props.numberOfLikes || isModalView ? null :             
         <ContentComponent>
             <FavoriteBorderIcon
                 className="icon"
@@ -41,7 +43,7 @@ const PostStats = (props) => {
                 onClick={handleLike}
                 style={heartColor}
             />
-             <p id="likes" onClick={toggleModalLikes}>{props.likes}</p> 
+             <p id="likes" onClick={toggleModalLikes}>{props.numberOfLikes}</p> 
         </ContentComponent>
 
     function handleLike() {

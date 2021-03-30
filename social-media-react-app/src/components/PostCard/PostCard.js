@@ -9,20 +9,19 @@ import PostImage from './PostCardContent/PostImage'
 const PostCard = (props) => {
     
     const post = props.post;
-    console.log(post);
 
     return (
         <CardWrapper>
             <Card>
                <PostImage 
-                    img = {post.photoPath}
+                    photoPath = {post.photoPath}
                     post={post}
                />
                <PostCardContent
-                    username = {post.userName}
-                    userProfilePhoto = {post.profilePhotoPath}
-                    likes = {post.numberOfLikes}
-                    comments = {post.numberOfComments}
+                    userName = {post.userName}
+                    profilePhotoPath = {post.profilePhotoPath}
+                    numberOfLikes = {post.numberOfLikes}
+                    numberOfComments = {post.numberOfComments}
                     post = {post}
                     isLiked = {post.isLiked}
                />

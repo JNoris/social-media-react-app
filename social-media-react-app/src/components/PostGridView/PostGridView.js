@@ -18,16 +18,16 @@ const PostGridView = () => {
         axios.get("https://localhost:5001/gethomepageposts")
         .then(res => setPosts(res.data))
         .catch(err=>console.log(err));
+
     },[])
 
     return (
         <GridWrapper>
             <Grid container justify="center" spacing={spacing} className="postGrid">
                 {posts?.map((post) => (
-                    <Grid key={post.Id} item>
+                    <Grid key={post.id} item>
                         <PostCard post={post} />
                     </Grid>
-                   
            ))}
         </Grid>
         </GridWrapper>
