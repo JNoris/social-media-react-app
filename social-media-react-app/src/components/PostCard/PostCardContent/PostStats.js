@@ -8,7 +8,7 @@ import PostViewModal from "../../PostViewModal/PostViewModal"
 
 const PostStats = (props) => {
     // update with connection
-    const [like, setLike] = useState(false);
+    const [like, setLike] = useState(props.isLiked);
     const [heartColor, setHeartColor] = useState(like ? {color: "#e2336b"} : {color: "#fff"});
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenLikes, setIsOpenLikes] = useState(false);

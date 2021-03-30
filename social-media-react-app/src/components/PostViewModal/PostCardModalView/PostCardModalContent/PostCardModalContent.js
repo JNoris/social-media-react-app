@@ -19,6 +19,7 @@ const PostCardModalContent = (props) => {
                         comments={props.comments}
                         post={props.post}
                         modalView={true}
+                        isLiked={props.isLiked}
                    />
                 </CardActions>
             </CardContent>
