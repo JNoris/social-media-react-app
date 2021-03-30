@@ -66,14 +66,14 @@ const Follow = (props) => {
 
     function getFollows(user) {
         if (user !== "") {
-            axios.get("https://localhost:5001/GetFollowedBy/" + user)
+            axios.get("https://localhost:5001/GetFollowers/" + user)
                 .then(res => setFollower(res.data))
                 .catch(err => setError(true) && console.log(err));
         }
     }
     function getFollowing(user) {
         if (user !== "") {
-            axios.get("https://localhost:5001/GetFollowers/" + user)
+            axios.get("https://localhost:5001/GetFollowing/" + user)
                 .then(res => setFollowing(res.data))
                 .catch(err => setError(true) && console.log(err));
         }

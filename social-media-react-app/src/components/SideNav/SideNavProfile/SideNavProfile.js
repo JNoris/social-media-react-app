@@ -14,11 +14,14 @@ const SideNavProfile = () => {
         "Content-Type":"application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`
     }
-
-    useEffect(()=>{
+    function getCurrentUserDetails()
+    {
         axios.get("https://localhost:5001/getcurrentuserdetails")
         .then(res => setUserId(res.data))
         .catch(err=>console.log(err))
+    }
+    useEffect(()=>{
+        getCurrentUserDetails()
     },[])
 
     const fullname = userId.firstName + " " + userId.lastName;
@@ -30,7 +33,7 @@ const SideNavProfile = () => {
                 userName={userId.userName}
                 src={userId.profilePhotoPath}
             />
-            <Grid container justify="center" spacing={1}>
+            {/* <Grid container justify="center" spacing={1}>
                 <Grid item xs={4}>
                     <Link to={{
                         pathname: "/profile",
@@ -72,7 +75,7 @@ const SideNavProfile = () => {
                         />
                     </Link>
                 </Grid>
-            </Grid>
+            </Grid> */}
         </SideNavProfileWrapper>
     );
 }

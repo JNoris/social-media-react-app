@@ -9,6 +9,7 @@ import LiveTvIcon from '@material-ui/icons/LiveTv';
 import ShowChartIcon from '@material-ui/icons/ShowChart';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {Link} from 'react-router-dom';
 
 const SideNavList = () => {
     function logOut() {
@@ -55,9 +56,11 @@ const SideNavList = () => {
                     description="Settings"
                 />
                 <Li onClick={() => logOut()}>
+                    <Link to='/'>
                     <div className="sidenav-link">
                         <ExitToAppIcon/> Logout
                     </div>
+                    </Link>
                 </Li>
             </ul>
         </ListWrapper>

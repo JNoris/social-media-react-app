@@ -44,20 +44,20 @@ namespace CapstoneIG_v1.Controllers
             return Ok(new Response { Status = "Success", Message = "Comment Added" });
         }
 
-        [HttpGet]
-        [Route("GetPostCommentsFull/{postId}")]
-        public async Task<JsonResult> GetPostCommentsFull(int postId)
-        {
-            var comments = await _db.Comments.Where(x => x.PostId == postId).Select(x => new
-            {
-                x.Id,
-                x.CommentText,
-                x.CommentDate,
-                x.PostId,
-                userId = x.CommentBy.Id
-            }).ToListAsync();
-            return Json(comments);
-        }
+        //[HttpGet]
+        //[Route("GetPostCommentsFull/{postId}")]
+        //public async Task<JsonResult> GetPostCommentsFull(int postId)
+        //{
+        //    var comments = await _db.Comments.Where(x => x.PostId == postId).Select(x => new
+        //    {
+        //        x.Id,
+        //        x.CommentText,
+        //        x.CommentDate,
+        //        x.PostId,
+        //        userId = x.CommentBy.Id
+        //    }).ToListAsync();
+        //    return Json(comments);
+        //}
 
         [HttpGet]
         [Route("GetPostComments/{postId}")]
@@ -66,6 +66,7 @@ namespace CapstoneIG_v1.Controllers
             var comments = await _db.Comments.Where(x => x.PostId == postId).Select(x => new
             {
                 Id = x.Id,
+                ProfilePhotoPath = x.CommentBy.ProfileImageName,
                 UserId = x.CommentBy.Id,
                 UserName = x.CommentBy.UserName,
                 FirstName = x.CommentBy.FirstName,
@@ -82,6 +83,7 @@ namespace CapstoneIG_v1.Controllers
                 CommentResponse singleComment = new CommentResponse()
                 {
                     Id = comment.Id,
+                    ProfilePhotoPath = comment.ProfilePhotoPath,
                     UserId = comment.UserId,
                     UserName = comment.UserName,
                     FirstName = comment.FirstName,
