@@ -113,6 +113,7 @@ const Login = () => {
             });
           }
         })
+        .then(() => window.location.reload())
         .catch((e) => window.alert(e));
     } else {
       setNotify({
@@ -135,7 +136,7 @@ const Login = () => {
     return () => {
       document.removeEventListener("keydown", listener);
     };
-  }, []);
+  });
 
   return (
     <Grid container component="main" className={classes.root}>

@@ -1,32 +1,54 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios';
+import React, { useState, useEffect } from 'react'
 import Container from '@material-ui/core/Container';
-//import {useQuery} from 'react-query';
-import {dummyFollow} from '../../temp/dummyData';
 import FollowersListItem from './FollowersListItem';
-import {Wrapper} from '../Follow.styles';
+import { Wrapper } from '../Follow.styles';
+import Empty from '../Empty';
 
 const Followers = (props) => {
+    const [data, setData] = useState([]);
+    const [noFollow, setNoFollow] = useState(false);
+    const [length, setLength] =useState(0);
+    useEffect(() => {
+        if(Array.isArray(props.data))
+        {setData(props.data)}
+    },[props.data])
 
-    
-    //API call using props.id or something
-    // const getFollowers = async() => await(fetch('',{
-    //     method:"GET",
-    //     headers:`Token ${token}`
-    // }))
-    // const {data,isLoading,error}=useQuery(
-    //     'followers',
-    //     getFollowers
-    // );
+    function checkIfEmpty() {
+        if (Array.isArray(data)) {
+            if (data.length > 0) {
+                setNoFollow(false);
+                setLength(data.length);
+            }
+            else {
+                console.log("no data");
+                setNoFollow(true);
+            }
+        }
+    }
+    useEffect(() => {
+        checkIfEmpty(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data])
+    if(noFollow)
+    {
+        return <Empty text="No Followers"/>
+    }
+    // if(error)
+    // {
+    //     return <div>Error</div>
+    // }
     return (
         <Container>
             <Wrapper>
-                <p class="subheader">{dummyFollow.length} Followers</p>
-                {dummyFollow?.map(item => (
+                <p className="subheader">{length} Followers</p>
+                {data?.map(item => (
                     <FollowersListItem
                         key={item.id}
-                        src={item.src}
-                        username={item.username}
+                        isSelf={props.isSelf}
+                        src={item.profilePhotoPath}
+                        fname={item.firstName}
+                        lname={item.lastName}
+                        username={item.userName}
                     />
                 ))}
             </Wrapper>

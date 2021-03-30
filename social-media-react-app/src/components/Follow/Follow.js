@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Followers from './Followers/Followers';
 import Following from './Following/Following';
-import { FollowWrapper, Sticky } from './Follow.styles';
+import { FollowWrapper, TabWrapper } from './Follow.styles';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -41,37 +43,126 @@ function tabProps(index) {
 }
 
 const Follow = (props) => {
-
-    const { followIndex } = props.location.state;
-    const { userName } = props.location.state;
+    var state = {
+        followIndex: 0,
+        userName: ""
+    };
+    if (props.location.state !== undefined) {
+        state = props.location.state;
+    }
+    const [isSelf, setIsSelf] = useState(false);
+    const [userDetails, setUserDetails] = useState("");
+    const [userName, setUserName] = useState("");
+    const [follower, setFollower] = useState([]);
+    const [following, setFollowing] = useState([]);
+    const [error, setError] = useState(false);
+    const [noUser, setNoUser] = useState(false);
     const [value, setValue] = useState(0);
+
+    axios.defaults.headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+
+    function getFollows(user) {
+        if (user !== "") {
+            axios.get("https://localhost:5001/GetFollowers/" + user)
+                .then(res => setFollower(res.data))
+                .catch(err => setError(true) && console.log(err));
+        }
+    }
+    function getFollowing(user) {
+        if (user !== "") {
+            axios.get("https://localhost:5001/GetFollowing/" + user)
+                .then(res => setFollowing(res.data))
+                .catch(err => setError(true) && console.log(err));
+        }
+    }
+    function getUserFollows(user) {
+        if (user !== undefined) {
+            getFollows(user);
+            getFollowing(user);
+        }
+    }
+    function getCurrentUserDetails() {
+        axios.get("https://localhost:5001/getcurrentuserdetails")
+            .then(res => setUserDetails(res.data))
+            .catch(err => setError(true) && console.log(err));
+    }
+    let url = useParams();
+    function checkParams(urlid) {
+        if (urlid !== undefined) {
+            console.log(url.id);
+            setUserName(url.id);
+            console.log("not current");
+        }
+        else {
+            if (state.userName !== "") {
+                console.log(state.userName);
+                getUserFollows(state.userName);
+            }
+            else {
+                getCurrentUserDetails();
+            }
+            setIsSelf(true);
+            console.log("Current user");
+        }
+    }
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        state.followIndex = newValue;
     };
     useEffect(() => {
-        setValue(followIndex);
-    }, [followIndex]);
+        checkParams(url.id)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [url.id]);
+    useEffect(() => {
+        setValue(state.followIndex);
+    }, [state.followIndex])
+    useEffect(() => {
+        getUserFollows(userName)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userName]);
 
-    console.log(followIndex);
-    console.log(userName);
+    useEffect(() => {
+        getUserFollows(userDetails.userName)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userDetails])
+
+    if (error) {
+        return (<div>Error</div>);
+    }
     return (
         <FollowWrapper>
             <AppBar position="static" className="tabs">
                 <Tabs value={value} variant="fullWidth" onChange={handleChange} aria-label="follows"
-                TabIndicatorProps={{
-                    style: {
-                      backgroundColor: "#fcac56" }}}
+                    TabIndicatorProps={{
+                        style: {
+                            backgroundColor: "#fcac56"
+                        }
+                    }}
                 >
                     <Tab label="Followers" {...tabProps(0)} />
                     <Tab label="Following" {...tabProps(1)} />
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
-                <Followers />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <Following />
-            </TabPanel>
+            <TabWrapper>
+                {!isSelf? (<h1>@{userName}</h1>): null}
+                <TabPanel value={value} index={0}>
+                    <Followers
+                        userName={userName}
+                        data={follower}
+                        isSelf={isSelf}
+                    />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <Following
+                        userName={userName}
+                        data={following}
+                        isSelf={isSelf}
+                    />
+                </TabPanel>
+            </TabWrapper>
         </FollowWrapper>
     );
 }

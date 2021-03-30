@@ -1,5 +1,5 @@
 import React from 'react'
-import {ListWrapper} from './SideNavList.styles';
+import {Li, ListWrapper} from './SideNavList.styles';
 import SideNavListItem from './SideNavListItem';
 import FireplaceIcon from '@material-ui/icons/Fireplace';
 import SearchIcon from '@material-ui/icons/Search';
@@ -9,8 +9,13 @@ import LiveTvIcon from '@material-ui/icons/LiveTv';
 import ShowChartIcon from '@material-ui/icons/ShowChart';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {Link} from 'react-router-dom';
 
 const SideNavList = () => {
+    function logOut() {
+        localStorage.removeItem("token");
+        window.location.reload();
+    }
     return (
         <ListWrapper>
             <ul>
@@ -50,11 +55,13 @@ const SideNavList = () => {
                     icon={<SettingsIcon/>}
                     description="Settings"
                 />
-                <SideNavListItem 
-                    route="/a"
-                    icon={<ExitToAppIcon/>}
-                    description="Logout"
-                />
+                <Li onClick={() => logOut()}>
+                    <Link to='/'>
+                    <div className="sidenav-link">
+                        <ExitToAppIcon/> Logout
+                    </div>
+                    </Link>
+                </Li>
             </ul>
         </ListWrapper>
     );
