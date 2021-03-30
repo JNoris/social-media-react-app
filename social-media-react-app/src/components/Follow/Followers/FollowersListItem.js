@@ -3,18 +3,9 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import { Flex } from '../Follow.styles';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 const FollowersListItem = (props) => {
     var link = '/profile/' + props.username;
-
-    function removeFollow(user) {
-        if (user !== "") {
-            axios.post("https://localhost:5001/SelfRemoveFollow/" + user)
-            .then(window.location.reload());
-        }
-    }
-
     return (
         <Flex>
             <Avatar src={props.src} />
@@ -25,7 +16,7 @@ const FollowersListItem = (props) => {
                 </Link>
             </div>
             {props.isSelf ?
-                <Button variant="outlined" onClick={() => removeFollow(props.username)}>Remove</Button>
+                <Button variant="outlined">Remove</Button>
                 : <div />}
         </Flex>
     );
