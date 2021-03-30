@@ -5,7 +5,6 @@ import {TitleWrapper} from './PostComment.styles'
 import PostCommentItem from './PostCommentItem'
 
 const PostCommentListView = (props) => {
-    const post = props.post;
     const [comments, setComments] = useState([]);
     
     axios.defaults.headers={
@@ -14,7 +13,7 @@ const PostCommentListView = (props) => {
     }
 
     useEffect(()=>{
-        axios.get("https://localhost:5001/GetPostComments/" + post.Id)
+        axios.get("https://localhost:5001/GetPostComments/" + props.postId)
         .then(res => setComments(res.data))
         .catch(err=>console.log(err))
      },[])
@@ -26,7 +25,7 @@ const PostCommentListView = (props) => {
         </TitleWrapper>
         <List>
             {comments?.map((comment) => (
-               <PostCommentItem comment={comment}/>
+               <PostCommentItem key={comment.id} comment={comment}/>
             ))}
         </List>
         </div>

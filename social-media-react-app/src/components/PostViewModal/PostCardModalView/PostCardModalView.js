@@ -9,29 +9,28 @@ import PostCommentListView from '../PostComment/PostCommentList';
 import PostLikeList from '../PostLikes/PostLikeList'
 
 const PostCardModalView = (props) => {
-
     const post = props.post;
     const viewComments = props.viewComments
  
     var postDataToShow = viewComments ? (
         <PostCardModalContent 
-            username={props.userName} 
-            userProfilePhoto={props.userProfilePhoto}
-            likes = {post.NumberOfLikes}
+            userName={post.userName} 
+            profilePhotoPath={post.profilePhotoPath}
+            numberOfLikes = {post.numberOfLikes}
             post={post}
                />
     ) : (
         <PostCardModalContent 
-            username={props.userName} 
-            userProfilePhoto={props.userProfilePhoto}
+            userName={post.userName} 
+            profilePhotoPath={post.profilePhotoPath}
             post={post}
-               />
+        />
     ) ;
 
     var content = viewComments ? (
         <div>
-           <PostCardAddComment postId={post.Id}/>
-            <PostCommentListView postId={post.Id} username={props.userName}  />
+           <PostCardAddComment postId={post.id}/>
+            <PostCommentListView postId={post.id} userName={post.userName}  />
         </div>
     ) : (
         <PostLikeList/>
@@ -41,12 +40,12 @@ const PostCardModalView = (props) => {
         <CardWrapper>
             <Card>
                <PostImage 
-                    img = {post.PhotoPath}
+                    photoPath = {post.photoPath}
                     modalView = {props.modalView}
                />
                 {postDataToShow}
                <CaptionWrapper>
-                <p>This will be where the caption goes...</p>
+                <p>{post.caption ? post.caption : null}</p>
                </CaptionWrapper>
                 {content}
             </Card>

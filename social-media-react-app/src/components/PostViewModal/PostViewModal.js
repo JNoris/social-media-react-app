@@ -6,7 +6,6 @@ import PostCardModalView from './PostCardModalView/PostCardModalView'
 import {ModalWrapper} from './PostViewModal.styles'
 
 const PostViewModal = (props) => {
-
     const post = props.post;
     const show = props.show;
     const viewComments = props.viewComments;

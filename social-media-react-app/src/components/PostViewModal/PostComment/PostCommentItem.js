@@ -10,7 +10,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'; 
 
 const PostCommentItem= (props) => {
-
     const comment = props.comment;
     const [currentUserName, setCurrentUserName] = useState("")
     const [showDelete, setShowDelete] = useState(false);
@@ -28,23 +27,26 @@ const PostCommentItem= (props) => {
 
     useEffect(()=>{
         getCurrentUserDetails()
-        checkForDelete();
     },[])
 
+    useEffect(() => {
+        checkForDelete();
+    })
+
     function checkForDelete() {
-        if(comment.UserName == currentUserName) {
+        if(comment.userName == currentUserName) {
             setShowDelete(true);
         }
     }
 
     function handleDelete() {
-        // if user's post || user's comment delete
+        // if  user's comment, then can delete
         axios.defaults.headers={
             "Content-Type":"application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
-        axios.post("https://localhost:5001/DeleteComment/" + comment.Id, {
-            commentID: comment.Id,
+        axios.post("https://localhost:5001/DeleteComment/" + comment.id, {
+            commentID: comment.id,
         })
         .then(console.log("delete success"))
         .catch(err => console.log(err))
@@ -53,24 +55,24 @@ const PostCommentItem= (props) => {
 
     var deleteHtml = showDelete ? (
         <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="delete">
+        <IconButton edge="end" aria-label="delete" onClick={handleDelete}>
             <CloseIcon
                 id="delete"
-                onClick={handleDelete}
             />
         </IconButton>
     </ListItemSecondaryAction>
     ) : null
 
+
     return(
         <CommentWrapper>
-            <ListItem key={comment.Id} className="listItem">
+            <ListItem key={comment.id} className="listItem">
                   <ListItemAvatar>
-                      <Avatar aria-label="user" src={comment.ProfilePhotoPath}/>
+                      <Avatar aria-label="user" src={comment.profilePhotoPath}/>
                   </ListItemAvatar>
                 <ListItemText
-                    primary={comment.UserName}
-                    secondary={comment.Text}
+                    primary={comment.userName}
+                    secondary={comment.text}
                 />      
                {deleteHtml}
             </ListItem>

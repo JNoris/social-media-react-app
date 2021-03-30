@@ -7,7 +7,7 @@ import PostViewModal from "../../PostViewModal/PostViewModal"
 
 
 const PostStats = (props) => {
-    console.log("stats", props)
+   //console.log("stats", props)
 
     const [like, setLike] = useState(props.isLiked);
     const [heartColor, setHeartColor] = useState(like ? {color: "#e2336b"} : {color: "#fff"});
@@ -93,13 +93,13 @@ const PostStats = (props) => {
         <PostViewModal 
             show={isOpen}
             onClose={toggleModal}
-            post = {props.post}
+            post = {post}
             viewComments = {true}
         />
         <PostViewModal 
             show={isOpenLikes}
             onClose={toggleModalLikes}
-            post = {props.post}
+            post = {post}
             viewComments = {false}
         />
         </div>
