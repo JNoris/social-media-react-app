@@ -186,6 +186,7 @@ const Register = () => {
               autoComplete="username"
               value={userName}
               onChange={handleUsername}
+              helperText="Must be between 3 to 16 characters, and may contain underscores and dashes"
             />
           </Grid>
           <Grid item xs={12}>
@@ -200,6 +201,7 @@ const Register = () => {
               autoComplete="current-password"
               value={passWord}
               onChange={handlePassword}
+              helperText="Must be between 6 to 20 characters, contain a number, and a special character"
             />
           </Grid>
         </Grid>
