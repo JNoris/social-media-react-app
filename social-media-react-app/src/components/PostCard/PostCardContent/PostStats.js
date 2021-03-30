@@ -7,19 +7,21 @@ import PostViewModal from "../../PostViewModal/PostViewModal"
 
 
 const PostStats = (props) => {
-
     console.log("stats", props)
-    // update with connection
+
     const [like, setLike] = useState(props.isLiked);
     const [heartColor, setHeartColor] = useState(like ? {color: "#e2336b"} : {color: "#fff"});
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenLikes, setIsOpenLikes] = useState(false);
     const isModalView = props.modalView? props.modalView : false;
     const post = props.post;
+    const [numOfLikes, setNumOfLikes] = useState(post.numberOfLikes)
 
     // update with get state of like + get updated like count
     useEffect(() => {
-            if(like == undefined) {
+            if(like) {
+                setHeartColor({color: "#e2336b"})
+            } else if(like == undefined) {
                 setLike(false)
             }
         }, 
@@ -43,7 +45,7 @@ const PostStats = (props) => {
                 onClick={handleLike}
                 style={heartColor}
             />
-             <p id="likes" onClick={toggleModalLikes}>{props.numberOfLikes}</p> 
+             <p id="likes" onClick={toggleModalLikes}>{numOfLikes}</p> 
         </ContentComponent>
 
     function handleLike() {
@@ -53,18 +55,22 @@ const PostStats = (props) => {
         }
         // Console log respons for now
         // Check for updates in like count
-        if(like) {
-            axios.get("https://localhost:5001/AddLike/" + post.Id)
+        if(!like) {
+            axios.post("https://localhost:5001/AddLike/" + post.id)
             .then(res => console.log(res.data))
             .catch(err=>console.log(err))
             setLike(true);
             setHeartColor({color: "#e2336b"});
+            var tempLikes = numOfLikes +1;
+            setNumOfLikes(tempLikes);
         } else {
-            axios.get("https://localhost:5001/RemoveLike/" + post.Id)
+            axios.post("https://localhost:5001/RemoveLike/" + post.id)
             .then(res => console.log(res.data))
             .catch(err=>console.log(err))
             setLike(false);
             setHeartColor({color: "#fff"});
+            var tempLikes = numOfLikes -1;
+            setNumOfLikes(tempLikes);
         }
     }
 
