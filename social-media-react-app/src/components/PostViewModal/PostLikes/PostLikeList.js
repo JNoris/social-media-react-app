@@ -28,7 +28,7 @@ const PostLikeList = (props) => {
             <h6>Likes</h6>
             </TitleWrapper>
         <List>
-            {tempLikes.map((like) => (
+            {likes?.map((like) => (
                 <LikeWrapper>
                   <ListItem key={like.Id}>
                       {/* TODO readd once API call is updated */}
