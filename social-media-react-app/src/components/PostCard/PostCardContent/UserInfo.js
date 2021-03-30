@@ -12,7 +12,7 @@ const UserInfo = (props) => {
                  pathname: "/profile",
                  state: {userName: props.username}
                  }}>
-                <Avatar aria-label="user" id="avatar">RU</Avatar>
+                <Avatar aria-label="user" id="avatar" src={props.userProfilePhoto} />
                     <p>{props.username}</p>
             </Link>
             </LinkWrapper>
