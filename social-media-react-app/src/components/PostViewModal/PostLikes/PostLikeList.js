@@ -31,10 +31,9 @@ const PostLikeList = (props) => {
             {likes?.map((like) => (
                 <LikeWrapper>
                   <ListItem key={like.Id}>
-                      {/* TODO readd once API call is updated */}
-                  {/* <ListItemAvatar>
+                  <ListItemAvatar>
                       <Avatar aria-label="user" src={like.ProfilePhotoPath}/>
-                  </ListItemAvatar> */}
+                  </ListItemAvatar>
                   <ListItemText
                       id="listItem"
                       secondary={like.UserName}
