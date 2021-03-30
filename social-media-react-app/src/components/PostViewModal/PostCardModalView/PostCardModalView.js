@@ -8,7 +8,7 @@ import PostCardAddComment from '../PostComment/PostCardAddComment';
 import PostCommentListView from '../PostComment/PostCommentList';
 import PostLikeList from '../PostLikes/PostLikeList'
 
-const PostCardModalView = (props) => {
+const PostCardModalView = (props) => { 
     const post = props.post;
     const viewComments = props.viewComments
  
@@ -33,7 +33,7 @@ const PostCardModalView = (props) => {
             <PostCommentListView postId={post.id} userName={post.userName}  />
         </div>
     ) : (
-        <PostLikeList/>
+        <PostLikeList postId={post.id} />
     )
 
     return (
