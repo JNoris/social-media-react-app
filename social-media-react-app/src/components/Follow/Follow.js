@@ -7,7 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Followers from './Followers/Followers';
 import Following from './Following/Following';
-import { FollowWrapper } from './Follow.styles';
+import { FollowWrapper, TabWrapper } from './Follow.styles';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -146,20 +146,23 @@ const Follow = (props) => {
                     <Tab label="Following" {...tabProps(1)} />
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
-                <Followers
-                    userName={userName}
-                    data={follower}
-                    isSelf={isSelf}
-                />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <Following
-                    userName={userName}
-                    data={following}
-                    isSelf={isSelf}
-                />
-            </TabPanel>
+            <TabWrapper>
+                {!isSelf? (<h1>@{userName}</h1>): null}
+                <TabPanel value={value} index={0}>
+                    <Followers
+                        userName={userName}
+                        data={follower}
+                        isSelf={isSelf}
+                    />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <Following
+                        userName={userName}
+                        data={following}
+                        isSelf={isSelf}
+                    />
+                </TabPanel>
+            </TabWrapper>
         </FollowWrapper>
     );
 }

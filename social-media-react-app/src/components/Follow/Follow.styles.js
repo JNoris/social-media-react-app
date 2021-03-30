@@ -22,6 +22,12 @@ export const FollowWrapper = styled.div`
     // }
 
 `;
+export const TabWrapper = styled.div`
+    padding:1rem 2rem;
+    h1{
+        color:white;
+    }
+`;
 
 export const Flex = styled.div`
     display:flex;
@@ -81,7 +87,10 @@ export const Wrapper = styled.div`
 `;
 
 export const EmptyWrapper = styled.div`
+    margin:auto;
+    text-align:center;
     h1{
+        line-height:50vh;
         color:white;
     }
 `;

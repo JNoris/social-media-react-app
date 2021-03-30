@@ -45,6 +45,9 @@ export const GridWrapper = styled.div`
 export const InfoCol = styled.div`
     width:30vw;
     padding:3vw 3vw 0 3vw;
+    h1{
+        font-size:clamp(1rem,3vw,2.5rem);
+    }
     p{
         font-size:1vw;
         font-weight:700;
