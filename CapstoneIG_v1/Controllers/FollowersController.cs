@@ -116,5 +116,28 @@ namespace CapstoneIG_v1.Controllers
 
             return Ok(new Response { Status = "Success", Message = "Follower Removed" });
         }
+        [HttpPost]
+        [Route("SelfRemoveFollow/{username}")]
+        public async Task<IActionResult> SelfRemoveFollow(string username)
+        {
+            ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+
+            ApplicationUser target = _db.Users.Where(p => p.UserName == username).FirstOrDefault();
+
+            //Check if target exists
+            FollowersModel follow = _db.Followers.Where(p => p.FollowingId == user).Where(q => q.UserId == target).FirstOrDefault();
+
+            if (follow != null)
+            {
+                _db.Followers.Remove(follow);
+                _db.SaveChanges();
+            }
+            else
+            {
+                return Ok(new Response { Status = "Failed", Message = "Unable to Find User" });
+            }
+
+            return Ok(new Response { Status = "Success", Message = "Follower Removed" });
+        }
     }
 }

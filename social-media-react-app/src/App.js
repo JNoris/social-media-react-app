@@ -25,11 +25,13 @@ function App() {
           <MainWrapper>
             <Route exact path="/" component={Home} />
             <Route exact path="/add" component={AddPost} />
-            <Route path="/profile/:id?" component={Profile} />
-            <Route path="/follow/:id?" component={Follow} />
+            <Route exact path="/profile/:id?" component={Profile} />
+            <Route exact path="/follow/:id?" component={Follow} />
             <Route exact path="/settings" component={Settings2} />
             <Route exact path="/chat" component={Chat} />
-            <Route render={() => <Redirect to="/" />} />
+            <Route exact path="/login">
+              <Redirect to="/"/>
+            </Route>
             {/* <Route exact path='/TEST' component={TEST}/> */}
           </MainWrapper>
         </Flex>
