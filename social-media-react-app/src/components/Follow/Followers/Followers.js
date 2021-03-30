@@ -7,6 +7,7 @@ import Empty from '../Empty';
 const Followers = (props) => {
     const [data, setData] = useState([]);
     const [noFollow, setNoFollow] = useState(false);
+    const [length, setLength] =useState(0);
     useEffect(() => {
         if(Array.isArray(props.data))
         {setData(props.data)}
@@ -16,6 +17,7 @@ const Followers = (props) => {
         if (Array.isArray(data)) {
             if (data.length > 0) {
                 setNoFollow(false);
+                setLength(data.length);
             }
             else {
                 console.log("no data");
@@ -38,7 +40,7 @@ const Followers = (props) => {
     return (
         <Container>
             <Wrapper>
-                <p className="subheader">{data?.length} Followers</p>
+                <p className="subheader">{length} Followers</p>
                 {data?.map(item => (
                     <FollowersListItem
                         key={item.id}

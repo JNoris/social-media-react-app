@@ -29,7 +29,7 @@ function App() {
             <Route path="/follow/:id?" component={Follow} />
             <Route exact path="/settings" component={Settings2} />
             <Route exact path="/chat" component={Chat} />
-            <Route render={() => <Redirect to="/" />} />
+            {/* <Route render={() => <Redirect to="/" />} /> */}
             {/* <Route exact path='/TEST' component={TEST}/> */}
           </MainWrapper>
         </Flex>
