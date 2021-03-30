@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router";
+import { Route, Switch, Redirect } from "react-router";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
@@ -15,6 +15,7 @@ import Login from "./components/Login/Login";
 
 function App() {
   const isAuth = !!localStorage.getItem("token");
+
   //const [token, setToken] = useState("");
   if (isAuth) {
     return (
@@ -25,10 +26,14 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/add" component={AddPost} />
             <Route path="/profile/:id?" component={Profile} />
-            <Route exact path="/follow" component={Follow} />
+            <Route path="/follow/:id?" component={Follow} />
             <Route exact path="/settings" component={Settings} />
             <Route exact path="/chat" component={Chat} />
-            {/* <Route exact path='/TEST' component={TEST}/> */}
+            <Route exact path="/login">
+              <Redirect to="/"/>
+            </Route>
+            {/* <Route render={() => <Redirect to="/" />} /> */}
+
           </MainWrapper>
         </Flex>
       </Switch>
@@ -39,7 +44,7 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="*" component={Login} />
+          <Route render={() => <Redirect to="/login" />} />
         </Switch>
       </>
     );

@@ -11,7 +11,8 @@ const PostCardModalContent = (props) => {
             <CardContent>
                 <CardActions disableSpacing>
                     <UserInfo 
-                        username={props.user}
+                        username={props.username}
+                        userProfilePhoto={props.userProfilePhoto}
                     />
                    <PostStats 
                         likes={props.likes}

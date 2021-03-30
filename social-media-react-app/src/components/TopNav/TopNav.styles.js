@@ -8,6 +8,7 @@ export const NavIcon = styled(IconButton)`
 `;
 export const TopNavWrapper = styled.div`
     margin:1rem;
+    float:right;
 `;
 export const DropdownWrapper = styled.div`
 .dropdown {
