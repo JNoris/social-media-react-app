@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router";
+import { Route, Switch, Redirect } from "react-router";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import Settings2 from "./components/Settings/Settings2";
@@ -29,6 +29,7 @@ function App() {
             <Route path="/follow/:id?" component={Follow} />
             <Route exact path="/settings" component={Settings2} />
             <Route exact path="/chat" component={Chat} />
+            <Route render={() => <Redirect to="/" />} />
             {/* <Route exact path='/TEST' component={TEST}/> */}
           </MainWrapper>
         </Flex>
@@ -41,7 +42,7 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="*" component={Login} />
+          <Route render={() => <Redirect to="/login" />} />
         </Switch>
       </>
     );
