@@ -37,6 +37,7 @@ namespace CapstoneIG_v1.Models
     public class CommentResponse
     {
         public int Id { get; set; }
+        public string ProfilePhotoPath { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }
@@ -47,6 +48,7 @@ namespace CapstoneIG_v1.Models
     public class LikeReponse
     {
         public int Id { get; set; }
+        public string ProfilePhotoPath { get; set; }
         public string UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -60,5 +62,6 @@ namespace CapstoneIG_v1.Models
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string ProfilePhotoPath { get; set; }
     }
 }
