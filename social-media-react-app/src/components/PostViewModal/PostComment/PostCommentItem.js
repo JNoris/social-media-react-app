@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -11,10 +12,10 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 const PostCommentItem= (props) => {
 
     const comment = props.comment;
+    const [user, setUser] = useState([]);
 
     // TODO implement check to see if A. 'your post' to delete or B. 'your comment'
 
-    //const currentUser = ....
 
     // TODO implement delete
 
@@ -24,13 +25,14 @@ const PostCommentItem= (props) => {
 
     return(
         <CommentWrapper>
-            <ListItem key={comment.username} className="listItem">
+            <ListItem key={comment.Id} className="listItem">
                 <ListItemAvatar>
+                    {/* TO DO get avatar image */}
                     <Avatar aria-label="user">RU</Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                    primary={comment.username}
-                    secondary={comment.comment}
+                    primary={comment.UserName}
+                    secondary={comment.Text}
                 />      
                 <ListItemSecondaryAction>
                     <IconButton edge="end" aria-label="delete">

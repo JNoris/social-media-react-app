@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import {CardWrapper} from '../../PostCard/PostCard.styles'
 import PostImage from '../../PostCard/PostCardContent/PostImage'
@@ -11,27 +12,28 @@ import PostLikeList from '../PostLikes/PostLikeList'
 const PostCardModalView = (props) => {
 
     const post = props.post;
-    const user = post.username
     const viewComments = props.viewComments
-
-    // API to get post description + comments
+ 
     var postDataToShow = viewComments ? (
         <PostCardModalContent 
-                    user = {user}
-                    likes = {post.likes}
-                    post={post}
+            username={props.userName} 
+            userProfilePhoto={props.userProfilePhoto}
+            likes = {post.NumberOfLikes}
+            post={post}
                />
     ) : (
         <PostCardModalContent 
-                    user = {user}
-                    comments = {post.comments}
-                    post={post}
+            username={props.userName} 
+            userProfilePhoto={props.userProfilePhoto}
+            //TODO call for posts
+            //comments = {comments}
+            post={post}
                />
     ) ;
 
     var content = viewComments ? (
         <div>
-           <PostCardAddComment user = {user}/>
+           <PostCardAddComment user = {props.UserName}/>
             <PostCommentListView />
         </div>
     ) : (
@@ -42,7 +44,7 @@ const PostCardModalView = (props) => {
         <CardWrapper>
             <Card>
                <PostImage 
-                    img = {post.img}
+                    img = {post.PhotoPath}
                     modalView = {props.modalView}
                />
                 {postDataToShow}
