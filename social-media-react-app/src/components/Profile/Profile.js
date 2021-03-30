@@ -66,12 +66,22 @@ const Profile = () => {
       setIsSelf(true);
     }
   }
+  function getUserData(username) {
+    axios.get("https://localhost:5001/getuserdetails/" + username)
+      .then(res => setUserDetails(res.data))
+      .catch(err => setNoUser(true) && console.log(err));
+  }
+
   useEffect(() => {
     checkParams(url.id);
     setBio(userDetails.bio)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url.id, userDetails.bio]);
+  }, [url.id]);
+  useEffect(() => {
+    setIsFollowing(userDetails.isFollowed)
+  },[userDetails])
+  
   if (error) {
     return (
       <div>An Error has occured</div>
@@ -93,6 +103,7 @@ const Profile = () => {
     if (user !== "") {
       axios.post("https://localhost:5001/AddNewFollow/" + user)
         .then(res => setIsFollowing(true))
+        .then(getUserData(user))
         .catch(err => setError(true) && console.log(err));
     }
   }
@@ -101,6 +112,7 @@ const Profile = () => {
     if (user !== "") {
       axios.post("https://localhost:5001/RemoveFollow/" + user)
         .then(res => setIsFollowing(false))
+        .then(getUserData(user))
         .catch(err => setError(true) && console.log(err));
     }
   }
