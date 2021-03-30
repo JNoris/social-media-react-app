@@ -7,18 +7,17 @@ import PostCommentItem from './PostCommentItem'
 const PostCommentListView = (props) => {
     const post = props.post;
     const [comments, setComments] = useState([]);
+    
+    axios.defaults.headers={
+        "Content-Type":"application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
 
-
-        axios.defaults.headers={
-            "Content-Type":"application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-
-        useEffect(()=>{
-            axios.get("https://localhost:5001/GetPostComments/" + post.Id)
-            .then(res => setComments(res.data))
-            .catch(err=>console.log(err))
-        },[])
+    useEffect(()=>{
+        axios.get("https://localhost:5001/GetPostComments/" + post.Id)
+        .then(res => setComments(res.data))
+        .catch(err=>console.log(err))
+     },[])
 
     return (
         <div>

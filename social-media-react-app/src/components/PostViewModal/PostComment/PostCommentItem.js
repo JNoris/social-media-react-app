@@ -6,22 +6,61 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import {CommentWrapper} from './PostComment.styles'
 import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import CloseIcon from '@material-ui/icons/Close';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'; 
 
 const PostCommentItem= (props) => {
 
     const comment = props.comment;
-    const [user, setUser] = useState([]);
+    const [currentUserName, setCurrentUserName] = useState("")
+    const [showDelete, setShowDelete] = useState(false);
 
-    // TODO implement check to see if A. 'your post' to delete or B. 'your comment'
+    axios.defaults.headers={
+        "Content-Type":"application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+    function getCurrentUserDetails()
+    {
+        axios.get("https://localhost:5001/getcurrentuserdetails")
+        .then(res => setCurrentUserName(res.data.userName))
+        .catch(err=>console.log(err))
+    }
 
+    useEffect(()=>{
+        getCurrentUserDetails()
+        checkForDelete();
+    },[])
 
-    // TODO implement delete
+    function checkForDelete() {
+        if(comment.UserName == currentUserName) {
+            setShowDelete(true);
+        }
+    }
 
     function handleDelete() {
         // if user's post || user's comment delete
+        axios.defaults.headers={
+            "Content-Type":"application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+        axios.post("https://localhost:5001/DeleteComment/" + comment.Id, {
+            commentID: comment.Id,
+        })
+        .then(console.log("delete success"))
+        .catch(err => console.log(err))
+         // TODO add refresh to comment list component?
     }
+
+    var deleteHtml = showDelete ? (
+        <ListItemSecondaryAction>
+        <IconButton edge="end" aria-label="delete">
+            <CloseIcon
+                id="delete"
+                onClick={handleDelete}
+            />
+        </IconButton>
+    </ListItemSecondaryAction>
+    ) : null
 
     return(
         <CommentWrapper>
@@ -33,14 +72,7 @@ const PostCommentItem= (props) => {
                     primary={comment.UserName}
                     secondary={comment.Text}
                 />      
-                <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
-                        <DeleteIcon
-                            id="delete"
-                            onClick={handleDelete}
-                        />
-                    </IconButton>
-                </ListItemSecondaryAction>
+               {deleteHtml}
             </ListItem>
         </CommentWrapper>
     )
