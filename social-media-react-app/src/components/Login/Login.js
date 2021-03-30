@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"; // useState for Hooks
 import axios from "axios";
 import styled from "styled-components";
 import { Button, TextField } from "@material-ui/core";
+import { Redirect } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 
 const Wrapper = styled.div`
   position: fixed;
@@ -56,6 +58,7 @@ const Login = () => {
             window.localStorage.setItem("token", response.data.token);
           }
         })
+        .then(() => window.location.reload())
         .catch((e) => window.alert(e));
     } else {
       // TODO: potentially remove
@@ -75,7 +78,7 @@ const Login = () => {
     return () => {
       document.removeEventListener("keydown", listener);
     };
-  }, []);
+  });
 
   return (
     <Wrapper>

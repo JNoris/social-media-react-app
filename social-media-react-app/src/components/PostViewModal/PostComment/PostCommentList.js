@@ -5,7 +5,6 @@ import {TitleWrapper} from './PostComment.styles'
 import PostCommentItem from './PostCommentItem'
 
 const PostCommentListView = (props) => {
-    // TODO API call to get all post comments
     const post = props.post;
     const [comments, setComments] = useState([]);
 
@@ -20,38 +19,6 @@ const PostCommentListView = (props) => {
             .then(res => setComments(res.data))
             .catch(err=>console.log(err))
         },[])
-
-    // temp dummy data
-    // var tempComments = [
-    //     {
-    //         username: "bobbypark123",
-    //         comment: "Nice shot!"
-    //     }, 
-    //     {
-    //         username: "johhny_doe",
-    //         comment: "Wow"
-    //     }, 
-    //     {
-    //         username: "smithyjane93",
-    //         comment: "So pretty!"
-    //     }, 
-    //     {
-    //         username: "bugs_everywhere",
-    //         comment: "some comment"
-    //     }, 
-    //     {
-    //         username: "testing-scrolll",
-    //         comment: "some comment"
-    //     }, 
-    //     {
-    //         username: "more-scroll",
-    //         comment: "some comment"
-    //     }, 
-    //     {
-    //         username: "wut",
-    //         comment: "some comment"
-    //     }, 
-    // ];
 
     return (
         <div>

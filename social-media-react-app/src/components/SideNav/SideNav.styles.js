@@ -7,6 +7,10 @@ export const NavWrapper = styled.div`
     min-height:100vh;
     color:white;
     display:inline-block;
+    a{
+        color:white;
+        text-decoration:none;
+    }
     h1{
         text-align:center;
     }

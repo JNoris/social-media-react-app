@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Route, Switch } from "react-router";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import Settings2 from "./components/Settings/Settings2";
-import SignInSide from "./components/Login/SignInSide";
 import SideNav from "./components/SideNav/SideNav";
 // import TopNav from "./components/TopNav/TopNav";
 import Chat from "./components/Chat/Chat";
@@ -16,6 +15,7 @@ import Login from "./components/Login/Login";
 
 function App() {
   const isAuth = !!localStorage.getItem("token");
+
   //const [token, setToken] = useState("");
   if (isAuth) {
     return (
@@ -26,7 +26,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/add" component={AddPost} />
             <Route path="/profile/:id?" component={Profile} />
-            <Route exact path="/follow" component={Follow} />
+            <Route path="/follow/:id?" component={Follow} />
             <Route exact path="/settings" component={Settings2} />
             <Route exact path="/chat" component={Chat} />
             {/* <Route exact path='/TEST' component={TEST}/> */}
