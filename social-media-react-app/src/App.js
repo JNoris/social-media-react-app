@@ -15,6 +15,7 @@ import Login from "./components/Login/Login";
 
 function App() {
   const isAuth = !!localStorage.getItem("token");
+
   //const [token, setToken] = useState("");
   if (isAuth) {
     return (
@@ -25,7 +26,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/add" component={AddPost} />
             <Route path="/profile/:id?" component={Profile} />
-            <Route exact path="/follow" component={Follow} />
+            <Route path="/follow/:id?" component={Follow} />
             <Route exact path="/settings" component={Settings2} />
             <Route exact path="/chat" component={Chat} />
             {/* <Route exact path='/TEST' component={TEST}/> */}

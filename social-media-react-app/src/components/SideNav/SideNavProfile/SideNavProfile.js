@@ -33,7 +33,7 @@ const SideNavProfile = () => {
             <Grid container justify="center" spacing={1}>
                 <Grid item xs={4}>
                     <Link to={{
-                        pathname: "profile",
+                        pathname: "/profile",
                         state: {
                             userId: userId
                         }
@@ -46,7 +46,7 @@ const SideNavProfile = () => {
                 </Grid>
                 <Grid item xs={4}>
                     <Link to={{
-                        pathname: "follow",
+                        pathname: "/follow",
                         state: {
                             followIndex: 0,
                             userName: userId.userName
@@ -60,7 +60,7 @@ const SideNavProfile = () => {
                 </Grid>
                 <Grid item xs={4}>
                     <Link to={{
-                        pathname: "follow",
+                        pathname: "/follow",
                         state: {
                             followIndex: 1,
                             userName: userId.userName

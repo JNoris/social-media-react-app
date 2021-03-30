@@ -11,6 +11,18 @@ export const ProfileWrapper = styled.div`
         color: #f9f9f9;
     }
 `;
+export const ImgFrame = styled.div`
+    width:60%;
+    margin:auto;
+    border-radius:1rem;
+    max-height:30vh;
+    height:auto;
+    overflow:hidden;
+    img{
+        width:100%;
+        height:auto;
+    }
+`;
 export const PostDummy = styled.div`
     height:100vh;
     width:44vw;
@@ -32,7 +44,7 @@ export const GridWrapper = styled.div`
 `;
 export const InfoCol = styled.div`
     width:30vw;
-    padding:3vw;
+    padding:3vw 3vw 0 3vw;
     p{
         font-size:1vw;
         font-weight:700;
@@ -67,10 +79,17 @@ export const FlexEven = styled.div`
     }
 `;
 export const Bio = styled.div`
-    //padding-top:2rem;
+    margin-top:2rem;
+    background-color:rgba(40,42,52,0.5);
+    border-radius:1rem 1rem 0 0;
+    height:30vh;
+    overflow-y:scroll;
     padding: 1rem 0;
     display:inline-block;
     color:white;
+    ::-webkit-scrollbar {
+        display: none;
+    }
     .bio-text{
         color:white;
     }
@@ -78,6 +97,9 @@ export const Bio = styled.div`
     .MuiInput-underline:before, 
     .MuiInput-underline:after {
         display: none;
+    }
+    .MuiInput-root{
+        padding:1rem;
     }
 `;
 
