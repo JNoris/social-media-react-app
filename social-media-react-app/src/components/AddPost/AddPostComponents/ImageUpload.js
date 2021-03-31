@@ -100,7 +100,7 @@ const ImageUpload = () => {
                         multiline
                         value={caption}
                         placeholder="Description..."
-                        InputProps={{
+                        inputProps={{
                             className: "caption-text"
                         }}
                         onChange={handleCaptionChange}

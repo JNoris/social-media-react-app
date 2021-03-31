@@ -33,6 +33,7 @@ function App() {
   }
   useEffect(() => {
     getLoggedInUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuth])
 
   if(error)
@@ -55,8 +56,6 @@ function App() {
             <Route exact path="/login">
               <Redirect to="/"/>
             </Route>
-            {/* <Route render={() => <Redirect to="/" />} /> */}
-
           </MainWrapper>
         </Flex>
       </Switch>

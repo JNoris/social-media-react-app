@@ -37,7 +37,7 @@ function Chat() {
             </div>
             <div className="new-message-container">
               {/* CSS Error on the + sign for some reason. */}
-              <a href="#">+</a>
+              {/* <a href="#">+</a> */}
             </div>
             <div className="chat-title">
               <span>Noris Buriac</span>

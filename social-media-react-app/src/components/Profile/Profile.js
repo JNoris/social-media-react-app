@@ -180,7 +180,7 @@ const Profile = () => {
   useEffect(() => {
     setBio(userDetails.bio);
   },[userDetails.bio])
-  
+
   useEffect(() => {
     setIsFollowing(userDetails.isFollowed)
   }, [userDetails])
@@ -311,7 +311,7 @@ const Profile = () => {
           <BioML
             multiline
             value={bio}
-            InputProps={{
+            inputProps={{
               readOnly: bioReadOnly,
               className: "bio-text",
             }}
