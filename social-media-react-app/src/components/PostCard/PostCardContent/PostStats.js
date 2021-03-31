@@ -8,6 +8,8 @@ import PostViewModal from "../../PostViewModal/PostViewModal"
 
 const PostStats = (props) => {
 
+    console.log(props)
+
     const [like, setLike] = useState(props.isLiked);
     const [heartColor, setHeartColor] = useState(like ? {color: "#e2336b"} : {color: "#fff"});
     const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +18,6 @@ const PostStats = (props) => {
     const post = props.post;
     const [numOfLikes, setNumOfLikes] = useState(post.numberOfLikes)
 
-    // update with get state of like + get updated like count
     useEffect(() => {
             if(like) {
                 setHeartColor({color: "#e2336b"})
@@ -26,7 +27,7 @@ const PostStats = (props) => {
         }, 
     [like])
 
-    var showCommentCount = !props.numberOfComments || isModalView ? null : 
+    var showCommentCount = !isModalView ?
         <ContentComponent>
             <ChatBubbleOutlineIcon
                 className="icon"
@@ -35,8 +36,9 @@ const PostStats = (props) => {
             />
             <p id="comments" onClick={toggleModal}>{props.numberOfComments}</p>
         </ContentComponent>
+        : null
 
-    var showLikeCount = !props.numberOfLikes || isModalView ? null :             
+    var showLikeCount = isModalView ? null :             
         <ContentComponent>
             <FavoriteBorderIcon
                 className="icon"

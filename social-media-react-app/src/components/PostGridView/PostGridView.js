@@ -5,8 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import {GridWrapper} from "./PostGridView.styles";
 
 const PostGridView = () => {
-    // for final styling if responsiveness needed otherwise const spacing
-    const [spacing, setSpacing] = useState(2);
+    const spacing = 2;
     const [posts, setPosts] = useState([]);
     const [refreshComponent, setRefreshComponent] = useState(false)
 
@@ -23,9 +22,10 @@ const PostGridView = () => {
     },[refreshComponent]);
 
     function handleRefresh() {
-        console.log("updating")
         setRefreshComponent(true);
     }
+
+    console.log(posts)
 
     return (
         <GridWrapper>

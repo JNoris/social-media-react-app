@@ -8,10 +8,12 @@ import UserInfo from './UserInfo'
 
 const PostCardContent = (props) => {
 
+    console.log("pcc", props)
+
     var userHtml = props.userName ? (<UserInfo 
     userName={props.userName} profilePhotoPath={props.profilePhotoPath} /> ) : null
 
-    var statsHtml = props.numberOfLikes || props.numberOfComments ? ( <PostStats 
+    var statsHtml = props.numberOfLikes >= 0 || props.numberOfComments >= 0 ? ( <PostStats 
         numberOfLikes={props.numberOfLikes}
         numberOfComments={props.numberOfComments}
         post={props.post}

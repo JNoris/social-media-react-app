@@ -6,6 +6,7 @@ import PostStats from '../../PostCardContent/PostStats'
 import UserInfo from '../../PostCardContent/UserInfo'
 
 const PostCardModalContent = (props) => {
+
     return (
         <ContentWrapper>
             <CardContent>
