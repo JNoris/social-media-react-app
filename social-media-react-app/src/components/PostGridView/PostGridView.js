@@ -31,7 +31,7 @@ const PostGridView = () => {
         <GridWrapper>
             <Grid container justify="center" spacing={spacing} className="postGrid">
                 {posts?.map((post) => (
-                    <Grid key={post.id} item xs={12}>
+                    <Grid key={post.id} item>
                         <PostCard post={post} handleUpdate={handleRefresh} />
                     </Grid>
            ))}

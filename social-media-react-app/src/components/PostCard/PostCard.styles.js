@@ -4,8 +4,9 @@ export const CardWrapper = styled.div`
     .MuiCard-root {
         background: transparent;
         color: #fff;
-        max-width: 300px;
+        max-width: 350px;
         height: auto;
+        margin: 0 auto;
     }
 
     .MuiPaper-elevation1 {
