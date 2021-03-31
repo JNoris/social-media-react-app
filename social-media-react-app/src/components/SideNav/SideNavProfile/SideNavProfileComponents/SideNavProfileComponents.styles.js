@@ -37,7 +37,9 @@ export const FlexCenter = styled.div`
     }
     
     .avatar {
-        height:10vh;
-        width:10vh;
+        height:15vh;
+        width:15vh;
+        min-height:5rem;
+        min-width:5rem;
     }
 `;

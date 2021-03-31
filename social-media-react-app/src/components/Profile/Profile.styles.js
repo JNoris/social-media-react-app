@@ -155,7 +155,7 @@ export const UploadBtns = styled.div`
     button{
         padding:0.2rem;
         margin:0 0.2rem;
-
+        font-size: clamp(0.6rem,1vw,1rem);
     }
     .fwbtn{
         width:100%;
