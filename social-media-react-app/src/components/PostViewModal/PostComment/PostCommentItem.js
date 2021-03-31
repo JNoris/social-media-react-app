@@ -38,6 +38,7 @@ const PostCommentItem= (props) => {
         .then(console.log("delete success"))
         .catch(err => console.log(err))
          // TODO add refresh to comment list component? Or close modal
+         props.handleDelete()
     }
 
     var deleteHtml = showDelete ? (
