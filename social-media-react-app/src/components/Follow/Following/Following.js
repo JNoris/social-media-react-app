@@ -29,7 +29,7 @@ const Following = (props) => {
     }, [data])
     if(noFollowing)
     {
-        return <Empty text="No Followers"/>
+        return <Empty text="Following 0"/>
     }
     return (
         <Container>

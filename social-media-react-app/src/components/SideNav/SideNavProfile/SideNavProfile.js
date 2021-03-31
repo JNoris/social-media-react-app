@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Grid from '@material-ui/core/Grid';
-import UserInfo from './SideNavProfileComponents/UserInfo';
 import DisplayInfo from './SideNavProfileComponents/DisplayInfo';
-import { Link } from 'react-router-dom';
 import { SideNavProfileWrapper } from '../SideNav.styles';
+import SideNavList from '../SideNavList/SideNavList';
 
 const SideNavProfile = () => {
    
@@ -33,49 +31,9 @@ const SideNavProfile = () => {
                 userName={userId.userName}
                 src={userId.profilePhotoPath}
             />
-            {/* <Grid container justify="center" spacing={1}>
-                <Grid item xs={4}>
-                    <Link to={{
-                        pathname: "/profile",
-                        state: {
-                            userId: userId
-                        }
-                    }}>
-                        <UserInfo
-                            name="Posts"
-                            number={userId.numberOfPosts}
-                        />
-                    </Link>
-                </Grid>
-                <Grid item xs={4}>
-                    <Link to={{
-                        pathname: "/follow",
-                        state: {
-                            followIndex: 0,
-                            userName: userId.userName
-                        }
-                    }}>
-                        <UserInfo
-                            name="Followers"
-                            number={userId.numberOfFollowers}
-                        />
-                    </Link>
-                </Grid>
-                <Grid item xs={4}>
-                    <Link to={{
-                        pathname: "/follow",
-                        state: {
-                            followIndex: 1,
-                            userName: userId.userName
-                        }
-                    }}>
-                        <UserInfo
-                            name="Following"
-                            number={userId.numberOfFollowing}
-                        />
-                    </Link>
-                </Grid>
-            </Grid> */}
+            <SideNavList
+                userName={userId.userName}
+            />
         </SideNavProfileWrapper>
     );
 }

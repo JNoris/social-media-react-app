@@ -6,8 +6,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import AddIcon from '@material-ui/icons/Add';
 import NewDrop from './TopNavComponents/NewDrop';
 import { NavIcon, TopNavWrapper } from './TopNav.styles';
-import { IconButton } from '@material-ui/core';
-import DropdownMenu from './TopNavComponents/DropdownMenu';
+import SearchBar from './TopNavComponents/SearchBar';
 
 
 function NavItem(props) {
@@ -36,11 +35,10 @@ const TopNav = () => {
                 <NavItem icon={<NotificationsIcon />} />
             </Link>
             <Link to="/chat">
-            <NavItem icon={<WhatsAppIcon />} />
+                <NavItem icon={<WhatsAppIcon />} />
             </Link>
             <NavItem icon={<ArrowDropDownIcon />}>
                 <NewDrop />
-                {/* <DropdownMenu/> */}
             </NavItem>
         </TopNavWrapper>
     );
