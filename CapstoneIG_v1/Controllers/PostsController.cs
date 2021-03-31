@@ -171,6 +171,7 @@ namespace CapstoneIG_v1.Controllers
                         Id = p.Id,
                         PhotoPath = p.ImageName,
                         UploadDate = p.UploadDate,
+                        Caption = p.Caption,
                         ProfilePhotoPath = user.ProfileImageName,
                         UserName = user.UserName,
                         FirstName = user.FirstName,
@@ -222,6 +223,7 @@ namespace CapstoneIG_v1.Controllers
                         Id = p.Id,
                         PhotoPath = p.ImageName,
                         UploadDate = p.UploadDate,
+                        Caption = p.Caption,
                         ProfilePhotoPath = user.ProfileImageName,
                         UserName = user.UserName,
                         FirstName = user.FirstName,
@@ -264,26 +266,31 @@ namespace CapstoneIG_v1.Controllers
                 foreach (string key in followedUsers)
                 {
                     ApplicationUser usr = _db.Users.Where(u => u.Id == key).FirstOrDefault();
-                    PostModel usrPost = _db.Posts.Where(p => p.User.Id == key).FirstOrDefault();
-                    int totalLikes = _db.Likes.Where(l => l.PostId == usrPost.Id).Count();
-                    int totalComments = _db.Comments.Where(l => l.PostId == usrPost.Id).Count();
-                    bool checkLike = _db.Likes.Any(c => c.PostId == usrPost.Id && c.LikeBy == user);
+                    List<PostModel> usrPosts = _db.Posts.Where(p => p.User.Id == key).ToList();
 
-                    PostResponse newPResponse = new PostResponse()
+                    foreach (var p in usrPosts)
                     {
-                        Id = usrPost.Id,
-                        PhotoPath = usrPost.ImageName,
-                        UploadDate = usrPost.UploadDate,
-                        ProfilePhotoPath = usr.ProfileImageName,
-                        UserName = usr.UserName,
-                        FirstName = usr.FirstName,
-                        LastName = usr.LastName,
-                        NumberOfLikes = totalLikes,
-                        NumberOfComments = totalComments,
-                        IsLiked = checkLike
-                    };
+                        int totalLikes = _db.Likes.Where(l => l.PostId == p.Id).Count();
+                        int totalComments = _db.Comments.Where(l => l.PostId == p.Id).Count();
+                        bool checkLike = _db.Likes.Any(c => c.PostId == p.Id && c.LikeBy == user);
 
-                    pResponse.Add(newPResponse);
+                        PostResponse newPResponse = new PostResponse()
+                        {
+                            Id = p.Id,
+                            PhotoPath = p.ImageName,
+                            UploadDate = p.UploadDate,
+                            Caption = p.Caption,
+                            ProfilePhotoPath = usr.ProfileImageName,
+                            UserName = usr.UserName,
+                            FirstName = usr.FirstName,
+                            LastName = usr.LastName,
+                            NumberOfLikes = totalLikes,
+                            NumberOfComments = totalComments,
+                            IsLiked = checkLike
+                        };
+
+                        pResponse.Add(newPResponse);
+                    }
                 }
 
                 var orderByDate = pResponse.OrderByDescending(p => p.UploadDate);
@@ -298,5 +305,58 @@ namespace CapstoneIG_v1.Controllers
 
             return res;
         }
+
+        //[HttpGet]
+        //[Route("gethomepageposts")]
+        //public async Task<JsonResult> GetHomePagePosts()
+        //{
+        //    dynamic res;
+
+        //    ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+
+        //    if (user != null)
+        //    {
+        //        List<string> followedUsers = _db.Followers.Where(f => f.UserId == user).Select(x => x.FollowingId.Id).ToList();
+
+        //        List<PostResponse> pResponse = new List<PostResponse>();
+
+        //        foreach (string key in followedUsers)
+        //        {
+        //            ApplicationUser usr = _db.Users.Where(u => u.Id == key).FirstOrDefault();
+        //            PostModel usrPost = _db.Posts.Where(p => p.User.Id == key).FirstOrDefault();
+        //            int totalLikes = _db.Likes.Where(l => l.PostId == usrPost.Id).Count();
+        //            int totalComments = _db.Comments.Where(l => l.PostId == usrPost.Id).Count();
+        //            bool checkLike = _db.Likes.Any(c => c.PostId == usrPost.Id && c.LikeBy == user);
+
+        //            PostResponse newPResponse = new PostResponse()
+        //            {
+        //                Id = usrPost.Id,
+        //                PhotoPath = usrPost.ImageName,
+        //                UploadDate = usrPost.UploadDate,
+        //                Caption = usrPost.Caption,
+        //                ProfilePhotoPath = usr.ProfileImageName,
+        //                UserName = usr.UserName,
+        //                FirstName = usr.FirstName,
+        //                LastName = usr.LastName,
+        //                NumberOfLikes = totalLikes,
+        //                NumberOfComments = totalComments,
+        //                IsLiked = checkLike
+        //            };
+
+        //            pResponse.Add(newPResponse);
+        //        }
+
+        //        var orderByDate = pResponse.OrderByDescending(p => p.UploadDate);
+
+        //        res = Json(orderByDate);
+        //    }
+        //    else
+        //    {
+        //        Response.StatusCode = StatusCodes.Status400BadRequest;
+        //        res = Json(new { Status = "Failed", Message = "No user found" });
+        //    }
+
+        //    return res;
+        //}
     }
 }

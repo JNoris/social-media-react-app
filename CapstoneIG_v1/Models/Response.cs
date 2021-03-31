@@ -13,6 +13,7 @@ namespace CapstoneIG_v1.Models
         public int Id { get; set; }
         public string PhotoPath { get; set; }
         public DateTime UploadDate { get; set; }
+        public string Caption { get; set; }
         public string ProfilePhotoPath { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }
