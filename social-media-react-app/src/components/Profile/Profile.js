@@ -23,6 +23,7 @@ const Profile = () => {
   const [imgData, setImgData] = useState(null);
   const [picture, setPicture] = useState(null);
   const [isUpload, setIsUpload] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState(0);
 
   function checkIfPosts(data) {
     if (Array.isArray(data)) {
@@ -142,9 +143,8 @@ const Profile = () => {
           'content-type': 'multipart/form-data'
         }
     })
-        .then(res => console.log(res.status))
         .then(setIsUpload(false))
-        .then(window.location.reload())
+        .then(res => setUploadStatus(res.status))
         .catch(err => setError(true) && console.log(err));
     }
   }
@@ -171,7 +171,13 @@ const Profile = () => {
     }
   };
 
-
+  function refreshOnOK(status)
+  {
+    if(status===200)
+    {
+      window.location.reload();
+    }
+  }
   //Use Effect
   useEffect(() => {
     axios.get("https://localhost:5001/getcurrentuserdetails")
@@ -204,6 +210,9 @@ const Profile = () => {
     setImgData(userDetails.profilePhotoPath)
   }, [userDetails.profilePhotoPath])
 
+  useEffect(() => {
+    refreshOnOK(uploadStatus);
+  },[uploadStatus])
   //Error Pages
   if (error) {
     return (
@@ -354,7 +363,7 @@ const Profile = () => {
         <GridWrapper>
           {postsLoaded ? (<Grid container spacing={1} justify="flex-start" alignItems="center">
             {posts?.map((item) => (
-              <Grid item key={item.id} xs={12} md={6} lg={4}>
+              <Grid item key={item.id} xs={12} md={6}>
                 <ProfileGridItem
                   link={item.id}
                   src={item.photoPath}

@@ -110,11 +110,11 @@ export const BioML = styled(TextField)`
     width:30vw;
 `;
 export const ProfileGridWrapper = styled.div`
-    width:100%;
-    margin:auto;
+    
     img{
-        height:auto;
-        width:100%
+        width:21vw;
+        height:21vw;
+        object-fit:cover;
     }
 `;
 

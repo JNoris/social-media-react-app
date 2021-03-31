@@ -1,13 +1,17 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { Wrapper, ImageFrame, PostFrame, CaptionFrame, Flex, UploadButton } from './ImageUpload.styles';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
+import { Redirect } from 'react-router-dom';
 
 const ImageUpload = () => {
     const [picture, setPicture] = useState(null);
     const [imgData, setImgData] = useState(null);
     const [caption, setCaption] = useState("")
+    const [uploadStatus, setUploadStatus] = useState(0);
+    const [redirect, setRedirect] = useState(false);
+
     const onChangePicture = e => {
         if (e.target.files[0]) {
             setPicture(e.target.files[0]);
@@ -39,7 +43,22 @@ const ImageUpload = () => {
             headers: {
               'content-type': 'multipart/form-data'
             }
-        });
+        })
+        .then(res=> setUploadStatus(res.status));
+    }
+    function returnOnOK(status)
+    {
+        if(status===200)
+        {
+            setRedirect(true);
+        }
+    }
+    useEffect(() => {
+        returnOnOK(uploadStatus)
+    }, [uploadStatus])
+    if(redirect)
+    {
+        return <Redirect to="/profile"/>
     }
     return (
         <Wrapper>
