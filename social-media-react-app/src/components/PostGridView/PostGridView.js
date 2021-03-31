@@ -25,8 +25,6 @@ const PostGridView = () => {
         setRefreshComponent(true);
     }
 
-    console.log(posts)
-
     return (
         <GridWrapper>
             <Grid container justify="center" spacing={spacing} className="postGrid">

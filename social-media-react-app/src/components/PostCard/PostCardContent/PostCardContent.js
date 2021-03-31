@@ -8,8 +8,6 @@ import UserInfo from './UserInfo'
 
 const PostCardContent = (props) => {
 
-    console.log("pcc", props)
-
     var userHtml = props.userName ? (<UserInfo 
     userName={props.userName} profilePhotoPath={props.profilePhotoPath} /> ) : null
 
