@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+// import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import AddIcon from '@material-ui/icons/Add';
-import NewDrop from './TopNavComponents/NewDrop';
+// import NewDrop from './TopNavComponents/NewDrop';
 import { NavIcon, TopNavWrapper } from './TopNav.styles';
-import SearchBar from './TopNavComponents/SearchBar';
+// import SearchBar from './TopNavComponents/SearchBar';
 
 
 function NavItem(props) {

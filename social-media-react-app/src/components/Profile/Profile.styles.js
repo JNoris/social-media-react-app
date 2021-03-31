@@ -80,9 +80,7 @@ export const FlexEven = styled.div`
     button{
         width:100%;
         margin: 0 .5rem;
-        background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%);  
-        //background: none;
-        //background-color: #fcac56;
+        background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%); 
         transition: .5s;
         color: #fff;
         border: none;
@@ -91,10 +89,6 @@ export const FlexEven = styled.div`
     }
 
     button:hover {
-        //background-position: right center;
-        color: #fff;
-        text-decoration: none;
-        outline: none;
         background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);  
     }
 `;
