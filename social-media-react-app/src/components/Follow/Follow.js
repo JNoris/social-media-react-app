@@ -117,9 +117,6 @@ const Follow = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [url.id]);
     useEffect(() => {
-        setValue(state.followIndex);
-    }, [state.followIndex])
-    useEffect(() => {
         getUserFollows(userName)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userName]);
@@ -128,6 +125,10 @@ const Follow = (props) => {
         getUserFollows(userDetails.userName)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userDetails])
+    useEffect(() => {
+        setValue(state.followIndex);
+    }, [state.followIndex])
+
 
     if (error) {
         return (<div>Error</div>);

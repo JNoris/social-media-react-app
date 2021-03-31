@@ -20,6 +20,7 @@ const Profile = () => {
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [posts, setPosts] = useState("");
   const [isFollowing, setIsFollowing] = useState(false);
+  const [current, setCurrent]=useState([]);
 
   function checkIfPosts(data) {
     if (Array.isArray(data)) {
@@ -67,11 +68,18 @@ const Profile = () => {
     }
   }
   function getUserData(username) {
-    axios.get("https://localhost:5001/getuserdetails/" + username)
+    if(username !== undefined)
+    {
+      axios.get("https://localhost:5001/getuserdetails/" + username)
       .then(res => setUserDetails(res.data))
       .catch(err => setNoUser(true) && console.log(err));
+    }
   }
-
+  useEffect(() => {
+    axios.get("https://localhost:5001/getcurrentuserdetails")
+    .then(res => setCurrent(res.data))
+    .catch(err => setError(true) && console.log(err));
+  },[])
   useEffect(() => {
     checkParams(url.id);
     setBio(userDetails.bio)
@@ -82,6 +90,21 @@ const Profile = () => {
     setIsFollowing(userDetails.isFollowed)
   },[userDetails])
   
+  useEffect(() => {
+    getUserData(userDetails.userName);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[isFollowing])
+
+  function ifSelfLink() {
+    if(url.id === current.userName)
+    {
+      setIsSelf(true);
+    }
+  }
+  useEffect(() => {
+    ifSelfLink()
+  },[current])
+
   if (error) {
     return (
       <div>An Error has occured</div>

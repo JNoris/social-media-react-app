@@ -11,6 +11,7 @@ import Follow from "./components/Follow/Follow";
 import AddPost from "./components/AddPost/AddPost";
 import Register from "./components/Login/Register";
 import Login from "./components/Login/Login";
+import SearchBar from "./components/TopNav/TopNavComponents/SearchBar";
 // import TopNav3 from "./components/Topnav/TopNav3";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route exact path="/add" component={AddPost} />
             <Route path="/profile/:id?" component={Profile} />
             <Route path="/follow/:id?" component={Follow} />
+            <Route exact path="/explore" component={SearchBar} />
             <Route exact path="/settings" component={Settings} />
             <Route exact path="/chat" component={Chat} />
             <Route exact path="/login">

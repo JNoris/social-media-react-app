@@ -114,7 +114,7 @@ const Login = () => {
           }
         })
         .then(() => window.location.reload())
-        .catch((e) => window.alert(e));
+        .catch(e => window.alert(e.response.data.message));
     } else {
       setNotify({
         isOpen: true,
