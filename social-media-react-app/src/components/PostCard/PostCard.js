@@ -24,6 +24,7 @@ const PostCard = (props) => {
                     numberOfComments = {post.numberOfComments}
                     post = {post}
                     isLiked = {post.isLiked}
+                    handleUpdate = {props.handleUpdate}
                />
             </Card>
         </CardWrapper>

@@ -16,6 +16,7 @@ const PostCardContent = (props) => {
         numberOfComments={props.numberOfComments}
         post={props.post}
         isLiked={props.isLiked}
+        handleUpdate = {props.handleUpdate}
    />
    ) : null
 

@@ -9,7 +9,7 @@ const UserInfo = (props) => {
          <ContentComponent>
              <LinkWrapper>
              <Link to={{
-                 pathname: "/profile",
+                 pathname: "/profile/" + props.userName,
                  state: {userName: props.userName}
                  }}>
                 <Avatar aria-label="user" id="avatar" src={props.profilePhotoPath} />

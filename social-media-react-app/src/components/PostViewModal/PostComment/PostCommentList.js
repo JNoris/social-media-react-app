@@ -34,7 +34,6 @@ const PostCommentListView = (props) => {
 
      function handleRefresh() {
          setRefreshComponent(true);
-         console.log("refresh called");
      }
 
     return (
