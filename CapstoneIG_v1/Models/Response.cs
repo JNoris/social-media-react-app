@@ -19,6 +19,7 @@ namespace CapstoneIG_v1.Models
         public string LastName { get; set; }
         public int NumberOfLikes { get; set; }
         public int NumberOfComments { get; set; }
+        public bool IsLiked { get; set; }
     }
 
     public class UserResponse
@@ -31,6 +32,7 @@ namespace CapstoneIG_v1.Models
         public int NumberOfPosts { get; set; }
         public int NumberOfFollowers { get; set; }
         public int NumberOfFollowing { get; set; }
+        public bool IsFollowed { get; set; }
     }
     public class CommentResponse
     {
@@ -60,5 +62,6 @@ namespace CapstoneIG_v1.Models
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string ProfilePhotoPath { get; set; }
     }
 }

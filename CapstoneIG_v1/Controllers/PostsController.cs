@@ -91,7 +91,7 @@ namespace CapstoneIG_v1.Controllers
 
             if (user != null)
             {
-                PostModel pst = _db.Posts.Where(p => p.User == user).Where(q => q.Id == postId).FirstOrDefault();
+                PostModel pst = _db.Posts.Where(p => p.User == user && p.Id == postId).FirstOrDefault();
 
                 if (pst != null)
                 {
@@ -124,7 +124,7 @@ namespace CapstoneIG_v1.Controllers
 
             if (user != null)
             {
-                PostModel pst = _db.Posts.Where(p => p.User == user).Where(q => q.Id == postId).FirstOrDefault();
+                PostModel pst = _db.Posts.Where(p => p.User == user && p.Id == postId).FirstOrDefault();
 
                 if (pst != null)
                 {
@@ -164,6 +164,7 @@ namespace CapstoneIG_v1.Controllers
                 {
                     int totalLikes = _db.Likes.Where(l => l.PostId == p.Id).Count();
                     int totalComments = _db.Comments.Where(l => l.PostId == p.Id).Count();
+                    bool checkLike = _db.Likes.Any(c => c.PostId == p.Id && c.LikeBy == user);
 
                     PostResponse newPResponse = new PostResponse()
                     {
@@ -175,7 +176,8 @@ namespace CapstoneIG_v1.Controllers
                         FirstName = user.FirstName,
                         LastName = user.LastName,
                         NumberOfLikes = totalLikes,
-                        NumberOfComments = totalComments
+                        NumberOfComments = totalComments,
+                        IsLiked = checkLike
                     };
 
                     pResponse.Add(newPResponse);
@@ -196,9 +198,11 @@ namespace CapstoneIG_v1.Controllers
 
         [HttpGet]
         [Route("getuserposts/{username}")]
-        public JsonResult GetUserPosts(string username)
+        public async Task<JsonResult> GetUserPostsAsync(string username)
         {
             dynamic res;
+
+            ApplicationUser curUser = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
             ApplicationUser user = _db.Users.Where(u => u.UserName == username).FirstOrDefault();
 
@@ -211,6 +215,7 @@ namespace CapstoneIG_v1.Controllers
                 {
                     int totalLikes = _db.Likes.Where(l => l.PostId == p.Id).Count();
                     int totalComments = _db.Comments.Where(l => l.PostId == p.Id).Count();
+                    bool checkLike = _db.Likes.Any(c => c.PostId == p.Id && c.LikeBy == curUser);
 
                     PostResponse newPResponse = new PostResponse()
                     {
@@ -222,7 +227,8 @@ namespace CapstoneIG_v1.Controllers
                         FirstName = user.FirstName,
                         LastName = user.LastName,
                         NumberOfLikes = totalLikes,
-                        NumberOfComments = totalComments
+                        NumberOfComments = totalComments,
+                        IsLiked = checkLike
                     };
 
                     pResponse.Add(newPResponse);
@@ -261,6 +267,7 @@ namespace CapstoneIG_v1.Controllers
                     PostModel usrPost = _db.Posts.Where(p => p.User.Id == key).FirstOrDefault();
                     int totalLikes = _db.Likes.Where(l => l.PostId == usrPost.Id).Count();
                     int totalComments = _db.Comments.Where(l => l.PostId == usrPost.Id).Count();
+                    bool checkLike = _db.Likes.Any(c => c.PostId == usrPost.Id && c.LikeBy == user);
 
                     PostResponse newPResponse = new PostResponse()
                     {
@@ -272,7 +279,8 @@ namespace CapstoneIG_v1.Controllers
                         FirstName = usr.FirstName,
                         LastName = usr.LastName,
                         NumberOfLikes = totalLikes,
-                        NumberOfComments = totalComments
+                        NumberOfComments = totalComments,
+                        IsLiked = checkLike
                     };
 
                     pResponse.Add(newPResponse);

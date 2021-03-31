@@ -194,12 +194,19 @@ namespace CapstoneIG_v1.Tests
                 .Setup(x => x.FindByNameAsync(appUser.UserName))
                 .Returns(Task.FromResult(appUser));
 
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] {
+                                        new Claim(ClaimTypes.NameIdentifier, "fireman"),
+                                        new Claim(ClaimTypes.Name, "fireman")
+                                   }, "TestAuthentication"));
+
             var mockEnv = Mock.Of<IWebHostEnvironment>();
 
             var controller = new UsersController(context, mockUserManager.Object, mockEnv)
             {
                 ControllerContext = new ControllerContext()
             };
+
+            controller.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
 
             using (context)
             {
@@ -209,7 +216,7 @@ namespace CapstoneIG_v1.Tests
 
                 context.SaveChanges();
 
-                var res = controller.GetUserDetails("fireman");
+                var res = await controller.GetUserDetailsAsync("fireman");
 
                 UserResponse records = JsonConvert.DeserializeObject<UserResponse>(JsonConvert.SerializeObject(res.Value));
 
