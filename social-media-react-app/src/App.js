@@ -33,8 +33,8 @@ function App() {
   }
   useEffect(() => {
     getLoggedInUser();
-  }, [])
-  //const [token, setToken] = useState("");
+  }, [isAuth])
+  
   if(error)
   {
 
