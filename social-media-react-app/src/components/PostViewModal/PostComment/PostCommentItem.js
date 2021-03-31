@@ -10,11 +10,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'; 
 
 const PostCommentItem= (props) => {
+    console.log(props.comment)
+    
     const comment = props.comment;
     const currentUserName = props.currentUserName;
     const [showDelete, setShowDelete] = useState(false);
-
-    console.log(props)
 
     useEffect(() => {
         checkForDelete();

@@ -13,18 +13,22 @@ const PostCardAddComment = (props) => {
     }
 
     const handlePostComment = () => {
-        console.log(comment)
-        axios.defaults.headers = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        if(comment.trim().length > 0) {
+            axios.defaults.headers = {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+                axios.post("https://localhost:5001/AddComment/" + postId, {
+                    CommentText: comment,
+                    postId: postId
+                })
+                .then(console.log("success"))
+                .catch(err => console.log(err))
+                // TODO add refresh to comment list component?
         }
-        axios.post("https://localhost:5001/AddComment/" + postId, {
-            comment: comment,
-            postId: postId
-        })
-        .then(console.log("success"))
-        .catch(err => console.log(err))
-        // TODO add refresh to comment list component?
+        else {
+            setComment("");
+        }
     }
 
     return (

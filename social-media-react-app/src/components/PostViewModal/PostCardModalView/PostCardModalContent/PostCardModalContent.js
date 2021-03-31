@@ -7,7 +7,6 @@ import UserInfo from '../../../PostCard/PostCardContent/UserInfo'
 
 const PostCardModalContent = (props) => {
     const post = props.post;
-    console.log(props)
 
     return (
         <ContentWrapper>
