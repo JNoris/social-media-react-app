@@ -29,7 +29,7 @@ const PostCardModalView = (props) => {
 
     var content = viewComments ? (
         <div>
-           <PostCardAddComment postId={post.id}/>
+           <PostCardAddComment postId={post.id} onClose={props.onClose}/>
             <PostCommentListView postId={post.id} userName={post.userName}  />
         </div>
     ) : (

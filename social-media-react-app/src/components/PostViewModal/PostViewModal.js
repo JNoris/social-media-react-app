@@ -17,7 +17,7 @@ const PostViewModal = (props) => {
                 aria-labelledby=""
                 aria-describedby=""
                 style={{overflow: 'scroll'}}
-                //disableScrollLock
+                disableScrollLock
                 open={show}
                 onClose={props.onClose}
                 closeAfterTransition
@@ -31,6 +31,7 @@ const PostViewModal = (props) => {
                             post = {post}
                             modalView={true}
                             viewComments={viewComments}
+                            onClose={props.onClose}
                         />
                     </Fade>
                 </ModalWrapper>   
