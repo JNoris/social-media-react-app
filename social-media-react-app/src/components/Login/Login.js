@@ -1,28 +1,78 @@
 import React, { useState, useEffect } from "react"; // useState for Hooks
 import axios from "axios";
 import styled from "styled-components";
-import { Button, TextField } from "@material-ui/core";
-import { Redirect } from "react-router";
-import { BrowserRouter } from "react-router-dom";
+import Register from "./Register";
+import Notification from "./Notification";
+import {
+  Button,
+  TextField,
+  Avatar,
+  CssBaseline,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  makeStyles,
+  Paper,
+  Snackbar,
+  IconButton,
+  CloseIcon,
+  MuiAlert,
+} from "@material-ui/core";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-const Wrapper = styled.div`
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: calc(100vh - calc(100vh - 100%));
-  justify-content: center;
-  align-items: center;
-
-  p {
-    display: block;
-  }
-`;
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: "100vh",
+  },
+  image: {
+    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundRepeat: "no-repeat",
+    backgroundColor:
+      theme.palette.type === "dark"
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  containerStyle: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 const Login = () => {
+  // Styling
+  const classes = useStyles();
+
+  // Error handling messages
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
+  // State for username & password
   const [userName, setUserName] = useState("");
   const [passWord, setPassWord] = useState("");
 
+  // Handle username & password
   const handleUsername = (event) => {
     setUserName(event.target.value);
   };
@@ -56,13 +106,21 @@ const Login = () => {
         .then((response) => {
           if (response.status === 200) {
             window.localStorage.setItem("token", response.data.token);
+            setNotify({
+              isOpen: true,
+              message: "Logged in successfully",
+              type: "success",
+            });
           }
         })
         .then(() => window.location.reload())
-        .catch((e) => window.alert(e));
+        .catch(e => window.alert(e.response.data.message));
     } else {
-      // TODO: potentially remove
-      window.alert("Error");
+      setNotify({
+        isOpen: true,
+        message: "Login unsuccessful",
+        type: "error",
+      });
     }
   };
 
@@ -81,29 +139,74 @@ const Login = () => {
   });
 
   return (
-    <Wrapper>
-      <p>Username</p>
-      <input
-        type="text"
-        placeholder="Username"
-        value={userName}
-        onChange={handleUsername}
-      />
-      <p>Password</p>
-      <input
-        type="password"
-        placeholder="Password"
-        value={passWord}
-        onChange={handlePassword}
-      />
-
-      <input
-        style={{ marginTop: "1vh" }}
-        type="button"
-        onClick={handleLoginButton}
-        value="Login"
-      />
-    </Wrapper>
+    <Grid container component="main" className={classes.root}>
+      <CssBaseline />
+      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="userName"
+            label="Username"
+            value={userName}
+            onChange={handleUsername}
+            name="userName"
+            autoComplete="username"
+            autoFocus
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            value={passWord}
+            onChange={handlePassword}
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          {/* <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            /> */}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            value="Login"
+            onClick={handleLoginButton}
+            className={classes.submit}
+          >
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="/register" to="/register" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
+          <Notification notify={notify} setNotify={setNotify} />
+        </div>
+      </Grid>
+    </Grid>
   );
 };
 
