@@ -5,9 +5,7 @@ export const Wrapper = styled.div`
     .submitButton{
         width:100%
     }
-    .MuiButton-root{
-        background-color:white;
-    }
+    
     .MuiButton-label{
         padding:0;
     }

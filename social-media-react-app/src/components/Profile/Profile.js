@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Button from "@material-ui/core/Button";
 import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
-import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML, GridWrapper, FlexEven, LinkWrapper, ImgFrame } from "./Profile.styles";
+import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML, GridWrapper, FlexEven, LinkWrapper, ImgFrame, UploadBtns } from "./Profile.styles";
 import Grid from "@material-ui/core/Grid";
 import UserInfo from "../SideNav/SideNavProfile/SideNavProfileComponents/UserInfo";
 import ProfileGridItem from "./ProfileGridItem";
@@ -233,8 +233,10 @@ const Profile = () => {
         <ImgFrame>
           <img src={imgData} alt={userDetails.userName} />
         </ImgFrame>
+        <UploadBtns>
+        <div className="btns">
         {isSelf && !isUpload? (
-          <Button onClick={handleClick}>Upload Profile
+          <Button className="fwbtn" onClick={handleClick} variant="contained">Upload Profile Photo
             <input
               type="file"
               onChange={onChangePicture}
@@ -243,16 +245,21 @@ const Profile = () => {
             />
           </Button>
         ) : null}
+
         {isSelf && isUpload? (
           <>
-          <Button onClick={uploadNewProfile}>
+          <Button className="hwbtn" onClick={uploadNewProfile}
+          variant="contained">
             Save
           </Button>
-          <Button onClick={cancelProfileUpload}>
+          <Button className="hwbtn" onClick={cancelProfileUpload}
+          variant="contained">
             Cancel
           </Button>
           </>
         ) : null}
+        </div>
+        </UploadBtns>
         <LinkWrapper>
           <Grid container justify="center" spacing={1}>
             <Grid item xs={4}>

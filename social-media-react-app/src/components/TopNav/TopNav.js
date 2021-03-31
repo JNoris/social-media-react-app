@@ -31,15 +31,15 @@ const TopNav = () => {
             <Link to="/add">
                 <NavItem icon={<AddIcon />} />
             </Link>
-            <Link to="/notifications">
+            <Link to="/">
                 <NavItem icon={<NotificationsIcon />} />
             </Link>
             <Link to="/chat">
                 <NavItem icon={<WhatsAppIcon />} />
             </Link>
-            <NavItem icon={<ArrowDropDownIcon />}>
+            {/* <NavItem icon={<ArrowDropDownIcon />}>
                 <NewDrop />
-            </NavItem>
+            </NavItem> */}
         </TopNavWrapper>
     );
 }
