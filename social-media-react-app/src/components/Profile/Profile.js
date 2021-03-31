@@ -2,11 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import Button from "@material-ui/core/Button";
 import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
-import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML, GridWrapper, FlexEven, LinkWrapper, ImgFrame, ImgOverlay } from "./Profile.styles";
+import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML, GridWrapper, FlexEven, LinkWrapper, ImgFrame } from "./Profile.styles";
 import Grid from "@material-ui/core/Grid";
 import UserInfo from "../SideNav/SideNavProfile/SideNavProfileComponents/UserInfo";
 import ProfileGridItem from "./ProfileGridItem";
-import SearchBar from "../TopNav/TopNavComponents/SearchBar";
 
 const Profile = () => {
 
@@ -198,6 +197,7 @@ const Profile = () => {
   //Check if self if link name is same
   useEffect(() => {
     ifSelfLink()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current])
   //Set profile picture
   useEffect(() => {
