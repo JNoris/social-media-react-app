@@ -11,23 +11,10 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 const PostCommentItem= (props) => {
     const comment = props.comment;
-    const [currentUserName, setCurrentUserName] = useState("")
+    const currentUserName = props.currentUserName;
     const [showDelete, setShowDelete] = useState(false);
 
-    axios.defaults.headers={
-        "Content-Type":"application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-    }
-    function getCurrentUserDetails()
-    {
-        axios.get("https://localhost:5001/getcurrentuserdetails")
-        .then(res => setCurrentUserName(res.data.userName))
-        .catch(err=>console.log(err))
-    }
-
-    useEffect(()=>{
-        getCurrentUserDetails()
-    },[])
+    console.log(props)
 
     useEffect(() => {
         checkForDelete();
@@ -50,7 +37,7 @@ const PostCommentItem= (props) => {
         })
         .then(console.log("delete success"))
         .catch(err => console.log(err))
-         // TODO add refresh to comment list component?
+         // TODO add refresh to comment list component? Or close modal
     }
 
     var deleteHtml = showDelete ? (

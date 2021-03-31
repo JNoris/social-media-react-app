@@ -6,17 +6,29 @@ import PostCommentItem from './PostCommentItem'
 
 const PostCommentListView = (props) => {
     const [comments, setComments] = useState([]);
+    const [currentUserName, setCurrentUserName] = useState("")
     
     axios.defaults.headers={
         "Content-Type":"application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`
     }
 
+    useEffect(() => {
+        getCurrentUserDetails();
+    })
+
     useEffect(()=>{
         axios.get("https://localhost:5001/GetPostComments/" + props.postId)
         .then(res => setComments(res.data))
         .catch(err=>console.log(err))
      },[])
+
+     function getCurrentUserDetails()
+     {
+         axios.get("https://localhost:5001/getcurrentuserdetails")
+         .then(res => setCurrentUserName(res.data.userName))
+         .catch(err=>console.log(err))
+     }
 
     return (
         <div>
@@ -25,7 +37,11 @@ const PostCommentListView = (props) => {
         </TitleWrapper>
         <List>
             {comments?.map((comment) => (
-               <PostCommentItem key={comment.id} comment={comment}/>
+               <PostCommentItem 
+                key={comment.id} 
+                comment={comment} 
+                currentUserName={currentUserName}
+                />
             ))}
         </List>
         </div>

@@ -13,6 +13,7 @@ const PostCardAddComment = (props) => {
     }
 
     const handlePostComment = () => {
+        console.log(comment)
         axios.defaults.headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`
