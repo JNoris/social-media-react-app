@@ -137,18 +137,28 @@ const Profile = () => {
     if (picture !== null) {
       let form_data = new FormData();
       form_data.append('ImgFile', picture)
-      axios.post(`https://localhost:5001/edituserprofilephoto`, form_data,
+      axios.put(`https://localhost:5001/edituserprofilephoto`, form_data,
       {
         headers: {
           'content-type': 'multipart/form-data'
         }
     })
         .then(res => console.log(res.status))
+        .then(setIsUpload(false))
+        .then(window.location.reload())
         .catch(err => setError(true) && console.log(err));
     }
   }
   function cancelProfileUpload() {
-    
+    try{
+      setImgData(userDetails.profilePhotoPath);
+      setIsUpload(false);
+    }
+    catch(e)
+    {
+      console.log(e);
+    }
+
   }
   const onChangePicture = e => {
     if (e.target.files[0]) {
@@ -215,7 +225,7 @@ const Profile = () => {
           <img src={imgData} alt={userDetails.userName} />
         </ImgFrame>
         {isSelf && !isUpload? (
-          <Button onClick={handleClick}>asd
+          <Button onClick={handleClick}>Upload Profile
             <input
               type="file"
               onChange={onChangePicture}
@@ -229,7 +239,7 @@ const Profile = () => {
           <Button onClick={uploadNewProfile}>
             Save
           </Button>
-          <Button>
+          <Button onClick={cancelProfileUpload}>
             Cancel
           </Button>
           </>
