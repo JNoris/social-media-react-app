@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
-  form: {
+  containerStyle: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
@@ -114,7 +114,11 @@ const Login = () => {
           }
         })
         .then(() => window.location.reload())
+<<<<<<< HEAD
         .catch(e => window.alert(e.response.data.message));
+=======
+        .catch((e) => window.alert(e.response.data.message));
+>>>>>>> a8f96ed5c55f2cc57bc347f2d51023c0c76920cb
     } else {
       setNotify({
         isOpen: true,
@@ -176,10 +180,10 @@ const Login = () => {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+          {/* <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            /> */}
           <Button
             type="submit"
             fullWidth
