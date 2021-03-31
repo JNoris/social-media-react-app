@@ -24,7 +24,7 @@ function App() {
     Authorization: `Bearer ${localStorage.getItem("token")}`
   }
   function getLoggedInUser(){
-    if(isAuth)
+    if(isAuth && !userStored)
     {
       axios.get("https://localhost:5001/getcurrentuserdetails")
       .then(res => localStorage.setItem("username",res.data.userName))
@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     getLoggedInUser();
   }, [isAuth])
-  
+
   if(error)
   {
 
