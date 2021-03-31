@@ -74,9 +74,9 @@ const Register = () => {
     let res = false;
 
     // First name, upper or lower case
-    let firstNameRegex = /^[a-zA-Z]+$/;
+    let firstNameRegex = /^[a-zA-Z]$/;
     // Last name, upper or lower case
-    let lastNameRegex = /^[a-zA-Z]+$/;
+    let lastNameRegex = /^[a-zA-Z]$/;
     // Username must be 3-16 characters
     let usernameRegex = /^[a-z0-9_-]{3,16}$/;
     // Password, 6-20 char and must have a number and a special character
