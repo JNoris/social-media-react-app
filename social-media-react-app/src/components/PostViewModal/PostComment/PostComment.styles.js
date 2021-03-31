@@ -12,7 +12,7 @@ export const CommentWrapper = styled.div`
     }
 
     #delete:hover {
-        color: #a1a1a1;
+        color: #e2336b;
     }
 
 .MuiListItem-root {

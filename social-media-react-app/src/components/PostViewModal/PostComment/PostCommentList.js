@@ -5,20 +5,36 @@ import {TitleWrapper} from './PostComment.styles'
 import PostCommentItem from './PostCommentItem'
 
 const PostCommentListView = (props) => {
-    const post = props.post;
     const [comments, setComments] = useState([]);
+    const [currentUserName, setCurrentUserName] = useState("");
+    const [refreshComponent, setRefreshComponent] = useState(false);
+    
+    axios.defaults.headers={
+        "Content-Type":"application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
 
+    useEffect(() => {
+        getCurrentUserDetails();
+    })
 
-        axios.defaults.headers={
-            "Content-Type":"application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
+    useEffect(()=>{
+        axios.get("https://localhost:5001/GetPostComments/" + props.postId)
+        .then(res => setComments(res.data))
+        .catch(err=>console.log(err))
+        setRefreshComponent(false)
+     },[refreshComponent])
 
-        useEffect(()=>{
-            axios.get("https://localhost:5001/GetPostComments/" + post.Id)
-            .then(res => setComments(res.data))
-            .catch(err=>console.log(err))
-        },[])
+     function getCurrentUserDetails()
+     {
+         axios.get("https://localhost:5001/getcurrentuserdetails")
+         .then(res => setCurrentUserName(res.data.userName))
+         .catch(err=>console.log(err))
+     }
+
+     function handleRefresh() {
+         setRefreshComponent(true);
+     }
 
     return (
         <div>
@@ -27,7 +43,12 @@ const PostCommentListView = (props) => {
         </TitleWrapper>
         <List>
             {comments?.map((comment) => (
-               <PostCommentItem comment={comment}/>
+               <PostCommentItem 
+                key={comment.id} 
+                comment={comment} 
+                currentUserName={currentUserName}
+                handleDelete={handleRefresh}
+                />
             ))}
         </List>
         </div>

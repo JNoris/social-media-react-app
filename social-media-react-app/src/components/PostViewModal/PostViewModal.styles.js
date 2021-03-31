@@ -11,4 +11,5 @@ export const ModalWrapper = styled.div`
     outline: none;
     padding: 2rem 1rem;
     width: 350px;   // will need to adjust
+    //overflow: scroll;
 `;

@@ -7,13 +7,16 @@ import PostStats from './PostStats'
 import UserInfo from './UserInfo'
 
 const PostCardContent = (props) => {
-    var userHtml = props.user ? (<UserInfo 
-    username={props.username} userProfilePhoto={props.userProfilePhoto} /> ) : null
 
-    var statsHtml = props.likes || props.comments ? ( <PostStats 
-        likes={props.likes}
-        comments={props.comments}
+    var userHtml = props.userName ? (<UserInfo 
+    userName={props.userName} profilePhotoPath={props.profilePhotoPath} /> ) : null
+
+    var statsHtml = props.numberOfLikes || props.numberOfComments ? ( <PostStats 
+        numberOfLikes={props.numberOfLikes}
+        numberOfComments={props.numberOfComments}
         post={props.post}
+        isLiked={props.isLiked}
+        handleUpdate = {props.handleUpdate}
    />
    ) : null
 

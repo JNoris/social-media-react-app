@@ -6,19 +6,22 @@ import PostStats from '../../../PostCard/PostCardContent/PostStats'
 import UserInfo from '../../../PostCard/PostCardContent/UserInfo'
 
 const PostCardModalContent = (props) => {
+    const post = props.post;
 
     return (
         <ContentWrapper>
             <CardContent>
                 <CardActions disableSpacing>
                     <UserInfo 
-                        username={props.user}
+                        userName={props.userName}
+                        profilePhotoPath ={props.profilePhotoPath}
                     />
                    <PostStats 
-                        likes={props.likes}
-                        comments={props.comments}
-                        post={props.post}
+                        numberOfLikes={post.numberOfLikes}
+                        numberOfComments={post.numberOfComments}
+                        post={post}
                         modalView={true}
+                        isLiked={post.isLiked}
                    />
                 </CardActions>
             </CardContent>

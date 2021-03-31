@@ -17,7 +17,7 @@ const PostLikeList = (props) => {
     }
 
     useEffect(()=>{
-        axios.get("https://localhost:5001/GetLikes/" + post.Id)
+        axios.get("https://localhost:5001/GetLikes/" + props.postId)
         .then(res => setLikes(res.data))
         .catch(err=>console.log(err))
     },[])
@@ -31,13 +31,12 @@ const PostLikeList = (props) => {
             {likes?.map((like) => (
                 <LikeWrapper>
                   <ListItem key={like.Id}>
-                      {/* TODO readd once API call is updated */}
-                  {/* <ListItemAvatar>
-                      <Avatar aria-label="user" src={like.ProfilePhotoPath}/>
-                  </ListItemAvatar> */}
+                  <ListItemAvatar>
+                      <Avatar aria-label="user" src={like.profilePhotoPath}/>
+                  </ListItemAvatar>
                   <ListItemText
                       id="listItem"
-                      secondary={like.UserName}
+                      secondary={like.userName}
                   />      
               </ListItem>
               </LikeWrapper>

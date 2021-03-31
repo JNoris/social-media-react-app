@@ -14,15 +14,17 @@ const PostCard = (props) => {
         <CardWrapper>
             <Card>
                <PostImage 
-                    img = {post.PhotoPath}
+                    photoPath = {post.photoPath}
                     post={post}
                />
                <PostCardContent
-                    username = {post.UserName}
-                    userProfilePhoto = {post.ProfilePhotoPath}
-                    likes = {post.NumberOfLikes}
-                    comments = {post.NumberOfComments}
+                    userName = {post.userName}
+                    profilePhotoPath = {post.profilePhotoPath}
+                    numberOfLikes = {post.numberOfLikes}
+                    numberOfComments = {post.numberOfComments}
                     post = {post}
+                    isLiked = {post.isLiked}
+                    handleUpdate = {props.handleUpdate}
                />
             </Card>
         </CardWrapper>

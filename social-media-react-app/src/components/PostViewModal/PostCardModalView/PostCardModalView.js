@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import {CardWrapper} from '../../PostCard/PostCard.styles'
 import PostImage from '../../PostCard/PostCardContent/PostImage'
@@ -9,47 +8,44 @@ import PostCardAddComment from '../PostComment/PostCardAddComment';
 import PostCommentListView from '../PostComment/PostCommentList';
 import PostLikeList from '../PostLikes/PostLikeList'
 
-const PostCardModalView = (props) => {
-
+const PostCardModalView = (props) => { 
     const post = props.post;
     const viewComments = props.viewComments
  
     var postDataToShow = viewComments ? (
         <PostCardModalContent 
-            username={props.userName} 
-            userProfilePhoto={props.userProfilePhoto}
-            likes = {post.NumberOfLikes}
+            userName={post.userName} 
+            profilePhotoPath={post.profilePhotoPath}
+            numberOfLikes = {post.numberOfLikes}
             post={post}
                />
     ) : (
         <PostCardModalContent 
-            username={props.userName} 
-            userProfilePhoto={props.userProfilePhoto}
-            //TODO call for posts
-            //comments = {comments}
+            userName={post.userName} 
+            profilePhotoPath={post.profilePhotoPath}
             post={post}
-               />
+        />
     ) ;
 
     var content = viewComments ? (
         <div>
-           <PostCardAddComment user = {props.UserName}/>
-            <PostCommentListView />
+           <PostCardAddComment postId={post.id} onClose={props.onClose}/>
+            <PostCommentListView postId={post.id} userName={post.userName}  />
         </div>
     ) : (
-        <PostLikeList/>
+        <PostLikeList postId={post.id} />
     )
 
     return (
         <CardWrapper>
             <Card>
                <PostImage 
-                    img = {post.PhotoPath}
+                    photoPath = {post.photoPath}
                     modalView = {props.modalView}
                />
                 {postDataToShow}
                <CaptionWrapper>
-                <p>This will be where the caption goes...</p>
+                <p>{post.caption ? post.caption : null}</p>
                </CaptionWrapper>
                 {content}
             </Card>
