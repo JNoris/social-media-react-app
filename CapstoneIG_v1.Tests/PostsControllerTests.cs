@@ -338,10 +338,12 @@ namespace CapstoneIG_v1.Tests
 
                 List<PostResponse> records = JsonConvert.DeserializeObject<List<PostResponse>>(JsonConvert.SerializeObject(res.Value));
 
-                Assert.Equal(2, records.Count());
+                //Assert.Equal(2, records.Count());
+
+                //KEEP ABOVE METHOD FOR PREV ACTION
+                Assert.Equal(5, records.Count());
             }
         }
-
     }
 }
 
