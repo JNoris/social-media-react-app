@@ -9,18 +9,35 @@ export const ProfileWrapper = styled.div`
 
     h1 {
         color: #f9f9f9;
+        padding:0;
+        margin-top:0;
     }
+    .MuiButton-root {
+        background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%);  
+        transition: 0.5s;
+        color: #fff;
+        border: none;
+        background-size: 125% auto;
+    }
+    .MuiButton-root:hover {
+        // background-position: right center;
+        color: #fff;
+        text-decoration: none;
+        outline: none;
+        background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);  
 `;
 export const ImgFrame = styled.div`
     width:50%;
     margin:auto;
-    border-radius:1rem;
-    max-height:30vh;
+    max-height:15vw;
     height:auto;
     overflow:hidden;
+    padding-bottom:0.5rem;
     img{
-        width:100%;
-        height:auto;
+        border-radius:1rem;
+        height:15vw;
+        width:15vw;
+        object-fit:cover;
     }
 `;
 export const PostDummy = styled.div`
@@ -34,7 +51,7 @@ export const PostDummy = styled.div`
         background: transparent;  /* Optional: just make scrollbar invisible */
     }  
     img {
-        border-radius: 15px;
+        border-radius: 0.5rem;
         border: none;
     }
 `;
@@ -110,11 +127,11 @@ export const BioML = styled(TextField)`
     width:30vw;
 `;
 export const ProfileGridWrapper = styled.div`
-    width:100%;
-    margin:auto;
+    text-align:center;
     img{
-        height:auto;
-        width:100%
+        width:21vw;
+        height:21vw;
+        object-fit:cover;
     }
 `;
 
@@ -132,4 +149,24 @@ export const ImgOverlay = styled.div`
     background-color:red;
     height:10px;
     width:10px;
+`;
+export const UploadBtns = styled.div`
+    width:50%;
+    margin:auto;
+    .btns{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    }
+    button{
+        padding:0.2rem;
+        margin:0 0.2rem;
+
+    }
+    .fwbtn{
+        width:100%;
+    }
+    .hwbtn{
+        width:50%;
+    }
 `;

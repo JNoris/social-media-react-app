@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Button from "@material-ui/core/Button";
 import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
-import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML, GridWrapper, FlexEven, LinkWrapper, ImgFrame } from "./Profile.styles";
+import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML, GridWrapper, FlexEven, LinkWrapper, ImgFrame, UploadBtns } from "./Profile.styles";
 import Grid from "@material-ui/core/Grid";
 import UserInfo from "../SideNav/SideNavProfile/SideNavProfileComponents/UserInfo";
 import ProfileGridItem from "./ProfileGridItem";
@@ -23,6 +23,7 @@ const Profile = () => {
   const [imgData, setImgData] = useState(null);
   const [picture, setPicture] = useState(null);
   const [isUpload, setIsUpload] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState(0);
 
   function checkIfPosts(data) {
     if (Array.isArray(data)) {
@@ -142,9 +143,8 @@ const Profile = () => {
           'content-type': 'multipart/form-data'
         }
     })
-        .then(res => console.log(res.status))
         .then(setIsUpload(false))
-        .then(window.location.reload())
+        .then(res => setUploadStatus(res.status))
         .catch(err => setError(true) && console.log(err));
     }
   }
@@ -171,7 +171,13 @@ const Profile = () => {
     }
   };
 
-
+  function refreshOnOK(status)
+  {
+    if(status===200)
+    {
+      window.location.reload();
+    }
+  }
   //Use Effect
   useEffect(() => {
     axios.get("https://localhost:5001/getcurrentuserdetails")
@@ -204,6 +210,9 @@ const Profile = () => {
     setImgData(userDetails.profilePhotoPath)
   }, [userDetails.profilePhotoPath])
 
+  useEffect(() => {
+    refreshOnOK(uploadStatus);
+  },[uploadStatus])
   //Error Pages
   if (error) {
     return (
@@ -224,8 +233,10 @@ const Profile = () => {
         <ImgFrame>
           <img src={imgData} alt={userDetails.userName} />
         </ImgFrame>
+        <UploadBtns>
+        <div className="btns">
         {isSelf && !isUpload? (
-          <Button onClick={handleClick}>Upload Profile
+          <Button className="fwbtn" onClick={handleClick} variant="contained">Upload Profile Photo
             <input
               type="file"
               onChange={onChangePicture}
@@ -234,16 +245,21 @@ const Profile = () => {
             />
           </Button>
         ) : null}
+
         {isSelf && isUpload? (
           <>
-          <Button onClick={uploadNewProfile}>
+          <Button className="hwbtn" onClick={uploadNewProfile}
+          variant="contained">
             Save
           </Button>
-          <Button onClick={cancelProfileUpload}>
+          <Button className="hwbtn" onClick={cancelProfileUpload}
+          variant="contained">
             Cancel
           </Button>
           </>
         ) : null}
+        </div>
+        </UploadBtns>
         <LinkWrapper>
           <Grid container justify="center" spacing={1}>
             <Grid item xs={4}>
@@ -354,7 +370,7 @@ const Profile = () => {
         <GridWrapper>
           {postsLoaded ? (<Grid container spacing={1} justify="flex-start" alignItems="center">
             {posts?.map((item) => (
-              <Grid item key={item.id} xs={12} md={6} lg={4}>
+              <Grid item key={item.id} xs={12} md={6}>
                 <ProfileGridItem
                   link={item.id}
                   src={item.photoPath}
