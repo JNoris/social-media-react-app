@@ -12,7 +12,7 @@ export const ProfileWrapper = styled.div`
     }
 `;
 export const ImgFrame = styled.div`
-    width:60%;
+    width:50%;
     margin:auto;
     border-radius:1rem;
     max-height:30vh;
@@ -123,4 +123,13 @@ margin-top: 1rem;
     p {
         color: #e4e4e4;
     }
+`;
+
+export const ImgOverlay = styled.div`
+    position:relative;
+    bottom:0;
+    right:0;
+    background-color:red;
+    height:10px;
+    width:10px;
 `;
