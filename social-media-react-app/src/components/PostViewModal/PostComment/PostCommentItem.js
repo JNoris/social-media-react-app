@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import {CommentWrapper} from './PostComment.styles'
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'; 
+import {CommentWrapper} from './PostComment.styles'
 
 const PostCommentItem= (props) => {
     console.log(props.comment)
@@ -56,7 +57,12 @@ const PostCommentItem= (props) => {
         <CommentWrapper>
             <ListItem key={comment.id} className="listItem">
                   <ListItemAvatar>
+                    <Link to={{
+                        pathname: "/profile/" + comment.userName,
+                        state: {userName: comment.userName}
+                        }}>
                       <Avatar aria-label="user" src={comment.profilePhotoPath}/>
+                    </Link>
                   </ListItemAvatar>
                 <ListItemText
                     primary={comment.userName}
