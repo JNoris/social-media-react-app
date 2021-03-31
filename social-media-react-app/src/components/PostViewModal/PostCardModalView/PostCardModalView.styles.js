@@ -4,6 +4,7 @@ export const CaptionWrapper = styled.div`
     p {
         margin-top: -15px;
         padding: 0 5px;
+        color: #fff;
     }
 `;
 
