@@ -1,26 +1,16 @@
 import React, { useState, useEffect } from "react"; // useState for Hooks
 import axios from "axios";
-import styled from "styled-components";
-import Register from "./Register";
 import Notification from "./Notification";
 import {
   Button,
   TextField,
   Avatar,
   CssBaseline,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
-  Box,
   Typography,
-  Container,
   makeStyles,
-  Paper,
-  Snackbar,
-  IconButton,
-  CloseIcon,
-  MuiAlert,
+  Paper
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 

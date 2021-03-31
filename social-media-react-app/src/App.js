@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router";
+import axios from 'axios';
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
@@ -16,9 +17,29 @@ import SearchBar from "./components/TopNav/TopNavComponents/SearchBar";
 
 function App() {
   const isAuth = !!localStorage.getItem("token");
+  const userStored = !!localStorage.getItem("username");
+  const [error, setError] = useState(false);
+  axios.defaults.headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`
+  }
+  function getLoggedInUser(){
+    if(isAuth)
+    {
+      axios.get("https://localhost:5001/getcurrentuserdetails")
+      .then(res => localStorage.setItem("username",res.data.userName))
+      .catch(err => setError(true) && console.log(err));
+    }
+  }
+  useEffect(() => {
+    getLoggedInUser();
+  }, [isAuth])
+  
+  if(error)
+  {
 
-  //const [token, setToken] = useState("");
-  if (isAuth) {
+  }
+  if (isAuth && userStored) {
     return (
       <Switch>
         <Flex>

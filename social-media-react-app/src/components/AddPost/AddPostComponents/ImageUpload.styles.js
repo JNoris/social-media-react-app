@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
     .submitButton{
         width:100%
     }
-    
+
     .MuiButton-label{
         padding:0;
     }
@@ -95,4 +95,8 @@ export const UploadButton = styled.div`
     background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);  
 }
 
+`;
+export const NotifWrapper = styled.div`
+    position:absolute;
+    top:10vh;
 `;
