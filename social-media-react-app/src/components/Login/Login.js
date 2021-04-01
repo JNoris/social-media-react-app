@@ -66,6 +66,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   // Styling
+  const [redirect, setRedirect] = useState(false);
+  const [status, setStatus] = useState(0);
   const classes = useStyles();
 
   // Error handling messages
@@ -78,7 +80,7 @@ const Login = () => {
   // State for username & password
   const [userName, setUserName] = useState("");
   const [passWord, setPassWord] = useState("");
-  const [redirect, setRedirect] = useState(false);
+  
 
   // Handle username & password
   const handleUsername = (event) => {
@@ -113,6 +115,7 @@ const Login = () => {
         })
         .then((response) => {
           if (response.status === 200) {
+            setStatus(response.status);
             window.localStorage.setItem("token", response.data.token);
             setNotify({
               isOpen: true,
@@ -121,7 +124,6 @@ const Login = () => {
             });
           }
         })
-        .setRedirect(true)
         .catch(e => window.alert(e.response.data.message));
     } else {
       setNotify({
@@ -146,10 +148,14 @@ const Login = () => {
     };
   });
 
+  useEffect(() => { 
+    if(status===200)
+    {
+      window.location.reload()
+    }
+    
+  }, [status])
 
-  if (redirect) {
-    return <Redirect to="/" />
-  }
   return (
     <SideWrapper>
       <Grid container component="main" className={classes.root}>
