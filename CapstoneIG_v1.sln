@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CapstoneIG_v1", "CapstoneIG_v1\CapstoneIG_v1.csproj", "{15813101-71B4-47EF-8327-0FC86FE70524}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapstoneIG_v1.Tests", "CapstoneIG_v1.Tests\CapstoneIG_v1.Tests.csproj", "{9EA0D7AD-025E-4A84-B420-32BAB526C35E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15813101-71B4-47EF-8327-0FC86FE70524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15813101-71B4-47EF-8327-0FC86FE70524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15813101-71B4-47EF-8327-0FC86FE70524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15813101-71B4-47EF-8327-0FC86FE70524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA0D7AD-025E-4A84-B420-32BAB526C35E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA0D7AD-025E-4A84-B420-32BAB526C35E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA0D7AD-025E-4A84-B420-32BAB526C35E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA0D7AD-025E-4A84-B420-32BAB526C35E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {044FCF15-4165-40E6-87A6-FD1BB6DF5A8D}
+	EndGlobalSection
+EndGlobal
