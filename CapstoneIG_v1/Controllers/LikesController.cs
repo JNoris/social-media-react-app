@@ -1,5 +1,6 @@
 ﻿using CapstoneIG_v1.Auth;
 using CapstoneIG_v1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace CapstoneIG_v1.Controllers
 {
     [ApiController]
+    [Authorize]
     public class LikesController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -27,42 +29,34 @@ namespace CapstoneIG_v1.Controllers
         [Route("GetLikes/{postId}")]
         public async Task<JsonResult> GetLikes(int postId)
         {
-            try
+            var likers = await _db.Likes.Where(x => x.PostId == postId).Select(x => new
             {
-                var likers = await _db.Likes.Where(x => x.PostId == postId).Select(x => new
-                {
-                    x.Id,
-                    x.LikeDate,
-                    x.PostId,
-                    x.LikeBy
-                }).ToListAsync();
+                x.Id,
+                x.LikeDate,
+                x.PostId,
+                x.LikeBy
+            }).ToListAsync();
 
-                List<LikeReponse> likeReponses = new List<LikeReponse>();
+            List<LikeReponse> likeReponses = new List<LikeReponse>();
 
-                foreach (var person in likers)
-                {
-                    ApplicationUser usr = _db.Users.Where(u => u.Id == person.LikeBy.Id).FirstOrDefault();
-
-                    LikeReponse singleLike = new LikeReponse()
-                    {
-                        Id = person.Id,
-                        ProfilePhotoPath = person.LikeBy.ProfileImageName,
-                        UserId = person.LikeBy.Id,
-                        UserName = person.LikeBy.UserName,
-                        FirstName = person.LikeBy.FirstName,
-                        LastName = person.LikeBy.LastName
-                    };
-                    likeReponses.Add(singleLike);
-                }
-                var orderByName = likeReponses.OrderBy(p => p.UserName);
-
-                return Json(orderByName);
-            }
-            catch (DbUpdateException)
+            foreach (var person in likers)
             {
-                Response.StatusCode = StatusCodes.Status500InternalServerError;
-                return Json(new { Status = "Failed", Message = "Unable to query Database" });
+                ApplicationUser usr = _db.Users.Where(u => u.Id == person.LikeBy.Id).FirstOrDefault();
+
+                LikeReponse singleLike = new LikeReponse()
+                {
+                    Id = person.Id,
+                    ProfilePhotoPath = person.LikeBy.ProfileImageName,
+                    UserId = person.LikeBy.Id,
+                    UserName = person.LikeBy.UserName,
+                    FirstName = person.LikeBy.FirstName,
+                    LastName = person.LikeBy.LastName
+                };
+                likeReponses.Add(singleLike);
             }
+            var orderByName = likeReponses.OrderBy(p => p.UserName);
+
+            return Json(orderByName);
         }
 
         [HttpPost]
@@ -87,18 +81,10 @@ namespace CapstoneIG_v1.Controllers
                     LikeBy = user
                 };
 
-                try
-                {
-                    _db.Likes.Add(newLike);
-                    _db.SaveChanges();
+                _db.Likes.Add(newLike);
+                _db.SaveChanges();
 
-                    return Ok(new Response { Status = "Success", Message = "Liked" });
-                }
-                catch (DbUpdateException)
-                {
-                    Response.StatusCode = StatusCodes.Status500InternalServerError;
-                    return Json(new { Status = "Failed", Message = "Unable to Update Database" });
-                }
+                return Ok(new Response { Status = "Success", Message = "Liked" });
             }
             else
             {
@@ -125,18 +111,10 @@ namespace CapstoneIG_v1.Controllers
 
             if (like != null)
             {
-                try
-                {
-                    _db.Likes.Remove(like);
-                    _db.SaveChanges();
+                _db.Likes.Remove(like);
+                _db.SaveChanges();
 
-                    return Ok(new Response { Status = "Success", Message = "Unliked" });
-                }
-                catch (DbUpdateException)
-                {
-                    Response.StatusCode = StatusCodes.Status500InternalServerError;
-                    return Json(new { Status = "Failed", Message = "Unable to Update Database" });
-                }
+                return Ok(new Response { Status = "Success", Message = "Unliked" });
             }
             else
             {

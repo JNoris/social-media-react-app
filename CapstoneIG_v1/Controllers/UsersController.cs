@@ -1,5 +1,6 @@
 ﻿using CapstoneIG_v1.Auth;
 using CapstoneIG_v1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 namespace CapstoneIG_v1.Controllers
 {
     [ApiController]
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _db;

@@ -21,13 +21,28 @@ namespace CapstoneIG_v1
             Configuration = configuration;
         }
 
+        //TO BE UPDATED BEFORE LAUNCH
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Default")));
 
-            services.AddCors();
+            //services.AddCors();
+
+            //TO BE UPDATED BEFORE LAUNCH
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:3000").AllowAnyHeader();
+                                  });
+            });
+
+
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -73,16 +88,22 @@ namespace CapstoneIG_v1
                 RequestPath = "/ProfileImages"
             });
 
-            app.UseCors(builder => builder
-            .AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader());
+            //Original
+            //app.UseCors(builder => builder
+            //.AllowAnyOrigin()
+            //.AllowAnyMethod()
+            //.AllowAnyHeader());
+
+
+            //TO BE UPDATED BEFORE LAUNCH
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

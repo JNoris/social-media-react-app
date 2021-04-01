@@ -6,10 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using CapstoneIG_v1.Auth;
 using CapstoneIG_v1.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CapstoneIG_v1.Controllers
 {
     [ApiController]
+    [Authorize]
     public class FollowersController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -26,8 +28,6 @@ namespace CapstoneIG_v1.Controllers
         [Route("GetFollowing/{username}")]
         public async Task<JsonResult> GetFollowing(string username)
         {
-            try
-            {
                 var followers = await _db.Followers.Where(x => x.UserId.UserName == username).Select(x => new
                 {
                     Id = x.Id,
@@ -39,12 +39,6 @@ namespace CapstoneIG_v1.Controllers
                 }).ToListAsync();
 
                 return Json(followers);
-            }
-            catch (DbUpdateException)
-            {
-                Response.StatusCode = StatusCodes.Status500InternalServerError;
-                return Json(new { Status = "Failed", Message = "Unable to query Database" });
-            }
         }
 
         //People who are following you
@@ -52,25 +46,17 @@ namespace CapstoneIG_v1.Controllers
         [Route("GetFollowers/{username}")]
         public async Task<JsonResult> GetFollowers(string username)
         {
-            try
+            var followers = await _db.Followers.Where(x => x.FollowingId.UserName == username).Select(x => new
             {
-                var followers = await _db.Followers.Where(x => x.FollowingId.UserName == username).Select(x => new
-                {
-                    Id = x.Id,
-                    UserId = x.UserId.Id,
-                    UserName = x.UserId.UserName,
-                    FirstName = x.UserId.FirstName,
-                    LastName = x.UserId.LastName,
-                    ProfilePhotoPath = x.UserId.ProfileImageName
-                }).ToListAsync();
+                Id = x.Id,
+                UserId = x.UserId.Id,
+                UserName = x.UserId.UserName,
+                FirstName = x.UserId.FirstName,
+                LastName = x.UserId.LastName,
+                ProfilePhotoPath = x.UserId.ProfileImageName
+            }).ToListAsync();
 
-                return Json(followers);
-            }
-            catch (DbUpdateException)
-            {
-                Response.StatusCode = StatusCodes.Status500InternalServerError;
-                return Json(new { Status = "Failed", Message = "Unable to query Database" });
-            }
+            return Json(followers);
         }
 
         [HttpPost]
@@ -94,18 +80,10 @@ namespace CapstoneIG_v1.Controllers
                     FollowingId = targetExists,
                 };
 
-                try
-                {
-                    _db.Followers.Add(newFollower);
-                    _db.SaveChanges();
+                _db.Followers.Add(newFollower);
+                _db.SaveChanges();
 
-                    return Ok(new Response { Status = "Success", Message = "Follower Added" });
-                }
-                catch (DbUpdateException)
-                {
-                    Response.StatusCode = StatusCodes.Status500InternalServerError;
-                    return Json(new { Status = "Failed", Message = "Unable to Update Database" });
-                }
+                return Ok(new Response { Status = "Success", Message = "Follower Added" });
             }
             else
             {
@@ -134,18 +112,10 @@ namespace CapstoneIG_v1.Controllers
 
             if (follow != null)
             {
-                try
-                {
-                    _db.Followers.Remove(follow);
-                    _db.SaveChanges();
+                _db.Followers.Remove(follow);
+                _db.SaveChanges();
 
-                    return Ok(new Response { Status = "Success", Message = "Follower Removed" });
-                }
-                catch (DbUpdateException)
-                {
-                    Response.StatusCode = StatusCodes.Status500InternalServerError;
-                    return Json(new { Status = "Failed", Message = "Unable to Update Database" });
-                }
+                return Ok(new Response { Status = "Success", Message = "Follower Removed" });
             }
             else
             {
@@ -167,18 +137,10 @@ namespace CapstoneIG_v1.Controllers
 
             if (follow != null)
             {
-                try
-                {
-                    _db.Followers.Remove(follow);
-                    _db.SaveChanges();
+                _db.Followers.Remove(follow);
+                _db.SaveChanges();
 
-                    return Ok(new Response { Status = "Success", Message = "Follower Removed" });
-                }
-                catch (DbUpdateException)
-                {
-                    Response.StatusCode = StatusCodes.Status500InternalServerError;
-                    return Json(new { Status = "Failed", Message = "Unable to Update Database" });
-                }
+                return Ok(new Response { Status = "Success", Message = "Follower Removed" });
             }
             else
             {
