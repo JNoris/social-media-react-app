@@ -20,45 +20,64 @@ namespace CapstoneIG_v1.Controllers
             _db = db;
             _userManager = userManager;
         }
+
         //People you are following
         [HttpGet]
         [Route("GetFollowing/{username}")]
         public async Task<JsonResult> GetFollowing(string username)
         {
-            var followers = await _db.Followers.Where(x => x.UserId.UserName == username).Select(x => new
+            try
             {
-                Id = x.Id,
-                UserId = x.FollowingId.Id,
-                UserName = x.FollowingId.UserName,
-                FirstName = x.FollowingId.FirstName,
-                LastName = x.FollowingId.LastName,
-                ProfilePhotoPath = x.FollowingId.ProfileImageName
-            }).ToListAsync();
+                var followers = await _db.Followers.Where(x => x.UserId.UserName == username).Select(x => new
+                {
+                    Id = x.Id,
+                    UserId = x.FollowingId.Id,
+                    UserName = x.FollowingId.UserName,
+                    FirstName = x.FollowingId.FirstName,
+                    LastName = x.FollowingId.LastName,
+                    ProfilePhotoPath = x.FollowingId.ProfileImageName
+                }).ToListAsync();
 
-            return Json(followers);
+                return Json(followers);
+            }
+            catch (DbUpdateException)
+            {
+                Response.StatusCode = StatusCodes.Status500InternalServerError;
+                return Json(new { Status = "Failed", Message = "Unable to query Database" });
+            }
         }
+
         //People who are following you
         [HttpGet]
         [Route("GetFollowers/{username}")]
         public async Task<JsonResult> GetFollowers(string username)
         {
-            var followers = await _db.Followers.Where(x => x.FollowingId.UserName == username).Select(x => new
+            try
             {
-                Id = x.Id,
-                UserId = x.UserId.Id,
-                UserName = x.UserId.UserName,
-                FirstName = x.UserId.FirstName,
-                LastName = x.UserId.LastName,
-                ProfilePhotoPath = x.UserId.ProfileImageName
-            }).ToListAsync();
+                var followers = await _db.Followers.Where(x => x.FollowingId.UserName == username).Select(x => new
+                {
+                    Id = x.Id,
+                    UserId = x.UserId.Id,
+                    UserName = x.UserId.UserName,
+                    FirstName = x.UserId.FirstName,
+                    LastName = x.UserId.LastName,
+                    ProfilePhotoPath = x.UserId.ProfileImageName
+                }).ToListAsync();
 
-            return Json(followers);
+                return Json(followers);
+            }
+            catch (DbUpdateException)
+            {
+                Response.StatusCode = StatusCodes.Status500InternalServerError;
+                return Json(new { Status = "Failed", Message = "Unable to query Database" });
+            }
         }
 
         [HttpPost]
         [Route("AddNewFollow/{username}")]
         public async Task<IActionResult> AddNewFollow(string username)
         {
+            string message;
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
             //Check if targetId exists
@@ -75,22 +94,31 @@ namespace CapstoneIG_v1.Controllers
                     FollowingId = targetExists,
                 };
 
-                _db.Followers.Add(newFollower);
-                _db.SaveChanges();
+                try
+                {
+                    _db.Followers.Add(newFollower);
+                    _db.SaveChanges();
+
+                    return Ok(new Response { Status = "Success", Message = "Follower Added" });
+                }
+                catch (DbUpdateException)
+                {
+                    Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    return Json(new { Status = "Failed", Message = "Unable to Update Database" });
+                }
             }
             else
             {
                 if (targetExists == null)
                 {
-                    return Ok(new Response { Status = "Failed", Message = "Unable to Find User" });
+                    message = "Unable to Find User";
                 }
                 else
                 {
-                    return Ok(new Response { Status = "Failed", Message = "Unable to Add User" });
+                    message = "Already following User";
                 }
+                return BadRequest(new Response { Status = "Failed", Message = message });
             }
-
-            return Ok(new Response { Status = "Success", Message = "Follower Added" });
         }
 
         [HttpPost]
@@ -101,20 +129,29 @@ namespace CapstoneIG_v1.Controllers
 
             ApplicationUser target = _db.Users.Where(p => p.UserName == username).FirstOrDefault();
 
-            //Check if target exists
+            //Check if following target
             FollowersModel follow = _db.Followers.Where(p => p.UserId == user).Where(q => q.FollowingId == target).FirstOrDefault();
 
             if (follow != null)
             {
-                _db.Followers.Remove(follow);
-                _db.SaveChanges();
+                try
+                {
+                    _db.Followers.Remove(follow);
+                    _db.SaveChanges();
+
+                    return Ok(new Response { Status = "Success", Message = "Follower Removed" });
+                }
+                catch (DbUpdateException)
+                {
+                    Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    return Json(new { Status = "Failed", Message = "Unable to Update Database" });
+                }
             }
             else
             {
-                return Ok(new Response { Status = "Failed", Message = "Unable to Find User" });
+                return BadRequest(new Response { Status = "Failed", Message = "Unable to Find User" });
             }
 
-            return Ok(new Response { Status = "Success", Message = "Follower Removed" });
         }
 
         [HttpPost]
@@ -130,15 +167,23 @@ namespace CapstoneIG_v1.Controllers
 
             if (follow != null)
             {
-                _db.Followers.Remove(follow);
-                _db.SaveChanges();
+                try
+                {
+                    _db.Followers.Remove(follow);
+                    _db.SaveChanges();
+
+                    return Ok(new Response { Status = "Success", Message = "Follower Removed" });
+                }
+                catch (DbUpdateException)
+                {
+                    Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    return Json(new { Status = "Failed", Message = "Unable to Update Database" });
+                }
             }
             else
             {
                 return Ok(new Response { Status = "Failed", Message = "Unable to Find User" });
             }
-
-            return Ok(new Response { Status = "Success", Message = "Follower Removed" });
         }
     }
 }

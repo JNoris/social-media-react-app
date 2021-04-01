@@ -30,70 +30,79 @@ namespace CapstoneIG_v1.Controllers
         {
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
-            CommentModel newComment = new CommentModel()
+            if (user!=null)
             {
-                CommentText = comment.CommentText,
-                CommentDate = DateTime.Now,
-                PostId = postId,
-                CommentBy = user
-            };
+                CommentModel newComment = new CommentModel()
+                {
+                    CommentText = comment.CommentText,
+                    CommentDate = DateTime.Now,
+                    PostId = postId,
+                    CommentBy = user
+                };
 
-            _db.Comments.Add(newComment);
-            _db.SaveChanges();
+                try
+                {
+                    _db.Comments.Add(newComment);
+                    _db.SaveChanges();
+                }
+                catch (DbUpdateException)
+                {
+                    Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    return Json(new Response { Status = "Failed", Message = "Unable to Save to Database" });
+                }
 
-            return Ok(new Response { Status = "Success", Message = "Comment Added" });
+                return Ok(new Response { Status = "Success", Message = "Comment Added" }); 
+            }
+            else
+            {
+                return BadRequest(new Response { Status = "Failed", Message = "Unable to find User" });
+            }
         }
-
-        //[HttpGet]
-        //[Route("GetPostCommentsFull/{postId}")]
-        //public async Task<JsonResult> GetPostCommentsFull(int postId)
-        //{
-        //    var comments = await _db.Comments.Where(x => x.PostId == postId).Select(x => new
-        //    {
-        //        x.Id,
-        //        x.CommentText,
-        //        x.CommentDate,
-        //        x.PostId,
-        //        userId = x.CommentBy.Id
-        //    }).ToListAsync();
-        //    return Json(comments);
-        //}
 
         [HttpGet]
         [Route("GetPostComments/{postId}")]
         public async Task<JsonResult> GetPostComments(int postId)
         {
-            var comments = await _db.Comments.Where(x => x.PostId == postId).Select(x => new
-            {
-                Id = x.Id,
-                ProfilePhotoPath = x.CommentBy.ProfileImageName,
-                UserId = x.CommentBy.Id,
-                UserName = x.CommentBy.UserName,
-                FirstName = x.CommentBy.FirstName,
-                LastName = x.CommentBy.LastName,
-                Text = x.CommentText
-            }).ToListAsync();
-
             List<CommentResponse> commentResponses = new List<CommentResponse>();
 
-            foreach (var comment in comments)
+            try
             {
-                ApplicationUser usr = _db.Users.Where(u => u.Id == comment.UserId).FirstOrDefault();
-
-                CommentResponse singleComment = new CommentResponse()
+                var comments = await _db.Comments.Where(x => x.PostId == postId).Select(x => new
                 {
-                    Id = comment.Id,
-                    ProfilePhotoPath = comment.ProfilePhotoPath,
-                    UserId = comment.UserId,
-                    UserName = comment.UserName,
-                    FirstName = comment.FirstName,
-                    LastName = comment.LastName,
-                    Text = comment.Text
-                };
-                commentResponses.Add(singleComment);
+                    Id = x.Id,
+                    ProfilePhotoPath = x.CommentBy.ProfileImageName,
+                    UserId = x.CommentBy.Id,
+                    UserName = x.CommentBy.UserName,
+                    FirstName = x.CommentBy.FirstName,
+                    LastName = x.CommentBy.LastName,
+                    Text = x.CommentText
+                }).ToListAsync();
+
+                foreach (var comment in comments)
+                {
+                    ApplicationUser usr = _db.Users.Where(u => u.Id == comment.UserId).FirstOrDefault();
+
+                    CommentResponse singleComment = new CommentResponse()
+                    {
+                        Id = comment.Id,
+                        ProfilePhotoPath = comment.ProfilePhotoPath,
+                        UserId = comment.UserId,
+                        UserName = comment.UserName,
+                        FirstName = comment.FirstName,
+                        LastName = comment.LastName,
+                        Text = comment.Text
+                    };
+                    commentResponses.Add(singleComment);
+                }
+                var orderByDate = commentResponses.OrderBy(p => p.Id);
+
+                return Json(orderByDate);
             }
-            var orderByDate = commentResponses.OrderBy(p => p.Id);
-            return Json(orderByDate);
+            catch (DbUpdateException)
+            {
+                Response.StatusCode = StatusCodes.Status500InternalServerError;
+                return Json(new { Status = "Failed", Message = "Unable to query Database" });
+            }
         }
 
 
@@ -103,19 +112,34 @@ namespace CapstoneIG_v1.Controllers
         {
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
-            CommentModel comment = _db.Comments.Where(p => p.CommentBy == user).Where(q => q.Id == commentID).FirstOrDefault();
-
-            if (comment != null)
+            if (user !=null)
             {
-                _db.Comments.Remove(comment);
-                await _db.SaveChangesAsync();
+                CommentModel comment = _db.Comments.Where(p => p.CommentBy == user).Where(q => q.Id == commentID).FirstOrDefault();
+
+                if (comment != null)
+                {
+                    try
+                    {
+                        _db.Comments.Remove(comment);
+                        await _db.SaveChangesAsync();
+
+                        return Ok(new Response { Status = "Success", Message = "Post Deleted" });
+                    }
+                    catch (DbUpdateException)
+                    {
+                        Response.StatusCode = StatusCodes.Status500InternalServerError;
+                        return Json(new { Status = "Failed", Message = "Unable to query Database" });
+                    }
+                }
+                else
+                {
+                    return BadRequest(new Response { Status = "Failed", Message = "You can't delete a post you don't own" });
+                }
             }
             else
             {
-                return Ok(new Response { Status = "Failed", Message = "You can't delete a post you don't own" });
+                return BadRequest(new Response { Status = "Failed", Message = "Unable to find User" });
             }
-
-            return Ok(new Response { Status = "Success", Message = "Post Deleted" });
         }
     }
 }
