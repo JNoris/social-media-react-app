@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
 import Container from '@material-ui/core/Container';
 import FollowingListItem from './FollowingListItem';
 import { Wrapper } from '../Follow.styles';

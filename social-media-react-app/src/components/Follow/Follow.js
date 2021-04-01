@@ -56,7 +56,6 @@ const Follow = (props) => {
     const [follower, setFollower] = useState([]);
     const [following, setFollowing] = useState([]);
     const [error, setError] = useState(false);
-    const [noUser, setNoUser] = useState(false);
     const [value, setValue] = useState(0);
 
     axios.defaults.headers = {

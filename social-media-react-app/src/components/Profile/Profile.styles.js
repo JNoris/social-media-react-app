@@ -3,25 +3,30 @@ import styled from 'styled-components'
 
 export const ProfileWrapper = styled.div`
     display:flex;
+    color:#FAF9F6;
     .MuiGrid-root {
         padding:0;
     }
+    a{
+        text-decoration:none;
+    }
 
     h1 {
-        color: #f9f9f9;
+        color: #FAF9F6;
         padding:0;
         margin-top:0;
+        font-size:clamp(1rem,3vw,2.5rem);
     }
     .MuiButton-root {
         background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%);  
         transition: 0.5s;
-        color: #fff;
+        color: #FAF9F6;
         border: none;
         background-size: 125% auto;
     }
     .MuiButton-root:hover {
         // background-position: right center;
-        color: #fff;
+        color: #FAF9F6;
         text-decoration: none;
         outline: none;
         background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);  
@@ -62,9 +67,6 @@ export const GridWrapper = styled.div`
 export const InfoCol = styled.div`
     width:30vw;
     padding:3vw 3vw 0 3vw;
-    h1{
-        font-size:clamp(1rem,3vw,2.5rem);
-    }
     p{
         font-size:1vw;
         font-weight:700;
@@ -155,7 +157,8 @@ export const UploadBtns = styled.div`
     button{
         padding:0.2rem;
         margin:0 0.2rem;
-        font-size: clamp(0.6rem,1vw,1rem);
+        font-size: clamp(0.6rem,1vw,0.8rem);
+
     }
     .fwbtn{
         width:100%;

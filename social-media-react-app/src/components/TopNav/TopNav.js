@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-// import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import AddIcon from '@material-ui/icons/Add';
-// import NewDrop from './TopNavComponents/NewDrop';
 import { NavIcon, TopNavWrapper } from './TopNav.styles';
-// import SearchBar from './TopNavComponents/SearchBar';
 
 
 function NavItem(props) {
@@ -17,7 +14,7 @@ function NavItem(props) {
             <NavIcon
                 color="inherit"
                 style={{ color: 'red', backgroundColor: 'black' }}
-                size="large"
+                size="medium"
                 onClick={() => setOpen(!open)}>
                 {props.icon}
             </NavIcon>
@@ -37,9 +34,6 @@ const TopNav = () => {
             <Link to="/chat">
                 <NavItem icon={<WhatsAppIcon />} />
             </Link>
-            {/* <NavItem icon={<ArrowDropDownIcon />}>
-                <NewDrop />
-            </NavItem> */}
         </TopNavWrapper>
     );
 }

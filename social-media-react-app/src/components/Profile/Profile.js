@@ -8,7 +8,7 @@ import UserInfo from "../SideNav/SideNavProfile/SideNavProfileComponents/UserInf
 import ProfileGridItem from "./ProfileGridItem";
 
 const Profile = () => {
-
+  const userName = localStorage.getItem("username");
   const [bio, setBio] = useState("");
   const [bioReadOnly, setReadOnly] = useState(true);
   const [saveBtn, showSaveBtn] = useState(false);
@@ -19,7 +19,6 @@ const Profile = () => {
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [posts, setPosts] = useState("");
   const [isFollowing, setIsFollowing] = useState(false);
-  const [current, setCurrent] = useState([]);
   const [imgData, setImgData] = useState(null);
   const [picture, setPicture] = useState(null);
   const [isUpload, setIsUpload] = useState(false);
@@ -41,22 +40,22 @@ const Profile = () => {
     Authorization: `Bearer ${localStorage.getItem("token")}`
   }
   //User Detail API Calls
-  function getCurrentUserDetails() {
-    axios.get("https://localhost:5001/getcurrentuserdetails")
-      .then(res => setUserDetails(res.data))
-      .catch(err => setError(true) && console.log(err));
-    axios.get("https://localhost:5001/getcurrentuserposts")
-      .then(res => checkIfPosts(res.data))
-      .catch(err => console.log(error));
-  }
 
   function getUserDetails(username) {
-    axios.get("https://localhost:5001/getuserdetails/" + username)
+    if(username !== undefined)
+    {
+      axios.get("https://localhost:5001/getuserdetails/" + username)
       .then(res => setUserDetails(res.data))
       .catch(err => setNoUser(true) && console.log(err));
-    axios.get("https://localhost:5001/getuserposts/" + username)
+    }
+  }
+  function getUserPosts(username){
+    if(username !== undefined)
+    {
+      axios.get("https://localhost:5001/getuserposts/" + username)
       .then(res => checkIfPosts(res.data))
       .catch(err => console.log(error));
+    }
   }
   //For refresh follow number after following/unfollow
   function getUserData(username) {
@@ -69,24 +68,17 @@ const Profile = () => {
   //URL Parameters
   let url = useParams();
   function checkParams(urlid) {
-    if (urlid !== undefined) {
-      console.log(url.id);
-      console.log("not current");
+    if (urlid !== undefined && urlid !== userName) {
       getUserDetails(url.id);
+      getUserPosts(urlid);
     }
     else {
-      getCurrentUserDetails();
-      console.log("Current user");
+      getUserDetails(userName);
+      getUserPosts(userName);
       setIsSelf(true);
     }
   }
   
-  function ifSelfLink() {
-    if (url.id === current.userName) {
-      setIsSelf(true);
-    }
-  }
-
   //Bio
   const handleBioChange = (event) => {
     setBio(event.target.value);
@@ -126,7 +118,6 @@ const Profile = () => {
         .catch(err => setError(true) && console.log(err));
     }
   }
-
 
   //Image Upload
   const hiddenFileInput = useRef(null);
@@ -179,17 +170,17 @@ const Profile = () => {
     }
   }
   //Use Effect
-  useEffect(() => {
-    axios.get("https://localhost:5001/getcurrentuserdetails")
-      .then(res => setCurrent(res.data))
-      .catch(err => setError(true) && console.log(err));
-  }, [])
+
   useEffect(() => {
     checkParams(url.id);
-    setBio(userDetails.bio)
-
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url.id, userDetails.bio]);
+  }, [url.id]);
+
+  useEffect(() => {
+    setBio(userDetails.bio);
+  },[userDetails.bio])
+
   useEffect(() => {
     setIsFollowing(userDetails.isFollowed)
   }, [userDetails])
@@ -199,12 +190,6 @@ const Profile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFollowing])
 
-
-  //Check if self if link name is same
-  useEffect(() => {
-    ifSelfLink()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [current])
   //Set profile picture
   useEffect(() => {
     setImgData(userDetails.profilePhotoPath)
@@ -326,7 +311,7 @@ const Profile = () => {
           <BioML
             multiline
             value={bio}
-            InputProps={{
+            inputProps={{
               readOnly: bioReadOnly,
               className: "bio-text",
             }}

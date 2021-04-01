@@ -5,14 +5,31 @@ import {
   Button,
   TextField,
   Avatar,
-  CssBaseline,
   Link,
   Grid,
   Typography,
-  makeStyles,
-  Paper
+  makeStyles
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import styled from 'styled-components';
+
+const SideWrapper = styled.div`
+  .MuiGrid-root{
+    color:rgba(250,250,250, 0.7);
+  }
+  a{
+    color:rgba(250,250,250, 0.5);
+  }
+  .MuiInputBase-root{
+    background-color:rgba(250,250,250, 0.5);
+  }
+  label.Mui-focused{
+    color:white;
+  }
+  svg{
+    color:black;
+  }
+`;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
   },
   containerStyle: {
     width: "100%", // Fix IE 11 issue.
@@ -77,7 +93,8 @@ const Login = () => {
     // username must be 3-16 characters
     let usernameRegex = /^[a-z0-9_-]{3,16}$/;
     // Password, 6-20 char and must have a number and a special character
-    let passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/;
+    //let passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/;
+    let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/;
 
     if (usernameRegex.test(userName) && passwordRegex.test(passWord)) {
       res = true;
@@ -129,74 +146,75 @@ const Login = () => {
   });
 
   return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
+    <SideWrapper>
+      <Grid container component="main" className={classes.root}>
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
+        <Grid item xs={12} sm={8} md={5} elevation={6} square>
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
           </Typography>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="userName"
-            label="Username"
-            value={userName}
-            onChange={handleUsername}
-            name="userName"
-            autoComplete="username"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            value={passWord}
-            onChange={handlePassword}
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          {/* <FormControlLabel
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="userName"
+              label="Username"
+              value={userName}
+              onChange={handleUsername}
+              name="userName"
+              autoComplete="username"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              value={passWord}
+              onChange={handlePassword}
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             /> */}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            value="Login"
-            onClick={handleLoginButton}
-            className={classes.submit}
-          >
-            Sign In
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              value="Login"
+              onClick={handleLoginButton}
+              className={classes.submit}
+            >
+              Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
               </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/register" to="/register" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link href="/register" to="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-          <Notification notify={notify} setNotify={setNotify} />
-        </div>
+            <Notification notify={notify} setNotify={setNotify} />
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
+    </SideWrapper>
   );
 };
 
