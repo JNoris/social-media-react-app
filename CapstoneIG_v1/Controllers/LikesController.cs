@@ -27,40 +27,49 @@ namespace CapstoneIG_v1.Controllers
         [Route("GetLikes/{postId}")]
         public async Task<JsonResult> GetLikes(int postId)
         {
-            var likers = await _db.Likes.Where(x => x.PostId == postId).Select(x => new
+            try
             {
-                x.Id,
-                x.LikeDate,
-                x.PostId,
-                x.LikeBy
-            }).ToListAsync();
-
-            List<LikeReponse> likeReponses = new List<LikeReponse>();
-
-            foreach (var person in likers)
-            {
-                ApplicationUser usr = _db.Users.Where(u => u.Id == person.LikeBy.Id).FirstOrDefault();
-
-                LikeReponse singleLike = new LikeReponse()
+                var likers = await _db.Likes.Where(x => x.PostId == postId).Select(x => new
                 {
-                    Id = person.Id,
-                    ProfilePhotoPath = person.LikeBy.ProfileImageName,
-                    UserId = person.LikeBy.Id,
-                    UserName = person.LikeBy.UserName,
-                    FirstName = person.LikeBy.FirstName,
-                    LastName = person.LikeBy.LastName
-                };
-                likeReponses.Add(singleLike);
-            }
-            var orderByName = likeReponses.OrderBy(p => p.UserName);
+                    x.Id,
+                    x.LikeDate,
+                    x.PostId,
+                    x.LikeBy
+                }).ToListAsync();
 
-            return Json(orderByName);
+                List<LikeReponse> likeReponses = new List<LikeReponse>();
+
+                foreach (var person in likers)
+                {
+                    ApplicationUser usr = _db.Users.Where(u => u.Id == person.LikeBy.Id).FirstOrDefault();
+
+                    LikeReponse singleLike = new LikeReponse()
+                    {
+                        Id = person.Id,
+                        ProfilePhotoPath = person.LikeBy.ProfileImageName,
+                        UserId = person.LikeBy.Id,
+                        UserName = person.LikeBy.UserName,
+                        FirstName = person.LikeBy.FirstName,
+                        LastName = person.LikeBy.LastName
+                    };
+                    likeReponses.Add(singleLike);
+                }
+                var orderByName = likeReponses.OrderBy(p => p.UserName);
+
+                return Json(orderByName);
+            }
+            catch (DbUpdateException)
+            {
+                Response.StatusCode = StatusCodes.Status500InternalServerError;
+                return Json(new { Status = "Failed", Message = "Unable to query Database" });
+            }
         }
 
         [HttpPost]
         [Route("AddLike/{postId}")]
         public async Task<IActionResult> AddLike(int postId)
         {
+            string message;
             ApplicationUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
             //Check if post exists
@@ -78,22 +87,31 @@ namespace CapstoneIG_v1.Controllers
                     LikeBy = user
                 };
 
-                _db.Likes.Add(newLike);
-                _db.SaveChanges();
+                try
+                {
+                    _db.Likes.Add(newLike);
+                    _db.SaveChanges();
+
+                    return Ok(new Response { Status = "Success", Message = "Liked" });
+                }
+                catch (DbUpdateException)
+                {
+                    Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    return Json(new { Status = "Failed", Message = "Unable to Update Database" });
+                }
             }
             else
             {
                 if (targetExists == null)
                 {
-                    return Ok(new Response { Status = "Failed", Message = "Unable to find Post" });
+                    message = "Unable to find Post";
                 }
                 else
                 {
-                    return Ok(new Response { Status = "Failed", Message = "Already Liked" });
+                    message = "Already Liked" ;
                 }
+                return BadRequest(new Response { Status = "Failed", Message = message });
             }
-
-            return Ok(new Response { Status = "Success", Message = "Liked" });
         }
 
         [HttpPost]
@@ -107,15 +125,23 @@ namespace CapstoneIG_v1.Controllers
 
             if (like != null)
             {
-                _db.Likes.Remove(like);
-                _db.SaveChanges();
+                try
+                {
+                    _db.Likes.Remove(like);
+                    _db.SaveChanges();
+
+                    return Ok(new Response { Status = "Success", Message = "Unliked" });
+                }
+                catch (DbUpdateException)
+                {
+                    Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    return Json(new { Status = "Failed", Message = "Unable to Update Database" });
+                }
             }
             else
             {
-                return Ok(new Response { Status = "Failed", Message = "Unable to Find Like" });
+                return BadRequest(new Response { Status = "Failed", Message = "Unable to Find Like" });
             }
-
-            return Ok(new Response { Status = "Success", Message = "Unliked" });
         }
     }
 }
