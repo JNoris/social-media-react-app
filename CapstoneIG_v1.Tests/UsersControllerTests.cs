@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using CapstoneIG_v1.Controllers;
 using Microsoft.AspNetCore.Hosting;
+using System.Collections.Generic;
 
 namespace CapstoneIG_v1.Tests
 {
@@ -221,6 +222,39 @@ namespace CapstoneIG_v1.Tests
                 UserResponse records = JsonConvert.DeserializeObject<UserResponse>(JsonConvert.SerializeObject(res.Value));
 
                 Assert.Equal(1, records.NumberOfFollowing);
+            }
+        }
+
+        [Fact]
+        public async Task SearchUser()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
+
+            var context = new ApplicationDbContext(options);
+
+            var mockStore = Mock.Of<IUserStore<ApplicationUser>>();
+            var mockUserManager = new Mock<UserManager<ApplicationUser>>(mockStore, null, null, null, null, null, null, null, null);
+
+            var mockEnv = Mock.Of<IWebHostEnvironment>();
+
+            var controller = new UsersController(context, mockUserManager.Object, mockEnv)
+            {
+                ControllerContext = new ControllerContext()
+            };
+
+            using (context)
+            {
+                context.Users.Add(new ApplicationUser { Id = "123", UserName = "snowman" });
+                context.Users.Add(new ApplicationUser { Id = "456", UserName = "rainman" });
+                context.Users.Add(new ApplicationUser { Id = "789", UserName = "windman" });
+
+                context.SaveChanges();
+
+                var res = controller.SearchUser("man");
+
+                List<SearchUserResponse> records = JsonConvert.DeserializeObject<List<SearchUserResponse>>(JsonConvert.SerializeObject(res.Value));
+
+                Assert.Equal(3, records.Count);
             }
         }
     }

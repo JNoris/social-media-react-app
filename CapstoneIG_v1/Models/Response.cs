@@ -35,6 +35,15 @@ namespace CapstoneIG_v1.Models
         public int NumberOfFollowing { get; set; }
         public bool IsFollowed { get; set; }
     }
+
+    public class SearchUserResponse
+    {
+        public string ProfilePhotoPath { get; set; }
+        public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
+
     public class CommentResponse
     {
         public int Id { get; set; }

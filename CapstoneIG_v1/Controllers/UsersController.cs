@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -191,6 +192,41 @@ namespace CapstoneIG_v1.Controllers
             {
                 Response.StatusCode = StatusCodes.Status400BadRequest;
                 res = Json(new { Status = "Failed", Message = "No user found" });
+            }
+
+            return res;
+        }
+
+        [HttpGet]
+        [Route("search/{username}")]
+        public JsonResult SearchUser(string username)
+        {
+            dynamic res;
+
+            List<ApplicationUser> users = _db.Users.Where(u => u.UserName.Contains(username)).ToList();
+
+            List<SearchUserResponse> resultList = new List<SearchUserResponse>();
+
+            foreach (var u in users)
+            {
+                SearchUserResponse searchResponse = new SearchUserResponse()
+                {
+                    ProfilePhotoPath = u.ProfileImageName,
+                    UserName = u.UserName,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName
+                };
+
+                resultList.Add(searchResponse);
+            }
+
+            if (resultList.Count == 0)
+            {
+                res = Json(new { Status = "Success", Message = "No users found" });
+            }
+            else
+            {
+                res = Json(resultList);
             }
 
             return res;
