@@ -91,20 +91,20 @@ const Follow = (props) => {
     let url = useParams();
     function checkParams(urlid) {
         if (urlid !== undefined) {
-            console.log(url.id);
+            //console.log(url.id);
             setUserName(url.id);
-            console.log("not current");
+            //console.log("not current");
         }
         else {
             if (state.userName !== "") {
-                console.log(state.userName);
+                //console.log(state.userName);
                 getUserFollows(state.userName);
             }
             else {
                 getCurrentUserDetails();
             }
             setIsSelf(true);
-            console.log("Current user");
+            //console.log("Current user");
         }
     }
     const handleChange = (event, newValue) => {

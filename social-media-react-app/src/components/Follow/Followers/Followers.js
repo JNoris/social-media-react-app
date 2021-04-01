@@ -20,7 +20,7 @@ const Followers = (props) => {
                 setLength(data.length);
             }
             else {
-                console.log("no data");
+                //console.log("no data");
                 setNoFollow(true);
             }
         }

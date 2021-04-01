@@ -136,7 +136,7 @@ const Login = () => {
   useEffect(() => {
     const listener = (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
-        console.log("Enter key was pressed. Run your function.");
+        //console.log("Enter key was pressed. Run your function.");
         handleLoginButton();
       }
     };

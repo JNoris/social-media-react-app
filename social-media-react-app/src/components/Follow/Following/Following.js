@@ -17,7 +17,7 @@ const Following = (props) => {
                 setNoFollowing(false);
             }
             else {
-                console.log("no data");
+                //console.log("no data");
                 setNoFollowing(true);
             }
         }
