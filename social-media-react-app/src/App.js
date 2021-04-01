@@ -39,7 +39,7 @@ function App() {
   {
 
   }
-  if (isAuth && !userStored) {
+  if (isAuth && userStored) {
     return (
       <Switch>
         <Flex>
