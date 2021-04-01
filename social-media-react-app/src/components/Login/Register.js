@@ -9,7 +9,7 @@ import {
   Grid,
   Typography,
   Container,
-  makeStyles,
+  makeStyles
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Redirect } from "react-router";

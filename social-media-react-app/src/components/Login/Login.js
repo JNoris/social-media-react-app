@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"; // useState for Hooks
 import axios from "axios";
+import { Redirect } from 'react-router-dom';
 import Notification from "./Notification";
 import {
   Button,
@@ -94,6 +95,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   // Styling
+  const [redirect, setRedirect] = useState(false);
+  const [status, setStatus] = useState(0);
   const classes = useStyles();
 
   // Error handling messages
@@ -106,6 +109,7 @@ const Login = () => {
   // State for username & password
   const [userName, setUserName] = useState("");
   const [passWord, setPassWord] = useState("");
+  
 
   // Handle username & password
   const handleUsername = (event) => {
@@ -131,7 +135,6 @@ const Login = () => {
 
     return res;
   }
-
   const handleLoginButton = () => {
     if (inputValidation()) {
       axios
@@ -141,6 +144,7 @@ const Login = () => {
         })
         .then((response) => {
           if (response.status === 200) {
+            setStatus(response.status);
             window.localStorage.setItem("token", response.data.token);
             setNotify({
               isOpen: true,
@@ -149,7 +153,6 @@ const Login = () => {
             });
           }
         })
-        .then(() => window.location.reload())
         .catch(e => window.alert(e.response.data.message));
     } else {
       setNotify({
@@ -173,6 +176,14 @@ const Login = () => {
       document.removeEventListener("keydown", listener);
     };
   });
+
+  useEffect(() => { 
+    if(status===200)
+    {
+      window.location.reload()
+    }
+    
+  }, [status])
 
   return (
     <SideWrapper>
