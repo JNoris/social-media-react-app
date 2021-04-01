@@ -175,7 +175,7 @@ function Settings() {
           color="primary"
           onClick={()=>history.goBack()}
           >
-            <span>&lt;</span> Back
+            Back
           </Button>{" "}
             Settings
         </h1>
@@ -186,6 +186,7 @@ function Settings() {
           inputProps={{
             className:"Search"
           }}
+          className="search"
           onChange={onChange}
           placeholder="Search..."
         />

@@ -21,7 +21,7 @@ const RegisterWrapper = styled.div`
     color: #fff;
   }
   .MuiContainer-root{
-    background-color: rgba(39,43,52,.9);
+    background-color: rgba(255,255,255,.1);
     padding-bottom:1rem;
     border-radius:1rem;
   }
