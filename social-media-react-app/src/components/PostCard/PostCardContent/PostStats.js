@@ -8,8 +8,6 @@ import PostViewModal from "../../PostViewModal/PostViewModal"
 
 const PostStats = (props) => {
 
-    console.log(props)
-
     const [like, setLike] = useState(props.isLiked);
     const [heartColor, setHeartColor] = useState(like ? {color: "#e2336b"} : {color: "#fff"});
     const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +19,7 @@ const PostStats = (props) => {
     useEffect(() => {
             if(like) {
                 setHeartColor({color: "#e2336b"})
-            } else if(like == undefined) {
+            } else if(like === undefined) {
                 setLike(false)
             }
         }, 
@@ -70,7 +68,7 @@ const PostStats = (props) => {
             .catch(err=>console.log(err))
             setLike(false);
             setHeartColor({color: "#fff"});
-            var tempLikes = numOfLikes -1;
+            tempLikes = numOfLikes -1;
             setNumOfLikes(tempLikes);
         }
     }

@@ -24,7 +24,6 @@ const PostCardAddComment = (props) => {
                 })
                 .then(console.log("success"))
                 .catch(err => console.log(err))
-                // TODO add refresh to comment list component?
                 props.onClose();
         }       
         else {

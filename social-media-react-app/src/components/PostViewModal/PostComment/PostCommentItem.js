@@ -11,7 +11,6 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import {CommentWrapper} from './PostComment.styles'
 
 const PostCommentItem= (props) => {
-    console.log(props.comment)
     
     const comment = props.comment;
     const currentUserName = props.currentUserName;
@@ -22,7 +21,7 @@ const PostCommentItem= (props) => {
     })
 
     function checkForDelete() {
-        if(comment.userName == currentUserName) {
+        if(comment.userName === currentUserName) {
             setShowDelete(true);
         }
     }

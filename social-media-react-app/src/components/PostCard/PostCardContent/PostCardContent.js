@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import React from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';

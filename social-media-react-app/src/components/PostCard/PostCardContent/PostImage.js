@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import React, { useState } from 'react';
 import CardMedia  from '@material-ui/core/CardMedia';
 import {Media} from './PostCardContent.styles';
@@ -18,7 +17,7 @@ const PostImage = (props) => {
         <div>
         <Media>
             <CardMedia>
-                <img src={props.photoPath} onClick={toggleModal} />
+                <img src={props.photoPath} alt={props.alt? props.alt : ""} onClick={toggleModal} />
             </CardMedia>
         </Media>
         <PostViewModal 

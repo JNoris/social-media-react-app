@@ -14,6 +14,7 @@ const PostCard = (props) => {
             <Card>
                <PostImage 
                     photoPath = {post.photoPath}
+                    alt = {post.caption}
                     post={post}
                />
                <PostCardContent

@@ -42,6 +42,7 @@ const PostCardModalView = (props) => {
                <PostImage 
                     photoPath = {post.photoPath}
                     modalView = {props.modalView}
+                    alt = {post.caption}
                />
                 {postDataToShow}
                <CaptionWrapper>

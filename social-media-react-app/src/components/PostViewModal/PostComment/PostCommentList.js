@@ -8,6 +8,7 @@ const PostCommentListView = (props) => {
     const [comments, setComments] = useState([]);
     const currentUserName = localStorage.getItem("username");
     const [refreshComponent, setRefreshComponent] = useState(false);
+    const postId = props.postId;
     
     axios.defaults.headers={
         "Content-Type":"application/json",
@@ -15,11 +16,11 @@ const PostCommentListView = (props) => {
     }
     
     useEffect(()=>{
-        axios.get("https://localhost:5001/GetPostComments/" + props.postId)
+        axios.get("https://localhost:5001/GetPostComments/" + postId)
         .then(res => setComments(res.data))
         .catch(err=>console.log(err))
         setRefreshComponent(false)
-     },[refreshComponent])
+     },[refreshComponent, postId])
 
      function handleRefresh() {
          setRefreshComponent(true);
