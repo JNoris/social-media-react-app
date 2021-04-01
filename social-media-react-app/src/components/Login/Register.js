@@ -18,14 +18,20 @@ import styled from 'styled-components';
 const RegisterWrapper = styled.div`
   .MuiInputBase-root{
     background-color:rgba(250,250,250, 0.5);
+    color: #fff;
   }
   .MuiContainer-root{
-    background-color:rgba(250,250,250, 0.6);
+    background-color: rgba(39,43,52,.9);
     padding-bottom:1rem;
     border-radius:1rem;
   }
   .MuiAvatar-root{
-    background-color:grey;
+    background-color:#bdbdbd;
+    margin-top: 2rem;
+  }
+
+  .MuiInputLabel-outlined {
+    color: #e4e4e4;
   }
   label.Mui-focused{
     color:white;
@@ -34,12 +40,43 @@ const RegisterWrapper = styled.div`
     color:black;
   }
   a{
-    color: rgba(0,0,0, 0.6);
+    color:rgba(250,250,250, 0.5);
+  }
+  a:hover {
+    text-decoration: none;
+    color: #fff;
   }
   h1{
-    color:rgba(0,0,0, 0.6);
+    color: rgba(250,250,250,0.7);
     padding-bottom:1rem;
   }
+
+  .MuiFormHelperText-root {
+    color: #d4d4d4;
+  }
+
+  .MuiFormHelperText-root.Mui-error {
+    color #f44336;
+  }
+
+  .MuiButton-root {
+    background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%);  
+    transition: 0.5s;
+    color: #fff;
+    border: none;
+    margin-top: 1.5rem;
+    background-size: 125% auto;
+}
+.MuiButton-root:hover {
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+    background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%); 
+}
+
+.MuiButton-contained.Mui-disabled {
+  background: linear-gradient(to right, rgba(252,172,86,.5) 0%,  rgba(252,172,86,.5) 100%);
+}
 `;
 
 const useStyles = makeStyles((theme) => ({

@@ -30,7 +30,8 @@ export const Flex = styled.div`
         color: #fff;
         text-decoration: none;
         outline: none;
-        background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);  
+        background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%); 
+    }
 
 `;
 export const PostFrame = styled.div`
