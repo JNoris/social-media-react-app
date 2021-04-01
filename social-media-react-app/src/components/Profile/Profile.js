@@ -30,9 +30,6 @@ const Profile = () => {
         setPosts(data);
         setPostsLoaded(true);
       }
-      else {
-        console.log("No Posts")
-      }
     }
   }
   axios.defaults.headers = {
@@ -95,7 +92,6 @@ const Profile = () => {
         lastName: userDetails.lastName,
         bio: bio
       })
-      .then(console.log("success"))
       .catch(err => console.log(err));
     showSaveBtn(false);
     setReadOnly(true);

@@ -28,7 +28,7 @@ const ImageUpload = () => {
             reader.readAsDataURL(e.target.files[0]);
         }
     };
-    console.log(picture);
+    //console.log(picture);
 
     const handleCaptionChange = event => {
         setCaption(event.target.value);
@@ -85,12 +85,12 @@ const ImageUpload = () => {
                     <UploadButton>
                         <Button variant="contained" onClick={handleClick}>
                             Upload
-                    <input
+                                <input
                                 type="file"
                                 onChange={onChangePicture}
                                 ref={hiddenFileInput}
                                 style={{ display: 'none' }}
-                            />
+                                />
                         </Button>
                     </UploadButton>
                 </PostFrame>

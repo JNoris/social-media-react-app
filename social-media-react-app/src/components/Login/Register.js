@@ -175,7 +175,7 @@ const Register = () => {
           });
         });
     } else {
-      console.log("regex fail")
+      //console.log("regex fail")
       setNotify({
         isOpen: true,
         message: "Registration unsuccessful",
@@ -188,7 +188,7 @@ const Register = () => {
   useEffect(() => {
     const listener = (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
-        console.log("??????Enter key was pressed. Run your function.");
+        //console.log("??????Enter key was pressed. Run your function.");
         handleRegisterButton();
       }
     };

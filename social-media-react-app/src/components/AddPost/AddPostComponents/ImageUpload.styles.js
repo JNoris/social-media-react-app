@@ -50,6 +50,7 @@ export const ImageFrame = styled.div`
         margin:auto;
         display:block;
         height:100%;
+        object-fit:cover;
         
     }
 `;

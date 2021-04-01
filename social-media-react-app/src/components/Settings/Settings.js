@@ -120,7 +120,7 @@ function Settings() {
     e.preventDefault();
     const value = e.target.value;
 
-    console.log("You searched for", value);
+    //console.log("You searched for", value);
 
     if (value.trim().length === 0) {
       setVisibleOptions(options);

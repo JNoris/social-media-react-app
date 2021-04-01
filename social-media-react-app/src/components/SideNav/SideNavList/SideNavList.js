@@ -4,7 +4,6 @@ import SideNavListItem from './SideNavListItem';
 import CameraRollIcon from '@material-ui/icons/CameraRoll';
 import SearchIcon from '@material-ui/icons/Search';
 import ChatIcon from '@material-ui/icons/Chat';
-import LiveTvIcon from '@material-ui/icons/LiveTv';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -66,11 +65,6 @@ const SideNavList = (props) => {
                     route="/chat"
                     icon={<ChatIcon />}
                     description="Direct"
-                />
-                <SideNavListItem
-                    route="/tv"
-                    icon={<LiveTvIcon />}
-                    description="FGTV"
                 />
                 
                 <SideNavListItem
