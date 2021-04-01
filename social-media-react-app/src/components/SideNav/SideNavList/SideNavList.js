@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 const SideNavList = (props) => {
     function logOut() {
         localStorage.removeItem("token");
+        localStorage.removeItem("username");
         window.location.reload();
     }
     return (

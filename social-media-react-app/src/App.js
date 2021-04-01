@@ -33,14 +33,13 @@ function App() {
   }
   useEffect(() => {
     getLoggedInUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuth])
+  })
 
   if(error)
   {
 
   }
-  if (isAuth && userStored) {
+  if (isAuth && !userStored) {
     return (
       <Switch>
         <Flex>

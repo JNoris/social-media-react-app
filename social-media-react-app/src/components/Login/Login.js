@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"; // useState for Hooks
 import axios from "axios";
+import { Redirect } from 'react-router-dom';
 import Notification from "./Notification";
 import {
   Button,
@@ -77,6 +78,7 @@ const Login = () => {
   // State for username & password
   const [userName, setUserName] = useState("");
   const [passWord, setPassWord] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   // Handle username & password
   const handleUsername = (event) => {
@@ -102,7 +104,6 @@ const Login = () => {
 
     return res;
   }
-
   const handleLoginButton = () => {
     if (inputValidation()) {
       axios
@@ -120,7 +121,7 @@ const Login = () => {
             });
           }
         })
-        .then(() => window.location.reload())
+        .setRedirect(true)
         .catch(e => window.alert(e.response.data.message));
     } else {
       setNotify({
@@ -145,6 +146,10 @@ const Login = () => {
     };
   });
 
+
+  if (redirect) {
+    return <Redirect to="/" />
+  }
   return (
     <SideWrapper>
       <Grid container component="main" className={classes.root}>
