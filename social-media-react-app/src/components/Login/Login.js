@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"; // useState for Hooks
 import axios from "axios";
-import { Redirect } from 'react-router-dom';
 import Notification from "./Notification";
 import {
   Button,
@@ -95,7 +94,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   // Styling
-  const [redirect, setRedirect] = useState(false);
   const [status, setStatus] = useState(0);
   const classes = useStyles();
 

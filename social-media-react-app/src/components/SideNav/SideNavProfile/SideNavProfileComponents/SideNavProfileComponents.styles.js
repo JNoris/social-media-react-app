@@ -41,5 +41,6 @@ export const FlexCenter = styled.div`
         width:15vh;
         min-height:5rem;
         min-width:5rem;
+        border: 0.2rem solid black;
     }
 `;
