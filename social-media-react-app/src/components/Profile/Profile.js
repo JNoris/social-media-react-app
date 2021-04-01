@@ -9,7 +9,7 @@ import ProfileGridItem from "./ProfileGridItem";
 
 const Profile = () => {
   const userName = localStorage.getItem("username");
-  const [bio, setBio] = useState("");
+  const [bio, setBio] = useState(" ");
   const [bioReadOnly, setReadOnly] = useState(true);
   const [saveBtn, showSaveBtn] = useState(false);
   const [isSelf, setIsSelf] = useState(false); //usually false
@@ -175,7 +175,7 @@ const Profile = () => {
     checkParams(url.id);
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url.id]);
+  }, [url]);
 
   useEffect(() => {
     setBio(userDetails.bio);
