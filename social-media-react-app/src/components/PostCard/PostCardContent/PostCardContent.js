@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import React from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,7 +10,7 @@ const PostCardContent = (props) => {
     var userHtml = props.userName ? (<UserInfo 
     userName={props.userName} profilePhotoPath={props.profilePhotoPath} /> ) : null
 
-    var statsHtml = props.numberOfLikes || props.numberOfComments ? ( <PostStats 
+    var statsHtml = props.numberOfLikes >= 0 || props.numberOfComments >= 0 ? ( <PostStats 
         numberOfLikes={props.numberOfLikes}
         numberOfComments={props.numberOfComments}
         post={props.post}

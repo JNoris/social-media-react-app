@@ -8,7 +8,7 @@ import Avatar from '@material-ui/core/Avatar';
 import {LikeWrapper, TitleWrapper} from './PostLikeList.styles';
 
 const PostLikeList = (props) => {
-    const post = props.post;
+    const postId = props.postId;
     const [likes, setLikes] = useState([]);
 
     axios.defaults.headers={
@@ -17,10 +17,10 @@ const PostLikeList = (props) => {
     }
 
     useEffect(()=>{
-        axios.get("https://localhost:5001/GetLikes/" + props.postId)
+        axios.get("https://localhost:5001/GetLikes/" + postId)
         .then(res => setLikes(res.data))
         .catch(err=>console.log(err))
-    },[])
+    },[postId])
 
     return (
         <div>
@@ -29,8 +29,8 @@ const PostLikeList = (props) => {
             </TitleWrapper>
         <List>
             {likes?.map((like) => (
-                <LikeWrapper>
-                  <ListItem key={like.Id}>
+                <LikeWrapper key={like.id}>
+                  <ListItem key={like.id}>
                   <ListItemAvatar>
                       <Avatar aria-label="user" src={like.profilePhotoPath}/>
                   </ListItemAvatar>

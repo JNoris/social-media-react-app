@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import {ContentWrapper} from '../../../PostCard/PostCardContent/PostCardContent.styles'
