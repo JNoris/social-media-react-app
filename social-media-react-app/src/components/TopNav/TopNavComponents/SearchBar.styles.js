@@ -46,3 +46,23 @@ export const BtnWrap = styled.div`
         color: #fff;
     }
 `;
+
+export const LikeWrapper = styled.div`
+
+    p{
+        color: #fff;
+        font-size: 1rem;
+    }
+
+    .MuiListItem-root {
+        color: #c3c3c3;
+    }
+
+    .MuiListItem-alignItemsFlexStart {
+        align-items: center;
+    }
+`;
+
+export const ResultsWrapper = styled.div``;
+
+export const SearchContainer = styled.div``
