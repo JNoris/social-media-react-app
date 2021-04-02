@@ -47,7 +47,7 @@ export const Wrapper = styled.div`
     }
 
     .search {
-        background-color: rgba(255,255,255,.5);
+        background-color: rgba(255,255,255,.2);
         color: #fff;
     }
 

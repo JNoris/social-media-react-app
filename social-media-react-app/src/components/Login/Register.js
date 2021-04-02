@@ -17,11 +17,11 @@ import styled from 'styled-components';
 
 const RegisterWrapper = styled.div`
   .MuiInputBase-root{
-    background-color:rgba(250,250,250, 0.5);
+    background-color:rgba(250,250,250, 0.1);
     color: #fff;
   }
   .MuiContainer-root{
-    background-color: rgba(255,255,255,.1);
+    background-color: rgba(39,43,52,.9);
     padding-bottom:1rem;
     border-radius:1rem;
   }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { NavIcon, TopNavWrapper } from './TopNav.styles';
 import Button from '@material-ui/core/Button';
-
+import SearchBar from './TopNavComponents/SearchBar'
 
 function NavItem(props) {
     const [open, setOpen] = useState(false);
@@ -20,9 +20,11 @@ function NavItem(props) {
         </>
     );
 }
+
 const TopNav = () => {
     return (
         <TopNavWrapper>
+            <SearchBar />
             <Link to="/add">
                 <Button variant="contained">Add Photo</Button>
             </Link>

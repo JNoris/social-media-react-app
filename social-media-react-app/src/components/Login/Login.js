@@ -25,7 +25,7 @@ const SideWrapper = styled.div`
     color: #fff;
   }
   .MuiInputBase-root{
-    background-color:rgba(250,250,250, 0.5);
+    background-color:rgba(250,250,250, 0.1);
   }
   label.Mui-focused{
     color:white;

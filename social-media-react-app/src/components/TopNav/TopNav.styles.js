@@ -8,11 +8,11 @@ export const NavIcon = styled(IconButton)`
 `;
 export const TopNavWrapper = styled.div`
     padding:1rem 1rem 2rem;
-    margin: 0 auto;
+    margin: 1rem auto;
     // float:right;
     // display: block;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     max-width: 1000px;
 
@@ -25,7 +25,6 @@ export const TopNavWrapper = styled.div`
       transition: 0.5s;
       color: #fff;
       border: none;
-      margin-top: 1.5rem;
       background-size: 125% auto;
       text-decoration: none;
   }
