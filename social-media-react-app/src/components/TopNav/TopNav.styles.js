@@ -14,7 +14,7 @@ export const TopNavWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1000px;
+    max-width: 925px;
 
     a {
       text-decoration: none;
@@ -36,6 +36,22 @@ export const TopNavWrapper = styled.div`
       outline: none;
       //background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%); 
   }
+
+  @media only screen and (max-width: 1165px) {
+    max-width:625px;
+}
+
+@media only screen and (max-width: 845px) {
+  max-width:400px;
+  flex-direction: column;
+  align-items: center;
+
+  .MuiButton-root{
+    margin-top: 1rem;
+    width: 100%;
+  }
+}
+
 `;
 export const DropdownWrapper = styled.div`
 .dropdown {
