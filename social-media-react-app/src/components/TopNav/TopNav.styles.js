@@ -7,8 +7,36 @@ export const NavIcon = styled(IconButton)`
     color:red;
 `;
 export const TopNavWrapper = styled.div`
-    margin:1rem;
-    float:right;
+    padding:1rem 1rem 2rem;
+    margin: 0 auto;
+    // float:right;
+    // display: block;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    max-width: 1000px;
+
+    a {
+      text-decoration: none;
+    }
+
+    .MuiButton-root {
+      background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);  
+      transition: 0.5s;
+      color: #fff;
+      border: none;
+      margin-top: 1.5rem;
+      background-size: 125% auto;
+      text-decoration: none;
+  }
+
+  .MuiButton-root:hover {
+      background-position: right center;
+      color: #fff;
+      text-decoration: none;
+      outline: none;
+      //background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%); 
+  }
 `;
 export const DropdownWrapper = styled.div`
 .dropdown {

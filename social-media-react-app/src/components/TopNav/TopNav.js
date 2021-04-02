@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-import AddIcon from '@material-ui/icons/Add';
 import { NavIcon, TopNavWrapper } from './TopNav.styles';
+import Button from '@material-ui/core/Button';
 
 
 function NavItem(props) {
@@ -26,13 +24,7 @@ const TopNav = () => {
     return (
         <TopNavWrapper>
             <Link to="/add">
-                <NavItem icon={<AddIcon />} />
-            </Link>
-            <Link to="/">
-                <NavItem icon={<NotificationsIcon />} />
-            </Link>
-            <Link to="/chat">
-                <NavItem icon={<WhatsAppIcon />} />
+                <Button variant="contained">Add Photo</Button>
             </Link>
         </TopNavWrapper>
     );
