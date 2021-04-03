@@ -75,7 +75,7 @@ export const LikeWrapper = styled.div`
 
 export const ResultsWrapper = styled.div`
     margin-top:0.1rem;
-    border-radius:1rem;
+    border-radius:0.4rem;
     position:absolute;
     background-color: #505363;
     z-index:100;

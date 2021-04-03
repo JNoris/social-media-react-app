@@ -57,11 +57,6 @@ const SideNavList = (props) => {
                     description="New Post"
                 />
                 <SideNavListItem
-                    route="/explore"
-                    icon={<SearchIcon />}
-                    description="Explore"
-                />
-                <SideNavListItem
                     route="/chat"
                     icon={<ChatIcon />}
                     description="Direct"
