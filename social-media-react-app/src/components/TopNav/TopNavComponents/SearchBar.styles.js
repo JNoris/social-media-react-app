@@ -1,8 +1,14 @@
 import Input from '@material-ui/core/Input';
 import styled from 'styled-components';
 
+export const Absolute = styled.div`
+    position:absolute;
+    width:27.5vw;
+    z-index:100;
+`;
 export const SearchWrapper = styled.div`
     display:flex;
+    margin-top:1rem;
     background-color:white;
     width:fit-content;
     border-radius: 2rem;
