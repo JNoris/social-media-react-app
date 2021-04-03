@@ -39,19 +39,17 @@ const Profile = () => {
   //User Detail API Calls
 
   function getUserDetails(username) {
-    if(username !== undefined)
-    {
+    if (username !== undefined) {
       axios.get("https://localhost:5001/getuserdetails/" + username)
-      .then(res => setUserDetails(res.data))
-      .catch(err => setNoUser(true) && console.log(err));
+        .then(res => setUserDetails(res.data))
+        .catch(err => setNoUser(true) && console.log(err));
     }
   }
-  function getUserPosts(username){
-    if(username !== undefined)
-    {
+  function getUserPosts(username) {
+    if (username !== undefined) {
       axios.get("https://localhost:5001/getuserposts/" + username)
-      .then(res => checkIfPosts(res.data))
-      .catch(err => console.log(error));
+        .then(res => checkIfPosts(res.data))
+        .catch(err => console.log(error));
     }
   }
   //For refresh follow number after following/unfollow
@@ -75,7 +73,7 @@ const Profile = () => {
       setIsSelf(true);
     }
   }
-  
+
   //Bio
   const handleBioChange = (event) => {
     setBio(event.target.value);
@@ -125,23 +123,22 @@ const Profile = () => {
       let form_data = new FormData();
       form_data.append('ImgFile', picture)
       axios.put(`https://localhost:5001/edituserprofilephoto`, form_data,
-      {
-        headers: {
-          'content-type': 'multipart/form-data'
-        }
-    })
+        {
+          headers: {
+            'content-type': 'multipart/form-data'
+          }
+        })
         .then(setIsUpload(false))
         .then(res => setUploadStatus(res.status))
         .catch(err => setError(true) && console.log(err));
     }
   }
   function cancelProfileUpload() {
-    try{
+    try {
       setImgData(userDetails.profilePhotoPath);
       setIsUpload(false);
     }
-    catch(e)
-    {
+    catch (e) {
       console.log(e);
     }
 
@@ -158,10 +155,8 @@ const Profile = () => {
     }
   };
 
-  function refreshOnOK(status)
-  {
-    if(status===200)
-    {
+  function refreshOnOK(status) {
+    if (status === 200) {
       window.location.reload();
     }
   }
@@ -169,13 +164,15 @@ const Profile = () => {
 
   useEffect(() => {
     checkParams(url.id);
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
   useEffect(() => {
-    setBio(userDetails.bio);
-  },[userDetails.bio])
+    if (userDetails.bio !== null) {
+      setBio(userDetails.bio);
+    }
+  }, [userDetails.bio])
 
   useEffect(() => {
     setIsFollowing(userDetails.isFollowed)
@@ -193,7 +190,7 @@ const Profile = () => {
 
   useEffect(() => {
     refreshOnOK(uploadStatus);
-  },[uploadStatus])
+  }, [uploadStatus])
   //Error Pages
   if (error) {
     return (
@@ -215,31 +212,31 @@ const Profile = () => {
           <img src={imgData} alt={userDetails.userName} />
         </ImgFrame>
         <UploadBtns>
-        <div className="btns">
-        {isSelf && !isUpload? (
-          <Button className="fwbtn" onClick={handleClick} variant="contained">Upload Profile Photo
-            <input
-              type="file"
-              onChange={onChangePicture}
-              ref={hiddenFileInput}
-              style={{ display: 'none' }}
-            />
-          </Button>
-        ) : null}
+          <div className="btns">
+            {isSelf && !isUpload ? (
+              <Button className="fwbtn" onClick={handleClick} variant="contained">Upload Profile Photo
+                <input
+                  type="file"
+                  onChange={onChangePicture}
+                  ref={hiddenFileInput}
+                  style={{ display: 'none' }}
+                />
+              </Button>
+            ) : null}
 
-        {isSelf && isUpload? (
-          <>
-          <Button className="hwbtn" onClick={uploadNewProfile}
-          variant="contained">
-            Save
+            {isSelf && isUpload ? (
+              <>
+                <Button className="hwbtn" onClick={uploadNewProfile}
+                  variant="contained">
+                  Save
           </Button>
-          <Button className="hwbtn" onClick={cancelProfileUpload}
-          variant="contained">
-            Cancel
+                <Button className="hwbtn" onClick={cancelProfileUpload}
+                  variant="contained">
+                  Cancel
           </Button>
-          </>
-        ) : null}
-        </div>
+              </>
+            ) : null}
+          </div>
         </UploadBtns>
         <LinkWrapper>
           <Grid container justify="center" spacing={1}>
@@ -353,7 +350,7 @@ const Profile = () => {
             {posts?.map((item) => (
               <Grid item key={item.id} xs={12} md={6}>
                 <ProfileGridItem
-                  link={item.id}
+                  id={item.id}
                   src={item.photoPath}
                   alt={item.id}
                 />

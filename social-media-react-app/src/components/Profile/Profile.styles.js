@@ -124,11 +124,21 @@ export const BioML = styled(TextField)`
 `;
 export const ProfileGridWrapper = styled.div`
     text-align:center;
+    position:relative;
     img{
         width:21vw;
         height:21vw;
         object-fit:cover;
     }
+`;
+export const GridBtn = styled.button`
+    position:absolute;
+    top:0;
+    right:0;
+    padding:0.5rem;
+    margin:0;
+    line-height:0.5rem;
+    border-radius:1rem;
 `;
 
 export const LinkWrapper = styled.div`
