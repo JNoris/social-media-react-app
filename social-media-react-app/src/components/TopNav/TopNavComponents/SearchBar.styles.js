@@ -8,8 +8,6 @@ export const Absolute = styled.div`
 `;
 export const SearchWrapper = styled.div`
     display:flex;
-    margin-top:1rem;
-    // background-color:white;
     background-color:rgba(255,255,255,.1);
     width:fit-content;
     border-radius: 5px;

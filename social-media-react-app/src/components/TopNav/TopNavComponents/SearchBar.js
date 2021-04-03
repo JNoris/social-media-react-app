@@ -2,86 +2,89 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
-import { Absolute, BtnWrap, Search, SearchWrapper } from './SearchBar.styles';
+import { BtnWrap, Search, SearchWrapper, LikeWrapper, SearchContainer, ResultsWrapper } from './SearchBar.styles';
 import IconButton from '@material-ui/core/IconButton';
-import SearchListItem from './SearchListItem';
-import Grid from '@material-ui/core/Grid';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Input from "@material-ui/core/Input";
 
 
 const SearchBar = () => {
     const [search, setSearch] = useState("");
-    const [users, setUsers] = useState([]);
-    const [empty, setEmpty] = useState(true);
-    const handleData = (data) => {
-        if(Array.isArray(data))
-        {
-            setUsers(data);
-        }
-    }
-    const getUsers = (search) => {
-        if (search !== "" && search !== null && search !== undefined) {
-            axios.get(`https://localhost:5001/search/${search}`)
-                .then(res => handleData(res.data))
-                .then(setEmpty(false))
-                .catch(e => console.log(e));
-        }
-    }
-    const handleEmptySearch = (search) => {
-        if(search === "")
-        {
-            setUsers([]);
-            setEmpty(true);
-        }
-    }
+    const [userResults, setUsersResults] = useState([]);
+
     const handleSearchEntry = event => {
         setSearch(event.target.value);
     }
-    useEffect(() => {
-        handleEmptySearch(search);
-    },[search])
-    useEffect(() => {
-        getUsers(search)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [search])
-    var link = `/profile/${search}`;
+
+      axios.defaults.headers={
+        "Content-Type":"application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+
+    useEffect(()=>{
+        if(search.length > 2) {
+            axios.get("https://localhost:5001/search/" + search)
+           // .then(res => setUsersResults(res.data), console.log(userResults))
+           .then(res => {
+               console.log(res)
+               if(!res.data.message) {
+                   setUsersResults(res.data)
+               } else {
+                   setUsersResults([])
+               }
+           })
+            .catch(err=>console.log(err))
+        } else {
+            setUsersResults([])
+        }
+    },[search]);
+    
     return (
-        <Absolute>
-            <SearchWrapper>
-                <Search
-                    inputProps={{
-                        className: "searchinput"
-                    }}
-                    placeholder="Search..."
-                    value={search}
-                    onChange={handleSearchEntry}
-                    disableUnderline
-                >
-                </Search>
-                <BtnWrap>
-                    <Link to={link}>
-                        <IconButton ><SearchIcon /></IconButton>
-                    </Link>
-                </BtnWrap>
-            </SearchWrapper>
-            {!empty? (<Grid container>
-                {users?.map(user => (
-                    <Grid item xs={12}
-                    key={user.userName} 
-                    value={user.userName}          
-                    >
-                        <SearchListItem
-                            setSearch={setSearch}
-                            value={user.userName}
-                            src={user.profilePhotoPath}
-                            name={user.userName}
-                            fname={user.firstName}
-                            lname={user.lastName}
-                        />
-                    </Grid>
-                ))}
-            </Grid>)
-            :null}            
-        </Absolute>
+        <SearchContainer>
+        <SearchWrapper>
+        <Input
+          type="text"
+          disableUnderline
+          inputProps={{
+            className:"Search"
+          }}
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          }
+          className="search"
+          onChange={handleSearchEntry}
+          placeholder="Search..."
+        />
+        </SearchWrapper>
+        <ResultsWrapper>
+         <List>
+         {userResults?.map((user) => (
+         <LikeWrapper key={user.userName}>
+             <Link to={{
+                 pathname: "/profile/" + user.userName,
+                 state: {userName: user.userName}}}>
+           <ListItem key={user.userName}>
+           <ListItemAvatar>
+               <Avatar aria-label="user" src={user.profilePhotoPath}/>
+           </ListItemAvatar>
+           <ListItemText
+               id="listItem"
+               secondary={user.userName}
+           />      
+       </ListItem>
+       </Link>
+       </LikeWrapper>
+     ))}
+ </List>
+ </ResultsWrapper>
+ </SearchContainer>
     );
 }
 export default SearchBar
