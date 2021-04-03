@@ -23,6 +23,15 @@ export const SearchWrapper = styled.div`
     .searchinput{
         font-size:0.9rem;
     }
+
+    .MuiInputBase-root {
+        padding: .5rem 1rem
+    }
+
+    .MuiList-padding {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 `;
 export const Search = styled(Input)`
     // border:1px solid black;

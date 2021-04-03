@@ -27,6 +27,7 @@ export const TopNavWrapper = styled.div`
       border: none;
       background-size: 125% auto;
       text-decoration: none;
+      margin-bottom: 16px;
   }
 
   .MuiButton-root:hover {

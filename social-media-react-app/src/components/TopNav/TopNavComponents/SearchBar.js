@@ -9,6 +9,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Input from "@material-ui/core/Input";
 
 
 const SearchBar = () => {
@@ -19,20 +21,6 @@ const SearchBar = () => {
         setSearch(event.target.value)
     }
 
-    var link = '/profile/' + search;
-
-    useEffect(() => {
-        const listener = (event) => {
-          if (event.code === "Enter" || event.code === "NumpadEnter") {
-            
-          }
-        };
-        document.addEventListener("keydown", listener);
-        return () => {
-          document.removeEventListener("keydown", listener);
-        };
-      });
-
       axios.defaults.headers={
         "Content-Type":"application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -41,38 +29,47 @@ const SearchBar = () => {
     useEffect(()=>{
         if(search.length > 2) {
             axios.get("https://localhost:5001/search/" + search)
-            .then(res => setUsersResults(res.data))
-            .catch(err=>console.log(err));
+           // .then(res => setUsersResults(res.data), console.log(userResults))
+           .then(res => {
+               console.log(res)
+               if(!res.data.message) {
+                   setUsersResults(res.data)
+               } else {
+                   setUsersResults([])
+               }
+           })
+            .catch(err=>console.log(err))
         } else {
             setUsersResults([])
         }
     },[search]);
     
-    console.log(userResults)
-    
     return (
         <SearchContainer>
         <SearchWrapper>
-            <Search
-                inputProps={{
-                    className: "searchinput"
-                }}
-                placeholder="Search..."
-                value={search}
-                onChange={handleSearchEntry}
-                disableUnderline
-            >
-            </Search>
-            <BtnWrap>
-                <Link to={link}>
-                    <IconButton ><SearchIcon /></IconButton>
-                </Link>
-            </BtnWrap>
+        <Input
+          type="text"
+          disableUnderline
+          inputProps={{
+            className:"Search"
+          }}
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          }
+          className="search"
+          onChange={handleSearchEntry}
+          placeholder="Search..."
+        />
         </SearchWrapper>
         <ResultsWrapper>
          <List>
          {userResults?.map((user) => (
          <LikeWrapper key={user.userName}>
+             <Link to={{
+                 pathname: "/profile/" + user.userName,
+                 state: {userName: user.userName}}}>
            <ListItem key={user.userName}>
            <ListItemAvatar>
                <Avatar aria-label="user" src={user.profilePhotoPath}/>
@@ -82,6 +79,7 @@ const SearchBar = () => {
                secondary={user.userName}
            />      
        </ListItem>
+       </Link>
        </LikeWrapper>
      ))}
  </List>
