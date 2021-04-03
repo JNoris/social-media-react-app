@@ -28,10 +28,6 @@ export const SearchWrapper = styled.div`
         padding: .5rem 1rem
     }
 
-    .MuiList-padding {
-        padding-top: 0;
-        padding-bottom: 0;
-    }
 `;
 export const Search = styled(Input)`
     // border:1px solid black;
