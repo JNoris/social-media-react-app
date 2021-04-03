@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import Container from '@material-ui/core/Container';
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import { Wrapper } from "./Settings.styles";
 import {useHistory} from 'react-router-dom';
+import SearchIcon from '@material-ui/icons/Search';
+import InputAdornment from "@material-ui/core/InputAdornment";
+
 function Settings() {
+  const [redirect, setRedirect] = useState(false);
+  const [notify, setNotify] = useState({
+      isOpen: false,
+      message: "",
+      type: "",
+    });
+  const [deleteStatus, setDeleteStatus] = useState(false)
+
   const options = [
     {
       header: {
@@ -166,6 +179,30 @@ function Settings() {
     setVisibleOptions(returnedItems);
   };
   let history = useHistory();
+
+  function handleDeleteUser() {
+    axios.defaults.headers={
+      "Content-Type":"application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+  }
+  axios.post("https://localhost:5001/deleteuser")
+  .then(res => setDeleteStatus(res.status))
+  .catch(err => console.log(err))
+  }
+
+  function returnOnOK(status) {
+    if(status === 200) {
+      setRedirect(true)}
+  }
+
+  useEffect(() => {
+    returnOnOK(deleteStatus)
+  }, [deleteStatus])
+  if(redirect) {
+    return <Redirect to="/login" />
+  }
+
+
   return (
     <Wrapper>
       <Container maxWidth="lg">
@@ -175,17 +212,22 @@ function Settings() {
           color="primary"
           onClick={()=>history.goBack()}
           >
-            <span>&lt;</span> Back
+            Back
           </Button>{" "}
             Settings
         </h1>
-
         <Input
           type="text"
           disableUnderline
           inputProps={{
             className:"Search"
           }}
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          }
+          className="search"
           onChange={onChange}
           placeholder="Search..."
         />

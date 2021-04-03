@@ -7,8 +7,52 @@ export const NavIcon = styled(IconButton)`
     color:red;
 `;
 export const TopNavWrapper = styled.div`
-    margin:1rem;
-    float:right;
+    padding:1rem 1rem 2rem;
+    margin: 1rem auto;
+    // float:right;
+    // display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 925px;
+
+    a {
+      text-decoration: none;
+    }
+
+    .MuiButton-root {
+      background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);  
+      transition: 0.5s;
+      color: #fff;
+      border: none;
+      background-size: 125% auto;
+      text-decoration: none;
+      margin-bottom: 16px;
+  }
+
+  .MuiButton-root:hover {
+      background-position: right center;
+      color: #fff;
+      text-decoration: none;
+      outline: none;
+      //background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%); 
+  }
+
+  @media only screen and (max-width: 1165px) {
+    max-width:625px;
+}
+
+@media only screen and (max-width: 845px) {
+  max-width:400px;
+  flex-direction: column;
+  align-items: center;
+
+  .MuiButton-root{
+    margin-top: 1rem;
+    width: 100%;
+  }
+}
+
 `;
 export const DropdownWrapper = styled.div`
 .dropdown {

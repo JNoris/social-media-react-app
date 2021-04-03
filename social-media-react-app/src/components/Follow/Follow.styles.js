@@ -10,17 +10,6 @@ export const FollowWrapper = styled.div`
     span{
         color:white;
     }
-
-    // .PrivateTabIndicator-colorSecondary-,
-    // .PrivateTabIndicator-colorSecondary-3,
-    // .PrivateTabIndicator-colorSecondary-7,
-    // .PrivateTabIndicator-colorSecondary-9,
-    // .PrivateTabIndicator-colorSecondary-11,
-    // .PrivateTabIndicator-colorSecondary-13,
-    // .PrivateTabIndicator-colorSecondary-15 {
-    //     background-color: #fcac56
-    // }
-
 `;
 export const TabWrapper = styled.div`
     padding:1rem 2rem;
@@ -34,13 +23,8 @@ export const Flex = styled.div`
     padding: 0.5rem 2rem ;
     justify-content: space-between;
     align-items: center;
-    //border: 1px solid black;
-    //background-color:grey;
     background-color: rgba(255,255,255,.1);
-    //box-shadow: 5px 5px 10px 5px #000000;
-    //margin-bottom:0.7rem;
     margin-bottom: 1rem;
-    //border-radius:1rem;
     border-radius: 10px;
     a{
         text-decoration:none;
@@ -65,7 +49,8 @@ export const Flex = styled.div`
     }
 
     .MuiButton-outlined {
-        border: 1px solid rgba(48,53, 64,.7);
+        //border: 1px solid rgba(48,53, 64,.7);
+        border: 1px solid rgba(255,255, 255,.3);
     }
 
     .MuiButton-outlined:hover {

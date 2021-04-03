@@ -20,8 +20,12 @@ const SideWrapper = styled.div`
   a{
     color:rgba(250,250,250, 0.5);
   }
+  a:hover {
+    text-decoration: none;
+    color: #fff;
+  }
   .MuiInputBase-root{
-    background-color:rgba(250,250,250, 0.5);
+    background-color:rgba(250,250,250, 0.1);
   }
   label.Mui-focused{
     color:white;
@@ -29,6 +33,31 @@ const SideWrapper = styled.div`
   svg{
     color:black;
   }
+  .MuiButton-root {
+    background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%);  
+    transition: 0.5s;
+    color: #fff;
+    border: none;
+    margin-top: 1.5rem;
+    background-size: 125% auto;
+}
+.MuiButton-root:hover {
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+    background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%); 
+}
+
+.MuiInputBase-input {
+  color: #fff;
+  border-radius: 5px;
+}
+
+.MuiInputLabel-outlined {
+  color: #e4e4e4;
+}
+
+
 `;
 
 const useStyles = makeStyles((theme) => ({

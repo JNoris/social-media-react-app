@@ -14,9 +14,10 @@ export const Wrapper = styled.div`
   }
 
   .main {
-    font-family: Arial, Helvetica, sans-serif; /* whatever you want here */
-    background: #282a36;
-    font-size: 10px;
+    font-family: 'Roboto', sans-serif; /* whatever you want here */
+    background: #3c3f51;
+    font-size: 1rem;
+    margin: 2rem auto;
   }
 
   .body {
@@ -38,15 +39,15 @@ export const Wrapper = styled.div`
     max-width: 1000px;
     max-height: 800px;
     width: 100%;
-    height: 95vh;
-    background: #fff;
+    height: 100vh;
+    //background: #fff;
     border-radius: 10px;
   }
 
   .search-container,
   .conversation-list,
   .new-message-container {
-    background: #282a34;
+    background: rgba(39,43,52,.9);
   }
 
   .search-container {
@@ -54,52 +55,59 @@ export const Wrapper = styled.div`
     align-items: center;
     padding: 0 20px;
     grid-area: search-container;
-    border-radius: 10px 0 0 0;
-    box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0.75);
+   background-color: rgba(39,43,52,.9);
+   border-radius: 10px 0 0 0;
+  // box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0.75);
     z-index: 1;
   }
 
   .search-container input {
     color: #eee;
     outline: none;
-    font-weight: bold;
-    border-radius: 2px;
-    height: 30px;
+    font-weight: 400;
+    border-radius: 5px;
+    height: 2rem;
     border: 0;
-    padding-left: 48px;
+    padding-left: 10px;
     padding-right: 20px;
-    font-size: 1.4rem;
-    /*
-        Import garbage here if you want to go hard
-   */
-    background: url("") no-repeat rgba(255, 255, 255, 0.3);
+    font-size: 1rem;
+    background: url("") no-repeat rgba(255, 255, 255, 0.1);
     background-position: 15px center;
     background-size: 20px 20px;
   }
 
   .search-container input::placeholder {
     color: #ddd;
-    font-weight: bold;
+    font-weight: normal;
   }
 
   .conversation-list {
     grid-area: conversation-list;
-    overflow-y: scroll;
+    //overflow-y: scroll;
+    background-color: rgba(39,43,52,.9);
   }
 
   .conversation {
-    display: grid;
-    grid-template-columns: 40px 1fr max-content;
-    grid-gap: 10px;
+    //display: grid;
+    //grid-template-columns: 40px 1fr max-content;
+    display: flex;
+    flex-direction: column;
+    //grid-gap: 10px;
     color: #ddd;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border-bottom: 1px solid #282a34;
     padding: 20px 20px 20px 15px;
   }
 
+  .message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
   .conversation.active,
   .conversation:hover {
-    background: #282a34;
+    background-color: rgba(0,0,0,.2);
   }
 
   .conversation:hover {
@@ -114,7 +122,7 @@ export const Wrapper = styled.div`
   }
 
   .title-text {
-    font-weight: bold;
+    font-weight: 400;
     color: #eee;
     padding-left: 5px;
     white-space: nowrap;
@@ -124,7 +132,7 @@ export const Wrapper = styled.div`
 
   .created-date {
     color: #ddd;
-    font-size: 1rem;
+    font-size: .8rem;
   }
 
   .conversation-message {
@@ -133,6 +141,8 @@ export const Wrapper = styled.div`
     white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
+    font-size: .8rem;
+    color: #fff;
   }
 
   .new-message-container {
@@ -140,7 +150,7 @@ export const Wrapper = styled.div`
     grid: 40px / 40px;
     align-content: center;
     grid-area: new-message-container;
-    border-top: 1px solid rgba(0, 0, 0, 0.25);
+    //border-top: 1px solid rgba(0, 0, 0, 0.25);
     border-radius: 0 0 0 10px;
     padding: 0 15px;
   }
@@ -166,12 +176,13 @@ export const Wrapper = styled.div`
     align-content: center;
     align-items: center;
     grid-area: chat-title;
-    color: #3c3f51;
+    color: #fff;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.5rem;
     border-radius: 0 10px 0 0;
     box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0.75);
     padding: 0 20px;
+    background-color: rgba(39,43,52,.9);
   }
 
   .chat-title > img {
@@ -183,7 +194,8 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column-reverse;
     padding: 0 20px;
-    overflow-y: scroll;
+    //overflow-y: scroll;
+    background-color: rgba(255,255,255,.1);
   }
 
   .message-row {
@@ -221,13 +233,15 @@ export const Wrapper = styled.div`
 
   .message-text {
     padding: 9px 14px;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     margin-bottom: 5px;
   }
 
   .message-time {
-    font-size: 1.3rem;
-    color: #777; // Might blend if dark themed
+    font-size: 1rem;
+    color: #ccc; // Might blend if dark themed
+    text-align: right;
+    padding-right: .5rem;
   }
 
   .you-message .message-text {
@@ -263,7 +277,7 @@ export const Wrapper = styled.div`
     border: 2px solid #ddd;
     color: #330; /* whatever color */
     border-radius: 6px;
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
 
   ::-webkit-scrollbar {

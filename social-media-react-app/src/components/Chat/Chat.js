@@ -16,8 +16,10 @@ function Chat() {
               <div className="conversation active">
                 {/* Add profile photo here */}
                 {/* <img src="images/profiles/.." alt="Noris Buriac" /> */}
+                <div className="message-header">
                 <div className="title-text">Noris Buriac</div>
                 <div className="created-date">Mar 24</div>
+                </div>
                 <div className="conversation-message">
                   This is the message that will help you conquer humanity; for
                   only $9.99! *Restrictions Apply*.

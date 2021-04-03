@@ -6,10 +6,28 @@ import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import AddIcon from '@material-ui/icons/Add';
 import { NavIcon, TopNavWrapper } from './TopNav.styles';
 import SearchBar from './TopNavComponents/SearchBar';
-
+// import React from 'react';
+// import { Link } from 'react-router-dom';
+// import {TopNavWrapper } from './TopNav.styles';
+// import Button from '@material-ui/core/Button';
+// import SearchBar from './TopNavComponents/SearchBar'
 
 function NavItem(props) {
     const [open, setOpen] = useState(false);
+
+//     return (
+//         <>
+//             <NavIcon
+//                 color="inherit"
+//                 style={{ color: 'red', backgroundColor: 'black' }}
+//                 size="medium"
+//                 onClick={() => setOpen(!open)}>
+//                 {props.icon}
+//             </NavIcon>
+//             {open && props.children}
+//         </>
+//     );
+// }
 
     return (
         <>
@@ -46,3 +64,13 @@ const TopNav = () => {
     );
 }
 export default TopNav
+// const TopNav = () => {
+//     return (
+//         <TopNavWrapper>
+//             <SearchBar />
+//             <Link to="/add">
+//                 <Button variant="contained">Add Photo</Button>
+//             </Link>
+//         </TopNavWrapper>
+//     );
+// }
