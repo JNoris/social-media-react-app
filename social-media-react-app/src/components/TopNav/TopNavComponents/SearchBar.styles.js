@@ -73,6 +73,18 @@ export const LikeWrapper = styled.div`
     }
 `;
 
-export const ResultsWrapper = styled.div``;
+export const ResultsWrapper = styled.div`
+    margin-top:0.1rem;
+    border-radius:1rem;
+    position:absolute;
+    background-color: #505363;
+    z-index:100;
+    .hover:hover{
+        background-color:rgba(50,50,50,0.5);
+    }
+`;
+    
 
-export const SearchContainer = styled.div``
+export const SearchContainer = styled.div`
+    
+`;
