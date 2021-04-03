@@ -55,5 +55,9 @@ export const Wrapper = styled.div`
         color: #e4e4e4;
     }
 
+    .link:hover {
+        color: #e2336b;
+    }
+
 
 `;

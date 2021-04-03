@@ -10,13 +10,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 function Settings() {
-  const [redirect, setRedirect] = useState(false);
-  const [notify, setNotify] = useState({
-      isOpen: false,
-      message: "",
-      type: "",
-    });
-  const [deleteStatus, setDeleteStatus] = useState(false)
+
+  const [deleteStatus, setDeleteStatus] = useState(0);
+  const [redirect, setRedirect] = useState(false)
 
   const options = [
     {
@@ -180,28 +176,45 @@ function Settings() {
   };
   let history = useHistory();
 
-  function handleDeleteUser() {
-    axios.defaults.headers={
-      "Content-Type":"application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`
-  }
-  axios.post("https://localhost:5001/deleteuser")
-  .then(res => setDeleteStatus(res.status))
-  .catch(err => console.log(err))
+
+  axios.defaults.headers={
+    "Content-Type":"application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`
   }
 
-  function returnOnOK(status) {
-    if(status === 200) {
-      setRedirect(true)}
-  }
+    const handleDeleteUser = () => {
+      var deleteUser = window.confirm("Are you sure you want to delete your account?");
+      if (deleteUser === true) {
+        axios.post("https://localhost:5001/deleteuser")
+        .then(res => {
+          console.log(res);
+          if(res.status === 200) {
+            setDeleteStatus(res.status)
+          }
+        }) .catch(err => console.log(err))
+      }
+    }
 
+    function returnOnOK(status) {
+      if (status === 200) {
+          setRedirect(true);
+      }
+  }
   useEffect(() => {
-    returnOnOK(deleteStatus)
+      returnOnOK(deleteStatus)
   }, [deleteStatus])
-  if(redirect) {
-    return <Redirect to="/login" />
+
+  if (redirect) {
+    logOut();
+      return <Redirect to="/login" />
   }
 
+  function logOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    window.location.reload();
+}
+  
 
   return (
     <Wrapper>
@@ -236,16 +249,34 @@ function Settings() {
             <div key={option.header.name} className="settingheader">
               <h3>{option.header.name}</h3>
               <div>
-                {option.values.map((value) => (
-                  <div key={value.name}>
-                    <ul className="group">
-                      <li>
-                        <h6>{value.name}</h6>
-                        <p>{value.description}</p>
-                      </li>
-                    </ul>
-                  </div>
-                ))}
+                {option.values.map((value) => 
+                  {console.log(value);
+                    if(value.name == "Delete Account") {
+                    console.log("yay")
+                    return(
+                      <div key={value.name}>
+                      <ul className="group">
+                        <li>
+                          <h6 className="link" onClick={handleDeleteUser}>{value.name}</h6>
+                          <p>{value.description}</p>
+                        </li>
+                      </ul>
+                    </div>
+                    )
+                  } else {
+                    return(
+                      <div key={value.name}>
+                      <ul className="group">
+                        <li>
+                          <h6>{value.name}</h6>
+                          <p>{value.description}</p>
+                        </li>
+                      </ul>
+                    </div>
+                    )
+                  }
+                }
+                )}
               </div>
             </div>
           ))}
