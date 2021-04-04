@@ -1,3 +1,5 @@
+//Author: Noris Buriac
+//Styled by: Noris Buriac, Athena Kozak
 import React from "react";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import AttachmentIcon from "@material-ui/icons/Attachment";

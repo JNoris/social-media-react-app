@@ -1,3 +1,5 @@
+//Authors: Athena Kozak
+//Styled by: Athena Kozak
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import {CardWrapper} from '../../PostCard/PostCard.styles'

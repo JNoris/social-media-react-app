@@ -1,3 +1,5 @@
+//Authors: Edvin Lin
+//Styled by: Edvin Lin
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import DisplayInfo from './SideNavProfileComponents/DisplayInfo';

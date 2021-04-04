@@ -1,3 +1,4 @@
+//Author: Edvin Lin
 import React, {useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router";
 import axios from 'axios';
@@ -5,7 +6,6 @@ import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
 import SideNav from "./components/SideNav/SideNav";
-// import TopNav from "./components/TopNav/TopNav";
 import Chat from "./components/Chat/Chat";
 import { Flex, MainWrapper } from "./App.styles";
 import Follow from "./components/Follow/Follow";
@@ -13,7 +13,6 @@ import AddPost from "./components/AddPost/AddPost";
 import Register from "./components/Login/Register";
 import Login from "./components/Login/Login";
 import SearchBar from "./components/TopNav/TopNavComponents/SearchBar";
-// import TopNav3 from "./components/Topnav/TopNav3";
 
 function App() {
   const isAuth = !!localStorage.getItem("token");

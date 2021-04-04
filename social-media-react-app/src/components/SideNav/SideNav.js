@@ -1,3 +1,5 @@
+//Authors: Edvin Lin
+//Styled by: Edvin Lin
 import React from 'react'
 import { NavWrapper } from './SideNav.styles';
 import SideNavProfile from './SideNavProfile/SideNavProfile';

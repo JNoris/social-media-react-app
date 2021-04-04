@@ -1,3 +1,5 @@
+//Authors: Athena Kozak
+//Styled by: Athena Kozak
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';

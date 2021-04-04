@@ -1,3 +1,5 @@
+//Authors: Edvin Lin
+//Styled by: Edvin Lin
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 import { Li } from './SideNavList.styles';

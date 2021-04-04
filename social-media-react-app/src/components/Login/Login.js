@@ -1,3 +1,5 @@
+//Authors: Noris Buriac, Edvin Lin
+//Styled by: Noris Buriac, Edvin Lin, Athena Kozak
 import React, { useState, useEffect } from "react"; // useState for Hooks
 import axios from "axios";
 import Notification from "./Notification";

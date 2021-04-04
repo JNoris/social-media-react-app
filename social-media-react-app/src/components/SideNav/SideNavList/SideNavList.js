@@ -1,3 +1,5 @@
+//Authors: Edvin Lin
+//Styled by: Edvin Lin
 import React from 'react'
 import { Li, ListWrapper } from './SideNavList.styles';
 import SideNavListItem from './SideNavListItem';

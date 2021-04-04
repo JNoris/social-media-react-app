@@ -1,23 +1,32 @@
+//Authors: Edvin Lin, Yasir Karapinar
+//Styled by: Edvin Lin, Athena Kozak
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+//Components
 import { Wrapper, ImageFrame, PostFrame, CaptionFrame, Flex, UploadButton, NotifWrapper } from './ImageUpload.styles';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
-import { Redirect } from 'react-router-dom';
+//Notification from Noris Login/Registration
 import Notification from '../../Login/Notification';
 
 const ImageUpload = () => {
+    //Base image data
     const [picture, setPicture] = useState(null);
+    //decoded image data
     const [imgData, setImgData] = useState(null);
     const [caption, setCaption] = useState("")
+    //Status of response for upload api call
     const [uploadStatus, setUploadStatus] = useState(0);
+    //Redirect on status 200
     const [redirect, setRedirect] = useState(false);
+    //Notification popup
     const [notify, setNotify] = useState({
         isOpen: false,
         message: "",
         type: "",
       });
-
+    //Sets image data, and decoded image data
     const onChangePicture = e => {
         if (e.target.files[0]) {
             setPicture(e.target.files[0]);
@@ -28,7 +37,6 @@ const ImageUpload = () => {
             reader.readAsDataURL(e.target.files[0]);
         }
     };
-    //console.log(picture);
 
     const handleCaptionChange = event => {
         setCaption(event.target.value);
@@ -51,7 +59,8 @@ const ImageUpload = () => {
                     'content-type': 'multipart/form-data'
                 }
             })
-                .then(res => setUploadStatus(res.status));
+            .then(res => setUploadStatus(res.status))
+            .catch(e => console.log(e));
         }
         else{
             setNotify({
