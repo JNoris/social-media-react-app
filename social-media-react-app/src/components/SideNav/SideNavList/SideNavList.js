@@ -1,64 +1,77 @@
+//Authors: Edvin Lin
+//Styled by: Edvin Lin
 import React from 'react'
-import {Li, ListWrapper} from './SideNavList.styles';
+import { Li, ListWrapper } from './SideNavList.styles';
 import SideNavListItem from './SideNavListItem';
-import FireplaceIcon from '@material-ui/icons/Fireplace';
-import SearchIcon from '@material-ui/icons/Search';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import CameraRollIcon from '@material-ui/icons/CameraRoll';
 import ChatIcon from '@material-ui/icons/Chat';
-import LiveTvIcon from '@material-ui/icons/LiveTv';
-import ShowChartIcon from '@material-ui/icons/ShowChart';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import {Link} from 'react-router-dom';
+import GroupIcon from '@material-ui/icons/Group';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import { Link } from 'react-router-dom';
 
-const SideNavList = () => {
+const SideNavList = (props) => {
     function logOut() {
         localStorage.removeItem("token");
+        localStorage.removeItem("username");
         window.location.reload();
     }
     return (
         <ListWrapper>
             <ul>
-                <SideNavListItem 
+                <SideNavListItem
                     route="/"
-                    icon={<FireplaceIcon />}
+                    icon={<CameraRollIcon />}
                     description="Feed"
                 />
-                <SideNavListItem 
-                    route="/g"
-                    icon={<SearchIcon/>}
-                    description="Explore"
+                <Li>
+                    <Link to={{
+                        pathname: "/follow",
+                        state: {
+                            followIndex: 0,
+                            userName: props.userName
+                        }
+                    }}>
+                        <div className="sidenav-link">
+                            <GroupIcon /> Followers
+                    </div>
+                    </Link>
+                </Li>
+                <Li>
+                    <Link to={{
+                        pathname: "/follow",
+                        state: {
+                            followIndex: 1,
+                            userName: props.userName
+                        }
+                    }}>
+                        <div className="sidenav-link">
+                            <FavoriteIcon /> Following
+                    </div>
+                    </Link>
+                </Li>
+                <SideNavListItem
+                    route="/add"
+                    icon={<AddAPhotoIcon />}
+                    description="New Post"
                 />
-                <SideNavListItem 
-                    route="/notifications"
-                    icon={<NotificationsIcon/>}
-                    description="Notifications"
-                    
-                />
-                <SideNavListItem 
+                <SideNavListItem
                     route="/chat"
-                    icon={<ChatIcon/>}
+                    icon={<ChatIcon />}
                     description="Direct"
                 />
-                <SideNavListItem 
-                    route="/TEST"
-                    icon={<LiveTvIcon/>}
-                    description="FGTV"
-                />
-                <SideNavListItem 
-                    route="/c"
-                    icon={<ShowChartIcon/>}
-                    description="Stats"
-                />
-                <SideNavListItem 
+                
+                <SideNavListItem
                     route="/settings"
-                    icon={<SettingsIcon/>}
+                    icon={<SettingsIcon />}
                     description="Settings"
                 />
                 <Li onClick={() => logOut()}>
                     <Link to='/'>
-                    <div className="sidenav-link">
-                        <ExitToAppIcon/> Logout
+                        <div className="sidenav-link">
+                            <ExitToAppIcon /> Logout
                     </div>
                     </Link>
                 </Li>

@@ -1,3 +1,5 @@
+//Authors: Edvin Lin
+//Styled by: Edvin Lin
 import React, { useState, useEffect } from 'react'
 import Container from '@material-ui/core/Container';
 import FollowersListItem from './FollowersListItem';
@@ -20,7 +22,7 @@ const Followers = (props) => {
                 setLength(data.length);
             }
             else {
-                console.log("no data");
+                //console.log("no data");
                 setNoFollow(true);
             }
         }

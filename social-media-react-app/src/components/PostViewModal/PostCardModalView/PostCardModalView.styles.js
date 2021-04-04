@@ -4,6 +4,7 @@ export const CaptionWrapper = styled.div`
     p {
         margin-top: -15px;
         padding: 0 5px;
+        color: #fff;
     }
 `;
 
@@ -31,18 +32,20 @@ export const FormWrapper = styled.div`
 
 export const ButtonWrapper = styled.div`
 .MuiButton-root {
-    background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);    
+    background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%);  
     transition: 0.5s;
     background-size: 125% auto;
     color: #fff;
     border: none;
     margin-top: .5rem;
+    width: 100%;
 }
 
 .MuiButton-root:hover {
-    background-position: right center;
+    //background-position: right center;
     color: #fff;
     text-decoration: none;
     outline: none;
+    background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);  
 }
 `;

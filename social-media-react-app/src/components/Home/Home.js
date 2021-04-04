@@ -11,7 +11,7 @@ const Home = () => {
     }
     return(
         <HomeWrapper>
-            <TopNav />
+            <div style={{position:'sticky', top:0}}><TopNav /></div>
             <PostGridView />
         </HomeWrapper>
     );

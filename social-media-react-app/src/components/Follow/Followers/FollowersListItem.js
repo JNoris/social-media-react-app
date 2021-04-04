@@ -14,7 +14,6 @@ const FollowersListItem = (props) => {
                 .then(res => setDeleted(true))
                 .catch(err => console.log(err));
         }
-        
     }
     
     return !deleted ? (

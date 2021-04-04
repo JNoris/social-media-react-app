@@ -1,5 +1,4 @@
-// eslint-disable-next-line
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import {CardWrapper} from './PostCard.styles'
 import PostCardContent from './PostCardContent/PostCardContent'
@@ -14,15 +13,18 @@ const PostCard = (props) => {
         <CardWrapper>
             <Card>
                <PostImage 
-                    img = {post.PhotoPath}
+                    photoPath = {post.photoPath}
+                    alt = {post.caption}
                     post={post}
                />
                <PostCardContent
-                    username = {post.UserName}
-                    userProfilePhoto = {post.ProfilePhotoPath}
-                    likes = {post.NumberOfLikes}
-                    comments = {post.NumberOfComments}
+                    userName = {post.userName}
+                    profilePhotoPath = {post.profilePhotoPath}
+                    numberOfLikes = {post.numberOfLikes}
+                    numberOfComments = {post.numberOfComments}
                     post = {post}
+                    isLiked = {post.isLiked}
+                    handleUpdate = {props.handleUpdate}
                />
             </Card>
         </CardWrapper>

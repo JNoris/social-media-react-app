@@ -5,9 +5,7 @@ export const Wrapper = styled.div`
     .submitButton{
         width:100%
     }
-    .MuiButton-root{
-        background-color:white;
-    }
+
     .MuiButton-label{
         padding:0;
     }
@@ -20,7 +18,7 @@ export const Flex = styled.div`
     display:flex;
 
     .MuiButton-root {
-        background: linear-gradient(to right, #e2336b 0%, #fcac56 100%);  
+        background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%);  
         transition: 0.5s;
         color: #fff;
         border: none;
@@ -28,10 +26,11 @@ export const Flex = styled.div`
         background-size: 125% auto;
     }
     .MuiButton-root:hover {
-        background-position: right center;
+        // background-position: right center;
         color: #fff;
         text-decoration: none;
         outline: none;
+        background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%); 
     }
 
 `;
@@ -52,6 +51,7 @@ export const ImageFrame = styled.div`
         margin:auto;
         display:block;
         height:100%;
+        object-fit:cover;
         
     }
 `;
@@ -97,4 +97,8 @@ export const UploadButton = styled.div`
     background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);  
 }
 
+`;
+export const NotifWrapper = styled.div`
+    position:absolute;
+    top:10vh;
 `;

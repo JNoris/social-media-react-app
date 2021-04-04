@@ -1,3 +1,5 @@
+//Authors: Edvin Lin
+//Styled by: Edvin Lin
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -56,7 +58,6 @@ const Follow = (props) => {
     const [follower, setFollower] = useState([]);
     const [following, setFollowing] = useState([]);
     const [error, setError] = useState(false);
-    const [noUser, setNoUser] = useState(false);
     const [value, setValue] = useState(0);
 
     axios.defaults.headers = {
@@ -92,20 +93,16 @@ const Follow = (props) => {
     let url = useParams();
     function checkParams(urlid) {
         if (urlid !== undefined) {
-            console.log(url.id);
             setUserName(url.id);
-            console.log("not current");
         }
         else {
             if (state.userName !== "") {
-                console.log(state.userName);
                 getUserFollows(state.userName);
             }
             else {
                 getCurrentUserDetails();
             }
             setIsSelf(true);
-            console.log("Current user");
         }
     }
     const handleChange = (event, newValue) => {
@@ -117,9 +114,6 @@ const Follow = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [url.id]);
     useEffect(() => {
-        setValue(state.followIndex);
-    }, [state.followIndex])
-    useEffect(() => {
         getUserFollows(userName)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userName]);
@@ -128,6 +122,10 @@ const Follow = (props) => {
         getUserFollows(userDetails.userName)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userDetails])
+    useEffect(() => {
+        setValue(state.followIndex);
+    }, [state.followIndex])
+
 
     if (error) {
         return (<div>Error</div>);

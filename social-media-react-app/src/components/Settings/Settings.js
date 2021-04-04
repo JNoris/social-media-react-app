@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+//Authors: Noris Buriac
+//Styled by: Noris Buriac
+import React, { useEffect, useState } from "react";
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import Container from '@material-ui/core/Container';
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import { Wrapper } from "./Settings.styles";
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import SearchIcon from '@material-ui/icons/Search';
+import InputAdornment from "@material-ui/core/InputAdornment";
+
 function Settings() {
+
+  const [deleteStatus, setDeleteStatus] = useState(0);
+  const [redirect, setRedirect] = useState(false)
+
   const options = [
     {
       header: {
@@ -120,7 +131,7 @@ function Settings() {
     e.preventDefault();
     const value = e.target.value;
 
-    console.log("You searched for", value);
+    //console.log("You searched for", value);
 
     if (value.trim().length === 0) {
       setVisibleOptions(options);
@@ -166,26 +177,72 @@ function Settings() {
     setVisibleOptions(returnedItems);
   };
   let history = useHistory();
+
+
+  axios.defaults.headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`
+  }
+
+  const handleDeleteUser = () => {
+    var deleteUser = window.confirm("Are you sure you want to delete your account?");
+    if (deleteUser === true) {
+      axios.post("https://localhost:5001/deleteuser")
+        .then(res => {
+          console.log(res);
+          if (res.status === 200) {
+            setDeleteStatus(res.status)
+          }
+        }).catch(err => console.log(err))
+    }
+  }
+
+  function returnOnOK(status) {
+    if (status === 200) {
+      setRedirect(true);
+    }
+  }
+  useEffect(() => {
+    returnOnOK(deleteStatus)
+  }, [deleteStatus])
+
+  if (redirect) {
+    logOut();
+    return <Redirect to="/login" />
+  }
+
+  function logOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    window.location.reload();
+  }
+
+
   return (
     <Wrapper>
       <Container maxWidth="lg">
         <h1>
-          <Button 
-          variant="contained" 
-          color="primary"
-          onClick={()=>history.goBack()}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => history.goBack()}
           >
-            <span>&lt;</span> Back
+            Back
           </Button>{" "}
             Settings
         </h1>
-
         <Input
           type="text"
           disableUnderline
           inputProps={{
-            className:"Search"
+            className: "Search"
           }}
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          }
+          className="search"
           onChange={onChange}
           placeholder="Search..."
         />
@@ -194,16 +251,34 @@ function Settings() {
             <div key={option.header.name} className="settingheader">
               <h3>{option.header.name}</h3>
               <div>
-                {option.values.map((value) => (
-                  <div key={value.name}>
-                    <ul className="group">
-                      <li>
-                        <h6>{value.name}</h6>
-                        <p>{value.description}</p>
-                      </li>
-                    </ul>
-                  </div>
-                ))}
+                {option.values.map((value) => {
+                  console.log(value);
+                  if (value.name === "Delete Account") {
+                    console.log("yay")
+                    return (
+                      <div key={value.name}>
+                        <ul className="group">
+                          <li>
+                            <h6 className="link" onClick={handleDeleteUser}>{value.name}</h6>
+                            <p>{value.description}</p>
+                          </li>
+                        </ul>
+                      </div>
+                    )
+                  } else {
+                    return (
+                      <div key={value.name}>
+                        <ul className="group">
+                          <li>
+                            <h6>{value.name}</h6>
+                            <p>{value.description}</p>
+                          </li>
+                        </ul>
+                      </div>
+                    )
+                  }
+                }
+                )}
               </div>
             </div>
           ))}

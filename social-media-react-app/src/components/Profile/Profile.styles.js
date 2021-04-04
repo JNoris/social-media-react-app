@@ -3,24 +3,46 @@ import styled from 'styled-components'
 
 export const ProfileWrapper = styled.div`
     display:flex;
+    color:#FAF9F6;
     .MuiGrid-root {
         padding:0;
     }
+    a{
+        text-decoration:none;
+    }
 
     h1 {
-        color: #f9f9f9;
+        color: #FAF9F6;
+        padding:0;
+        margin-top:0;
+        font-size:clamp(1rem,3vw,2.5rem);
     }
+    .MuiButton-root {
+        background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%);  
+        transition: 0.5s;
+        color: #FAF9F6;
+        border: none;
+        background-size: 125% auto;
+    }
+    .MuiButton-root:hover {
+        // background-position: right center;
+        color: #FAF9F6;
+        text-decoration: none;
+        outline: none;
+        background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);  
 `;
 export const ImgFrame = styled.div`
-    width:60%;
+    width:50%;
     margin:auto;
-    border-radius:1rem;
-    max-height:30vh;
+    max-height:15vw;
     height:auto;
     overflow:hidden;
+    padding-bottom:0.5rem;
     img{
-        width:100%;
-        height:auto;
+        border-radius:1rem;
+        height:15vw;
+        width:15vw;
+        object-fit:cover;
     }
 `;
 export const PostDummy = styled.div`
@@ -34,7 +56,7 @@ export const PostDummy = styled.div`
         background: transparent;  /* Optional: just make scrollbar invisible */
     }  
     img {
-        border-radius: 15px;
+        border-radius: 0.5rem;
         border: none;
     }
 `;
@@ -45,9 +67,6 @@ export const GridWrapper = styled.div`
 export const InfoCol = styled.div`
     width:30vw;
     padding:3vw 3vw 0 3vw;
-    h1{
-        font-size:clamp(1rem,3vw,2.5rem);
-    }
     p{
         font-size:1vw;
         font-weight:700;
@@ -63,9 +82,7 @@ export const FlexEven = styled.div`
     button{
         width:100%;
         margin: 0 .5rem;
-        background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%);  
-        //background: none;
-        //background-color: #fcac56;
+        background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%); 
         transition: .5s;
         color: #fff;
         border: none;
@@ -74,10 +91,6 @@ export const FlexEven = styled.div`
     }
 
     button:hover {
-        //background-position: right center;
-        color: #fff;
-        text-decoration: none;
-        outline: none;
         background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%);  
     }
 `;
@@ -110,17 +123,57 @@ export const BioML = styled(TextField)`
     width:30vw;
 `;
 export const ProfileGridWrapper = styled.div`
-    width:100%;
-    margin:auto;
+    text-align:center;
+    position:relative;
     img{
-        height:auto;
-        width:100%
+        width:21vw;
+        height:21vw;
+        object-fit:cover;
     }
+`;
+export const GridBtn = styled.button`
+    position:absolute;
+    top:0;
+    right:0;
+    padding:0.5rem;
+    margin:0;
+    line-height:0.5rem;
+    border-radius:1rem;
 `;
 
 export const LinkWrapper = styled.div`
 margin-top: 1rem;
     p {
         color: #e4e4e4;
+    }
+`;
+
+export const ImgOverlay = styled.div`
+    position:relative;
+    bottom:0;
+    right:0;
+    background-color:red;
+    height:10px;
+    width:10px;
+`;
+export const UploadBtns = styled.div`
+    width:50%;
+    margin:auto;
+    .btns{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    }
+    button{
+        padding:0.2rem;
+        margin:0 0.2rem;
+        font-size: clamp(0.6rem,1vw,0.8rem);
+
+    }
+    .fwbtn{
+        width:100%;
+    }
+    .hwbtn{
+        width:50%;
     }
 `;

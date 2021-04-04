@@ -1,5 +1,6 @@
+//Authors: Edvin Lin
+//Styled by: Edvin Lin
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
 import Container from '@material-ui/core/Container';
 import FollowingListItem from './FollowingListItem';
 import { Wrapper } from '../Follow.styles';
@@ -18,7 +19,6 @@ const Following = (props) => {
                 setNoFollowing(false);
             }
             else {
-                console.log("no data");
                 setNoFollowing(true);
             }
         }
@@ -29,7 +29,7 @@ const Following = (props) => {
     }, [data])
     if(noFollowing)
     {
-        return <Empty text="No Followers"/>
+        return <Empty text="Following 0"/>
     }
     return (
         <Container>

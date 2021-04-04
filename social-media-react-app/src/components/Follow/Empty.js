@@ -1,3 +1,5 @@
+//Authors: Edvin Lin
+//Styled by: Edvin Lin
 import React, {useState, useEffect} from 'react'
 import {EmptyWrapper} from './Follow.styles';
 const Empty = (props) => {
