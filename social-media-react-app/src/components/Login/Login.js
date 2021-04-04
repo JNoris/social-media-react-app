@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import styled from 'styled-components';
+import { Redirect } from "react-router";
 
 const SideWrapper = styled.div`
   .MuiGrid-root{
@@ -143,8 +144,8 @@ const Login = () => {
           passWord: passWord,
         })
         .then((response) => {
+          setStatus(response.status);
           if (response.status === 200) {
-            setStatus(response.status);
             window.localStorage.setItem("token", response.data.token);
             setNotify({
               isOpen: true,
@@ -185,6 +186,14 @@ const Login = () => {
     
   }, [status])
 
+  useEffect(() => {
+    if(status===500)
+    {
+      return(
+        <Redirect to='/error'/>
+      );
+    }
+  })
   return (
     <SideWrapper>
       <Grid container component="main" className={classes.root}>
