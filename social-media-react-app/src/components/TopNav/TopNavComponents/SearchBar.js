@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
+<<<<<<< HEAD
 import { SearchWrapper, LikeWrapper, SearchContainer, ResultsWrapper } from './SearchBar.styles';
+=======
+import { BtnWrap, Search, SearchWrapper, LikeWrapper, SearchContainer, ResultsWrapper } from './SearchBar.styles';
+import IconButton from '@material-ui/core/IconButton';
+>>>>>>> 60bf300235026a4b8e9744796e81347564cf7421
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';

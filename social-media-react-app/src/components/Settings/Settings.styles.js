@@ -53,6 +53,13 @@ export const Wrapper = styled.div`
 
     .search::placeholder{
         color: #e4e4e4;
+<<<<<<< HEAD
+=======
+    }
+
+    .link:hover {
+        color: #e2336b;
+>>>>>>> 60bf300235026a4b8e9744796e81347564cf7421
     }
 
 

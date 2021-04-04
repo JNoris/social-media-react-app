@@ -10,6 +10,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 function Settings() {
+<<<<<<< HEAD
   const [redirect, setRedirect] = useState(false);
   const [notify, setNotify] = useState({
       isOpen: false,
@@ -17,6 +18,11 @@ function Settings() {
       type: "",
     });
   const [deleteStatus, setDeleteStatus] = useState(false)
+=======
+
+  const [deleteStatus, setDeleteStatus] = useState(0);
+  const [redirect, setRedirect] = useState(false)
+>>>>>>> 60bf300235026a4b8e9744796e81347564cf7421
 
   const options = [
     {
@@ -180,6 +186,7 @@ function Settings() {
   };
   let history = useHistory();
 
+<<<<<<< HEAD
   function handleDeleteUser() {
     axios.defaults.headers={
       "Content-Type":"application/json",
@@ -202,6 +209,47 @@ function Settings() {
     return <Redirect to="/login" />
   }
 
+=======
+
+  axios.defaults.headers={
+    "Content-Type":"application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`
+  }
+
+    const handleDeleteUser = () => {
+      var deleteUser = window.confirm("Are you sure you want to delete your account?");
+      if (deleteUser === true) {
+        axios.post("https://localhost:5001/deleteuser")
+        .then(res => {
+          console.log(res);
+          if(res.status === 200) {
+            setDeleteStatus(res.status)
+          }
+        }) .catch(err => console.log(err))
+      }
+    }
+
+    function returnOnOK(status) {
+      if (status === 200) {
+          setRedirect(true);
+      }
+  }
+  useEffect(() => {
+      returnOnOK(deleteStatus)
+  }, [deleteStatus])
+
+  if (redirect) {
+    logOut();
+      return <Redirect to="/login" />
+  }
+
+  function logOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    window.location.reload();
+}
+  
+>>>>>>> 60bf300235026a4b8e9744796e81347564cf7421
 
   return (
     <Wrapper>
@@ -236,16 +284,34 @@ function Settings() {
             <div key={option.header.name} className="settingheader">
               <h3>{option.header.name}</h3>
               <div>
-                {option.values.map((value) => (
-                  <div key={value.name}>
-                    <ul className="group">
-                      <li>
-                        <h6>{value.name}</h6>
-                        <p>{value.description}</p>
-                      </li>
-                    </ul>
-                  </div>
-                ))}
+                {option.values.map((value) => 
+                  {console.log(value);
+                    if(value.name == "Delete Account") {
+                    console.log("yay")
+                    return(
+                      <div key={value.name}>
+                      <ul className="group">
+                        <li>
+                          <h6 className="link" onClick={handleDeleteUser}>{value.name}</h6>
+                          <p>{value.description}</p>
+                        </li>
+                      </ul>
+                    </div>
+                    )
+                  } else {
+                    return(
+                      <div key={value.name}>
+                      <ul className="group">
+                        <li>
+                          <h6>{value.name}</h6>
+                          <p>{value.description}</p>
+                        </li>
+                      </ul>
+                    </div>
+                    )
+                  }
+                }
+                )}
               </div>
             </div>
           ))}
