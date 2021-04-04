@@ -1,3 +1,5 @@
+//Authors: Edvin Lin
+//Styled by: Edvin Lin
 import React from 'react'
 import { FlexCenter, InfoWrapper } from './SideNavProfileComponents.styles';
 import { Link } from 'react-router-dom';

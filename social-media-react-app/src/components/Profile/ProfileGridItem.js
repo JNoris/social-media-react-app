@@ -1,3 +1,5 @@
+//Authors: Edvin Lin
+//Styled by: Edvin Lin
 import React, { useState } from 'react'
 import axios from 'axios';
 import { GridBtn, ProfileGridWrapper } from './Profile.styles'

@@ -1,3 +1,5 @@
+//Authors: Noris Buriac
+//Styled by: Noris Buriac
 import React, { useEffect, useState } from "react";
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';

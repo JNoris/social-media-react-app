@@ -1,19 +1,20 @@
+//Author: Edvin Lin
 import React, {useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router";
 import axios from 'axios';
+import { Flex, MainWrapper } from "./App.styles";
+
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
 import SideNav from "./components/SideNav/SideNav";
-// import TopNav from "./components/TopNav/TopNav";
 import Chat from "./components/Chat/Chat";
-import { Flex, MainWrapper } from "./App.styles";
 import Follow from "./components/Follow/Follow";
 import AddPost from "./components/AddPost/AddPost";
 import Register from "./components/Login/Register";
 import Login from "./components/Login/Login";
+import Error from './components/Error/Error';
 import SearchBar from "./components/TopNav/TopNavComponents/SearchBar";
-// import TopNav3 from "./components/Topnav/TopNav3";
 
 function App() {
   const isAuth = !!localStorage.getItem("token");
@@ -37,7 +38,9 @@ function App() {
 
   if(error)
   {
-
+    return(
+      <Error/>
+    );
   }
   if (isAuth) {
     return (
@@ -52,6 +55,7 @@ function App() {
             <Route exact path="/explore" component={SearchBar} />
             <Route exact path="/settings" component={Settings} />
             <Route exact path="/chat" component={Chat} />
+            <Route exact path="/error" component={Error}/>
             <Route exact path="/login">
               <Redirect to="/"/>
             </Route>
@@ -65,6 +69,7 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/error" component={Error}/>
           <Route render={() => <Redirect to="/login" />} />
         </Switch>
       </>

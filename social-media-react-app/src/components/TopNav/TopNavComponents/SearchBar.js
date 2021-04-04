@@ -1,3 +1,5 @@
+//Authors: Edvin Lin, Yasir Karapinar, Athena Kozak
+//Styled by: Athena Kozak, Edvin Lin
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';

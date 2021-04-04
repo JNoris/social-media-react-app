@@ -1,3 +1,5 @@
+//Authors: Athena Kozak
+//Styled by: Athena Kozak
 import React from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';

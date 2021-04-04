@@ -1,3 +1,5 @@
+//Authors: Edvin Lin
+//Styled by: Edvin Lin
 import React, { useState, useEffect, useRef } from "react";
 import Button from "@material-ui/core/Button";
 import axios from 'axios';
