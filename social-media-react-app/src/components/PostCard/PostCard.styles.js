@@ -6,6 +6,7 @@ export const CardWrapper = styled.div`
         color: #fff;
         max-width: 300px;
         height: auto;
+        margin: 0 auto;
     }
 
     .MuiPaper-elevation1 {

@@ -30,10 +30,17 @@ export const FlexCenter = styled.div`
     justify-content:center;
     align-items:center;
     
+    .border-wrap{
+        background:linear-gradient(to right, #fcac56 0%,  #e2336b 100%);
+        padding:0.2rem;
+        border-radius:50%;
+    }
     
     .avatar {
-        height:10vh;
-        width:10vh;
-        border: 0.15rem solid black;
+        height:15vh;
+        width:15vh;
+        min-height:5rem;
+        min-width:5rem;
+        border: 0.2rem solid black;
     }
 `;

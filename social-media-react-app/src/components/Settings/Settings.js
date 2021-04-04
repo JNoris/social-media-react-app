@@ -1,8 +1,29 @@
-import "./Settings.css";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
+import Container from '@material-ui/core/Container';
+import Button from "@material-ui/core/Button";
+import Input from "@material-ui/core/Input";
+import { Wrapper } from "./Settings.styles";
+import {useHistory} from 'react-router-dom';
+import SearchIcon from '@material-ui/icons/Search';
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 function Settings() {
+<<<<<<< HEAD
+  const [redirect, setRedirect] = useState(false);
+  const [notify, setNotify] = useState({
+      isOpen: false,
+      message: "",
+      type: "",
+    });
+  const [deleteStatus, setDeleteStatus] = useState(false)
+=======
+
+  const [deleteStatus, setDeleteStatus] = useState(0);
+  const [redirect, setRedirect] = useState(false)
+>>>>>>> 60bf300235026a4b8e9744796e81347564cf7421
+
   const options = [
     {
       header: {
@@ -118,7 +139,7 @@ function Settings() {
     e.preventDefault();
     const value = e.target.value;
 
-    console.log("You searched for", value);
+    //console.log("You searched for", value);
 
     if (value.trim().length === 0) {
       setVisibleOptions(options);
@@ -133,7 +154,7 @@ function Settings() {
         // .trim to remove whitespace & search for name or description
         return (
           item.name.toLocaleLowerCase().search(value.trim().toLowerCase()) !==
-            -1 ||
+          -1 ||
           item.description
             .toLocaleLowerCase()
             .search(value.trim().toLowerCase()) !== -1
@@ -163,49 +184,140 @@ function Settings() {
 
     setVisibleOptions(returnedItems);
   };
+  let history = useHistory();
+
+<<<<<<< HEAD
+  function handleDeleteUser() {
+    axios.defaults.headers={
+      "Content-Type":"application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+  }
+  axios.post("https://localhost:5001/deleteuser")
+  .then(res => setDeleteStatus(res.status))
+  .catch(err => console.log(err))
+  }
+
+  function returnOnOK(status) {
+    if(status === 200) {
+      setRedirect(true)}
+  }
+
+  useEffect(() => {
+    returnOnOK(deleteStatus)
+  }, [deleteStatus])
+  if(redirect) {
+    return <Redirect to="/login" />
+  }
+
+=======
+
+  axios.defaults.headers={
+    "Content-Type":"application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`
+  }
+
+    const handleDeleteUser = () => {
+      var deleteUser = window.confirm("Are you sure you want to delete your account?");
+      if (deleteUser === true) {
+        axios.post("https://localhost:5001/deleteuser")
+        .then(res => {
+          console.log(res);
+          if(res.status === 200) {
+            setDeleteStatus(res.status)
+          }
+        }) .catch(err => console.log(err))
+      }
+    }
+
+    function returnOnOK(status) {
+      if (status === 200) {
+          setRedirect(true);
+      }
+  }
+  useEffect(() => {
+      returnOnOK(deleteStatus)
+  }, [deleteStatus])
+
+  if (redirect) {
+    logOut();
+      return <Redirect to="/login" />
+  }
+
+  function logOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    window.location.reload();
+}
+  
+>>>>>>> 60bf300235026a4b8e9744796e81347564cf7421
 
   return (
-    <div className="Settings">
-      <div className="container my-5">
+    <Wrapper>
+      <Container maxWidth="lg">
         <h1>
-          <span>
-            <button className="btn btn-secondary">
-              {" "}
-              <span>&lt;</span> Back{" "}
-            </button>{" "}
+          <Button 
+          variant="contained" 
+          color="primary"
+          onClick={()=>history.goBack()}
+          >
+            Back
+          </Button>{" "}
             Settings
-          </span>
         </h1>
-
-        <input
+        <Input
           type="text"
-          className="form-control mt-5"
+          disableUnderline
+          inputProps={{
+            className:"Search"
+          }}
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          }
+          className="search"
           onChange={onChange}
           placeholder="Search..."
         />
-
         <div>
           {visibleOptions.map((option) => (
-            <div key={option.header.name} className="mt-5 mt-2">
+            <div key={option.header.name} className="settingheader">
               <h3>{option.header.name}</h3>
-
               <div>
-                {option.values.map((value) => (
-                  <div key={value.name}>
-                    <ul className="list-group">
-                      <li className="list-group-item mb-2">
-                        <h6>{value.name}</h6>
-                        <p>{value.description}</p>
-                      </li>
-                    </ul>
-                  </div>
-                ))}
+                {option.values.map((value) => 
+                  {console.log(value);
+                    if(value.name == "Delete Account") {
+                    console.log("yay")
+                    return(
+                      <div key={value.name}>
+                      <ul className="group">
+                        <li>
+                          <h6 className="link" onClick={handleDeleteUser}>{value.name}</h6>
+                          <p>{value.description}</p>
+                        </li>
+                      </ul>
+                    </div>
+                    )
+                  } else {
+                    return(
+                      <div key={value.name}>
+                      <ul className="group">
+                        <li>
+                          <h6>{value.name}</h6>
+                          <p>{value.description}</p>
+                        </li>
+                      </ul>
+                    </div>
+                    )
+                  }
+                }
+                )}
               </div>
             </div>
           ))}
         </div>
-      </div>
-    </div>
+      </Container>
+    </Wrapper>
   );
 }
 

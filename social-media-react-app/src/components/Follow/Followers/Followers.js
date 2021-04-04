@@ -1,28 +1,57 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Container from '@material-ui/core/Container';
-//import {useQuery} from 'react-query';
-import {dummyFollow} from '../../temp/dummyData';
 import FollowersListItem from './FollowersListItem';
+import { Wrapper } from '../Follow.styles';
+import Empty from '../Empty';
+
 const Followers = (props) => {
-    //API call using props.id or something
-    // const getFollowers = async() => await(fetch('',{
-    //     method:"GET",
-    //     headers:`Token ${token}`
-    // }))
-    // const {data,isLoading,error}=useQuery(
-    //     'followers',
-    //     getFollowers
-    // );
+    const [data, setData] = useState([]);
+    const [noFollow, setNoFollow] = useState(false);
+    const [length, setLength] =useState(0);
+    useEffect(() => {
+        if(Array.isArray(props.data))
+        {setData(props.data)}
+    },[props.data])
+
+    function checkIfEmpty() {
+        if (Array.isArray(data)) {
+            if (data.length > 0) {
+                setNoFollow(false);
+                setLength(data.length);
+            }
+            else {
+                //console.log("no data");
+                setNoFollow(true);
+            }
+        }
+    }
+    useEffect(() => {
+        checkIfEmpty(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data])
+    if(noFollow)
+    {
+        return <Empty text="No Followers"/>
+    }
+    // if(error)
+    // {
+    //     return <div>Error</div>
+    // }
     return (
         <Container>
-            <p>{dummyFollow.length} Followers</p>
-            {dummyFollow?.map(item => (
-                <FollowersListItem
-                key={item.id}
-                src={item.src}
-                username={item.username}
-                />
-            ))}
+            <Wrapper>
+                <p className="subheader">{length} Followers</p>
+                {data?.map(item => (
+                    <FollowersListItem
+                        key={item.id}
+                        isSelf={props.isSelf}
+                        src={item.profilePhotoPath}
+                        fname={item.firstName}
+                        lname={item.lastName}
+                        username={item.userName}
+                    />
+                ))}
+            </Wrapper>
         </Container>
     );
 }

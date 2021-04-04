@@ -17,7 +17,7 @@ const PostImage = (props) => {
         <div>
         <Media>
             <CardMedia>
-                <img src={props.img} onClick={toggleModal} />
+                <img src={props.photoPath} alt={props.alt? props.alt : ""} onClick={toggleModal} />
             </CardMedia>
         </Media>
         <PostViewModal 

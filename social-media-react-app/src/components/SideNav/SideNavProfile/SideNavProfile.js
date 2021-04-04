@@ -1,63 +1,39 @@
-import React, { useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import UserInfo from './SideNavProfileComponents/UserInfo';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import DisplayInfo from './SideNavProfileComponents/DisplayInfo';
-import { Link } from 'react-router-dom';
 import { SideNavProfileWrapper } from '../SideNav.styles';
+import SideNavList from '../SideNavList/SideNavList';
 
-const SideNavProfile = (props) => {
-    const [userId, setUserId] = useState(0);
-    const [userName, setUserName] = useState("test")
+const SideNavProfile = () => {
+   
+    const [userId, setUserId] = useState("");
+
+    axios.defaults.headers={
+        "Content-Type":"application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+    function getCurrentUserDetails()
+    {
+        axios.get("https://localhost:5001/getcurrentuserdetails")
+        .then(res => setUserId(res.data))
+        .catch(err=>console.log(err))
+    }
+    useEffect(()=>{
+        getCurrentUserDetails()
+    },[])
+
+    const fullname = userId.firstName + " " + userId.lastName;
+
     return (
         <SideNavProfileWrapper>
             <DisplayInfo
-                fullname="Jane Doe"
-                userName={userName}
+                fullname={fullname}
+                userName={userId.userName}
+                src={userId.profilePhotoPath}
             />
-            <Grid container justify="center" spacing={1}>
-                <Grid item xs={4}>
-                    <Link to={{
-                        pathname: "profile",
-                        state: {
-                            userId: userId
-                        }
-                    }}>
-                        <UserInfo
-                            name="Posts"
-                            number="46"
-                        />
-                    </Link>
-                </Grid>
-                <Grid item xs={4}>
-                    <Link to={{
-                        pathname:"follow",
-                        state: {
-                            followIndex: 0,
-                            userName: userName
-                        }
-                    }}>
-                        <UserInfo
-                            name="Followers"
-                            number="2800"
-                        />
-                    </Link>
-                </Grid>
-                <Grid item xs={4}>
-                    <Link to={{
-                        pathname:"follow",
-                        state: {
-                            followIndex: 1,
-                            userName: userName
-                        }
-                    }}>
-                        <UserInfo
-                            name="Following"
-                            number="5"
-                            link="follow"
-                        />
-                    </Link>
-                </Grid>
-            </Grid>
+            <SideNavList
+                userName={userId.userName}
+            />
         </SideNavProfileWrapper>
     );
 }

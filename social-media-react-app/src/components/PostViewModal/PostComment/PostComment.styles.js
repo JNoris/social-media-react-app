@@ -8,15 +8,17 @@ export const CommentWrapper = styled.div`
 
     #delete {
         color: #b4b4b4;
+        font-size: 1rem;
     }
 
     #delete:hover {
-        color: #a1a1a1;
+        color: #e2336b;
     }
 
 .MuiListItem-root {
     color: #c3c3c3;
 }
+
 `;
 
 export const TitleWrapper = styled.div`

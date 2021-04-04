@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 export const ListWrapper = styled.div`
     .selected {
-        color:red;
-        font-weight:bold;
+        color:#fcac56;
     }
     ul{
         list-style-type:none;
