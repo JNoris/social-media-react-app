@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\edvin\\source\\repos\\JNoris\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj": {}
+    "C:\\Src\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\edvin\\source\\repos\\JNoris\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj": {
+    "C:\\Src\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\edvin\\source\\repos\\JNoris\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj",
+        "projectUniqueName": "C:\\Src\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj",
         "projectName": "CapstoneIG_v1",
-        "projectPath": "C:\\Users\\edvin\\source\\repos\\JNoris\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj",
-        "packagesPath": "C:\\Users\\edvin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\edvin\\source\\repos\\JNoris\\social-media-react-app\\CapstoneIG_v1\\obj\\",
+        "projectPath": "C:\\Src\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj",
+        "packagesPath": "C:\\Users\\Jatin\\.nuget\\packages\\",
+        "outputPath": "C:\\Src\\social-media-react-app\\CapstoneIG_v1\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\edvin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jatin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -85,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
