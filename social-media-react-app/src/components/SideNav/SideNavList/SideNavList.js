@@ -2,7 +2,6 @@ import React from 'react'
 import { Li, ListWrapper } from './SideNavList.styles';
 import SideNavListItem from './SideNavListItem';
 import CameraRollIcon from '@material-ui/icons/CameraRoll';
-import SearchIcon from '@material-ui/icons/Search';
 import ChatIcon from '@material-ui/icons/Chat';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SettingsIcon from '@material-ui/icons/Settings';

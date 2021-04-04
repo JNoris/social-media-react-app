@@ -1,5 +1,4 @@
 import styled from "styled-components";
-//import SearchIcon from "@material-ui/icons/Search";
 
 export const Wrapper = styled.div`
   .entire-body {
