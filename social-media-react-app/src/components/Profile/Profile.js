@@ -355,6 +355,7 @@ const Profile = () => {
                   id={item.id}
                   src={item.photoPath}
                   alt={item.id}
+                  post={item}
                 />
               </Grid>
             ))}
