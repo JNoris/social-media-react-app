@@ -8,6 +8,7 @@ import { ProfileWrapper, PostDummy, InfoCol, Bio, BioML, GridWrapper, FlexEven, 
 import Grid from "@material-ui/core/Grid";
 import UserInfo from "../SideNav/SideNavProfile/SideNavProfileComponents/UserInfo";
 import ProfileGridItem from "./ProfileGridItem";
+import TopNav from '../TopNav/TopNav';
 
 const Profile = () => {
   const userName = localStorage.getItem("username");
@@ -200,8 +201,10 @@ const Profile = () => {
     );
   }
   if (noUser) {
-    return (
+    return (<>
+      <TopNav/>
       <div style={{display:"grid",height:"80vh", placeItems:"center"}}><h2 style={{color:"whitesmoke"}}>No user by {url.id} exists</h2></div>
+      </>
     );
   }
   //Main Content
