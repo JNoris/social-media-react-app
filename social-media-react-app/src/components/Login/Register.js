@@ -58,7 +58,7 @@ const RegisterWrapper = styled.div`
   }
 
   .MuiFormHelperText-root.Mui-error {
-    color #f44336;
+    color: #f44336;
   }
 
   .MuiButton-root {
