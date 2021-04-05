@@ -196,12 +196,12 @@ const Profile = () => {
   //Error Pages
   if (error) {
     return (
-      <div>An Error has occured</div>
+      <div style={{display:"grid",height:"80vh", placeItems:"center"}}><h2>An Error has occured</h2></div>
     );
   }
   if (noUser) {
     return (
-      <div>No user by {url.id} exists</div>
+      <div style={{display:"grid",height:"80vh", placeItems:"center"}}><h2 style={{color:"whitesmoke"}}>No user by {url.id} exists</h2></div>
     );
   }
   //Main Content

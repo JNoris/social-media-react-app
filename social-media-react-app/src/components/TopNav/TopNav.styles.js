@@ -7,14 +7,12 @@ export const NavIcon = styled(IconButton)`
     color:red;
 `;
 export const TopNavWrapper = styled.div`
-    padding:1rem 1rem 2rem;
-    margin: 1rem auto;
-    // float:right;
-    // display: block;
+    padding:1rem;
+    margin:auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 925px;
+    max-width: 58rem;
 
     a {
       text-decoration: none;
@@ -27,7 +25,6 @@ export const TopNavWrapper = styled.div`
       border: none;
       background-size: 125% auto;
       text-decoration: none;
-      margin-bottom: 16px;
   }
 
   .MuiButton-root:hover {
