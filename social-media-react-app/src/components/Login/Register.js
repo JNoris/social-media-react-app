@@ -11,46 +11,46 @@ import {
   Grid,
   Typography,
   Container,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Redirect } from "react-router";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const RegisterWrapper = styled.div`
-  .MuiInputBase-root{
-    background-color:rgba(250,250,250, 0.1);
+  .MuiInputBase-root {
+    background-color: rgba(250, 250, 250, 0.1);
     color: #fff;
   }
-  .MuiContainer-root{
-    background-color: rgba(39,43,52,.9);
-    padding-bottom:1rem;
-    border-radius:1rem;
+  .MuiContainer-root {
+    background-color: rgba(39, 43, 52, 0.9);
+    padding-bottom: 1rem;
+    border-radius: 1rem;
   }
-  .MuiAvatar-root{
-    background-color:#bdbdbd;
+  .MuiAvatar-root {
+    background-color: #bdbdbd;
     margin-top: 2rem;
   }
 
   .MuiInputLabel-outlined {
     color: #e4e4e4;
   }
-  label.Mui-focused{
-    color:white;
+  label.Mui-focused {
+    color: white;
   }
-  svg{
-    color:black;
+  svg {
+    color: black;
   }
-  a{
-    color:rgba(250,250,250, 0.5);
+  a {
+    color: rgba(250, 250, 250, 0.5);
   }
   a:hover {
     text-decoration: none;
     color: #fff;
   }
-  h1{
-    color: rgba(250,250,250,0.7);
-    padding-bottom:1rem;
+  h1 {
+    color: rgba(250, 250, 250, 0.7);
+    padding-bottom: 1rem;
   }
 
   .MuiFormHelperText-root {
@@ -58,27 +58,31 @@ const RegisterWrapper = styled.div`
   }
 
   .MuiFormHelperText-root.Mui-error {
-    color #f44336;
+    color: #f44336;
   }
 
   .MuiButton-root {
-    background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%);  
+    background: linear-gradient(to right, #fcac56 0%, #fcac56 100%);
     transition: 0.5s;
     color: #fff;
     border: none;
     margin-top: 1.5rem;
     background-size: 125% auto;
-}
-.MuiButton-root:hover {
+  }
+  .MuiButton-root:hover {
     color: #fff;
     text-decoration: none;
     outline: none;
-    background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%); 
-}
+    background: linear-gradient(to right, #fcac56 0%, #e2336b 100%);
+  }
 
-.MuiButton-contained.Mui-disabled {
-  background: linear-gradient(to right, rgba(252,172,86,.5) 0%,  rgba(252,172,86,.5) 100%);
-}
+  .MuiButton-contained.Mui-disabled {
+    background: linear-gradient(
+      to right,
+      rgba(252, 172, 86, 0.5) 0%,
+      rgba(252, 172, 86, 0.5) 100%
+    );
+  }
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -116,14 +120,13 @@ const Register = () => {
   const lastNameRegex = /^[a-zA-Z]*$/;
   // Username must be 3-16 characters
   const usernameRegex = /^[a-z0-9_-]{3,16}$/;
-  // Password, 6-20 char and must have a number and a special character and caps 
+  // Password, 6-20 char and must have a number and a special character and caps
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/;
   const handleUsername = (event) => {
     setUserName(event.target.value);
     if (event.target.value.match(usernameRegex)) {
       setUserNameErr(false);
-    }
-    else {
+    } else {
       setUserNameErr(true);
     }
   };
@@ -131,8 +134,7 @@ const Register = () => {
     setPassWord(event.target.value);
     if (event.target.value.match(passwordRegex)) {
       setPasswordErr(false);
-    }
-    else {
+    } else {
       setPasswordErr(true);
     }
   };
@@ -141,8 +143,7 @@ const Register = () => {
     setFirstname(event.target.value);
     if (event.target.value.match(firstNameRegex)) {
       setFNameErr(false);
-    }
-    else {
+    } else {
       setFNameErr(true);
     }
   };
@@ -150,8 +151,7 @@ const Register = () => {
     setLastname(event.target.value);
     if (event.target.value.match(lastNameRegex)) {
       setLNameErr(false);
-    }
-    else {
+    } else {
       setLNameErr(true);
     }
   };
@@ -162,9 +162,6 @@ const Register = () => {
     message: "",
     type: "",
   });
-
-
-
 
   // Valah-day-shiun
   function inputValidation() {
@@ -182,10 +179,28 @@ const Register = () => {
     return res;
   }
   useEffect(() => {
-    if (!fNameErr && !lNameErr && !userNameErr && !passwordErr && firstName.length > 0 && lastName.length > 0 && userName.length > 0 && passWord.length > 0) {
-      setBtnEnable(false)
+    if (
+      !fNameErr &&
+      !lNameErr &&
+      !userNameErr &&
+      !passwordErr &&
+      firstName.length > 0 &&
+      lastName.length > 0 &&
+      userName.length > 0 &&
+      passWord.length > 0
+    ) {
+      setBtnEnable(false);
     }
-  }, [fNameErr, lNameErr, userNameErr, passwordErr, firstName.length, lastName.length, userName.length, passWord.length])
+  }, [
+    fNameErr,
+    lNameErr,
+    userNameErr,
+    passwordErr,
+    firstName.length,
+    lastName.length,
+    userName.length,
+    passWord.length,
+  ]);
 
   const handleRegisterButton = () => {
     if (inputValidation()) {
@@ -206,7 +221,8 @@ const Register = () => {
             setRedirect(true);
           }
         })
-        .catch(e => {console.log(e);
+        .catch((e) => {
+          console.log(e);
           setNotify({
             isOpen: true,
             message: "Registration unsuccessful",
@@ -239,7 +255,7 @@ const Register = () => {
   }, []);
 
   if (redirect) {
-    return <Redirect to='/login' />
+    return <Redirect to="/login" />;
   }
   return (
     <RegisterWrapper>
@@ -250,7 +266,7 @@ const Register = () => {
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
-        </Typography>
+          </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -324,7 +340,7 @@ const Register = () => {
             disabled={btnEnable}
           >
             Sign Up
-        </Button>
+          </Button>
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="/login" to="/login" variant="body2">

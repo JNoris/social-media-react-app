@@ -10,57 +10,55 @@ import {
   Link,
   Grid,
   Typography,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Redirect } from "react-router";
 
 const SideWrapper = styled.div`
-  .MuiGrid-root{
-    color:rgba(250,250,250, 0.7);
+  .MuiGrid-root {
+    color: rgba(250, 250, 250, 0.7);
   }
-  a{
-    color:rgba(250,250,250, 0.5);
+  a {
+    color: rgba(250, 250, 250, 0.5);
   }
   a:hover {
     text-decoration: none;
     color: #fff;
   }
-  .MuiInputBase-root{
-    background-color:rgba(250,250,250, 0.1);
+  .MuiInputBase-root {
+    background-color: rgba(250, 250, 250, 0.1);
   }
-  label.Mui-focused{
-    color:white;
+  label.Mui-focused {
+    color: white;
   }
-  svg{
-    color:black;
+  svg {
+    color: black;
   }
   .MuiButton-root {
-    background: linear-gradient(to right, #fcac56 0%,  #fcac56 100%);  
+    background: linear-gradient(to right, #fcac56 0%, #fcac56 100%);
     transition: 0.5s;
     color: #fff;
     border: none;
     margin-top: 1.5rem;
     background-size: 125% auto;
-}
-.MuiButton-root:hover {
+  }
+  .MuiButton-root:hover {
     color: #fff;
     text-decoration: none;
     outline: none;
-    background: linear-gradient(to right, #fcac56 0%,  #e2336b 100%); 
-}
+    background: linear-gradient(to right, #fcac56 0%, #e2336b 100%);
+  }
 
-.MuiInputBase-input {
-  color: #fff;
-  border-radius: 5px;
-}
+  .MuiInputBase-input {
+    color: #fff;
+    border-radius: 5px;
+  }
 
-.MuiInputLabel-outlined {
-  color: #e4e4e4;
-}
-
-
+  .MuiInputLabel-outlined {
+    color: #e4e4e4;
+  }
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -110,7 +108,6 @@ const Login = () => {
   // State for username & password
   const [userName, setUserName] = useState("");
   const [passWord, setPassWord] = useState("");
-  
 
   // Handle username & password
   const handleUsername = (event) => {
@@ -154,7 +151,7 @@ const Login = () => {
             });
           }
         })
-        .catch(e => window.alert(e.response.data.message));
+        .catch((e) => window.alert(e.response.data.message));
     } else {
       setNotify({
         isOpen: true,
@@ -178,22 +175,17 @@ const Login = () => {
     };
   });
 
-  useEffect(() => { 
-    if(status===200)
-    {
-      window.location.reload()
+  useEffect(() => {
+    if (status === 200) {
+      window.location.reload();
     }
-    
-  }, [status])
+  }, [status]);
 
   useEffect(() => {
-    if(status===500)
-    {
-      return(
-        <Redirect to='/error'/>
-      );
+    if (status === 500) {
+      return <Redirect to="/error" />;
     }
-  })
+  });
   return (
     <SideWrapper>
       <Grid container component="main" className={classes.root}>
@@ -205,7 +197,7 @@ const Login = () => {
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
-          </Typography>
+            </Typography>
             <TextField
               variant="outlined"
               margin="normal"
@@ -246,12 +238,12 @@ const Login = () => {
               className={classes.submit}
             >
               Sign In
-          </Button>
+            </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
-              </Link>
+                </Link>
               </Grid>
               <Grid item>
                 <Link href="/register" to="/register" variant="body2">
