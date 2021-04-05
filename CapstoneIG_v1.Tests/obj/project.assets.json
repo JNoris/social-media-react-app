@@ -8426,23 +8426,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\edvin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\JNoris\\social-media-react-app\\CapstoneIG_v1.Tests\\CapstoneIG_v1.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\edvin\\source\\repos\\JNoris\\social-media-react-app\\CapstoneIG_v1.Tests\\CapstoneIG_v1.Tests.csproj",
       "projectName": "CapstoneIG_v1.Tests",
-      "projectPath": "C:\\Users\\User\\Source\\Repos\\JNoris\\social-media-react-app\\CapstoneIG_v1.Tests\\CapstoneIG_v1.Tests.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Source\\Repos\\JNoris\\social-media-react-app\\CapstoneIG_v1.Tests\\obj\\",
+      "projectPath": "C:\\Users\\edvin\\source\\repos\\JNoris\\social-media-react-app\\CapstoneIG_v1.Tests\\CapstoneIG_v1.Tests.csproj",
+      "packagesPath": "C:\\Users\\edvin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\edvin\\source\\repos\\JNoris\\social-media-react-app\\CapstoneIG_v1.Tests\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\edvin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8456,8 +8452,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\User\\Source\\Repos\\JNoris\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj": {
-              "projectPath": "C:\\Users\\User\\Source\\Repos\\JNoris\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj"
+            "C:\\Users\\edvin\\source\\repos\\JNoris\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj": {
+              "projectPath": "C:\\Users\\edvin\\source\\repos\\JNoris\\social-media-react-app\\CapstoneIG_v1\\CapstoneIG_v1.csproj"
             }
           }
         }
@@ -8516,7 +8512,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }
