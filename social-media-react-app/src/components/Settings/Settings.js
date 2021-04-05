@@ -1,4 +1,4 @@
-//Authors: Noris Buriac
+//Authors: Noris Buriac, Athena Kozak
 //Styled by: Noris Buriac
 import React, { useEffect, useState } from "react";
 import { Redirect } from 'react-router-dom';
