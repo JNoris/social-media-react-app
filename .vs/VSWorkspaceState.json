@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CapstoneIG_v1",
+    "\\social-media-react-app",
+    "\\social-media-react-app\\public",
+    "\\social-media-react-app\\src"
   ],
-  "SelectedNode": "\\CapstoneIG_v1.Tests",
   "PreviewInSolutionExplorer": false
 }
